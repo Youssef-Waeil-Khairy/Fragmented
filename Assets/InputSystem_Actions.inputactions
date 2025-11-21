@@ -41,6 +41,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "FreeCursor",
+                    "type": "Button",
+                    "id": "ef1fb8b8-eac1-46aa-a989-eb48d7814243",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -261,6 +270,17 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "372bf848-b398-4d4a-8ba6-9404d990a1ea",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FreeCursor",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
