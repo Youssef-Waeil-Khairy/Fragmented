@@ -6,8 +6,8 @@ public class MovingObstacle : MonoBehaviour
     [SerializeField] private LineRenderer pathRenderer;
     [SerializeField] private float speed = 2f;
     [SerializeField] private float errorMargin = 0.1f;
+    [SerializeField] private int pointDirection = 1; // 1 for forward, -1 for backward
     private int currentPointIndex = 0;
-    private int pointDirection = 1; // 1 for forward, -1 for backward
     private Rigidbody rb;
     private Vector3 targetPoint;
 
@@ -32,17 +32,25 @@ public class MovingObstacle : MonoBehaviour
         // Check if the obstacle has reached the target point
         if (Vector3.Distance(transform.position, targetPoint) <= errorMargin)
         {
+            transform.position = targetPoint; // Snap to target point
+
             // Check if we are on the last point
-            if (currentPointIndex == pathRenderer.positionCount - 1)
+            if (pathRenderer.loop)
             {
-                pointDirection = -1; // Reverse direction
+                currentPointIndex = (currentPointIndex += pointDirection) % pathRenderer.positionCount;
             }
-            else if (currentPointIndex == 0)
+            else
             {
-                pointDirection = 1; // Forward direction
+                if (currentPointIndex == pathRenderer.positionCount - 1)
+                {
+                    pointDirection = -1;
+                }
+                else if (currentPointIndex == 0)
+                {
+                    pointDirection = 1;
+                }
+                currentPointIndex += pointDirection;
             }
-            // Move to the next point in the path
-            currentPointIndex += pointDirection;
             MoveToPoint(currentPointIndex);
         }
     }
@@ -53,8 +61,9 @@ public class MovingObstacle : MonoBehaviour
     }
     public void SetTargetPoint(int index)
     {
-        if (index >= 0 && index < pathRenderer.positionCount)
+        if (index >= 0)
         {
+            index = index % pathRenderer.positionCount;
             currentPointIndex = index;
             targetPoint = pathRenderer.GetPosition(currentPointIndex);
         }
@@ -80,19 +89,31 @@ public class MovingObstacle : MonoBehaviour
         MoveToPoint();
     }
 
-    void OnDrawGizmosSelected()
+    void OnDrawGizmos()
     {
         // Draw the path in the editor for visualization
         if (pathRenderer != null && pathRenderer.positionCount > 1)
         {
-            Vector3 outline = GetComponent<BoxCollider>().size;
             Gizmos.color = Color.green;
             for (int i = 0; i < pathRenderer.positionCount - 1; i++)
             {
                 Gizmos.DrawLine(pathRenderer.GetPosition(i), pathRenderer.GetPosition(i + 1));
-                Gizmos.DrawWireCube(pathRenderer.GetPosition(i), outline);
             }
-            Gizmos.DrawWireCube(pathRenderer.GetPosition(pathRenderer.positionCount - 1), outline);
+            if (pathRenderer.loop)
+            {
+                Gizmos.DrawLine(pathRenderer.GetPosition(pathRenderer.positionCount - 1), pathRenderer.GetPosition(0));
+            }
+
+            Vector3 outline = GetComponent<BoxCollider>().size;
+            for (int j = 0; j < pathRenderer.positionCount; j++)
+            {
+                if (j == currentPointIndex)
+                {
+                    Gizmos.color = Color.cyan;
+                }
+                Gizmos.DrawWireCube(pathRenderer.GetPosition(j), outline);
+                Gizmos.color = Color.green;
+            }
         }
     }
 }
