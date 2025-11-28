@@ -1,8 +1,10 @@
+using Interactables;
 using UnityEngine;
 
-public interface IINteractable
+public interface IInteractable
 {
-    public void OnInteract() { }
-    public void OnPreviewStart() { }
-    public void OnPreviewEnd() { }
+    public bool CanInteract();
+    public void Interact(Interactor interactor);
+    public void StartPreview();
+    public void StopPreview();
 }
