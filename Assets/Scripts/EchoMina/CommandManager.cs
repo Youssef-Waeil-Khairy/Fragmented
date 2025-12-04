@@ -6,10 +6,11 @@ namespace EchoMina
 {
     public class CommandManager : MonoBehaviour
     {
-        [SerializeReference]
         public List<Command> Commands;
         [SerializeField] private int _commandIndex = 0;
-        public int  CommandIndex { get; }
+        [SerializeField] private GameObject _echo;
+        public int  CommandIndex { get { return _commandIndex; } }
+        public GameObject Echo { get { return _echo; } }
 
         private void OnEnable()
         {
@@ -44,7 +45,7 @@ namespace EchoMina
             _commandIndex++;
 
             if (_commandIndex >= Commands.Count) return;
-            
+
             Commands[_commandIndex].BeginExecute();
         }
 
@@ -52,6 +53,18 @@ namespace EchoMina
         {
             Commands.Clear();
             Commands.AddRange(GetComponentsInChildren<Command>());
+        }
+
+        /// <summary>
+        /// Called if a given command timed out. Commands can time out if they try to move along a path but there is no ground under them
+        /// </summary>
+        /// <param name="command">GameObject of the command that timed out</param>
+        public void TimedOut(GameObject command)
+        {
+            // Disable Echo Mina
+            command.GetComponent<Command>().Mina.SetActive(false);
+            // Disable CommandManager
+            gameObject.SetActive(false);
         }
     }
 }

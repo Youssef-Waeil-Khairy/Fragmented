@@ -1,16 +1,19 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody))]
 public class StagedObstacle : MonoBehaviour
 {
     private Rigidbody rb;
-    private int currentStage = 0;
+    public int currentStage = 0;
     private Vector3 targetPosition;
     [SerializeField] private LineRenderer lineRenderer;
     [SerializeField] private float moveSpeed = 2f;
     [SerializeField] private int stageDirection = 1;
     [SerializeField] private float errorMargin = 0.1f;
     private bool isMoving = false;
+    [SerializeField] private UnityEvent events;
 
     public bool IsMoving => isMoving;
 
@@ -34,14 +37,16 @@ public class StagedObstacle : MonoBehaviour
 
         if (Vector3.Distance(transform.position, targetPosition) <= errorMargin)
         {
+            rb.constraints = RigidbodyConstraints.FreezeAll;
             rb.linearVelocity = Vector3.zero;
             transform.position = targetPosition; // Snap to target position
+            events?.Invoke();
         }
     }
 
     public void GoToNextStage()
     {
-        if (isMoving) 
+        if (isMoving)
         {
             return;
         }
@@ -61,9 +66,11 @@ public class StagedObstacle : MonoBehaviour
             }
             currentStage += stageDirection;
         }
-
         targetPosition = lineRenderer.GetPosition(currentStage);
+        rb.constraints = RigidbodyConstraints.None;
+        rb.constraints = RigidbodyConstraints.FreezeRotation;
         rb.linearVelocity = (targetPosition - transform.position).normalized * moveSpeed;
+        events?.Invoke();
     }
 
     private void OnDrawGizmos()
@@ -91,7 +98,11 @@ public class StagedObstacle : MonoBehaviour
                 {
                     Gizmos.color = Color.cyan;
                 }
-                Gizmos.DrawWireCube(lineRenderer.GetPosition(i), boxCollider.size);
+                Gizmos.DrawWireCube(
+                    lineRenderer.GetPosition(i),
+                    new Vector3(boxCollider.size.x * transform.localScale.x,
+                    boxCollider.size.y  * transform.localScale.y,
+                    boxCollider.size.z  * transform.localScale.z));
                 Gizmos.color = Color.rebeccaPurple;
             }
         }

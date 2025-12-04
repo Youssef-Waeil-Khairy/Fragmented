@@ -1,21 +1,36 @@
 tasks:
-[] Move from point A to point B
-    [] Within a set time
+[x] Move from point A to point B
+    [-] Within a set time
         [] (make optional)
-    [] With set speed
-    [] turn to face a direction
+    [x] With set speed
+    [-] turn to face a direction
 [] Interact with the environment
     [] Interaction System
     [] Pushing stuff
 [] Time out to despawn
 [] Spawn in on interaction
+[] Rotate to face a given direction
+    [] over a given period
+    [] preview rotation easily
 
 Echo Mina Actions:
 - Move along a given path
 - Wait for a set time
 - Push object (in path while moving or to a point if given one)
 - Interact with Interactable
+- Turn to face a direction
+
+Moving:
+check if the path is valid, timing out if not
 
 Command Manager:
-List of commands:
-    If it is a
+[
+Add new command
+]
+[
+current command index:
+current command type:
+    [
+    command info based on type
+    ]
+]

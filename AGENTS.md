@@ -6,7 +6,7 @@
   - Tags:
     - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Command
   - Layers:
-    - Default, TransparentFX, Ignore Raycast, Water, UI, Interactible
+    - Default, TransparentFX, Ignore Raycast, Ground, Water, UI, Interactible
 - Active game object:
   - Name: CommandManager
   - Tag: Untagged

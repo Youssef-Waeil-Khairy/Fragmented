@@ -26,6 +26,14 @@ namespace Interactables
             }
         }
 
+        public void InteractCommand()
+        {
+            if (_interactable != null && _interactable.CanInteract())
+            {
+                _interactable.Interact(this);
+            }
+        }
+
         private void OnTriggerExit(Collider other)
         {
             Debug.Log(other.gameObject.name + " has exited");
