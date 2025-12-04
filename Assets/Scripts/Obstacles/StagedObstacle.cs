@@ -37,7 +37,6 @@ public class StagedObstacle : MonoBehaviour
 
         if (Vector3.Distance(transform.position, targetPosition) <= errorMargin)
         {
-            rb.constraints = RigidbodyConstraints.FreezeAll;
             rb.linearVelocity = Vector3.zero;
             transform.position = targetPosition; // Snap to target position
             events?.Invoke();
@@ -52,7 +51,7 @@ public class StagedObstacle : MonoBehaviour
         }
         if (lineRenderer.loop)
         {
-            currentStage = (currentStage++) % lineRenderer.positionCount;
+            currentStage = (currentStage++) % lineRenderer.positionCount; // BUG: This needs to be looked at, seems broken
         }
         else
         {
@@ -67,8 +66,6 @@ public class StagedObstacle : MonoBehaviour
             currentStage += stageDirection;
         }
         targetPosition = lineRenderer.GetPosition(currentStage);
-        rb.constraints = RigidbodyConstraints.None;
-        rb.constraints = RigidbodyConstraints.FreezeRotation;
         rb.linearVelocity = (targetPosition - transform.position).normalized * moveSpeed;
         events?.Invoke();
     }
