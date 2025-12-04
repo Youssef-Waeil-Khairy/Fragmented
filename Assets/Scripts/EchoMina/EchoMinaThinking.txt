@@ -1,0 +1,21 @@
+tasks:
+[] Move from point A to point B
+    [] Within a set time
+        [] (make optional)
+    [] With set speed
+    [] turn to face a direction
+[] Interact with the environment
+    [] Interaction System
+    [] Pushing stuff
+[] Time out to despawn
+[] Spawn in on interaction
+
+Echo Mina Actions:
+- Move along a given path
+- Wait for a set time
+- Push object (in path while moving or to a point if given one)
+- Interact with Interactable
+
+Command Manager:
+List of commands:
+    If it is a
