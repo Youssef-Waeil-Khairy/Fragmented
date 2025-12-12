@@ -14,6 +14,7 @@ public class StagedObstacle : MonoBehaviour
     [SerializeField] private float errorMargin = 0.1f;
     private bool isMoving = false;
     [SerializeField] private UnityEvent events;
+    [SerializeField] private bool _drawGizmos = true;
 
     public bool IsMoving => isMoving;
 
@@ -72,6 +73,11 @@ public class StagedObstacle : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        if (!_drawGizmos)
+        {
+            return;
+        }
+
         if (boxCollider == null)
         {
             boxCollider = GetComponent<BoxCollider>();
