@@ -1,0 +1,140 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74cc2abdfba4a4c8fbb69c73fc969393, type: 3}
+  m_Name: GlobalNoteDatabase
+  m_EditorClassIdentifier: 
+  globalNoteInfoList:
+  - note:
+      noteTitle: Note Title (Edit Me!)
+      content: Put Your Note Here
+      style: 0
+      isOpen: 1
+      folderIndex: 0
+    isGlobal: 0
+    instanceID: 0
+    GUID: 5143bed9-7eae-4650-886d-e1e23330e788
+  - note:
+      noteTitle: Note Title (Edit Me!)
+      content: Put Your Note Here
+      style: 0
+      isOpen: 1
+      folderIndex: 0
+    isGlobal: 0
+    instanceID: 0
+    GUID: 18c6a304-cf38-4433-9328-3120173590bf
+  - note:
+      noteTitle: Note Title (Edit Me!)
+      content: Put Your Note Here
+      style: 0
+      isOpen: 1
+      folderIndex: 0
+    isGlobal: 0
+    instanceID: 0
+    GUID: 1461812f-ebf1-4333-b120-04cecca6c9a1
+  - note:
+      noteTitle: Note Title (Edit Me!)
+      content: Put Your Note Here
+      style: 0
+      isOpen: 1
+      folderIndex: 0
+    isGlobal: 0
+    instanceID: 0
+    GUID: eaa037f1-52ed-4cef-8a72-2d21daf28621
+  - note:
+      noteTitle: Hierarchy Restructure
+      content: 'This needs to be restructured
+
+        Have a GameObject for each
+        floor with another GameObject under it for each room. This should make it
+        much easier and cleaner to navigate through it'
+      style: 0
+      isOpen: 1
+      folderIndex: 1
+    isGlobal: 0
+    instanceID: 0
+    GUID: 132ecbdd-cba5-49fd-9fef-bc44586de550
+  - note:
+      noteTitle: Note Title (Edit Me!)
+      content: Put Your Note Here
+      style: 0
+      isOpen: 1
+      folderIndex: 0
+    isGlobal: 0
+    instanceID: 0
+    GUID: 82572f16-0ddd-4a18-aa18-6e986d639778
+  - note:
+      noteTitle: Note Title (Edit Me!)
+      content: Put Your Note Here
+      style: 0
+      isOpen: 1
+      folderIndex: 0
+    isGlobal: 1
+    instanceID: 0
+    GUID: 931a9143-dd5f-4f59-954e-b73417c6a3a5
+  - note:
+      noteTitle: Note Title (Edit Me!)
+      content: Put Your Note Here
+      style: 0
+      isOpen: 1
+      folderIndex: 0
+    isGlobal: 1
+    instanceID: 0
+    GUID: 4f0013fd-7030-4630-901b-2cf7694d31ee
+  - note:
+      noteTitle: Echo Mina Reworking
+      content: Look into get Echo Mina set up with the path she needs to take this
+        level
+      style: 1
+      isOpen: 1
+      folderIndex: 3
+    isGlobal: 0
+    instanceID: 0
+    GUID: ba7a8563-7a33-4855-a59f-516192c5972c
+  - note:
+      noteTitle: Scene Tasks
+      content: '[] Rework scene hierarchy
+
+        [] Make sure scene is accesable
+        where it needs to be
+
+        [] Player outline for when behind terrain
+
+        []
+        Room objects disabling to improve visibility
+
+        [] Fully integrate
+        Echo Mina (set up recording and test)'
+      style: 3
+      isOpen: 1
+      folderIndex: 4
+    isGlobal: 0
+    instanceID: 0
+    GUID: 5e22ec41-2f4f-448f-a25e-56a9bd9df5ca
+  - note:
+      noteTitle: Echo Mina Path Note
+      content: 'Where do we start?
+
+        Where do we have to go?
+
+        What
+        do we have to interact with and when?'
+      style: 0
+      isOpen: 1
+      folderIndex: 3
+    isGlobal: 0
+    instanceID: 0
+    GUID: 5af52f77-8590-4cc3-82ba-d0567bba824a
+  noteFolders:
+  - Current Tasks
+  - Archived
+  - Echo Mina
+  - Scene Tasks

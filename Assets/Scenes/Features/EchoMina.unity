@@ -404,7 +404,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8940277697560097501, guid: 7de5e7eeb9c7a9d449013e1d49a90a54, type: 3}
       propertyPath: m_Loop
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8940277697560097501, guid: 7de5e7eeb9c7a9d449013e1d49a90a54, type: 3}
       propertyPath: m_Positions.Array.size

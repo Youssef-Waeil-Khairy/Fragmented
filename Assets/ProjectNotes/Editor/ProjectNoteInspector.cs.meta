@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 5b684c839a206034abf2580bd55ea343
+timeCreated: 1481081316
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 100395
+  packageName: Project Notes
+  packageVersion: 1.25
+  assetPath: Assets/ProjectNotes/Editor/ProjectNoteInspector.cs
+  uploadId: 448900
