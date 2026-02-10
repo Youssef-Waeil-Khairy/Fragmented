@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: b3f11a1e2c034d748a6dd86ee85664ec
   - enabled: 1
-    path: Assets/Scenes/GreyBoxing/Tutorial_GreyBoxing.unity
+    path: Assets/Scenes/GreyBoxing/0_Tutorial_GreyBoxing.unity
     guid: 419aa68a2502a0646b27ed6426b0010a
   - enabled: 1
     path: Assets/Scenes/Level_One.unity
