@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 807e21d92e3771b4da33701cdfcf446c
+timeCreated: 1481081968
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 100395
+  packageName: Project Notes
+  packageVersion: 1.25
+  assetPath: Assets/ProjectNotes/Resources/ProjectNotesStyle_Dark.guiskin
+  uploadId: 448900

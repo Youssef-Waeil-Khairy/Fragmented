@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: 229a2e5a0073a4117afc017c66e213cd
+timeCreated: 1542840713
+licenseType: Store
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 100395
+  packageName: Project Notes
+  packageVersion: 1.25
+  assetPath: Assets/ProjectNotes/Scripts/ProjectNote.cs
+  uploadId: 448900
