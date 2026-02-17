@@ -1,3 +1,6 @@
+using System;
+using EchoMina.Original;
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,9 +9,13 @@ namespace Interactables
     [RequireComponent(typeof(BoxCollider))]
     public class Interactor : MonoBehaviour
     {
-        private IInteractable _interactable;
+        [ShowNonSerializedField] private IInteractable _interactable;
         [SerializeField] private Vector3 _interactionBox = Vector3.one;
         [SerializeField] private Vector3 _interactionOffset = Vector3.one;
+
+        public bool IsMina = false;
+        [Foldout("Echo Mina")][SerializeField] private float _timeSinceLastInteraction = 0f;
+        [Foldout("Echo Mina")][SerializeField] private OriginalEchoMina _originalEchoMina;
 
         private void Start()
         {
@@ -18,8 +25,30 @@ namespace Interactables
             _collider.center = _interactionOffset;
         }
 
+        void Update()
+        {
+            if (_originalEchoMina.IsRecording && IsMina) _timeSinceLastInteraction += Time.deltaTime;
+        }
+
+        private void OnDisable()
+        {
+            if (_interactable != null)
+            {
+                _interactable?.StopPreview();
+                _interactable = null;
+            }
+        }
+
         public void OnInteract(InputValue context)
         {
+            Debug.Log("Interact" + gameObject.name);
+            if (IsMina)
+            {
+                _originalEchoMina.SaveInteraction(_timeSinceLastInteraction);
+                _timeSinceLastInteraction = 0f;
+                _originalEchoMina.EchoInteractor.InteractCommand();
+            }
+            
             if (_interactable != null && _interactable.CanInteract())
             {
                 _interactable.Interact(this);
@@ -28,10 +57,16 @@ namespace Interactables
 
         public void InteractCommand()
         {
+            Debug.Log("InteractCommand");
             if (_interactable != null && _interactable.CanInteract())
             {
                 _interactable.Interact(this);
             }
+        }
+
+        public void StartRecording()
+        {
+            _timeSinceLastInteraction = 0f;
         }
 
         private void OnTriggerExit(Collider other)
@@ -57,7 +92,7 @@ namespace Interactables
                 {
                     _interactable = go;
                     _interactable.StartPreview();
-                    Debug.Log("Interacting with " + go);
+                    Debug.Log("Entered interaction range of " + go);
                 }
             }
         }

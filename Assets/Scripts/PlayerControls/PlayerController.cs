@@ -1,4 +1,7 @@
 using System;
+using EchoMina.Original;
+using JetBrains.Annotations;
+using NaughtyAttributes;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -8,6 +11,8 @@ namespace PlayerControls
     [RequireComponent(typeof(PlayerInput))]
     public class PlayerController : MonoBehaviour
     {
+        public static PlayerController Instance;
+        
         PlayerInput playerInput;
         CharacterController characterController;
 
@@ -22,9 +27,23 @@ namespace PlayerControls
         [Header("Camera")]
         [SerializeField] private CinemachineInputAxisController cinemachineInputAxisController;
         [SerializeField] private bool cursorFree = false;
+        
+        [Header("Echo Mina")]
+        [SerializeField] private OriginalEchoMina originalEchoMina;
+        
+        public OriginalEchoMina EchoMina => originalEchoMina;
 
         private void Start()
         {
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else if (Instance != this)
+            {
+                Destroy(gameObject);
+            }
+            
             playerInput = GetComponent<PlayerInput>();
             characterController = GetComponent<CharacterController>();
             LockCursor();
@@ -32,6 +51,10 @@ namespace PlayerControls
 
         private void FixedUpdate()
         {
+            if (originalEchoMina.IsRecording)
+            {
+                return;
+            }
             Vector3 move = transform.forward * (moveDirection * (isSprinting ? sprintSpeed : moveSpeed));
             characterController.SimpleMove(move);
             transform.Rotate(transform.up, turnDirection *  turnSpeed * Time.fixedDeltaTime);
@@ -77,6 +100,15 @@ namespace PlayerControls
         void OnMove(InputValue value)
         {
             Vector2 inputDirection = value.Get<Vector2>();
+            
+            // Block move inputs to main Mina if we are recording
+            if (originalEchoMina.IsRecording)
+            {
+                Vector3 recordInput = new Vector3(inputDirection.y, inputDirection.x, isSprinting ? 1f : 0f);
+                originalEchoMina.OnMove(recordInput);
+                return;
+            }
+            
             moveDirection = inputDirection.y;
             turnDirection = inputDirection.x;
         }
@@ -84,6 +116,20 @@ namespace PlayerControls
         void OnSprint(InputValue value)
         {
             isSprinting = value.isPressed;
+        }
+
+        [UsedImplicitly]
+        void OnMinaRecord(InputValue value)
+        {
+            characterController.enabled = !characterController.enabled;
+            Debug.Log($"position: {transform.position}, rotation: {transform.rotation}");
+            originalEchoMina.ToggleRecording(transform.position, transform.rotation);
+        }
+
+        [UsedImplicitly]
+        void OnMinaPlayback(InputValue value)
+        {
+            originalEchoMina.TogglePlaying();
         }
     }
 }

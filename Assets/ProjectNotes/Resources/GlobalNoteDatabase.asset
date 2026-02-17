@@ -133,6 +133,30 @@ MonoBehaviour:
     isGlobal: 0
     instanceID: 0
     GUID: 5af52f77-8590-4cc3-82ba-d0567bba824a
+  - note:
+      noteTitle: PreProgrammed Echo Mina
+      content: This is all the gameobjects needed for the preprogrammed version of
+        the echo mina mechanic
+      style: 2
+      isOpen: 1
+      folderIndex: 0
+    isGlobal: 0
+    instanceID: 0
+    GUID: fd3497ce-4a09-43bb-bec9-b905e7cb3aa9
+  - note:
+      noteTitle: Original Echo Mina Explanation
+      content: "This is the root object for the OG Echo Mina mechanic. \nThe way
+        the system works is as follows:\n1. player presses [R] to spawn in Echo Mina
+        and record a path as Echo Mina. Echo Mina can do everything normal Mina can\n2.
+        Player presses [R] again to stop the recording and save it and despawns Echo
+        Mina\n3. Player presses [P] to spawn in and run through the recording from
+        Echo Mina that was recorded, despawns after the recording finishes"
+      style: 2
+      isOpen: 1
+      folderIndex: 0
+    isGlobal: 0
+    instanceID: 0
+    GUID: 9ff38425-fc50-4a30-ba59-6b4707ff001e
   noteFolders:
   - Current Tasks
   - Archived

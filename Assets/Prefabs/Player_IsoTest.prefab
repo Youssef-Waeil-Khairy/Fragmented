@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7695706919278748009}
   - component: {fileID: 3001425210557622691}
   - component: {fileID: 2942653836451331848}
-  - component: {fileID: 6524184949012273191}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -28,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 498074962667858309}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.28}
   m_LocalScale: {x: 0.5556, y: 0.3558, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -87,27 +86,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6524184949012273191
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 498074962667858309}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1104100045832511698
 GameObject:
   m_ObjectHideFlags: 0
@@ -207,6 +185,8 @@ GameObject:
   - component: {fileID: 2886888034009999681}
   - component: {fileID: 883346794724088767}
   - component: {fileID: 7202005059351573423}
+  - component: {fileID: 6888464894120266942}
+  - component: {fileID: 4693985011188660579}
   m_Layer: 0
   m_Name: Player_IsoTest
   m_TagString: Untagged
@@ -244,7 +224,7 @@ CharacterController:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   m_LayerOverridePriority: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
@@ -276,6 +256,7 @@ MonoBehaviour:
   isSprinting: 0
   cinemachineInputAxisController: {fileID: 7830131462990624239}
   cursorFree: 0
+  originalEchoMina: {fileID: 0}
 --- !u!114 &7202005059351573423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306,6 +287,44 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!65 &6888464894120266942
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4583377852656252385}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4693985011188660579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4583377852656252385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2ad182816fa4dbcae107372e09972c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interactionBox: {x: 1, y: 1, z: 2}
+  _interactionOffset: {x: 1, y: 0, z: 1}
+  IsEchoMina: 0
+  _timeSinceLastInteraction: 0
+  _originalEchoMina: {fileID: 0}
 --- !u!1 &7304531934226083275
 GameObject:
   m_ObjectHideFlags: 0

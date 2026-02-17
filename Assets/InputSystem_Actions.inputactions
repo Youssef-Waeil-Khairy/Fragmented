@@ -50,6 +50,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "MinaRecord",
+                    "type": "Button",
+                    "id": "5d25aaa1-c3ca-4df7-aba8-0eabd9ae27ef",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MinaPlayback",
+                    "type": "Button",
+                    "id": "745d6f9a-93fd-47d7-86c6-8ad0ee8fa897",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -281,6 +299,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "FreeCursor",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "165f536e-4a1d-4585-a10f-fe5a04fc8055",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "MinaRecord",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ac9e9450-5574-4928-a7fe-6772019bb00a",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "MinaPlayback",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
