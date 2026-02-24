@@ -1,5 +1,6 @@
 using System;
 using EchoMina.Original;
+using Interactables;
 using JetBrains.Annotations;
 using NaughtyAttributes;
 using Unity.Cinemachine;
@@ -12,6 +13,7 @@ namespace PlayerControls
     public class PlayerController : MonoBehaviour
     {
         public static PlayerController Instance;
+        public static bool HASSTARTEDUP = false;
         
         PlayerInput playerInput;
         CharacterController characterController;
@@ -26,6 +28,7 @@ namespace PlayerControls
 
         [Header("Camera")]
         [SerializeField] private CinemachineInputAxisController cinemachineInputAxisController;
+        [SerializeField] private CinemachineCamera playerCamera;
         [SerializeField] private bool cursorFree = false;
         
         [Header("Echo Mina")]
@@ -33,7 +36,7 @@ namespace PlayerControls
         
         public OriginalEchoMina EchoMina => originalEchoMina;
 
-        private void Start()
+        public void Start()
         {
             if (Instance == null)
             {
@@ -47,10 +50,14 @@ namespace PlayerControls
             playerInput = GetComponent<PlayerInput>();
             characterController = GetComponent<CharacterController>();
             LockCursor();
+            
+            HASSTARTEDUP = true;
         }
 
         private void FixedUpdate()
         {
+            if (!HASSTARTEDUP) return;
+            
             if (originalEchoMina.IsRecording)
             {
                 return;
@@ -121,9 +128,21 @@ namespace PlayerControls
         [UsedImplicitly]
         void OnMinaRecord(InputValue value)
         {
-            characterController.enabled = !characterController.enabled;
+            //characterController.enabled = !characterController.enabled;
             Debug.Log($"position: {transform.position}, rotation: {transform.rotation}");
             originalEchoMina.ToggleRecording(transform.position, transform.rotation);
+            if (!originalEchoMina.IsRecording)
+            {
+                GetComponent<Interactor>().RecordingStopped();
+                playerCamera.enabled = true;
+                cinemachineInputAxisController.enabled = true;
+            }
+            else
+            {
+                GetComponent<Interactor>().RecordingStarted();
+                playerCamera.enabled = false;
+                cinemachineInputAxisController.enabled = false;
+            }
         }
 
         [UsedImplicitly]

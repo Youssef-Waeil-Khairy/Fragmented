@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using EchoMina.Original;
 using NaughtyAttributes;
 using PlayerControls;
 using UnityEngine;
@@ -16,16 +17,16 @@ namespace Interactables
         [SerializeField] private int _interactionCountOn = 0;
         [SerializeField] private int _interactionCountOff = 0;
 
-        void Start()
+        public void Startup()
         {
-            PlayerController.Instance.EchoMina.StartRecording += OnStartSignal;
-            PlayerController.Instance.EchoMina.StopRecording += OnReverseSignal;
+            OriginalEchoMina.Instance.StartRecording += OnStartSignal;
+            OriginalEchoMina.Instance.StopRecording += OnReverseSignal;
         }
 
         void OnDisable()
         {
-            PlayerController.Instance.EchoMina.StartRecording -= OnStartSignal;
-            PlayerController.Instance.EchoMina.StopRecording -= OnReverseSignal;
+            OriginalEchoMina.Instance.StartRecording -= OnStartSignal;
+            OriginalEchoMina.Instance.StopRecording -= OnReverseSignal;
         }
 
         void OnReverseSignal()

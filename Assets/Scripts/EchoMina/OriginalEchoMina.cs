@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.Linq;
 using Interactables;
 using NaughtyAttributes;
+using Unity.Cinemachine;
 using UnityEngine;
 // ReSharper disable InconsistentNaming
 
@@ -21,6 +23,8 @@ namespace EchoMina.Original
         [Header("States")]
         [SerializeField][ReadOnly] private bool _isRecording;
         [SerializeField][ReadOnly] private bool _isPlaying;
+        public static OriginalEchoMina Instance;
+        public static bool HASSTARTEDUP = false;
 
         [Header("Movement")] 
         [SerializeField] private CharacterController _characterController;
@@ -42,6 +46,8 @@ namespace EchoMina.Original
         [SerializeField][ReadOnly] private List<Quaternion> _rotations;
         [SerializeField][ReadOnly] private float _interactionTime;
         [SerializeField][ReadOnly] private List<float> _interactions;
+        [SerializeField] private CinemachineCamera echoCamera;
+        [SerializeField] private CinemachineInputAxisController echoInputAxisController;
         
         // Getters and setters
         public bool IsRecording
@@ -69,10 +75,37 @@ namespace EchoMina.Original
 
         #region Unity Functions
 
-        private void OnEnable()
+        private void Awake()
         {
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else if (Instance != this)
+            {
+                Destroy(gameObject);
+            }
+            
             _characterController = GetComponent<CharacterController>();
             _interactor = GetComponent<Interactor>();
+
+            IInteractable[] interactables = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<IInteractable>().ToArray();
+            
+            if (interactables != null)
+            {
+                foreach (var interactable in interactables)
+                {
+                    interactable.BindObject();
+                }
+            }
+            
+            InteractorPressurePlate[] pressurePlates = FindObjectsOfType<InteractorPressurePlate>();
+            foreach (var pressurePlate in pressurePlates)
+            {
+                pressurePlate.Startup();
+            }
+            
+            Despawn();
         }
 
         private void Update()
@@ -160,6 +193,7 @@ namespace EchoMina.Original
                 _interactor.StartRecording();
                 InvokeRepeating(nameof(RecordSnapshot), _recordFrequency, _recordFrequency);
                 if (StartRecording != null) StartRecording();
+                
             }
             else
             {
@@ -179,7 +213,8 @@ namespace EchoMina.Original
             _isRecording = false;
             CancelInvoke(nameof(LoadSnapshot));
             _isPlaying = false;
-            
+            echoCamera.enabled = false;
+            echoInputAxisController.enabled = false;
             gameObject.SetActive(false);
         }
 
@@ -187,6 +222,8 @@ namespace EchoMina.Original
         {
             Debug.Log("<b><color=green>[ECHOMINA]</color></b> Spawning Echo Mina");
             gameObject.SetActive(true);
+            echoCamera.enabled = true;
+            echoInputAxisController.enabled = true;
             _characterController.enabled = false;
             transform.position = position;
             transform.rotation = rotation;
@@ -194,6 +231,7 @@ namespace EchoMina.Original
             _startRotation = transform.rotation;
             _characterController.enabled = true;
             _recordIndex = 0;
+            _interactor.StartRecording();
         }
 
         public void TogglePlaying()

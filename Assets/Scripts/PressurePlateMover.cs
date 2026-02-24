@@ -1,3 +1,5 @@
+using System;
+using NaughtyAttributes;
 using UnityEngine;
 
 public class PressurePlateMover : MonoBehaviour
@@ -26,6 +28,7 @@ public class PressurePlateMover : MonoBehaviour
     }
 
     // Call this from OnBeginInteraction or OnUnInteractOn
+    [Button]
     public void MoveToPressed()
     {
         float direction = _moveUpOnPress ? 1f : -1f;
@@ -33,8 +36,17 @@ public class PressurePlateMover : MonoBehaviour
     }
 
     // Call this from OnEndInteraction or OnUnInteractOff
+    [Button]
     public void MoveToResting()
     {
         _targetPosition = _startPosition;
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (_objectToMove != null)
+        {
+            Debug.DrawLine(_objectToMove.position, _objectToMove.position + (_objectToMove.up * (_moveUpOnPress ? 1f : -1f)) * _moveDistance, Color.blueViolet);
+        }
     }
 }

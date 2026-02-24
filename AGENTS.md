@@ -2,13 +2,13 @@
 - Project name: Fragmented
 - Unity version: Unity 6000.1.14f1
 - Active scene:
-  - Name: EchoMina
+  - Name: Level_1_GreyBoxing
   - Tags:
-    - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Command, EchoMina
+    - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Command, EchoMina, Interactable
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Ground, Water, UI, Interactible, EchoMina
 - Active game object:
-  - Name: Lever
+  - Name: Platform_C
   - Tag: Untagged
-  - Layer: Interactible
+  - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

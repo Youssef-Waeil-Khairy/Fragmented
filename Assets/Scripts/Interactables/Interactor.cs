@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using EchoMina.Original;
 using NaughtyAttributes;
 using UnityEngine;
@@ -10,24 +11,65 @@ namespace Interactables
     public class Interactor : MonoBehaviour
     {
         [ShowNonSerializedField] private IInteractable _interactable;
-        [SerializeField] private Vector3 _interactionBox = Vector3.one;
-        [SerializeField] private Vector3 _interactionOffset = Vector3.one;
+
+        [Foldout("Moveable Transforms")] public Transform AttachingTransform;
+        [Foldout("Moveable Transforms")] public Transform DetachingTransform;
 
         public bool IsMina = false;
         [Foldout("Echo Mina")][SerializeField] private float _timeSinceLastInteraction = 0f;
         [Foldout("Echo Mina")][SerializeField] private OriginalEchoMina _originalEchoMina;
+        [Foldout("Echo Mina")][SerializeField] private bool isRecording = false;
+        
+        // TODO: Check if we are holding something before allowing an interaction
+
+        #region Unity Functions
 
         private void Start()
         {
-            BoxCollider _collider = GetComponent<BoxCollider>();
-            _collider.isTrigger = true;
-            _collider.size = _interactionBox;
-            _collider.center = _interactionOffset;
+            if (!IsMina)
+            {
+                _originalEchoMina.StartRecording += RecordingStarted;
+                _originalEchoMina.StopRecording += RecordingStopped;
+            }
         }
 
         void Update()
         {
-            if (_originalEchoMina.IsRecording && IsMina) _timeSinceLastInteraction += Time.deltaTime;
+            if (isRecording && IsMina) _timeSinceLastInteraction += Time.deltaTime;
+        }
+        
+        private void OnTriggerEnter(Collider other)
+        {
+            var go = other.GetComponent<IInteractable>();
+            if (go != null)
+            {
+                if (_interactable == null)
+                {
+                    _interactable = go;
+                    _interactable.StartPreview();
+                    Debug.Log($"<b><color=green>[Interactions][Interactor]</color></b> {gameObject.name} Entered interaction range of " + go);
+                }
+            }
+        }
+        
+        private void OnTriggerExit(Collider other)
+        {
+            var go = other.GetComponent<IInteractable>();
+            if (go != null)
+            {
+                if (go == _interactable)
+                {
+                    if (_interactable.IsLockable() && _interactable.IsLocked())
+                    {
+                        Debug.Log($"<b><color=yellow>[Interactions][Locking]</color></b> {other.gameObject.name} is locked to {gameObject.name} and is now outside interaction range");
+                        return;
+                    }
+                    
+                    go.StopPreview();
+                    _interactable = null;
+                    Debug.Log($"<b><color=red>[Interactions][Interactor]</color></b> {gameObject.name} Exited interaction range of " + go);
+                }
+            }
         }
 
         private void OnDisable()
@@ -37,19 +79,29 @@ namespace Interactables
                 _interactable?.StopPreview();
                 _interactable = null;
             }
+
+            if (!IsMina)
+            {
+                _originalEchoMina.StartRecording -= RecordingStarted;
+                _originalEchoMina.StopRecording -= RecordingStopped;
+            }
         }
+
+  #endregion
+
+        #region Public Functions
 
         public void OnInteract(InputValue context)
         {
-            Debug.Log("Interact" + gameObject.name);
-            if (IsMina)
+            if (IsMina && isRecording)
             {
                 _originalEchoMina.SaveInteraction(_timeSinceLastInteraction);
                 _timeSinceLastInteraction = 0f;
                 _originalEchoMina.EchoInteractor.InteractCommand();
+                return;
             }
             
-            if (_interactable != null && _interactable.CanInteract())
+            if (_interactable != null && _interactable.CanInteract(this))
             {
                 _interactable.Interact(this);
             }
@@ -57,8 +109,8 @@ namespace Interactables
 
         public void InteractCommand()
         {
-            Debug.Log("InteractCommand");
-            if (_interactable != null && _interactable.CanInteract())
+            Debug.Log("<b><color=green>[Interactions][Interactor][Echo Mina]</color></b> Interaction Command received");
+            if (_interactable != null && _interactable.CanInteract(this))
             {
                 _interactable.Interact(this);
             }
@@ -69,40 +121,31 @@ namespace Interactables
             _timeSinceLastInteraction = 0f;
         }
 
-        private void OnTriggerExit(Collider other)
+        public void UnlockObject()
         {
-            Debug.Log(other.gameObject.name + " has exited");
-            var go = other.GetComponent<IInteractable>();
-            if (go != null)
-            {
-                if (go == _interactable)
-                {
-                    go.StopPreview();
-                    _interactable = null;
-                }
-            }
+            _interactable.StopPreview();
+            _interactable = null;
+        }
+        
+        public void RecordingStarted()
+        {
+            isRecording = true;
+            Debug.Log($"<b><color=green>[Interactions][Interactor]</color></b> Recording started in {name}");
         }
 
-        private void OnTriggerEnter(Collider other)
+        public void RecordingStopped()
         {
-            var go = other.GetComponent<IInteractable>();
-            if (go != null)
-            {
-                if (_interactable == null)
-                {
-                    _interactable = go;
-                    _interactable.StartPreview();
-                    Debug.Log("Entered interaction range of " + go);
-                }
-            }
+            isRecording = false;
+            Debug.Log($"<b><color=red>[Interactions][Interactor]</color></b> Recording stopped in {name}");
         }
 
+  #endregion
 
+        #region Private Functions
 
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.darkGreen;
-            Gizmos.DrawWireCube(transform.position + _interactionOffset, _interactionBox);
-        }
+        
+        
+        #endregion
+
     }
 }

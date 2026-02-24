@@ -1,4 +1,5 @@
 using System;
+using EchoMina.Original;
 using NaughtyAttributes;
 using PlayerControls;
 using UnityEngine;
@@ -6,9 +7,9 @@ using UnityEngine.Events;
 
 namespace Interactables
 {
-    public class InteractableLever : MonoBehaviour,  IInteractable
+    public class InteractableLever : MonoBehaviour, IInteractable
     {
-        
+
         [SerializeField] private UnityEvent onInteract;
         [SerializeField] private UnityEvent onUnInteract;
         [SerializeField] private UnityEvent onStartPreview;
@@ -16,17 +17,18 @@ namespace Interactables
         [BoxGroup("Recording")][SerializeField] private bool _wasInteracted = false;
         [BoxGroup("Recording")][SerializeField] private int _interactionCount = 0;
 
-        private void Start()
-        {
-            PlayerController.Instance.EchoMina.StartRecording += EchoMinaStartRecording;
-            PlayerController.Instance.EchoMina.StopRecording  += EchoMinaOnStopRecording;
-        }
+    #region Unity Functions
 
         private void OnDisable()
         {
-            PlayerController.Instance.EchoMina.StartRecording -= EchoMinaStartRecording;
-            PlayerController.Instance.EchoMina.StopRecording  -= EchoMinaOnStopRecording;
+            OriginalEchoMina.Instance.StartRecording -= EchoMinaStartRecording;
+            OriginalEchoMina.Instance.StopRecording -= EchoMinaOnStopRecording;
         }
+
+    #endregion
+
+    #region Event Methods
+
         void EchoMinaOnStopRecording()
         {
             if (_wasInteracted)
@@ -44,7 +46,16 @@ namespace Interactables
             _interactionCount = 0;
         }
 
-        public bool CanInteract()
+    #endregion
+
+    #region IInteractable Methods
+
+        public void BindObject()
+        {
+            OriginalEchoMina.Instance.StartRecording += EchoMinaStartRecording;
+            OriginalEchoMina.Instance.StopRecording += EchoMinaOnStopRecording;
+        }
+        public bool CanInteract(Interactor interactor)
         {
             return true;
         }
@@ -68,5 +79,23 @@ namespace Interactables
         {
             onStopPreview?.Invoke();
         }
+        public bool IsLockable()
+        {
+            return false;
+        }
+        public bool IsLocked()
+        {
+            return false;
+        }
+        public void Lock(Interactor interactor)
+        {
+            return;
+        }
+        public void Unlock(Interactor interactor)
+        {
+            return;
+        }
+
+    #endregion
     }
 }

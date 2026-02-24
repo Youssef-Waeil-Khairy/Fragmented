@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -44,27 +45,30 @@ public class StagedObstacle : MonoBehaviour
         }
     }
 
+    [Button]
     public void GoToNextStage()
     {
         if (isMoving)
         {
             return;
         }
-        if (lineRenderer.loop)
+        currentStage++;
+        if (currentStage >= lineRenderer.positionCount)
         {
-            currentStage = (currentStage++) % lineRenderer.positionCount; // BUG: This needs to be looked at, seems broken
+            currentStage = 0;
         }
-        else
+        Debug.Log("Going to next stage: " + currentStage);
+        targetPosition = lineRenderer.GetPosition(currentStage);
+        rb.linearVelocity = (targetPosition - transform.position).normalized * moveSpeed;
+        events?.Invoke();
+    }
+
+    public void GoToPreviousStage()
+    {
+        currentStage--;
+        if (currentStage < 0)
         {
-            if (currentStage == lineRenderer.positionCount - 1)
-            {
-                stageDirection = -1;
-            }
-            else if (currentStage == 0)
-            {
-                stageDirection = 1;
-            }
-            currentStage += stageDirection;
+            currentStage = lineRenderer.positionCount - 1;
         }
         targetPosition = lineRenderer.GetPosition(currentStage);
         rb.linearVelocity = (targetPosition - transform.position).normalized * moveSpeed;

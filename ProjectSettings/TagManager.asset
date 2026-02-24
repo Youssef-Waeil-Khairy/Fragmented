@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Command
   - EchoMina
+  - Interactable
   layers:
   - Default
   - TransparentFX
