@@ -1,10 +1,14 @@
 using System.Collections.Generic;
+using EchoMina.Original;
+using Interactables;
+using JetBrains.Annotations;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody))]
-public class StagedObstacle : MonoBehaviour
+[RequireComponent(typeof(LineRenderer))]
+public class StagedObstacle : MonoBehaviour, IRecordable
 {
     private Rigidbody rb;
     public int currentStage = 0;
@@ -16,6 +20,8 @@ public class StagedObstacle : MonoBehaviour
     private bool isMoving = false;
     [SerializeField] private UnityEvent events;
     [SerializeField] private bool _drawGizmos = true;
+
+    [Foldout("Snapshot")][SerializeField] private int snapshotStage = 0;
 
     public bool IsMoving => isMoving;
 
@@ -45,7 +51,7 @@ public class StagedObstacle : MonoBehaviour
         }
     }
 
-    [Button]
+    //[Button]
     public void GoToNextStage()
     {
         if (isMoving)
@@ -63,6 +69,7 @@ public class StagedObstacle : MonoBehaviour
         events?.Invoke();
     }
 
+    //[Button("Go To Previous Stage")][UsedImplicitly]
     public void GoToPreviousStage()
     {
         currentStage--;
@@ -73,6 +80,24 @@ public class StagedObstacle : MonoBehaviour
         targetPosition = lineRenderer.GetPosition(currentStage);
         rb.linearVelocity = (targetPosition - transform.position).normalized * moveSpeed;
         events?.Invoke();
+    }
+
+    [Button]
+    public void SetUpLineRenderer()
+    {
+        lineRenderer = GetComponent<LineRenderer>();
+        if (lineRenderer == null)
+        {
+            Debug.LogError($"<b><color=orange>[StagedObstacle][Set Up]</color></b> {gameObject.name} tried to set up line renderer, but no line renderer found");
+            return;
+        }
+        lineRenderer.positionCount = 2;
+        lineRenderer.SetPosition(0, transform.position);
+    }
+
+    public void GoToStage(int stage)
+    {
+        targetPosition = lineRenderer.GetPosition(stage);
     }
 
     private void OnDrawGizmos()
@@ -113,5 +138,14 @@ public class StagedObstacle : MonoBehaviour
                 Gizmos.color = Color.rebeccaPurple;
             }
         }
+    }
+    public void TakeSnapshot()
+    {
+        snapshotStage = currentStage;
+    }
+    public void LoadSnapshot()
+    {
+        targetPosition = lineRenderer.GetPosition(snapshotStage);
+        transform.position = targetPosition;
     }
 }

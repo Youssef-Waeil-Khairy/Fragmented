@@ -19,24 +19,24 @@ namespace EchoMina.Original
         public event OnStopRecording StopRecording;
         public event OnStartPlayback StartPlayback;
         public event OnStopPlayback StopPlayback;
-        
+
         [Header("States")]
         [SerializeField][ReadOnly] private bool _isRecording;
         [SerializeField][ReadOnly] private bool _isPlaying;
         public static OriginalEchoMina Instance;
         public static bool HASSTARTEDUP = false;
 
-        [Header("Movement")] 
+        [Header("Movement")]
         [SerializeField] private CharacterController _characterController;
         [SerializeField] private float _speed = 1f;
         [SerializeField] private float _turnSpeed = 1f;
         [SerializeField, ReadOnly] private float _moveDirection;
         [SerializeField, ReadOnly] private float _turnDirection;
-        
+
         [Header("Interactions")]
         [SerializeField] private Interactor _interactor;
 
-        [Header("Recordings")] 
+        [Header("Recordings")]
         [SerializeField][Range(float.MinValue, float.MaxValue)] private float _recordFrequency = 0.1f;
         [SerializeField][ReadOnly] private int _recordIndex;
         [SerializeField][ReadOnly] private int _interactIndex;
@@ -48,7 +48,8 @@ namespace EchoMina.Original
         [SerializeField][ReadOnly] private List<float> _interactions;
         [SerializeField] private CinemachineCamera echoCamera;
         [SerializeField] private CinemachineInputAxisController echoInputAxisController;
-        
+        private IRecordable[] recordables;
+
         // Getters and setters
         public bool IsRecording
         {
@@ -85,27 +86,25 @@ namespace EchoMina.Original
             {
                 Destroy(gameObject);
             }
-            
+
             _characterController = GetComponent<CharacterController>();
             _interactor = GetComponent<Interactor>();
 
-            IInteractable[] interactables = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<IInteractable>().ToArray();
-            
-            if (interactables != null)
+            recordables = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<IRecordable>().ToArray();
+            foreach (var recordable in recordables)
             {
-                foreach (var interactable in interactables)
-                {
-                    interactable.BindObject();
-                }
+                recordable.BindRecordable();
             }
-            
-            InteractorPressurePlate[] pressurePlates = FindObjectsOfType<InteractorPressurePlate>();
-            foreach (var pressurePlate in pressurePlates)
-            {
-                pressurePlate.Startup();
-            }
-            
+
             Despawn();
+        }
+
+        private void OnDestroy()
+        {
+            foreach (IRecordable recordable in recordables)
+            {
+                recordable.UnbindRecordable();
+            }
         }
 
         private void Update()
@@ -163,7 +162,7 @@ namespace EchoMina.Original
             {
                 return;
             }
-            
+
             _characterController.enabled = false;
             transform.position = _positions[_recordIndex];
             transform.rotation = _rotations[_recordIndex];
@@ -180,7 +179,7 @@ namespace EchoMina.Original
                 Invoke(nameof(LoadInteraction), _interactions[_interactIndex]);
             }
         }
-        
+
         public void ToggleRecording(Vector3 position, Quaternion rotation)
         {
             _isRecording = !_isRecording;
@@ -193,7 +192,7 @@ namespace EchoMina.Original
                 _interactor.StartRecording();
                 InvokeRepeating(nameof(RecordSnapshot), _recordFrequency, _recordFrequency);
                 if (StartRecording != null) StartRecording();
-                
+
             }
             else
             {
@@ -208,7 +207,7 @@ namespace EchoMina.Original
         private void Despawn()
         {
             Debug.Log("<b><color=red>[ECHOMINA]</color></b> Despawning Echo Mina");
-            
+
             CancelInvoke(nameof(RecordSnapshot));
             _isRecording = false;
             CancelInvoke(nameof(LoadSnapshot));
@@ -245,7 +244,7 @@ namespace EchoMina.Original
                     return;
                 }
                 Debug.Log("<b><color=green>[ECHOMINA]</color></b> Playing recorded playback of Echo Mina");
-                
+
                 gameObject.SetActive(true);
                 _characterController.enabled = false;
                 transform.position = _startPosition;

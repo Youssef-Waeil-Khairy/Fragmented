@@ -1,26 +1,30 @@
-using System.Collections;
+
 using EchoMina.Original;
 using JetBrains.Annotations;
 using NaughtyAttributes;
 using PlayerControls;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Interactables
 {
     [RequireComponent(typeof(Rigidbody))]
-    public class InteractorMoveable : MonoBehaviour, IInteractable
+    public class InteractorMoveable : MonoBehaviour, IInteractable, IRecordable
     {
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private Transform startingTransform;
         [SerializeField] private Vector3 startingPosition;
         [SerializeField] private Quaternion startingRotation;
         [SerializeField] private bool isPickedUp = false;
-        [SerializeField][ReadOnly] private bool wasPickedUp = false;
+        [SerializeField] [ReadOnly] private bool wasPickedUp = false;
         [SerializeField] private Outline outline;
-        [ShowNonSerializedField] private bool isRecording = false;
         private Interactor _interactor;
         [SerializeField] private bool isLocked = false;
+
+        [BoxGroup("Snapshot")] [SerializeField]
+        private Transform snapshotParentTransform;
+
+        [BoxGroup("Snapshot")] [SerializeField]
+        private Transform snapshotTransform;
 
         void OnEnable()
         {
@@ -31,19 +35,8 @@ namespace Interactables
             }
         }
 
-        private void OnDisable()
-        {
-            OriginalEchoMina.Instance.StartRecording -= RecordingStart;
-            OriginalEchoMina.Instance.StopRecording -= RecordingEnd;
-        }
-
         #region Public Functions
 
-        public void BindObject()
-        {
-            OriginalEchoMina.Instance.StartRecording += RecordingStart;
-            OriginalEchoMina.Instance.StopRecording += RecordingEnd;
-        }
         public bool CanInteract(Interactor interactor)
         {
             if (isPickedUp)
@@ -68,29 +61,7 @@ namespace Interactables
         }
         public void UnInteract(Interactor interactor)
         {
-            if (wasPickedUp)
-            {
-                Debug.Log($"<b><color=purple>[Interactions][Moveable Objects]</color></b> {gameObject.name} has been un-interacted");
-                
-                if (isPickedUp)
-                {
-                    Debug.LogWarning($"<b><color=yellow>[Interactions][Moveable Object][Echo Mina Recording]</color></b> {gameObject.name} has been un-interacted while picked up");
-                    DropObject(OriginalEchoMina.Instance.EchoInteractor);
-                    
-                    transform.position = startingPosition;
-                    transform.rotation = startingRotation;
-                    transform.SetParent(startingTransform);
-                }
-                else
-                {
-                    transform.position = startingPosition;
-                    transform.rotation = startingRotation;
-                    transform.SetParent(startingTransform);
-                    
-                    wasPickedUp = false;
-                    isPickedUp = false;
-                }
-            }
+            throw new System.NotImplementedException();
         }
         public void StartPreview()
         {
@@ -114,10 +85,10 @@ namespace Interactables
         {
             _interactor = interactor;
             isLocked = true;
-            
+
             Debug.Log($"<b><color=green>[Interactions][Lock]</color></b> {gameObject.name} is locked to {interactor.name}");
         }
-        
+
         public void Unlock(Interactor interactor)
         {
             Debug.Log($"<b><color=red>[Interactions][Lock]</color></b> {gameObject.name} is no longer locked to {interactor.name}");
@@ -126,36 +97,9 @@ namespace Interactables
             isLocked = false;
         }
 
-  #endregion
+        #endregion
 
         #region Private Functions
-
-        private void ResetObject()
-        {
-            UnInteract(OriginalEchoMina.Instance.EchoInteractor);
-        }
-
-        private void RecordingStart()
-        {
-            isRecording = true;
-        }
-
-        private void RecordingEnd()
-        {
-            isRecording = false;
-
-            if (wasPickedUp)
-            {
-                UnInteract(OriginalEchoMina.Instance.EchoInteractor);
-            }
-        }
-
-        private void SnapshotObject()
-        {
-            startingTransform = transform.parent;
-            startingPosition = transform.position;
-            startingRotation = transform.rotation;
-        }
 
         private void PickUpObject(Interactor interactor)
         {
@@ -163,20 +107,10 @@ namespace Interactables
             Lock(interactor);
             _rigidbody.useGravity = false;
 
-            if (isRecording)
-            {
-                if (!wasPickedUp) // Only take a snapshot of the object if this object has not been picked up yet
-                {
-                    SnapshotObject();
-                }
-                
-                wasPickedUp = true;
-            }
-            
             transform.position = interactor.AttachingTransform.position;
             transform.rotation = interactor.AttachingTransform.rotation;
             transform.SetParent(interactor.AttachingTransform);
-            
+
             isPickedUp = true;
         }
 
@@ -185,26 +119,38 @@ namespace Interactables
             Debug.Log($"<b><color=red>[Moveable Objects][Interaction]</color></b> {gameObject.name} has been dropped by {interactor.gameObject.name}");
             isPickedUp = false;
             _rigidbody.useGravity = true;
-                
+
             transform.position = interactor.DetachingTransform.position;
             transform.rotation = interactor.DetachingTransform.rotation;
             transform.SetParent(startingTransform);
-            
+
             Unlock(interactor);
         }
 
-        [Button]
+        [Button][UsedImplicitly]
         private void EchoDrop()
         {
             DropObject(OriginalEchoMina.Instance.EchoInteractor);
         }
 
-        [Button]
+        [Button][UsedImplicitly]
         private void MinaDrop()
         {
             DropObject(PlayerController.Instance.gameObject.GetComponent<Interactor>());
         }
 
-  #endregion
+        #endregion
+
+        public void TakeSnapshot()
+        {
+            snapshotParentTransform = transform.parent;
+            snapshotTransform = transform;
+        }
+        public void LoadSnapshot()
+        {
+            transform.SetParent(snapshotParentTransform);
+            transform.position = snapshotTransform.position;
+            transform.rotation = snapshotTransform.rotation;
+        }
     }
 }

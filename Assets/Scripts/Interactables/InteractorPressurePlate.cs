@@ -7,7 +7,7 @@ using UnityEngine.Events;
 
 namespace Interactables
 {
-    public class InteractorPressurePlate : MonoBehaviour
+    public class InteractorPressurePlate : MonoBehaviour, IRecordable
     {
         [SerializeField] private bool _isInteracting = false;
         [SerializeField] private List<string> _whitelistTags = new List<string>() {"Player"};
@@ -16,6 +16,10 @@ namespace Interactables
         [ShowNonSerializedField] private bool _wasInteracted = false;
         [SerializeField] private int _interactionCountOn = 0;
         [SerializeField] private int _interactionCountOff = 0;
+
+        [BoxGroup("Snapshot")] [SerializeField] private Transform snapshotTransformParent;
+        [BoxGroup("Snapshot")] [SerializeField] private Transform snapshotTransform;
+
 
         public void Startup()
         {
@@ -42,7 +46,7 @@ namespace Interactables
                 {
                     OnUnInteractOff?.Invoke();
                 }
-                
+
                 _isInteracting = false;
             }
         }
@@ -57,7 +61,7 @@ namespace Interactables
             _interactionCountOn = 0;
             _interactionCountOff = 0;
         }
-        
+
         private void OnTriggerEnter(Collider other)
         {
             if (_whitelistTags.Contains(other.tag) && !_isInteracting)
@@ -79,6 +83,25 @@ namespace Interactables
                 _isInteracting = false;
                 _interactionCountOff++;
             }
+        }
+
+
+
+        public void BindRecordable()
+        {
+
+        }
+        public void UnbindRecordable()
+        {
+            throw new System.NotImplementedException();
+        }
+        public void TakeSnapshot()
+        {
+            throw new System.NotImplementedException();
+        }
+        public void LoadSnapshot()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
