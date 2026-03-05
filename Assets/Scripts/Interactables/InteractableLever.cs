@@ -4,10 +4,11 @@ using NaughtyAttributes;
 using PlayerControls;
 using UnityEngine;
 using UnityEngine.Events;
+using Utility;
 
 namespace Interactables
 {
-    public class InteractableLever : MonoBehaviour, IInteractable
+    public class InteractableLever : MonoBehaviour, IInteractable, IBindable
     {
 
         [SerializeField] private UnityEvent onInteract;
@@ -19,14 +20,19 @@ namespace Interactables
 
     #region IInteractable Methods
 
+        private void StopRecording() {isInteracted = false;}
         public void BindObject()
         {
-            
+            OriginalEchoMina.Instance.StopRecording += StopRecording;
         }
-        
+        public void UnBindObject()
+        {
+            OriginalEchoMina.Instance.StopRecording -= StopRecording;
+        }
+
         public bool CanInteract(Interactor interactor)
         {
-            return true;
+            return this.enabled;
         }
         public void Interact(Interactor interactor)
         {
@@ -40,10 +46,6 @@ namespace Interactables
                 onInteract?.Invoke();
                 isInteracted = true;
             }
-        }
-        public void UnInteract(Interactor interactor)
-        {
-            
         }
 
         public void StartPreview()
@@ -72,5 +74,20 @@ namespace Interactables
         }
 
     #endregion
+
+        [Button]
+        public void DebugInteract()
+        {
+            if (isInteracted)
+            {
+                onUnInteract.Invoke();
+                isInteracted = false;
+            }
+            else if (!isInteracted)
+            {
+                onInteract?.Invoke();
+                isInteracted = true;
+            }
+        }
     }
 }

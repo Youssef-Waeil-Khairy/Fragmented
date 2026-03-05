@@ -67,6 +67,7 @@ public class StagedObstacle : MonoBehaviour, IRecordable
         }
     }
 
+    /*
     private void OnTriggerEnter(Collider other)
     {
         if (attachables.Contains(other.tag))
@@ -90,6 +91,7 @@ public class StagedObstacle : MonoBehaviour, IRecordable
             attachedParents.RemoveAt(index);
         }
     }
+    */
 
     [Button]
     public void GoToNextStage()
@@ -211,5 +213,6 @@ public class StagedObstacle : MonoBehaviour, IRecordable
     {
         targetPosition = lineRenderer.GetPosition(snapshotStage);
         transform.position = targetPosition;
+        currentStage = snapshotStage;
     }
 }

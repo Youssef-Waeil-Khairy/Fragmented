@@ -499,6 +499,7 @@ GameObject:
   - component: {fileID: 106036768}
   - component: {fileID: 106036772}
   - component: {fileID: 106036771}
+  - component: {fileID: 106036773}
   m_Layer: 0
   m_Name: Lever_D
   m_TagString: Untagged
@@ -515,7 +516,7 @@ Transform:
   m_GameObject: {fileID: 106036766}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -14.09, y: 7.800002, z: -0.14}
+  m_LocalPosition: {x: -12.02, y: 2.8, z: 3.63}
   m_LocalScale: {x: 1.7, y: 1.7, z: 0.85}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -541,8 +542,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.1148456, y: 8.15227, z: 2.3852072}
+  m_Center: {x: 0.057423882, y: 3.5761364, z: 0.049164712}
 --- !u!23 &106036769
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -621,7 +622,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 106036766}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7996b580f1ab4297a6cc6eb44b4c060b, type: 3}
   m_Name: 
@@ -629,9 +630,9 @@ MonoBehaviour:
   onInteract:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PressurePlateMover, Assembly-CSharp
-        m_MethodName: MoveToPressed
+      - m_Target: {fileID: 505801152}
+        m_TargetAssemblyTypeName: StagedObstacle, Assembly-CSharp
+        m_MethodName: GoToNextStage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -644,9 +645,9 @@ MonoBehaviour:
   onUnInteract:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PressurePlateMover, Assembly-CSharp
-        m_MethodName: MoveToResting
+      - m_Target: {fileID: 505801152}
+        m_TargetAssemblyTypeName: StagedObstacle, Assembly-CSharp
+        m_MethodName: GoToPreviousStage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -687,6 +688,33 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   isInteracted: 0
+--- !u!54 &106036773
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 106036766}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &106326524
 GameObject:
   m_ObjectHideFlags: 0
@@ -807,9 +835,9 @@ GameObject:
   - component: {fileID: 108600402}
   - component: {fileID: 108600401}
   - component: {fileID: 108600400}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Water Right
-  m_TagString: Respawn
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -829,7 +857,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -1021,11 +1049,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 664558628960326646, guid: dd2e3ea5078d9fb4f96e1d1f5d95f628, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -10.91
       objectReference: {fileID: 0}
     - target: {fileID: 664558628960326646, guid: dd2e3ea5078d9fb4f96e1d1f5d95f628, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 6.53
       objectReference: {fileID: 0}
     - target: {fileID: 664558628960326646, guid: dd2e3ea5078d9fb4f96e1d1f5d95f628, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1071,13 +1099,18 @@ PrefabInstance:
       propertyPath: _turnSpeed
       value: 100
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedComponents:
+    - {fileID: 249558007106967385, guid: dd2e3ea5078d9fb4f96e1d1f5d95f628, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: 292938521566327418, guid: dd2e3ea5078d9fb4f96e1d1f5d95f628, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6064848917325602390, guid: dd2e3ea5078d9fb4f96e1d1f5d95f628, type: 3}
       insertIndex: -1
       addedObject: {fileID: 923959649}
+    - targetCorrespondingSourceObject: {fileID: 6064848917325602390, guid: dd2e3ea5078d9fb4f96e1d1f5d95f628, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 923959655}
   m_SourcePrefab: {fileID: 100100000, guid: dd2e3ea5078d9fb4f96e1d1f5d95f628, type: 3}
 --- !u!114 &141054132 stripped
 MonoBehaviour:
@@ -1504,7 +1537,7 @@ Transform:
   m_GameObject: {fileID: 212566322}
   serializedVersion: 2
   m_LocalRotation: {x: 0.34202015, y: 0, z: 0, w: 0.9396927}
-  m_LocalPosition: {x: -3.67, y: 10.176797, z: 1.0647068}
+  m_LocalPosition: {x: -3.58, y: 10.216797, z: 1.7247071}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3973,7 +4006,7 @@ Transform:
   m_GameObject: {fileID: 513373929}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8, y: 6.02, z: -2.99}
+  m_LocalPosition: {x: -8, y: 6.07, z: -2.99}
   m_LocalScale: {x: 2, y: 0.19999999, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -3992,7 +4025,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -4099,7 +4132,7 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: -14, y: 5, z: 4}
+  - {x: -14, y: 5, z: 3.9999998}
   - {x: -14, y: -1, z: 4}
   m_Parameters:
     serializedVersion: 3
@@ -5304,14 +5337,14 @@ MonoBehaviour:
   OnBeginInteraction:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PressurePlateMover, Assembly-CSharp
-        m_MethodName: MoveToResting
-        m_Mode: 1
+      - m_Target: {fileID: 629745346}
+        m_TargetAssemblyTypeName: StagedObstacle, Assembly-CSharp
+        m_MethodName: GoToStage
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -5319,9 +5352,9 @@ MonoBehaviour:
   OnEndInteraction:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PressurePlateMover, Assembly-CSharp
-        m_MethodName: MoveToPressed
+      - m_Target: {fileID: 629745346}
+        m_TargetAssemblyTypeName: StagedObstacle, Assembly-CSharp
+        m_MethodName: GoToPreviousStage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6288,16 +6321,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isInteracting: 0
   _whitelistTags:
-  - Player
   - EchoMina
-  - Interactable
   _blacklistTags: []
   OnBeginInteraction:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PressurePlateMover, Assembly-CSharp
-        m_MethodName: MoveToPressed
+      - m_Target: {fileID: 513373935}
+        m_TargetAssemblyTypeName: StagedObstacle, Assembly-CSharp
+        m_MethodName: GoToNextStage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6310,9 +6341,9 @@ MonoBehaviour:
   OnEndInteraction:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PressurePlateMover, Assembly-CSharp
-        m_MethodName: MoveToResting
+      - m_Target: {fileID: 513373935}
+        m_TargetAssemblyTypeName: StagedObstacle, Assembly-CSharp
+        m_MethodName: GoToPreviousStage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6795,9 +6826,9 @@ GameObject:
   - component: {fileID: 887773944}
   - component: {fileID: 887773943}
   - component: {fileID: 887773942}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Water Back
-  m_TagString: Respawn
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6819,7 +6850,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -7309,6 +7340,27 @@ MonoBehaviour:
   RespawnPoint: {fileID: 78629360}
   Whitelist:
   - Respawn
+--- !u!65 &923959655
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 923959643}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 0.3326069, z: 1}
+  m_Center: {x: 0, y: -0.88286895, z: 0}
 --- !u!1 &932128391
 GameObject:
   m_ObjectHideFlags: 0
@@ -8715,15 +8767,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3527509656408764565, guid: 1db0bcc4edb713c46be7f54718df9be6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.67
+      value: -3.58
       objectReference: {fileID: 0}
     - target: {fileID: 3527509656408764565, guid: 1db0bcc4edb713c46be7f54718df9be6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.66
+      value: 6.7
       objectReference: {fileID: 0}
     - target: {fileID: 3527509656408764565, guid: 1db0bcc4edb713c46be7f54718df9be6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.45
+      value: 7.11
       objectReference: {fileID: 0}
     - target: {fileID: 3527509656408764565, guid: 1db0bcc4edb713c46be7f54718df9be6, type: 3}
       propertyPath: m_LocalRotation.w
@@ -9360,6 +9412,9 @@ GameObject:
   - component: {fileID: 1293837635}
   - component: {fileID: 1293837634}
   - component: {fileID: 1293837633}
+  - component: {fileID: 1293837637}
+  - component: {fileID: 1293837636}
+  - component: {fileID: 1293837638}
   m_Layer: 0
   m_Name: Lever_D_Lower
   m_TagString: Untagged
@@ -9402,8 +9457,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.2622207, y: 17.683826, z: 1.9591999}
+  m_Center: {x: 0.040767968, y: 6.298759, z: -0.09202671}
 --- !u!23 &1293837634
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -9457,6 +9512,112 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1293837631}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1293837636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293837631}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
+--- !u!114 &1293837637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293837631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7996b580f1ab4297a6cc6eb44b4c060b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onInteract:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 505801152}
+        m_TargetAssemblyTypeName: StagedObstacle, Assembly-CSharp
+        m_MethodName: GoToStage
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onUnInteract:
+    m_PersistentCalls:
+      m_Calls: []
+  onStartPreview:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1293837636}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  onStopPreview:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1293837636}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  isInteracted: 0
+--- !u!54 &1293837638
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293837631}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &1309195942
 GameObject:
   m_ObjectHideFlags: 0
@@ -9838,8 +9999,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.9207399, y: 11.583308, z: 2.3326569}
+  m_Center: {x: -0.03757918, y: 5.291653, z: 0.051244736}
 --- !u!23 &1330044992
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -10257,7 +10418,7 @@ Transform:
   m_GameObject: {fileID: 1377122848}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12.071, y: 2.8999996, z: 3.87}
+  m_LocalPosition: {x: -13.85, y: 2.8999996, z: -0.14}
   m_LocalScale: {x: 1.3465, y: 1.3465, z: 1.3465}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -10857,7 +11018,7 @@ GameObject:
   - component: {fileID: 1443769943}
   - component: {fileID: 1443769942}
   - component: {fileID: 1443769941}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Water Front
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10879,7 +11040,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -12044,7 +12205,6 @@ GameObject:
   - component: {fileID: 1628895636}
   - component: {fileID: 1628895639}
   - component: {fileID: 1628895638}
-  - component: {fileID: 1628895637}
   m_Layer: 0
   m_Name: Platfrom_Preview_B
   m_TagString: Untagged
@@ -12067,27 +12227,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 905030053}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1628895637
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1628895635}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1628895638
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -12585,14 +12724,13 @@ GameObject:
   - component: {fileID: 1719881008}
   - component: {fileID: 1719881007}
   - component: {fileID: 1719881006}
-  - component: {fileID: 1719881011}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Water Top
-  m_TagString: Respawn
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1719881006
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12608,7 +12746,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -12682,33 +12820,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 817866144}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!54 &1719881011
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1719881005}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
 --- !u!1 &1738426784
 GameObject:
   m_ObjectHideFlags: 0
@@ -12943,7 +13054,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1754168265
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -14129,9 +14240,9 @@ GameObject:
   - component: {fileID: 2062535709}
   - component: {fileID: 2062535708}
   - component: {fileID: 2062535707}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Water Left
-  m_TagString: Respawn
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14507,6 +14618,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3867914445665025209, guid: aa12337cc2aa65648addc59ee076df1a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 3867914445665025209, guid: aa12337cc2aa65648addc59ee076df1a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 3867914445665025209, guid: aa12337cc2aa65648addc59ee076df1a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 8.62
+      objectReference: {fileID: 0}
     - target: {fileID: 4613892133393045764, guid: aa12337cc2aa65648addc59ee076df1a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

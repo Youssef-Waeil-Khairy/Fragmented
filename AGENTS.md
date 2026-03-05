@@ -8,7 +8,7 @@
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Ground, Water, UI, Interactible, EchoMina
 - Active game object:
-  - Name: Player_IsoTest
-  - Tag: Player
-  - Layer: Default
+  - Name: Water Top
+  - Tag: Untagged
+  - Layer: Ground
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

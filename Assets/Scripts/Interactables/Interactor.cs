@@ -36,8 +36,11 @@ namespace Interactables
                 if (_interactable == null)
                 {
                     _interactable = go;
-                    _interactable.StartPreview();
-                    Debug.Log($"<b><color=green>[Interactions][Interactor]</color></b> {gameObject.name} Entered interaction range of " + go);
+                    if (_interactable.CanInteract(this))
+                    {
+                        _interactable.StartPreview();
+                        Debug.Log($"<b><color=green>[Interactions][Interactor]</color></b> {gameObject.name} Entered interaction range of " + go);
+                    }
                 }
             }
         }

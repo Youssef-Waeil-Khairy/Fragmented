@@ -11,7 +11,7 @@ namespace Interactables
     public class InteractorPressurePlate : MonoBehaviour, IBindable
     {
         [SerializeField] private bool _isInteracting = false;
-        [SerializeField] private List<string> _whitelistTags = new List<string>() {"Player"};
+        [Tag][SerializeField] private List<string> _whitelistTags = new List<string>() {"Player"};
         [SerializeField] private List<string> _blacklistTags = new List<string>() {};
         public UnityEvent OnBeginInteraction, OnEndInteraction;
 
