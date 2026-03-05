@@ -15,7 +15,6 @@ namespace Interactables
         [SerializeField] private Vector3 startingPosition;
         [SerializeField] private Quaternion startingRotation;
         [SerializeField] private bool isPickedUp = false;
-        [SerializeField] [ReadOnly] private bool wasPickedUp = false;
         [SerializeField] private Outline outline;
         private Interactor _interactor;
         [SerializeField] private bool isLocked = false;
@@ -35,18 +34,68 @@ namespace Interactables
             }
         }
 
-        #region Public Functions
+        #region Private Functions
+
+        private void PickUpObject(Interactor interactor)
+        {
+            Debug.Log($"<b><color=green>[Interactions][Moveable Object]</color></b> {gameObject.name} has been picked up by {interactor.gameObject.name}");
+            Lock(interactor);
+            _rigidbody.useGravity = false;
+            _rigidbody.isKinematic = true;
+
+            transform.position = interactor.AttachingTransform.position;
+            transform.rotation = interactor.AttachingTransform.rotation;
+            transform.SetParent(interactor.AttachingTransform);
+
+            isPickedUp = true;
+        }
+
+        private void DropObject(Interactor interactor)
+        {
+            Debug.Log($"<b><color=red>[Moveable Objects][Interaction]</color></b> {gameObject.name} has been dropped by {interactor.gameObject.name}");
+            isPickedUp = false;
+            _rigidbody.useGravity = true;
+            _rigidbody.isKinematic = false;
+
+            transform.position = interactor.DetachingTransform.position;
+            transform.rotation = interactor.DetachingTransform.rotation;
+            transform.SetParent(startingTransform);
+
+            Unlock(interactor);
+        }
+
+        [Button][UsedImplicitly]
+        private void EchoDrop()
+        {
+            DropObject(OriginalEchoMina.Instance.EchoInteractor);
+        }
+
+        [Button][UsedImplicitly]
+        private void MinaDrop()
+        {
+            DropObject(PlayerController.Instance.gameObject.GetComponent<Interactor>());
+        }
+
+        #endregion
+
+        #region IInteractable
 
         public bool CanInteract(Interactor interactor)
         {
-            if (isPickedUp)
+            // if we are not picked up, we can be picked up
+            if (!isPickedUp)
             {
-                return true; // TODO: Check the area we would place it in to make sure it is clear of any obstacles first
+                return true;
             }
-            else
+            
+            // if we are picked up the interactor needs to be the same as our current one
+            if (isPickedUp && interactor == _interactor)
             {
-                return true; // If we aren't picked up we can be picked up
+                return true;
             }
+            
+            Debug.Log($"{gameObject.name} is already picked up by {_interactor.gameObject.name}");
+            return false;
         }
         public void Interact(Interactor interactor)
         {
@@ -59,10 +108,6 @@ namespace Interactables
                 PickUpObject(interactor);
             }
         }
-        public void UnInteract(Interactor interactor)
-        {
-            throw new System.NotImplementedException();
-        }
         public void StartPreview()
         {
             Debug.Log($"<b><color=green>[Interactions][Moveable Objects][Preview]</color></b> Preview started for {gameObject.name}");
@@ -71,7 +116,7 @@ namespace Interactables
         public void StopPreview()
         {
             Debug.Log($"<b><color=red>[Interactions][Moveable Objects][Preview]</color></b> Preview ended for {gameObject.name}");
-            outline.enabled = false;
+            if (outline) outline.enabled = false;
         }
         public bool IsLockable()
         {
@@ -97,49 +142,9 @@ namespace Interactables
             isLocked = false;
         }
 
-        #endregion
-
-        #region Private Functions
-
-        private void PickUpObject(Interactor interactor)
-        {
-            Debug.Log($"<b><color=green>[Interactions][Moveable Object]</color></b> {gameObject.name} has been picked up by {interactor.gameObject.name}");
-            Lock(interactor);
-            _rigidbody.useGravity = false;
-
-            transform.position = interactor.AttachingTransform.position;
-            transform.rotation = interactor.AttachingTransform.rotation;
-            transform.SetParent(interactor.AttachingTransform);
-
-            isPickedUp = true;
-        }
-
-        private void DropObject(Interactor interactor)
-        {
-            Debug.Log($"<b><color=red>[Moveable Objects][Interaction]</color></b> {gameObject.name} has been dropped by {interactor.gameObject.name}");
-            isPickedUp = false;
-            _rigidbody.useGravity = true;
-
-            transform.position = interactor.DetachingTransform.position;
-            transform.rotation = interactor.DetachingTransform.rotation;
-            transform.SetParent(startingTransform);
-
-            Unlock(interactor);
-        }
-
-        [Button][UsedImplicitly]
-        private void EchoDrop()
-        {
-            DropObject(OriginalEchoMina.Instance.EchoInteractor);
-        }
-
-        [Button][UsedImplicitly]
-        private void MinaDrop()
-        {
-            DropObject(PlayerController.Instance.gameObject.GetComponent<Interactor>());
-        }
-
-        #endregion
+  #endregion
+        
+        #region IRecordable
 
         public void TakeSnapshot()
         {
@@ -152,5 +157,7 @@ namespace Interactables
             transform.position = snapshotTransform.position;
             transform.rotation = snapshotTransform.rotation;
         }
+
+  #endregion
     }
 }

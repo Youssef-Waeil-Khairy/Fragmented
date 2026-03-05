@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using EchoMina.Original;
+using Utility;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -8,7 +9,7 @@ using UnityEngine.InputSystem;
 namespace Interactables
 {
     [RequireComponent(typeof(BoxCollider))]
-    public class Interactor : MonoBehaviour
+    public class Interactor : MonoBehaviour, IBindable
     {
         [ShowNonSerializedField] private IInteractable _interactable;
 
@@ -23,16 +24,6 @@ namespace Interactables
         // TODO: Check if we are holding something before allowing an interaction
 
         #region Unity Functions
-
-        private void Start()
-        {
-            if (!IsMina)
-            {
-                _originalEchoMina.StartRecording += RecordingStarted;
-                _originalEchoMina.StopRecording += RecordingStopped;
-            }
-        }
-
         void Update()
         {
             if (isRecording && IsMina) _timeSinceLastInteraction += Time.deltaTime;
@@ -79,12 +70,6 @@ namespace Interactables
                 _interactable?.StopPreview();
                 _interactable = null;
             }
-
-            if (!IsMina)
-            {
-                _originalEchoMina.StartRecording -= RecordingStarted;
-                _originalEchoMina.StopRecording -= RecordingStopped;
-            }
         }
 
   #endregion
@@ -93,11 +78,11 @@ namespace Interactables
 
         public void OnInteract(InputValue context)
         {
-            if (IsMina && isRecording)
+            if (IsMina && OriginalEchoMina.Instance.State is OriginalEchoMina.EchoState.Recording)
             {
-                _originalEchoMina.SaveInteraction(_timeSinceLastInteraction);
+                OriginalEchoMina.Instance.SaveInteraction(_timeSinceLastInteraction);
                 _timeSinceLastInteraction = 0f;
-                _originalEchoMina.EchoInteractor.InteractCommand();
+                OriginalEchoMina.Instance.EchoInteractor.InteractCommand();
                 return;
             }
             
@@ -126,26 +111,25 @@ namespace Interactables
             _interactable.StopPreview();
             _interactable = null;
         }
-        
-        public void RecordingStarted()
-        {
-            isRecording = true;
-            Debug.Log($"<b><color=green>[Interactions][Interactor]</color></b> Recording started in {name}");
-        }
 
-        public void RecordingStopped()
+  #endregion
+        #region IBindable
+
+        public void BindObject()
         {
-            isRecording = false;
-            Debug.Log($"<b><color=red>[Interactions][Interactor]</color></b> Recording stopped in {name}");
+            if (IsMina)
+            {
+                OriginalEchoMina.Instance.StartRecording += StartRecording;
+            }
+        }
+        public void UnBindObject()
+        {
+            if (IsMina)
+            {
+                OriginalEchoMina.Instance.StartRecording -= StartRecording;
+            }
         }
 
   #endregion
-
-        #region Private Functions
-
-        
-        
-        #endregion
-
     }
 }

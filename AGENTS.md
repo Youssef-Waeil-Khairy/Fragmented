@@ -8,7 +8,7 @@
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Ground, Water, UI, Interactible, EchoMina
 - Active game object:
-  - Name: CameraSystem
-  - Tag: Untagged
+  - Name: Plane
+  - Tag: Respawn
   - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

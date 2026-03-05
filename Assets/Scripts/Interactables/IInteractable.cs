@@ -5,7 +5,6 @@ public interface IInteractable
 {
     public bool CanInteract(Interactor interactor);
     public void Interact(Interactor interactor);
-    public void UnInteract(Interactor interactor);
     public void StartPreview();
     public void StopPreview();
 

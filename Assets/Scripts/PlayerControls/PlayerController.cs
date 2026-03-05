@@ -13,28 +13,20 @@ namespace PlayerControls
     public class PlayerController : MonoBehaviour
     {
         public static PlayerController Instance;
-        public static bool HASSTARTEDUP = false;
         
         PlayerInput playerInput;
         CharacterController characterController;
-
-        [Header("Movement")]
-        [SerializeField] float moveSpeed = 5f;
-        [SerializeField] float turnSpeed = 5f;
-        [SerializeField] float sprintSpeed = 10f;
-        [SerializeField] float moveDirection = 0f;
-        [SerializeField] float turnDirection = 0f;
-        [SerializeField] bool isSprinting = false;
-
-        [Header("Camera")]
-        [SerializeField] private CinemachineInputAxisController cinemachineInputAxisController;
-        [SerializeField] private CinemachineCamera playerCamera;
-        [SerializeField] private bool cursorFree = false;
         
-        [Header("Echo Mina")]
-        [SerializeField] private OriginalEchoMina originalEchoMina;
+        [Foldout("Movement")][SerializeField] float moveSpeed = 5f;
+        [Foldout("Movement")][SerializeField] float turnSpeed = 5f;
+        [Foldout("Movement")][SerializeField] float sprintSpeed = 10f;
+        [Foldout("Movement")][SerializeField] float moveDirection = 0f;
+        [Foldout("Movement")][SerializeField] float turnDirection = 0f;
+        [Foldout("Movement")][SerializeField] bool isSprinting = false;
         
-        public OriginalEchoMina EchoMina => originalEchoMina;
+        [Foldout("Camera")][SerializeField] private CinemachineInputAxisController cinemachineInputAxisController;
+        [Foldout("Camera")][SerializeField] private CinemachineCamera playerCamera;
+        [Foldout("Camera")][SerializeField] private bool cursorFree = false;
 
         public void Start()
         {
@@ -50,18 +42,15 @@ namespace PlayerControls
             playerInput = GetComponent<PlayerInput>();
             characterController = GetComponent<CharacterController>();
             LockCursor();
-            
-            HASSTARTEDUP = true;
         }
 
         private void FixedUpdate()
         {
-            if (!HASSTARTEDUP) return;
-            
-            if (originalEchoMina.IsRecording)
+            if (OriginalEchoMina.Instance.State is OriginalEchoMina.EchoState.Recording)
             {
                 return;
             }
+            
             Vector3 move = transform.forward * (moveDirection * (isSprinting ? sprintSpeed : moveSpeed));
             characterController.SimpleMove(move);
             transform.Rotate(transform.up, turnDirection *  turnSpeed * Time.fixedDeltaTime);
@@ -109,10 +98,10 @@ namespace PlayerControls
             Vector2 inputDirection = value.Get<Vector2>();
             
             // Block move inputs to main Mina if we are recording
-            if (originalEchoMina.IsRecording)
+            if (OriginalEchoMina.Instance.State is OriginalEchoMina.EchoState.Recording)
             {
                 Vector3 recordInput = new Vector3(inputDirection.y, inputDirection.x, isSprinting ? 1f : 0f);
-                originalEchoMina.OnMove(recordInput);
+                OriginalEchoMina.Instance.OnMove(recordInput);
                 return;
             }
             
@@ -130,16 +119,14 @@ namespace PlayerControls
         {
             //characterController.enabled = !characterController.enabled;
             Debug.Log($"position: {transform.position}, rotation: {transform.rotation}");
-            originalEchoMina.ToggleRecording(transform.position, transform.rotation);
-            if (!originalEchoMina.IsRecording)
+            OriginalEchoMina.Instance.ToggleRecording(transform.position, transform.rotation);
+            if (OriginalEchoMina.Instance.State is not OriginalEchoMina.EchoState.Recording)
             {
-                GetComponent<Interactor>().RecordingStopped();
                 playerCamera.enabled = true;
                 cinemachineInputAxisController.enabled = true;
             }
             else
             {
-                GetComponent<Interactor>().RecordingStarted();
                 playerCamera.enabled = false;
                 cinemachineInputAxisController.enabled = false;
             }
@@ -148,7 +135,7 @@ namespace PlayerControls
         [UsedImplicitly]
         void OnMinaPlayback(InputValue value)
         {
-            originalEchoMina.TogglePlaying();
+            OriginalEchoMina.Instance.TogglePlaying();
         }
     }
 }

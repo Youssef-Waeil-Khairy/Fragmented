@@ -14,61 +14,36 @@ namespace Interactables
         [SerializeField] private UnityEvent onUnInteract;
         [SerializeField] private UnityEvent onStartPreview;
         [SerializeField] private UnityEvent onStopPreview;
-        [BoxGroup("Recording")][SerializeField] private bool _wasInteracted = false;
-        [BoxGroup("Recording")][SerializeField] private int _interactionCount = 0;
-
-    #region Unity Functions
-
-        private void OnDisable()
-        {
-            OriginalEchoMina.Instance.StartRecording -= EchoMinaStartRecording;
-            OriginalEchoMina.Instance.StopRecording -= EchoMinaOnStopRecording;
-        }
-
-    #endregion
-
-    #region Event Methods
-
-        void EchoMinaOnStopRecording()
-        {
-            if (_wasInteracted)
-            {
-                for (int i = 0; i < _interactionCount; i++)
-                {
-                    UnInteract(PlayerController.Instance.EchoMina.EchoInteractor);
-                }
-            }
-        }
-
-        void EchoMinaStartRecording()
-        {
-            _wasInteracted = false;
-            _interactionCount = 0;
-        }
-
-    #endregion
+        [SerializeField] private bool isInteracted;
+        
 
     #region IInteractable Methods
 
         public void BindObject()
         {
-            OriginalEchoMina.Instance.StartRecording += EchoMinaStartRecording;
-            OriginalEchoMina.Instance.StopRecording += EchoMinaOnStopRecording;
+            
         }
+        
         public bool CanInteract(Interactor interactor)
         {
             return true;
         }
         public void Interact(Interactor interactor)
         {
-            onInteract?.Invoke();
-            _wasInteracted = true;
-            _interactionCount++;
+            if (isInteracted)
+            {
+                onUnInteract.Invoke();
+                isInteracted = false;
+            }
+            else if (!isInteracted)
+            {
+                onInteract?.Invoke();
+                isInteracted = true;
+            }
         }
-
         public void UnInteract(Interactor interactor)
         {
-            onUnInteract?.Invoke();
+            
         }
 
         public void StartPreview()

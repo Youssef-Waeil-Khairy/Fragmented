@@ -4,6 +4,7 @@ using Interactables;
 using NaughtyAttributes;
 using Unity.Cinemachine;
 using UnityEngine;
+using Utility;
 // ReSharper disable InconsistentNaming
 
 // ReSharper disable once CheckNamespace
@@ -11,6 +12,13 @@ namespace EchoMina.Original
 {
     public class OriginalEchoMina : MonoBehaviour
     {
+        public enum EchoState
+        {
+            Recording,
+            Playing,
+            Inactive
+        }
+        
         public delegate void OnStartRecording();
         public delegate void OnStopRecording();
         public delegate void OnStartPlayback();
@@ -21,10 +29,8 @@ namespace EchoMina.Original
         public event OnStopPlayback StopPlayback;
 
         [Header("States")]
-        [SerializeField][ReadOnly] private bool _isRecording;
-        [SerializeField][ReadOnly] private bool _isPlaying;
+        [SerializeField][ReadOnly] private EchoState state;
         public static OriginalEchoMina Instance;
-        public static bool HASSTARTEDUP = false;
 
         [Header("Movement")]
         [SerializeField] private CharacterController _characterController;
@@ -49,13 +55,23 @@ namespace EchoMina.Original
         [SerializeField] private CinemachineCamera echoCamera;
         [SerializeField] private CinemachineInputAxisController echoInputAxisController;
         private IRecordable[] recordables;
+        private IBindable[] bindables;
 
         // Getters and setters
+        #region Getters And Setters
+
+        public EchoState State
+        {
+            get
+            {
+                return state;
+            }
+        }
         public bool IsRecording
         {
             get
             {
-                return _isRecording;
+                return state == EchoState.Recording;
             }
         }
         public Interactor EchoInteractor
@@ -65,6 +81,8 @@ namespace EchoMina.Original
                 return _interactor;
             }
         }
+
+  #endregion
 
         #region InputMessages
         public void OnMove(Vector3 move)
@@ -95,6 +113,12 @@ namespace EchoMina.Original
             {
                 recordable.BindRecordable();
             }
+            
+            bindables = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<IBindable>().ToArray();
+            foreach (var bindable in bindables)
+            {
+                bindable.BindObject();
+            }
 
             Despawn();
         }
@@ -105,11 +129,16 @@ namespace EchoMina.Original
             {
                 recordable.UnbindRecordable();
             }
+
+            foreach (var bindable in bindables)
+            {
+                bindable.UnBindObject();
+            }
         }
 
         private void Update()
         {
-            if (_isPlaying && _interactions.Count > 0 && _interactIndex < _interactions.Count)
+            if (state == EchoState.Playing && _interactions.Count > 0 && _interactIndex < _interactions.Count)
             {
                 _interactionTime += Time.deltaTime;
                 if (_interactionTime >= _interactions[_interactIndex])
@@ -123,19 +152,26 @@ namespace EchoMina.Original
 
         private void FixedUpdate()
         {
-            if (_isRecording)
+            switch (state)
             {
-                Vector3 move = transform.forward * (_moveDirection * _speed);
-                _characterController.SimpleMove(move);
-                transform.Rotate(transform.up, _turnDirection * _turnSpeed * Time.fixedDeltaTime);
-            }
-            else if (_isPlaying)
-            {
-                if (_recordIndex >= _positions.Count)
-                {
-                    CancelInvoke(nameof(LoadSnapshot));
-                    TogglePlaying();
-                }
+                case EchoState.Inactive:
+                    if (gameObject.activeSelf)
+                    {
+                        Despawn();
+                    }
+                    return;
+                case EchoState.Recording:
+                    Vector3 move = transform.forward * (_moveDirection * _speed);
+                    _characterController.SimpleMove(move);
+                    transform.Rotate(transform.up, _turnDirection * _turnSpeed * Time.fixedDeltaTime);
+                    break;
+                case EchoState.Playing:
+                    if (_recordIndex >= _positions.Count)
+                    {
+                        CancelInvoke(nameof(LoadSnapshot));
+                        TogglePlaying();
+                    }
+                    break;
             }
         }
         #endregion
@@ -182,20 +218,21 @@ namespace EchoMina.Original
 
         public void ToggleRecording(Vector3 position, Quaternion rotation)
         {
-            _isRecording = !_isRecording;
-            if (_isRecording)
+            if (state is EchoState.Inactive or EchoState.Playing)
             {
+                Debug.Log("[Echo Mina][Recording] Echo Mina is recording...");
+                state = EchoState.Recording;
+                
                 Spawn(position, rotation);
                 _positions.Clear();
                 _rotations.Clear();
                 _interactions.Clear();
-                _interactor.StartRecording();
                 InvokeRepeating(nameof(RecordSnapshot), _recordFrequency, _recordFrequency);
                 if (StartRecording != null) StartRecording();
-
             }
-            else
+            else if (state is EchoState.Recording)
             {
+                Debug.Log("[Echo Mina][Recording] Echo Mina is no longer recording...");
                 CancelInvoke(nameof(RecordSnapshot));
                 CancelInvoke(nameof(LoadSnapshot));
                 CancelInvoke(nameof(LoadInteraction));
@@ -208,10 +245,10 @@ namespace EchoMina.Original
         {
             Debug.Log("<b><color=red>[ECHOMINA]</color></b> Despawning Echo Mina");
 
-            CancelInvoke(nameof(RecordSnapshot));
-            _isRecording = false;
-            CancelInvoke(nameof(LoadSnapshot));
-            _isPlaying = false;
+            state = EchoState.Inactive;
+            
+            CancelInvoke();
+            
             echoCamera.enabled = false;
             echoInputAxisController.enabled = false;
             gameObject.SetActive(false);
@@ -235,8 +272,33 @@ namespace EchoMina.Original
 
         public void TogglePlaying()
         {
-            _isPlaying = !_isPlaying;
-            if (_isPlaying)
+            if (state is EchoState.Recording) // We start playing before stopping recording
+            {
+                Debug.LogWarning("[Echo Mina][Playback] Echo Mina was still recording when playback started. Recording stopped and playback started");
+                CancelInvoke(nameof(RecordSnapshot));
+                _recordIndex = 0;
+                _interactIndex = 0;
+                
+                if (StopRecording != null) StopRecording();
+                
+                _characterController.enabled = false;
+                transform.position = _startPosition;
+                transform.rotation = _startRotation;
+                _characterController.enabled = true;
+
+                if (_interactions.Count > 0)
+                {
+                    Invoke(nameof(LoadInteraction), _interactions[_interactIndex]);
+                }
+                
+                InvokeRepeating(nameof(LoadSnapshot), _recordFrequency, _recordFrequency);
+                
+                if (StartPlayback != null) StartPlayback();
+                
+                state = EchoState.Playing;
+            }
+            
+            else if (state is EchoState.Inactive) // We started or stopped playback
             {
                 if (_positions.Count == 0)
                 {
@@ -246,12 +308,15 @@ namespace EchoMina.Original
                 Debug.Log("<b><color=green>[ECHOMINA]</color></b> Playing recorded playback of Echo Mina");
 
                 gameObject.SetActive(true);
+                
                 _characterController.enabled = false;
                 transform.position = _startPosition;
                 transform.rotation = _startRotation;
                 _characterController.enabled = true;
+                
                 _recordIndex = 0;
                 _interactIndex = 0;
+                
                 InvokeRepeating(nameof(LoadSnapshot), _recordFrequency, _recordFrequency);
                 if (_interactions.Count > 0)
                 {
