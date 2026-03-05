@@ -146,6 +146,7 @@ public class StagedObstacle : MonoBehaviour, IRecordable
         }
         lineRenderer.positionCount = 2;
         lineRenderer.SetPosition(0, transform.position);
+        lineRenderer.SetPosition(1, transform.position);
     }
 
     public void GoToStage(int stage)

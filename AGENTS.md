@@ -8,7 +8,7 @@
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Ground, Water, UI, Interactible, EchoMina
 - Active game object:
-  - Name: Water Top
+  - Name: Lever_C
   - Tag: Untagged
-  - Layer: Ground
+  - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
