@@ -1,12 +1,14 @@
 using System.Collections.Generic;
+using EchoMina.Original;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Events;
+using Utility;
 // ReSharper disable InconsistentNaming
 
 namespace Interactables
 {
-    public class InteractorPressurePlate : MonoBehaviour
+    public class InteractorPressurePlate : MonoBehaviour, IBindable
     {
         [SerializeField] private bool _isInteracting = false;
         [SerializeField] private List<string> _whitelistTags = new List<string>() {"Player"};
@@ -35,6 +37,24 @@ namespace Interactables
                 OnEndInteraction?.Invoke();
                 _isInteracting = false;
             }
+        }
+
+        private void PlaybackStopped()
+        {
+            if (!_isInteracting) return;
+            
+            OnEndInteraction?.Invoke();
+            _isInteracting = false;
+        }
+        public void BindObject()
+        {
+            OriginalEchoMina.Instance.StopPlayback += PlaybackStopped;
+            OriginalEchoMina.Instance.StopRecording += PlaybackStopped;
+        }
+        public void UnBindObject()
+        {
+            OriginalEchoMina.Instance.StopPlayback -= PlaybackStopped;
+            OriginalEchoMina.Instance.StopRecording -= PlaybackStopped;
         }
     }
 }

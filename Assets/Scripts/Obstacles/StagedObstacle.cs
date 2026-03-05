@@ -20,6 +20,7 @@ public class StagedObstacle : MonoBehaviour, IRecordable
     [SerializeField] private bool movingForward = true;
     [SerializeField] private float errorMargin = 0.1f;
     private bool isMoving = false;
+    [SerializeField] private bool canMoveWhileMoving = true;
     [SerializeField] private UnityEvent events;
     [SerializeField] private bool drawGizmos = true;
 
@@ -81,9 +82,9 @@ public class StagedObstacle : MonoBehaviour, IRecordable
 
     private void OnTriggerExit(Collider other)
     {
-        if (attachedTransforms.Contains(other.gameObject.transform))
+        if (attachedTransforms.Contains(other.transform))
         {
-            int index = attachedTransforms.IndexOf(other.gameObject.transform);
+            int index = attachedTransforms.IndexOf(other.transform);
             attachedTransforms.RemoveAt(index);
             other.transform.SetParent(attachedParents[index]);
             attachedParents.RemoveAt(index);
@@ -93,10 +94,11 @@ public class StagedObstacle : MonoBehaviour, IRecordable
     [Button]
     public void GoToNextStage()
     {
-        if (isMoving)
+        if (isMoving && !canMoveWhileMoving)
         {
             return;
         }
+        
         currentStage += movingForward ? 1 : -1;
         if (currentStage >= lineRenderer.positionCount || currentStage < 0)
         {
@@ -113,7 +115,7 @@ public class StagedObstacle : MonoBehaviour, IRecordable
     [Button][UsedImplicitly]
     public void GoToPreviousStage()
     {
-        if (isMoving)
+        if (isMoving && !canMoveWhileMoving)
         {
             return;
         }
@@ -146,6 +148,11 @@ public class StagedObstacle : MonoBehaviour, IRecordable
 
     public void GoToStage(int stage)
     {
+        if (isMoving && !canMoveWhileMoving)
+        {
+            return;
+        }
+        
         currentStage = stage;
         GoToTarget();
     }

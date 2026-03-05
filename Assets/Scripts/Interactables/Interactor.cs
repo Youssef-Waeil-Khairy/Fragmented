@@ -19,14 +19,13 @@ namespace Interactables
         public bool IsMina = false;
         [Foldout("Echo Mina")][SerializeField] private float _timeSinceLastInteraction = 0f;
         [Foldout("Echo Mina")][SerializeField] private OriginalEchoMina _originalEchoMina;
-        [Foldout("Echo Mina")][SerializeField] private bool isRecording = false;
         
         // TODO: Check if we are holding something before allowing an interaction
 
         #region Unity Functions
         void Update()
         {
-            if (isRecording && IsMina) _timeSinceLastInteraction += Time.deltaTime;
+            if (OriginalEchoMina.Instance.State is OriginalEchoMina.EchoState.Recording && IsMina) _timeSinceLastInteraction += Time.deltaTime;
         }
         
         private void OnTriggerEnter(Collider other)

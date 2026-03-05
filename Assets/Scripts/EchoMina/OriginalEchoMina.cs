@@ -138,6 +138,7 @@ namespace EchoMina.Original
 
         private void Update()
         {
+            /*
             if (state == EchoState.Playing && _interactions.Count > 0 && _interactIndex < _interactions.Count)
             {
                 _interactionTime += Time.deltaTime;
@@ -148,6 +149,7 @@ namespace EchoMina.Original
                     _interactionTime = 0f;
                 }
             }
+            */
         }
 
         private void FixedUpdate()
@@ -308,7 +310,9 @@ namespace EchoMina.Original
                 Debug.Log("<b><color=green>[ECHOMINA]</color></b> Playing recorded playback of Echo Mina");
 
                 gameObject.SetActive(true);
-                
+                echoCamera.enabled = false;
+                state = EchoState.Playing; 
+                   
                 _characterController.enabled = false;
                 transform.position = _startPosition;
                 transform.rotation = _startRotation;
@@ -324,10 +328,11 @@ namespace EchoMina.Original
                 }
 
                 if (StartPlayback != null) StartPlayback();
+                
             }
             else
             {
-                Debug.Log("<b><color=red>[ECHOMINA]</color></b> Stopping playback of recorded Echo Mina");
+                Debug.Log("<b><color=red>[ECHOMINA]</color></b> Stopping playback of recorded Echo Mina because we reached the end of the recording");
                 if (StopPlayback != null) StopPlayback();
                 Despawn();
             }

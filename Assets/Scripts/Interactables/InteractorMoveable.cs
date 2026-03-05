@@ -102,10 +102,12 @@ namespace Interactables
             if (isPickedUp)
             {
                 DropObject(interactor);
+                Debug.Log($"{gameObject.name} is dropped by {interactor.gameObject.name}");
             }
             else
             {
                 PickUpObject(interactor);
+                Debug.Log($"{gameObject.name} is picked up by {interactor.gameObject.name}");
             }
         }
         public void StartPreview()
@@ -148,14 +150,19 @@ namespace Interactables
 
         public void TakeSnapshot()
         {
+            print($"[Echo Mina][Recording] Taking snapshot of {gameObject.name}");
             snapshotParentTransform = transform.parent;
             snapshotTransform = transform;
+            
+            startingPosition = transform.position;
+            startingRotation = transform.rotation;
         }
         public void LoadSnapshot()
         {
+            print($"[Echo Mina][Recording] Loading snapshot for {gameObject.name}");
             transform.SetParent(snapshotParentTransform);
-            transform.position = snapshotTransform.position;
-            transform.rotation = snapshotTransform.rotation;
+            transform.position = startingPosition;
+            transform.rotation = startingRotation;
         }
 
   #endregion

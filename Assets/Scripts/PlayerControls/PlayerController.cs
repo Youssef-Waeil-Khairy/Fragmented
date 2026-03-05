@@ -10,7 +10,7 @@ using UnityEngine.InputSystem;
 namespace PlayerControls
 {
     [RequireComponent(typeof(PlayerInput))]
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : MonoBehaviour, IRecordable
     {
         public static PlayerController Instance;
         
@@ -27,6 +27,9 @@ namespace PlayerControls
         [Foldout("Camera")][SerializeField] private CinemachineInputAxisController cinemachineInputAxisController;
         [Foldout("Camera")][SerializeField] private CinemachineCamera playerCamera;
         [Foldout("Camera")][SerializeField] private bool cursorFree = false;
+        
+        [Foldout("Snapshot")][SerializeField] private Vector3 snapshotPosition;
+        [Foldout("Snapshot")][SerializeField] private Quaternion snapshotRotation;
 
         public void Start()
         {
@@ -136,6 +139,23 @@ namespace PlayerControls
         void OnMinaPlayback(InputValue value)
         {
             OriginalEchoMina.Instance.TogglePlaying();
+            if (OriginalEchoMina.Instance.State is OriginalEchoMina.EchoState.Playing)
+            {
+                playerCamera.enabled = true;
+                cinemachineInputAxisController.enabled = true;
+            }
+        }
+        public void TakeSnapshot()
+        {
+            snapshotPosition = transform.position;
+            snapshotRotation = transform.rotation;
+        }
+        public void LoadSnapshot()
+        {
+            characterController.enabled = false;
+            transform.position = snapshotPosition;
+            transform.rotation = snapshotRotation;
+            characterController.enabled = true;
         }
     }
 }
