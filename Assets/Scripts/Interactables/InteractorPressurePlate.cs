@@ -15,14 +15,11 @@ namespace Interactables
         [SerializeField] private List<string> _blacklistTags = new List<string>() {};
         public UnityEvent OnBeginInteraction, OnEndInteraction;
 
-        [BoxGroup("Snapshot")] [SerializeField] private Transform snapshotTransformParent;
-        [BoxGroup("Snapshot")] [SerializeField] private Transform snapshotTransform;
-
         private void OnTriggerEnter(Collider other)
         {
             if (_whitelistTags.Contains(other.tag) && !_isInteracting)
             {
-                Debug.Log(other.gameObject.name + " has stepped on " + gameObject.name);
+                Debug.Log($"<b><color=yellow>[Interactor][PressurePlate]</color></b> {gameObject.name} has been stepped on by {other.gameObject.name}");
                 OnBeginInteraction?.Invoke();
                 _isInteracting = true;
             }
@@ -32,29 +29,34 @@ namespace Interactables
         {
             if (_isInteracting)
             {
-                Debug.Log(other.gameObject.name + " has stepped off " + gameObject.name);
+                Debug.Log($"<b><color=yellow>[Interactor][PressurePlate]</color></b> {gameObject.name} has been stepped off by {other.gameObject.name}");
 
                 OnEndInteraction?.Invoke();
                 _isInteracting = false;
             }
         }
 
+        private void RecordingStopped()
+        {
+            _isInteracting = false;
+        }
+
         private void PlaybackStopped()
         {
             if (!_isInteracting) return;
-            
+
             OnEndInteraction?.Invoke();
             _isInteracting = false;
         }
         public void BindObject()
         {
             OriginalEchoMina.Instance.StopPlayback += PlaybackStopped;
-            OriginalEchoMina.Instance.StopRecording += PlaybackStopped;
+            OriginalEchoMina.Instance.StopRecording += RecordingStopped;
         }
         public void UnBindObject()
         {
             OriginalEchoMina.Instance.StopPlayback -= PlaybackStopped;
-            OriginalEchoMina.Instance.StopRecording -= PlaybackStopped;
+            OriginalEchoMina.Instance.StopRecording -= RecordingStopped;
         }
     }
 }

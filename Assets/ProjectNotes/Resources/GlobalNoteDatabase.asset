@@ -157,8 +157,18 @@ MonoBehaviour:
     isGlobal: 0
     instanceID: 0
     GUID: 9ff38425-fc50-4a30-ba59-6b4707ff001e
+  - note:
+      noteTitle: Upper Floor Pressure Plate
+      content: Put Your Note Here
+      style: 0
+      isOpen: 1
+      folderIndex: 0
+    isGlobal: 0
+    instanceID: 0
+    GUID: 3eeb93f9-ef88-4277-b6d9-d2dda3067c03
   noteFolders:
   - Current Tasks
   - Archived
   - Echo Mina
   - Scene Tasks
+  - Tutorial Possible Bugs

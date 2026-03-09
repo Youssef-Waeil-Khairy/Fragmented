@@ -3,6 +3,7 @@ using EchoMina.Original;
 using Interactables;
 using JetBrains.Annotations;
 using NaughtyAttributes;
+using QuickLoad;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -13,23 +14,25 @@ namespace PlayerControls
     public class PlayerController : MonoBehaviour, IRecordable
     {
         public static PlayerController Instance;
-        
+
         PlayerInput playerInput;
         CharacterController characterController;
-        
+
         [Foldout("Movement")][SerializeField] float moveSpeed = 5f;
         [Foldout("Movement")][SerializeField] float turnSpeed = 5f;
         [Foldout("Movement")][SerializeField] float sprintSpeed = 10f;
         [Foldout("Movement")][SerializeField] float moveDirection = 0f;
         [Foldout("Movement")][SerializeField] float turnDirection = 0f;
         [Foldout("Movement")][SerializeField] bool isSprinting = false;
-        
+
         [Foldout("Camera")][SerializeField] private CinemachineInputAxisController cinemachineInputAxisController;
         [Foldout("Camera")][SerializeField] private CinemachineCamera playerCamera;
         [Foldout("Camera")][SerializeField] private bool cursorFree = false;
-        
+
         [Foldout("Snapshot")][SerializeField] private Vector3 snapshotPosition;
         [Foldout("Snapshot")][SerializeField] private Quaternion snapshotRotation;
+
+        public CharacterController Controller => characterController;
 
         public void Start()
         {
@@ -41,7 +44,7 @@ namespace PlayerControls
             {
                 Destroy(gameObject);
             }
-            
+
             playerInput = GetComponent<PlayerInput>();
             characterController = GetComponent<CharacterController>();
             LockCursor();
@@ -53,7 +56,7 @@ namespace PlayerControls
             {
                 return;
             }
-            
+
             Vector3 move = transform.forward * (moveDirection * (isSprinting ? sprintSpeed : moveSpeed));
             characterController.SimpleMove(move);
             transform.Rotate(transform.up, turnDirection *  turnSpeed * Time.fixedDeltaTime);
@@ -99,7 +102,7 @@ namespace PlayerControls
         void OnMove(InputValue value)
         {
             Vector2 inputDirection = value.Get<Vector2>();
-            
+
             // Block move inputs to main Mina if we are recording
             if (OriginalEchoMina.Instance.State is OriginalEchoMina.EchoState.Recording)
             {
@@ -107,7 +110,7 @@ namespace PlayerControls
                 OriginalEchoMina.Instance.OnMove(recordInput);
                 return;
             }
-            
+
             moveDirection = inputDirection.y;
             turnDirection = inputDirection.x;
         }
@@ -143,6 +146,23 @@ namespace PlayerControls
             {
                 playerCamera.enabled = true;
                 cinemachineInputAxisController.enabled = true;
+            }
+        }
+
+        void OnQuickLoad(InputValue value)
+        {
+            if (value.isPressed)
+            {
+                Debug.Log("Quick Load");
+                QuickLoader.Instance.LoadCheckpoint();
+            }
+        }
+        void OnQuickSave(InputValue value)
+        {
+            if (value.isPressed)
+            {
+                Debug.Log("Quick Save");
+                QuickLoader.Instance.SaveCheckpoint();
             }
         }
         public void TakeSnapshot()

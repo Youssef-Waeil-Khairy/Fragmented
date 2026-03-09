@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Interactables;
 using JetBrains.Annotations;
@@ -21,13 +20,9 @@ public class StagedObstacle : MonoBehaviour, IRecordable
     [SerializeField] private float errorMargin = 0.1f;
     private bool isMoving = false;
     [SerializeField] private bool canMoveWhileMoving = true;
-    [SerializeField] private UnityEvent events;
+    [SerializeField] private List<UnityEvent> preMoveEvents;
+    [SerializeField] private List<UnityEvent> events;
     [SerializeField] private bool drawGizmos = true;
-
-    [Tag]
-    [SerializeField] private List<string> attachables = new List<string>() {"Player", "EchoMina"};
-    [SerializeField] private List<Transform> attachedTransforms = new List<Transform>();
-    [SerializeField] private List<Transform> attachedParents = new List<Transform>();
 
     [Foldout("Snapshot")][SerializeField] private int snapshotStage = 0;
 
@@ -53,6 +48,27 @@ public class StagedObstacle : MonoBehaviour, IRecordable
         {
             lineRenderer.SetPosition(0, transform.position);
         }
+
+        if (preMoveEvents.Count > lineRenderer.positionCount)
+        {
+            preMoveEvents.RemoveRange(lineRenderer.positionCount, preMoveEvents.Count - lineRenderer.positionCount);
+        }
+        if (events.Count > lineRenderer.positionCount)
+        {
+            events.RemoveRange(lineRenderer.positionCount, events.Count - lineRenderer.positionCount);
+        }
+
+        EventsSizeCheck:
+        if (preMoveEvents.Count < lineRenderer.positionCount)
+        {
+            preMoveEvents.Add(null);
+            goto EventsSizeCheck;
+        }
+        if (events.Count < lineRenderer.positionCount)
+        {
+            events.Add(null);
+            goto EventsSizeCheck;
+        }
     }
 
     private void FixedUpdate()
@@ -63,35 +79,9 @@ public class StagedObstacle : MonoBehaviour, IRecordable
         {
             rb.linearVelocity = Vector3.zero;
             transform.position = targetPosition; // Snap to target position
-            events?.Invoke();
+            events[currentStage]?.Invoke();
         }
     }
-
-    /*
-    private void OnTriggerEnter(Collider other)
-    {
-        if (attachables.Contains(other.tag))
-        {
-            if (!attachedTransforms.Contains(other.transform))
-            {
-                attachedParents.Add(other.transform.parent);
-                attachedTransforms.Add(other.transform);
-                other.transform.SetParent(transform);
-            }
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (attachedTransforms.Contains(other.transform))
-        {
-            int index = attachedTransforms.IndexOf(other.transform);
-            attachedTransforms.RemoveAt(index);
-            other.transform.SetParent(attachedParents[index]);
-            attachedParents.RemoveAt(index);
-        }
-    }
-    */
 
     [Button]
     public void GoToNextStage()
@@ -100,7 +90,7 @@ public class StagedObstacle : MonoBehaviour, IRecordable
         {
             return;
         }
-        
+
         currentStage += movingForward ? 1 : -1;
         if (currentStage >= lineRenderer.positionCount || currentStage < 0)
         {
@@ -108,10 +98,9 @@ public class StagedObstacle : MonoBehaviour, IRecordable
             currentStage = math.clamp(currentStage, 0, lineRenderer.positionCount - 1);
             currentStage += movingForward ? 1 : -1;
         }
-        
+
         Debug.Log("Going to next stage: " + currentStage);
         GoToTarget();
-        events?.Invoke();
     }
 
     [Button][UsedImplicitly]
@@ -121,7 +110,7 @@ public class StagedObstacle : MonoBehaviour, IRecordable
         {
             return;
         }
-        
+
         currentStage += movingForward ? -1 : 1;
         if (currentStage >= lineRenderer.positionCount || currentStage < 0)
         {
@@ -129,13 +118,32 @@ public class StagedObstacle : MonoBehaviour, IRecordable
             currentStage = math.clamp(currentStage, 0, lineRenderer.positionCount - 1);
             currentStage += movingForward ? -1 : 1;
         }
-        
+
         Debug.Log("Going to next stage: " + currentStage);
         GoToTarget();
-        events?.Invoke();
     }
 
-    [Button]
+    public void GoToStage(int stage)
+    {
+        if (isMoving && !canMoveWhileMoving)
+        {
+            return;
+        }
+
+        currentStage = stage;
+        GoToTarget();
+    }
+
+    private void GoToTarget()
+    {
+        targetPosition = lineRenderer.GetPosition(currentStage);
+        rb.linearVelocity = Vector3.zero;
+        rb.AddForce((targetPosition - transform.position).normalized * moveSpeed, ForceMode.VelocityChange);
+
+        preMoveEvents[currentStage]?.Invoke();
+    }
+
+    [Button][UsedImplicitly]
     public void SetUpLineRenderer()
     {
         lineRenderer = GetComponent<LineRenderer>();
@@ -147,24 +155,6 @@ public class StagedObstacle : MonoBehaviour, IRecordable
         lineRenderer.positionCount = 2;
         lineRenderer.SetPosition(0, transform.position);
         lineRenderer.SetPosition(1, transform.position);
-    }
-
-    public void GoToStage(int stage)
-    {
-        if (isMoving && !canMoveWhileMoving)
-        {
-            return;
-        }
-        
-        currentStage = stage;
-        GoToTarget();
-    }
-    
-    private void GoToTarget()
-    {
-        targetPosition = lineRenderer.GetPosition(currentStage);
-        rb.linearVelocity = Vector3.zero;
-        rb.AddForce((targetPosition - transform.position).normalized * moveSpeed, ForceMode.VelocityChange);
     }
 
     private void OnDrawGizmos()

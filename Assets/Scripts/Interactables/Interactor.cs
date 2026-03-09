@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using EchoMina.Original;
 using Utility;
 using NaughtyAttributes;
@@ -17,9 +15,9 @@ namespace Interactables
         [Foldout("Moveable Transforms")] public Transform DetachingTransform;
 
         public bool IsMina = false;
+        // ReSharper disable once RedundantDefaultMemberInitializer
         [Foldout("Echo Mina")][SerializeField] private float _timeSinceLastInteraction = 0f;
-        [Foldout("Echo Mina")][SerializeField] private OriginalEchoMina _originalEchoMina;
-        
+
         // TODO: Check if we are holding something before allowing an interaction
 
         #region Unity Functions
@@ -27,7 +25,7 @@ namespace Interactables
         {
             if (OriginalEchoMina.Instance.State is OriginalEchoMina.EchoState.Recording && IsMina) _timeSinceLastInteraction += Time.deltaTime;
         }
-        
+
         private void OnTriggerEnter(Collider other)
         {
             var go = other.GetComponent<IInteractable>();
@@ -44,7 +42,7 @@ namespace Interactables
                 }
             }
         }
-        
+
         private void OnTriggerExit(Collider other)
         {
             var go = other.GetComponent<IInteractable>();
@@ -57,7 +55,7 @@ namespace Interactables
                         Debug.Log($"<b><color=yellow>[Interactions][Locking]</color></b> {other.gameObject.name} is locked to {gameObject.name} and is now outside interaction range");
                         return;
                     }
-                    
+
                     go.StopPreview();
                     _interactable = null;
                     Debug.Log($"<b><color=red>[Interactions][Interactor]</color></b> {gameObject.name} Exited interaction range of " + go);
@@ -87,7 +85,7 @@ namespace Interactables
                 OriginalEchoMina.Instance.EchoInteractor.InteractCommand();
                 return;
             }
-            
+
             if (_interactable != null && _interactable.CanInteract(this))
             {
                 _interactable.Interact(this);
