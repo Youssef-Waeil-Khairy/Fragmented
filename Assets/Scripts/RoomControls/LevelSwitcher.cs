@@ -23,5 +23,10 @@ namespace RoomControls
         {
             SceneManager.LoadScene(level);
         }
+
+        public void CloseGame()
+        {
+            Application.Quit();
+        }
     }
 }
