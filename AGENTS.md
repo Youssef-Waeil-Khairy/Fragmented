@@ -2,13 +2,13 @@
 - Project name: Fragmented
 - Unity version: Unity 6000.1.14f1
 - Active scene:
-  - Name: MainMenu
+  - Name: Level_1_GreyBoxing
   - Tags:
     - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Command, EchoMina, Interactable
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Ground, Water, UI, Interactible, EchoMina
 - Active game object:
-  - Name: ExitButton
+  - Name: PP_A
   - Tag: Untagged
-  - Layer: UI
+  - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

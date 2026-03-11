@@ -1,4 +1,4 @@
-using System;
+using System.Diagnostics.CodeAnalysis;
 using EchoMina.Original;
 using Interactables;
 using JetBrains.Annotations;
@@ -11,12 +11,14 @@ using UnityEngine.InputSystem;
 namespace PlayerControls
 {
     [RequireComponent(typeof(PlayerInput))]
+    [SuppressMessage("ReSharper", "RedundantDefaultMemberInitializer")]
     public class PlayerController : MonoBehaviour, IRecordable
     {
         public static PlayerController Instance;
 
-        PlayerInput playerInput;
-        CharacterController characterController;
+        //PlayerInput playerInput;
+        //CharacterController characterController;
+        private Rigidbody rb;
 
         [Foldout("Movement")][SerializeField] float moveSpeed = 5f;
         [Foldout("Movement")][SerializeField] float turnSpeed = 5f;
@@ -32,8 +34,6 @@ namespace PlayerControls
         [Foldout("Snapshot")][SerializeField] private Vector3 snapshotPosition;
         [Foldout("Snapshot")][SerializeField] private Quaternion snapshotRotation;
 
-        public CharacterController Controller => characterController;
-
         public void Start()
         {
             if (Instance == null)
@@ -45,8 +45,8 @@ namespace PlayerControls
                 Destroy(gameObject);
             }
 
-            playerInput = GetComponent<PlayerInput>();
-            characterController = GetComponent<CharacterController>();
+            //playerInput = GetComponent<PlayerInput>();
+            rb  = GetComponent<Rigidbody>();
             LockCursor();
         }
 
@@ -58,8 +58,8 @@ namespace PlayerControls
             }
 
             Vector3 move = transform.forward * (moveDirection * (isSprinting ? sprintSpeed : moveSpeed));
-            characterController.SimpleMove(move);
-            transform.Rotate(transform.up, turnDirection *  turnSpeed * Time.fixedDeltaTime);
+            rb.AddForce(move, ForceMode.Force);
+            rb.AddTorque(transform.up * (turnDirection * turnSpeed * Time.fixedDeltaTime));
         }
 
         void ToggleCursorFree()
@@ -117,7 +117,7 @@ namespace PlayerControls
 
         void OnSprint(InputValue value)
         {
-            isSprinting = value.isPressed;
+            isSprinting = value.isPressed; // BUG: Sprinting is stuck on when first activated
         }
 
         [UsedImplicitly]
@@ -172,10 +172,8 @@ namespace PlayerControls
         }
         public void LoadSnapshot()
         {
-            characterController.enabled = false;
             transform.position = snapshotPosition;
             transform.rotation = snapshotRotation;
-            characterController.enabled = true;
         }
     }
 }
