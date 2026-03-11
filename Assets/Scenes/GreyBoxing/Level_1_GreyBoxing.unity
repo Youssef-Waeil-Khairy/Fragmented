@@ -567,7 +567,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 74122bd56b381e2439f6008dfd63db84, type: 2}
+  - {fileID: 2100000, guid: cf6f5633e1388e24cb277bf1278c6ffa, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4966,7 +4966,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 74122bd56b381e2439f6008dfd63db84, type: 2}
+  - {fileID: 2100000, guid: 70142ef9a4cc3544bb83fe8f517934d9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5012,7 +5012,6 @@ MonoBehaviour:
   _whitelistTags:
   - Player
   - EchoMina
-  - Interactable
   _blacklistTags: []
   OnBeginInteraction:
     m_PersistentCalls:
@@ -5955,7 +5954,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 74122bd56b381e2439f6008dfd63db84, type: 2}
+  - {fileID: 2100000, guid: 70142ef9a4cc3544bb83fe8f517934d9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7292,7 +7291,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 74122bd56b381e2439f6008dfd63db84, type: 2}
+  - {fileID: 2100000, guid: cf6f5633e1388e24cb277bf1278c6ffa, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9025,7 +9024,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 74122bd56b381e2439f6008dfd63db84, type: 2}
+  - {fileID: 2100000, guid: 70142ef9a4cc3544bb83fe8f517934d9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9786,7 +9785,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 74122bd56b381e2439f6008dfd63db84, type: 2}
+  - {fileID: 2100000, guid: 7ac2e8aeacaa80d49acf5a85e1ceebbc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9830,7 +9829,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isInteracting: 0
   _whitelistTags:
-  - Player
   - EchoMina
   _blacklistTags: []
   OnBeginInteraction:
@@ -13405,7 +13403,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 74122bd56b381e2439f6008dfd63db84, type: 2}
+  - {fileID: 2100000, guid: 70142ef9a4cc3544bb83fe8f517934d9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -13881,6 +13879,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 327849340}
     m_Modifications:
     - target: {fileID: 750576822887557997, guid: 4814ec330d4fbf64089f4b5b894949bc, type: 3}
+      propertyPath: _whitelistTags.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 750576822887557997, guid: 4814ec330d4fbf64089f4b5b894949bc, type: 3}
       propertyPath: OnEndInteraction.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -13936,13 +13938,17 @@ PrefabInstance:
       propertyPath: OnBeginInteraction.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 5096711815448499545, guid: 4814ec330d4fbf64089f4b5b894949bc, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 70142ef9a4cc3544bb83fe8f517934d9, type: 2}
     - target: {fileID: 5590743708502114545, guid: 4814ec330d4fbf64089f4b5b894949bc, type: 3}
       propertyPath: m_Name
       value: PP_A
       objectReference: {fileID: 0}
     - target: {fileID: 9013086653684957800, guid: 4814ec330d4fbf64089f4b5b894949bc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.13
+      value: -5.01
       objectReference: {fileID: 0}
     - target: {fileID: 9013086653684957800, guid: 4814ec330d4fbf64089f4b5b894949bc, type: 3}
       propertyPath: m_LocalPosition.y
@@ -13950,7 +13956,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9013086653684957800, guid: 4814ec330d4fbf64089f4b5b894949bc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10.27
+      value: 8.7
       objectReference: {fileID: 0}
     - target: {fileID: 9013086653684957800, guid: 4814ec330d4fbf64089f4b5b894949bc, type: 3}
       propertyPath: m_LocalRotation.w
@@ -13993,6 +13999,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 673357571}
     m_Modifications:
+    - target: {fileID: 82186821816905731, guid: 1e1de02e66a6f994fadd04d529226574, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 70142ef9a4cc3544bb83fe8f517934d9, type: 2}
+    - target: {fileID: 3795057519513654528, guid: 1e1de02e66a6f994fadd04d529226574, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 70142ef9a4cc3544bb83fe8f517934d9, type: 2}
     - target: {fileID: 4745187057902122514, guid: 1e1de02e66a6f994fadd04d529226574, type: 3}
       propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.size
       value: 1
