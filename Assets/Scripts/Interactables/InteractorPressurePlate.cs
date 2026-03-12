@@ -12,7 +12,7 @@ namespace Interactables
     {
         [SerializeField] private bool _isInteracting = false;
         [Tag][SerializeField] private List<string> _whitelistTags = new List<string>() {"Player"};
-        [SerializeField] private List<string> _blacklistTags = new List<string>() {};
+        [SerializeField] private GameObject _interactingObject;
         public UnityEvent OnBeginInteraction, OnEndInteraction;
 
         private void OnTriggerEnter(Collider other)
@@ -20,6 +20,7 @@ namespace Interactables
             if (_whitelistTags.Contains(other.tag) && !_isInteracting)
             {
                 Debug.Log($"<b><color=yellow>[Interactor][PressurePlate]</color></b> {gameObject.name} has been stepped on by {other.gameObject.name}");
+                _interactingObject = other.gameObject;
                 OnBeginInteraction?.Invoke();
                 _isInteracting = true;
             }
@@ -27,10 +28,10 @@ namespace Interactables
 
         private void OnTriggerExit(Collider other)
         {
-            if (_isInteracting)
+            if (_isInteracting && other.gameObject == _interactingObject)
             {
                 Debug.Log($"<b><color=yellow>[Interactor][PressurePlate]</color></b> {gameObject.name} has been stepped off by {other.gameObject.name}");
-
+                _interactingObject =  null;
                 OnEndInteraction?.Invoke();
                 _isInteracting = false;
             }
@@ -39,6 +40,7 @@ namespace Interactables
         private void RecordingStopped()
         {
             _isInteracting = false;
+            _interactingObject = null;
         }
 
         private void PlaybackStopped()
@@ -46,6 +48,7 @@ namespace Interactables
             if (!_isInteracting) return;
 
             OnEndInteraction?.Invoke();
+            _interactingObject = null;
             _isInteracting = false;
         }
         public void BindObject()

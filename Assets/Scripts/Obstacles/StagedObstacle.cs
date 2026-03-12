@@ -188,10 +188,8 @@ public class StagedObstacle : MonoBehaviour, IRecordable
                     Gizmos.color = Color.cyan;
                 }
                 Gizmos.DrawWireCube(
-                    lineRenderer.GetPosition(i),
-                    new Vector3(boxCollider.size.x * transform.lossyScale.x,
-                    boxCollider.size.y * transform.lossyScale.y,
-                    boxCollider.size.z * transform.lossyScale.z));
+                    lineRenderer.GetPosition(i) + boxCollider.center,
+                    new Vector3(boxCollider.size.x, boxCollider.size.y, boxCollider.size.z));
                 Gizmos.color = Color.rebeccaPurple;
             }
         }
