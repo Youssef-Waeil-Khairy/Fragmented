@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace DialogueSystem
 {
@@ -18,7 +19,7 @@ namespace DialogueSystem
             [AllowNesting][ShowIf("HasBackgroundSprite")] public Sprite BackgroundSprite;
             [TextArea(1, 4)] public string Text;
         }
-        
+
         public List<DialogueSnippet> DialogueSnippets;
     }
 }

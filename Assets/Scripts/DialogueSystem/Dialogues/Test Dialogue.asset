@@ -25,3 +25,9 @@ MonoBehaviour:
     HasBackgroundSprite: 1
     BackgroundSprite: {fileID: 21300000, guid: c50d0f5f6163b564b89736aae20a8781, type: 3}
     Text: text box 2
+  - SpeakerName: Test 2
+    HasSpeakerSprite: 0
+    SpeakerSprite: {fileID: 0}
+    HasBackgroundSprite: 0
+    BackgroundSprite: {fileID: 0}
+    Text: text box 2

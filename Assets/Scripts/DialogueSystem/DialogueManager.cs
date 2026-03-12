@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
 using TMPro;
@@ -22,40 +23,49 @@ namespace DialogueSystem
         // Text
         [SerializeField] private TMP_Text Text;
 
-        [SerializeField] private ScriptableDialogue Dialogue;
+        [SerializeField][Expandable] private ScriptableDialogue Dialogue;
         [SerializeField] private ScriptableDialogue.DialogueSnippet CurrentSnippet;
         [SerializeField] private int DialogueIndex;
+        [SerializeField] private List<UnityEvent> SnippetEvents;
+        [InfoBox("These events will be called when their corresponding index snippet is shown. Please ensure the number of events exactly match the number of snippets in your dialogue.", EInfoBoxType.Warning)]
 
         public UnityEvent OnDialogueStart;
         public UnityEvent OnDialogueEnd;
-        
+
         InputAction nextAction;
 
-        private void Start()
+        private void OnEnable()
         {
             nextAction = InputSystem.actions.FindAction("NextSnippet");
             nextAction.performed += NextSnippet;
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             nextAction.performed -= NextSnippet;
+        }
+
+        private void NextSnippet(InputAction.CallbackContext callbackContext)
+        {
+            AdvanceDialogue();
         }
 
         private void UpdateUI()
         {
             SpeakerName.text = CurrentSnippet.SpeakerName;
-            if (CurrentSnippet.SpeakerSprite != null)
+            if (CurrentSnippet.HasSpeakerSprite && CurrentSnippet.SpeakerSprite != null)
             {
                 SpeakerSprite.sprite = CurrentSnippet.SpeakerSprite;
             }
-            if (CurrentSnippet.BackgroundSprite != null)
+            if (CurrentSnippet.HasBackgroundSprite && CurrentSnippet.BackgroundSprite != null)
             {
                 BackgroundSprite.sprite = CurrentSnippet.BackgroundSprite;
             }
             Text.text = CurrentSnippet.Text; // TODO: maybe make typewriter thing for this
+
+            SnippetEvents[DialogueIndex]?.Invoke();
         }
-        
+
         [Button]
         public void ShowDialogue()
         {
@@ -64,17 +74,18 @@ namespace DialogueSystem
             UpdateUI();
             OnDialogueStart?.Invoke();
         }
-        
+
         [Button]
         public void HideDialogue()
         {
             DialoguePanel.SetActive(false);
         }
-        
-        public void NextSnippet(InputAction.CallbackContext callbackContext)
+
+        [Button][UsedImplicitly]
+        public void AdvanceDialogue()
         {
             if (!DialoguePanel.activeSelf) return;
-            
+
             DialogueIndex++;
             if (DialogueIndex > Dialogue.DialogueSnippets.Count - 1)
             {
@@ -94,7 +105,7 @@ namespace DialogueSystem
             {
                 return;
             }
-            
+
             CurrentSnippet = Dialogue.DialogueSnippets[DialogueIndex];
             UpdateUI();
         }
