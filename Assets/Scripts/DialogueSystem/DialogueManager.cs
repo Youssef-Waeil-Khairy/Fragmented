@@ -28,7 +28,7 @@ namespace DialogueSystem
         [SerializeField] private int DialogueIndex;
         [SerializeField] private List<UnityEvent> SnippetEvents;
         [InfoBox("These events will be called when their corresponding index snippet is shown. Please ensure the number of events exactly match the number of snippets in your dialogue.", EInfoBoxType.Warning)]
-
+        
         public UnityEvent OnDialogueStart;
         public UnityEvent OnDialogueEnd;
 
