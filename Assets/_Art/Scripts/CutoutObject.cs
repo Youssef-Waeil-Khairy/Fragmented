@@ -9,6 +9,9 @@ public class CutoutObject : MonoBehaviour
 
     [SerializeField]
     private LayerMask wallMask;
+    [SerializeField] private Vector2 MinaOffset = Vector2.up;
+    [SerializeField] private float CutoutSize = .1f;
+    [SerializeField] private float FallOffSize = .05f;
 
     private Camera mainCamera;
 
@@ -20,7 +23,8 @@ public class CutoutObject : MonoBehaviour
     private void Update()
     {
         Vector2 cutoutPos = mainCamera.WorldToViewportPoint(targetObject.position);
-        cutoutPos.y /= (Screen.width / Screen.height);
+        cutoutPos += MinaOffset;
+        //cutoutPos.y /= (Screen.width / Screen.height);
 
         Vector3 offset = targetObject.position - transform.position;
         RaycastHit[] hitObjects = Physics.RaycastAll(transform.position, offset, offset.magnitude, wallMask);
@@ -32,8 +36,8 @@ public class CutoutObject : MonoBehaviour
             for (int m = 0; m < materials.Length; ++m)
             {
                 materials[m].SetVector("_CutoutPos", cutoutPos);
-                materials[m].SetFloat("_CutoutSize", 0.1f);
-                materials[m].SetFloat("_FalloffSize", 0.05f);
+                materials[m].SetFloat("_CutoutSize", CutoutSize);
+                materials[m].SetFloat("_FalloffSize", FallOffSize);
             }
         }
     }

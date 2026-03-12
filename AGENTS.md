@@ -2,13 +2,13 @@
 - Project name: Fragmented
 - Unity version: Unity 6000.1.14f1
 - Active scene:
-  - Name: Level_1_GreyBoxing
+  - Name: Tutorial
   - Tags:
     - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Command, EchoMina, Interactable
   - Layers:
-    - Default, TransparentFX, Ignore Raycast, Ground, Water, UI, Interactible, EchoMina
+    - Default, TransparentFX, Ignore Raycast, Ground, Water, UI, Interactible, EchoMina, Walls
 - Active game object:
-  - Name: Platform_D
+  - Name: CinemachineCamera
   - Tag: Untagged
   - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
