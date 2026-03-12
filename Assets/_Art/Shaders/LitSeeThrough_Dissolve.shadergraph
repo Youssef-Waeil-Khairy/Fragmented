@@ -951,8 +951,8 @@
     "m_ObjectId": "0c7621c7f0b5473b9ae75a33e437812c",
     "m_Title": "Aspect Ratio",
     "m_Position": {
-        "x": -2802.857421875,
-        "y": 807.4285888671875
+        "x": -2802.400146484375,
+        "y": 807.1998901367188
     }
 }
 
@@ -2148,8 +2148,8 @@
     "m_ObjectId": "5adf5958f60943cfbca58e5b7d26aeb6",
     "m_Title": "Calculate cutout with dithering",
     "m_Position": {
-        "x": -1578.2857666015625,
-        "y": 643.4285278320313
+        "x": -1577.5999755859375,
+        "y": 643.1998901367188
     }
 }
 
@@ -2804,8 +2804,8 @@
     "m_ObjectId": "7bdf221fe79d48adadd0bed5c97adf44",
     "m_Title": "Get Distance",
     "m_Position": {
-        "x": -1772.5712890625,
-        "y": 805.1428833007813
+        "x": -1771.9998779296875,
+        "y": 804.7999877929688
     }
 }
 
@@ -3420,8 +3420,8 @@
     "m_ObjectId": "a3631695e2a5488d875ed1ced95cfbdd",
     "m_Title": "Get Cutout Position",
     "m_Position": {
-        "x": -2433.71435546875,
-        "y": 802.8571166992188
+        "x": -2433.60009765625,
+        "y": 802.4000854492188
     }
 }
 
@@ -3941,8 +3941,8 @@
     "m_ObjectId": "c2780b8f05394235864a5aaf8e872ce7",
     "m_Title": "Get Screen Position",
     "m_Position": {
-        "x": -2417.71435546875,
-        "y": 513.7141723632813
+        "x": -2417.60009765625,
+        "y": 512.7999877929688
     }
 }
 
@@ -4224,7 +4224,7 @@
     "m_ZTestMode": 4,
     "m_ZWriteControl": 0,
     "m_AlphaMode": 0,
-    "m_RenderFace": 2,
+    "m_RenderFace": 0,
     "m_AlphaClip": true,
     "m_CastShadows": true,
     "m_ReceiveShadows": true,
