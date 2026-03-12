@@ -8,7 +8,7 @@
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Ground, Water, UI, Interactible, EchoMina
 - Active game object:
-  - Name: Level Exit
+  - Name: DialogueCanvas (Missing Prefab with guid: 0bd7b9a101f8cd846a52b3b29287fc51)
   - Tag: Untagged
   - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
