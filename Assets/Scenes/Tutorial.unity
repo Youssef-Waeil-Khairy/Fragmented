@@ -1545,6 +1545,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: EchoMina(Original)
       objectReference: {fileID: 0}
+    - target: {fileID: 6869389280814274392, guid: dd2e3ea5078d9fb4f96e1d1f5d95f628, type: 3}
+      propertyPath: _speed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6869389280814274392, guid: dd2e3ea5078d9fb4f96e1d1f5d95f628, type: 3}
+      propertyPath: _turnSpeed
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -52026,13 +52034,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2035582690252776944}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.05548929, y: 0.7049262, z: 0.7049262, w: 0.055489283}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.32502833, y: 0.6279782, z: 0.6279782, w: -0.32502833}
+  m_LocalPosition: {x: 1.8396251, y: -0.000000101024824, z: -0.06526238}
   m_LocalScale: {x: 80.1479, y: 80.1479, z: 80.147896}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1586710305}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 234.73001}
 --- !u!114 &6885937178916628783
 MonoBehaviour:
   m_ObjectHideFlags: 0
