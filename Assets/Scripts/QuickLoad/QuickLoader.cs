@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using EchoMina.Original;
+using NaughtyAttributes;
 using PlayerControls;
 using UnityEngine;
 
@@ -14,6 +16,13 @@ namespace QuickLoad
         [SerializeField] private Transform quickSavePoint;
         [SerializeField] private int loadIndex;
 
+        private void Awake()
+        {
+            if (Instance == null) Instance = this;
+            else if (Instance != this) Destroy(this);
+        }
+
+        [Button]
         public void LoadCheckpoint()
         {
             PlayerController.Instance.transform.position = checkpoints[loadIndex].position;
@@ -29,15 +38,40 @@ namespace QuickLoad
             }
         }
 
+        public void QuickLoadCheckpoint()
+        {
+            PlayerController.Instance.transform.position = quickSavePoint.position;
+            PlayerController.Instance.transform.rotation = quickSavePoint.rotation;
+        }
+
         public void SaveCheckpoint()
         {
-            checkpoints[loadIndex].position = PlayerController.Instance.transform.position;
-            checkpoints[loadIndex].rotation = PlayerController.Instance.transform.rotation;
+            quickSavePoint.position = PlayerController.Instance.transform.position;
+            quickSavePoint.rotation = PlayerController.Instance.transform.rotation;
         }
 
         public void SetCheckpoint(int index)
         {
             loadIndex = index;
+        }
+
+        private void OnDrawGizmos()
+        {
+            Color  prevColor = Gizmos.color;
+
+            Gizmos.color = Color.blueViolet;
+            Gizmos.DrawSphere(quickSavePoint.position, 0.2f);
+
+            if (checkpoints.Count == 0)
+            {
+                Gizmos.color = prevColor;
+                return;
+            }
+
+            Gizmos.color = Color.gold;
+            Gizmos.DrawSphere(checkpoints[loadIndex].position, 0.2f);
+
+            Gizmos.color = prevColor;
         }
     }
 }

@@ -22,10 +22,9 @@ namespace PlayerControls
 
         [Foldout("Movement")][SerializeField] float moveSpeed = 5f;
         [Foldout("Movement")][SerializeField] float turnSpeed = 5f;
-        [Foldout("Movement")][SerializeField] float sprintSpeed = 10f;
         [Foldout("Movement")][SerializeField] float moveDirection = 0f;
         [Foldout("Movement")][SerializeField] float turnDirection = 0f;
-        [Foldout("Movement")][SerializeField] bool isSprinting = false;
+        [Foldout("Movement")][SerializeField] private float maxSpeed;
 
         [Foldout("Camera")][SerializeField] private CinemachineInputAxisController cinemachineInputAxisController;
         [Foldout("Camera")][SerializeField] private CinemachineCamera playerCamera;
@@ -47,6 +46,7 @@ namespace PlayerControls
 
             //playerInput = GetComponent<PlayerInput>();
             rb  = GetComponent<Rigidbody>();
+            rb.maxLinearVelocity = maxSpeed;
             LockCursor();
         }
 
@@ -57,7 +57,7 @@ namespace PlayerControls
                 return;
             }
 
-            Vector3 move = transform.forward * (moveDirection * (isSprinting ? sprintSpeed : moveSpeed));
+            Vector3 move = transform.forward * (moveDirection * moveSpeed);
             rb.AddForce(move, ForceMode.Force);
             rb.AddTorque(transform.up * (turnDirection * turnSpeed * Time.fixedDeltaTime));
         }
@@ -91,6 +91,7 @@ namespace PlayerControls
             cinemachineInputAxisController.enabled = false;
         }
 
+        [UsedImplicitly]
         void OnFreeCursor(InputValue value)
         {
             if (value.isPressed)
@@ -99,6 +100,7 @@ namespace PlayerControls
             }
         }
 
+        [UsedImplicitly]
         void OnMove(InputValue value)
         {
             Vector2 inputDirection = value.Get<Vector2>();
@@ -106,7 +108,7 @@ namespace PlayerControls
             // Block move inputs to main Mina if we are recording
             if (OriginalEchoMina.Instance.State is OriginalEchoMina.EchoState.Recording)
             {
-                Vector3 recordInput = new Vector3(inputDirection.y, inputDirection.x, isSprinting ? 1f : 0f);
+                Vector3 recordInput = new Vector3(inputDirection.y, inputDirection.x, 0f);
                 OriginalEchoMina.Instance.OnMove(recordInput);
                 return;
             }
@@ -115,14 +117,11 @@ namespace PlayerControls
             turnDirection = inputDirection.x;
         }
 
-        void OnSprint(InputValue value)
-        {
-            isSprinting = value.isPressed; // BUG: Sprinting is stuck on when first activated
-        }
-
         [UsedImplicitly]
         void OnMinaRecord(InputValue value)
         {
+            if (cursorFree) return;
+
             //characterController.enabled = !characterController.enabled;
             Debug.Log($"position: {transform.position}, rotation: {transform.rotation}");
             OriginalEchoMina.Instance.ToggleRecording(transform.position, transform.rotation);
@@ -149,14 +148,26 @@ namespace PlayerControls
             }
         }
 
+        [UsedImplicitly]
+        void OnLoadCheckpoint(InputValue value)
+        {
+            if (value.isPressed)
+            {
+                QuickLoader.Instance.LoadCheckpoint();
+            }
+        }
+
+        [UsedImplicitly]
         void OnQuickLoad(InputValue value)
         {
             if (value.isPressed)
             {
                 Debug.Log("Quick Load");
-                QuickLoader.Instance.LoadCheckpoint();
+                QuickLoader.Instance.QuickLoadCheckpoint();
             }
         }
+
+        [UsedImplicitly]
         void OnQuickSave(InputValue value)
         {
             if (value.isPressed)

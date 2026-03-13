@@ -19,8 +19,9 @@ namespace Interactables
         {
             if (_whitelistTags.Contains(other.tag) && !_isInteracting)
             {
-                Debug.Log($"<b><color=yellow>[Interactor][PressurePlate]</color></b> {gameObject.name} has been stepped on by {other.gameObject.name}");
+                Debug.LogError($"<b><color=yellow>[Interactor][PressurePlate]</color></b> {gameObject.name} has been stepped on by {other.gameObject.name}");
                 _interactingObject = other.gameObject;
+
                 OnBeginInteraction?.Invoke();
                 _isInteracting = true;
             }
@@ -30,7 +31,7 @@ namespace Interactables
         {
             if (_isInteracting && other.gameObject == _interactingObject)
             {
-                Debug.Log($"<b><color=yellow>[Interactor][PressurePlate]</color></b> {gameObject.name} has been stepped off by {other.gameObject.name}");
+                Debug.LogError($"<b><color=yellow>[Interactor][PressurePlate]</color></b> {gameObject.name} has been stepped off by {other.gameObject.name}");
                 _interactingObject =  null;
                 OnEndInteraction?.Invoke();
                 _isInteracting = false;
@@ -39,8 +40,21 @@ namespace Interactables
 
         private void RecordingStopped()
         {
-            _isInteracting = false;
-            _interactingObject = null;
+            if (_isInteracting)
+            {
+                if (_interactingObject.CompareTag("Player"))
+                {
+                    Debug.LogError("Pressure plate is being interacted with by the player when recording stopped");
+                    return;
+                }
+                else
+                {
+                    Debug.LogError("Pressure plate is being interacted with by the Echo Mins when recording stopped");
+                    _isInteracting = false;
+                    _interactingObject = null;
+                    // BUG: [Pressure Plate] might need to call OnEndInteraction here as well
+                }
+            }
         }
 
         private void PlaybackStopped()
