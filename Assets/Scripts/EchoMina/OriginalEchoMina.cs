@@ -29,36 +29,38 @@ namespace EchoMina.Original
         [UsedImplicitly] public event OnStartPlayback StartPlayback;
         public event OnStopPlayback StopPlayback;
 
-        [Header("States")]
-        [SerializeField][ReadOnly] private EchoState state;
+        [Header("States")] [SerializeField] [ReadOnly]
+        private EchoState state;
+
         public static OriginalEchoMina Instance;
 
-        [Header("Movement")]
-        Rigidbody rb;
+        [Header("Movement")] Rigidbody rb;
         [SerializeField] private float _speed = 1f;
         [SerializeField] private float _turnSpeed = 1f;
         [SerializeField, ReadOnly] private float _moveDirection;
         [SerializeField, ReadOnly] private float _turnDirection;
 
-        [Header("Interactions")]
-        [SerializeField] private Interactor _interactor;
+        [Header("Interactions")] [SerializeField]
+        private Interactor _interactor;
 
-        [Header("Recordings")]
-        [SerializeField][Range(float.MinValue, float.MaxValue)] private float _recordFrequency = 0.1f;
-        [SerializeField][ReadOnly] private int _recordIndex;
-        [SerializeField][ReadOnly] private int _interactIndex;
-        [SerializeField][ReadOnly] private Vector3 _startPosition;
-        [SerializeField][ReadOnly] private Quaternion _startRotation;
-        [SerializeField][ReadOnly] private List<Vector3> _positions;
-        [SerializeField][ReadOnly] private List<Quaternion> _rotations;
-        [SerializeField][ReadOnly] private float _interactionTime;
-        [SerializeField][ReadOnly] private List<float> _interactions;
+        [Header("Recordings")] [SerializeField] [Range(float.MinValue, float.MaxValue)]
+        private float _recordFrequency = 0.1f;
+
+        [SerializeField] [ReadOnly] private int _recordIndex;
+        [SerializeField] [ReadOnly] private int _interactIndex;
+        [SerializeField] [ReadOnly] private Vector3 _startPosition;
+        [SerializeField] [ReadOnly] private Quaternion _startRotation;
+        [SerializeField] [ReadOnly] private List<Vector3> _positions;
+        [SerializeField] [ReadOnly] private List<Quaternion> _rotations;
+        [SerializeField] [ReadOnly] private float _interactionTime;
+        [SerializeField] [ReadOnly] private List<float> _interactions;
         [SerializeField] private CinemachineCamera echoCamera;
         [SerializeField] private CinemachineInputAxisController echoInputAxisController;
         private IRecordable[] recordables;
         private IBindable[] bindables;
 
         // Getters and setters
+
         #region Getters And Setters
 
         public EchoState State
@@ -83,14 +85,16 @@ namespace EchoMina.Original
             }
         }
 
-  #endregion
+        #endregion
 
         #region InputMessages
+
         public void OnMove(Vector3 move)
         {
             _moveDirection = move.x;
             _turnDirection = move.y;
         }
+
         #endregion
 
         #region Unity Functions
@@ -147,11 +151,13 @@ namespace EchoMina.Original
                         Despawn();
                     }
                     return;
+
                 case EchoState.Recording:
                     Vector3 move = transform.forward * (_moveDirection * _speed);
                     rb.AddForce(move, ForceMode.Force);
                     rb.AddTorque(transform.up * (_turnDirection * _turnSpeed * Time.fixedDeltaTime));
                     break;
+
                 case EchoState.Playing:
                     if (_recordIndex >= _positions.Count)
                     {
@@ -161,6 +167,7 @@ namespace EchoMina.Original
                     break;
             }
         }
+
         #endregion
 
         public void SaveInteraction(float interactionTime)
@@ -253,10 +260,38 @@ namespace EchoMina.Original
             _interactor.StartRecording();
         }
 
-        public void TogglePlaying()
+        public void TogglePlaying(int value = -1)
         {
+            if (value == 0)
+            {
+                // Inactive -> return
+                if (state is EchoState.Inactive) return;
+                // Recording -> do nothing
+                if (state is EchoState.Recording)
+                {
+                    Debug.LogError("You are trying to stop a playback while recording. If you see this, you messed something up");
+                    CancelInvoke(nameof(RecordSnapshot));
+                    if (StopRecording != null) StopRecording();
+                    return;
+                }
+                // Playing ->
+                if (state is EchoState.Playing)
+                {
+                    Debug.Log("<b><color=red>[ECHOMINA]</color></b> Stopping playback of recorded Echo Mina because we reached the end of the recording");
+                    if (StopPlayback != null) StopPlayback();
+                    Despawn();
+                    return;
+                }
+            }
+            else if (value == 1)
+            {
+                // Inactive -> do nothing
+                if (state is EchoState.Playing) return;
+            }
+
             if (state is EchoState.Recording) // We start playing before stopping recording
             {
+                StateRecording:
                 Debug.LogWarning("[Echo Mina][Playback] Echo Mina was still recording when playback started. Recording stopped and playback started");
                 CancelInvoke(nameof(RecordSnapshot));
                 _recordIndex = 0;
@@ -281,6 +316,7 @@ namespace EchoMina.Original
 
             else if (state is EchoState.Inactive) // We started or stopped playback
             {
+                StateInactive:
                 if (_positions.Count == 0)
                 {
                     Debug.Log("<b><color=yellow>[ECHOMINA]</color></b> No data recorded to play Echo Mina");
@@ -309,10 +345,12 @@ namespace EchoMina.Original
             }
             else
             {
+                StatePlaying:
                 Debug.Log("<b><color=red>[ECHOMINA]</color></b> Stopping playback of recorded Echo Mina because we reached the end of the recording");
                 if (StopPlayback != null) StopPlayback();
                 Despawn();
             }
+
         }
     }
 }

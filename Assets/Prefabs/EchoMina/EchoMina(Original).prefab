@@ -392,8 +392,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  _speed: 5
-  _turnSpeed: 100
+  _speed: 15
+  _turnSpeed: 30
   _moveDirection: 0
   _turnDirection: 0
   _interactor: {fileID: 6046659384336675105}

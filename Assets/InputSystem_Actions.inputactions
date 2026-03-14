@@ -104,6 +104,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "LoadCheckpoint",
+                    "type": "Button",
+                    "id": "440db9fc-d723-4342-9c44-338f4fb8dc8c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -412,6 +421,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "NextSnippet",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "61db3b27-42c0-405f-9b8c-83aa5ab1cfaa",
+                    "path": "<Keyboard>/x",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LoadCheckpoint",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

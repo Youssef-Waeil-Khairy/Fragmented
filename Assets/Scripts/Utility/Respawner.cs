@@ -1,31 +1,35 @@
 using System;
 using System.Collections.Generic;
+using EchoMina.Original;
 using NaughtyAttributes;
+using QuickLoad;
 using UnityEngine;
 
 namespace Utility
 {
     public class Respawner : MonoBehaviour
     {
-        public Transform RespawnPoint;
         [Tag] public List<string> Whitelist = new List<string>();
+        [SerializeField] private bool IsOnMina;
 
         private void OnTriggerEnter(Collider other)
         {
             if (Whitelist.Contains(other.tag))
             {
-                CharacterController characterController = gameObject.GetComponent<CharacterController>();
-                if (characterController)
+                if (IsOnMina)
                 {
-                    characterController.enabled = false;
-                    transform.position = RespawnPoint.position;
-                    transform.rotation = RespawnPoint.rotation;
-                    characterController.enabled = true;
+                    QuickLoader.Instance.LoadCheckpoint();
                 }
                 else
                 {
-                    transform.position = RespawnPoint.position;
-                    transform.rotation = RespawnPoint.rotation;
+                    if (OriginalEchoMina.Instance.State is OriginalEchoMina.EchoState.Recording)
+                    {
+                        OriginalEchoMina.Instance.ToggleRecording(transform.position, transform.rotation);
+                    }
+                    else if (OriginalEchoMina.Instance.State is OriginalEchoMina.EchoState.Playing)
+                    {
+                        OriginalEchoMina.Instance.TogglePlaying(0);
+                    }
                 }
             }
         }

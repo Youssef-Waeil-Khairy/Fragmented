@@ -166,6 +166,15 @@ MonoBehaviour:
     isGlobal: 0
     instanceID: 0
     GUID: 3eeb93f9-ef88-4277-b6d9-d2dda3067c03
+  - note:
+      noteTitle: Quick Load
+      content: Add checkpoint world snapshot and loading
+      style: 0
+      isOpen: 1
+      folderIndex: 0
+    isGlobal: 0
+    instanceID: 0
+    GUID: 831c6d28-c969-4095-9483-624bd2bbb322
   noteFolders:
   - Current Tasks
   - Archived
