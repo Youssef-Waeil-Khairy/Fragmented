@@ -71,7 +71,7 @@ public class StagedObstacle : MonoBehaviour, IRecordable
         }
     }
 
-    private void FixedUpdate()
+    public virtual void FixedUpdate()
     {
         isMoving = rb.linearVelocity.magnitude > 0;
 
@@ -84,7 +84,7 @@ public class StagedObstacle : MonoBehaviour, IRecordable
     }
 
     [Button]
-    public void GoToNextStage()
+    public virtual void GoToNextStage()
     {
         if (isMoving && !canMoveWhileMoving)
         {
@@ -104,7 +104,7 @@ public class StagedObstacle : MonoBehaviour, IRecordable
     }
 
     [Button][UsedImplicitly]
-    public void GoToPreviousStage()
+    public virtual void GoToPreviousStage()
     {
         if (isMoving && !canMoveWhileMoving)
         {
@@ -123,7 +123,7 @@ public class StagedObstacle : MonoBehaviour, IRecordable
         GoToTarget();
     }
 
-    public void GoToStage(int stage)
+    public virtual void GoToStage(int stage)
     {
         if (isMoving && !canMoveWhileMoving)
         {
