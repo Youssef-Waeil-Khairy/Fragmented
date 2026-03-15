@@ -39,6 +39,7 @@ namespace EchoMina.Original
         [SerializeField] private float _turnSpeed = 1f;
         [SerializeField, ReadOnly] private float _moveDirection;
         [SerializeField, ReadOnly] private float _turnDirection;
+        [SerializeField] private float maxSpeed = 5f;
 
         [Header("Interactions")] [SerializeField]
         private Interactor _interactor;
@@ -111,6 +112,7 @@ namespace EchoMina.Original
             }
 
             rb = GetComponent<Rigidbody>();
+            rb.maxLinearVelocity = maxSpeed;
             _interactor = GetComponent<Interactor>();
 
             recordables = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<IRecordable>().ToArray();
@@ -291,7 +293,6 @@ namespace EchoMina.Original
 
             if (state is EchoState.Recording) // We start playing before stopping recording
             {
-                StateRecording:
                 Debug.LogWarning("[Echo Mina][Playback] Echo Mina was still recording when playback started. Recording stopped and playback started");
                 CancelInvoke(nameof(RecordSnapshot));
                 _recordIndex = 0;
@@ -316,7 +317,6 @@ namespace EchoMina.Original
 
             else if (state is EchoState.Inactive) // We started or stopped playback
             {
-                StateInactive:
                 if (_positions.Count == 0)
                 {
                     Debug.Log("<b><color=yellow>[ECHOMINA]</color></b> No data recorded to play Echo Mina");
@@ -345,7 +345,6 @@ namespace EchoMina.Original
             }
             else
             {
-                StatePlaying:
                 Debug.Log("<b><color=red>[ECHOMINA]</color></b> Stopping playback of recorded Echo Mina because we reached the end of the recording");
                 if (StopPlayback != null) StopPlayback();
                 Despawn();

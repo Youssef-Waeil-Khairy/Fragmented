@@ -392,7 +392,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  _speed: 15
+  _speed: 45
   _turnSpeed: 30
   _moveDirection: 0
   _turnDirection: 0
@@ -436,9 +436,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5416fe839034079847accc795559b4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RespawnPoint: {fileID: 0}
   Whitelist:
   - Respawn
+  IsOnMina: 0
 --- !u!65 &2448035396789083401
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -467,7 +467,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6064848917325602390}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 711365663230c5e4596132cf4a9466e1, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

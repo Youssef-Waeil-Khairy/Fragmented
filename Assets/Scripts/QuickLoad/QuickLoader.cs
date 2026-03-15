@@ -57,6 +57,9 @@ namespace QuickLoad
 
         private void OnDrawGizmos()
         {
+            if (quickSavePoint == null) return;
+            if (checkpoints.Count == 0) return;
+
             Color  prevColor = Gizmos.color;
 
             Gizmos.color = Color.blueViolet;
