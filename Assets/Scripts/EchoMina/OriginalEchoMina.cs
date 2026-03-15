@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Interactables;
@@ -40,6 +41,7 @@ namespace EchoMina.Original
         [SerializeField, ReadOnly] private float _moveDirection;
         [SerializeField, ReadOnly] private float _turnDirection;
         [SerializeField] private float maxSpeed = 5f;
+        [SerializeField] private float maxTurnSpeed = 5f;
 
         [Header("Interactions")] [SerializeField]
         private Interactor _interactor;
@@ -112,7 +114,7 @@ namespace EchoMina.Original
             }
 
             rb = GetComponent<Rigidbody>();
-            rb.maxLinearVelocity = maxSpeed;
+            SetMaxSpeed();
             _interactor = GetComponent<Interactor>();
 
             recordables = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<IRecordable>().ToArray();
@@ -128,6 +130,11 @@ namespace EchoMina.Original
             }
 
             Despawn();
+        }
+
+        private void OnEnable()
+        {
+            SetMaxSpeed();
         }
 
         private void OnDestroy()
@@ -158,6 +165,9 @@ namespace EchoMina.Original
                     Vector3 move = transform.forward * (_moveDirection * _speed);
                     rb.AddForce(move, ForceMode.Force);
                     rb.AddTorque(transform.up * (_turnDirection * _turnSpeed * Time.fixedDeltaTime));
+
+                    Debug.Log($"{rb.linearVelocity.magnitude} | {rb.angularVelocity.magnitude}");
+
                     break;
 
                 case EchoState.Playing:
@@ -350,6 +360,13 @@ namespace EchoMina.Original
                 Despawn();
             }
 
+        }
+
+        [Button]
+        public void SetMaxSpeed()
+        {
+            rb.maxLinearVelocity = maxSpeed;
+            rb.maxAngularVelocity = maxTurnSpeed;
         }
     }
 }

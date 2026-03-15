@@ -72,7 +72,7 @@ namespace QuickLoad
             }
 
             Gizmos.color = Color.gold;
-            Gizmos.DrawSphere(checkpoints[loadIndex].position, 0.2f);
+            if (checkpoints[loadIndex] != null) Gizmos.DrawSphere(checkpoints[loadIndex].position, 0.2f);
 
             Gizmos.color = prevColor;
         }

@@ -87,11 +87,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0236ffe2d5b444e583eebcf89515ad82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 45
+  moveSpeed: 50
   turnSpeed: 30
   moveDirection: 0
   turnDirection: 0
   maxSpeed: 3.5
+  maxTurnSpeed: 3
   cinemachineInputAxisController: {fileID: 6587215598781653005}
   playerCamera: {fileID: 2884369257089630960}
   cursorFree: 0
@@ -210,7 +211,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.3
+  m_Radius: 0.2
   m_Height: 1.6
   m_Direction: 1
   m_Center: {x: 0, y: -0.2, z: 0}
@@ -244,8 +245,8 @@ Rigidbody:
   m_GameObject: {fileID: 4583377852656252385}
   serializedVersion: 5
   m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 5
+  m_LinearDamping: 2
+  m_AngularDamping: 10
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}

@@ -25,6 +25,7 @@ namespace PlayerControls
         [Foldout("Movement")][SerializeField] float moveDirection = 0f;
         [Foldout("Movement")][SerializeField] float turnDirection = 0f;
         [Foldout("Movement")][SerializeField] private float maxSpeed;
+        [Foldout("Movement")] [SerializeField] private float maxTurnSpeed;
 
         [Foldout("Camera")][SerializeField] private CinemachineInputAxisController cinemachineInputAxisController;
         [Foldout("Camera")][SerializeField] private CinemachineCamera playerCamera;
@@ -47,6 +48,7 @@ namespace PlayerControls
             //playerInput = GetComponent<PlayerInput>();
             rb  = GetComponent<Rigidbody>();
             rb.maxLinearVelocity = maxSpeed;
+            rb.maxAngularVelocity = maxTurnSpeed;
             LockCursor();
         }
 
@@ -60,6 +62,7 @@ namespace PlayerControls
             Vector3 move = transform.forward * (moveDirection * moveSpeed);
             rb.AddForce(move, ForceMode.Force);
             rb.AddTorque(transform.up * (turnDirection * turnSpeed * Time.fixedDeltaTime));
+
         }
 
         void ToggleCursorFree()
@@ -185,6 +188,13 @@ namespace PlayerControls
         {
             transform.position = snapshotPosition;
             transform.rotation = snapshotRotation;
+        }
+
+        [Button]
+        public void SetMaxSpeed()
+        {
+            rb.maxLinearVelocity = maxSpeed;
+            rb.maxAngularVelocity = maxTurnSpeed;
         }
     }
 }

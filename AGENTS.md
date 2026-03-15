@@ -2,13 +2,13 @@
 - Project name: Fragmented
 - Unity version: Unity 6000.1.14f1
 - Active scene:
-  - Name: Level_Two_Library
+  - Name: Tutorial_Home
   - Tags:
     - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Command, EchoMina, Interactable
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Ground, Water, UI, Interactible, EchoMina, Walls
 - Active game object:
-  - Name: Cylinder.071
-  - Tag: Untagged
-  - Layer: Default
+  - Name: EchoMina(Original)
+  - Tag: EchoMina
+  - Layer: EchoMina
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
