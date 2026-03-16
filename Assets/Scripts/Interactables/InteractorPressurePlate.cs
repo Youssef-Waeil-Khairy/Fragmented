@@ -19,7 +19,10 @@ namespace Interactables
         {
             if (_whitelistTags.Contains(other.tag) && !_isInteracting)
             {
+                #if DEBUG
                 Debug.LogError($"<b><color=yellow>[Interactor][PressurePlate]</color></b> {gameObject.name} has been stepped on by {other.gameObject.name}");
+                #endif
+
                 _interactingObject = other.gameObject;
 
                 OnBeginInteraction?.Invoke();
@@ -31,7 +34,10 @@ namespace Interactables
         {
             if (_isInteracting && other.gameObject == _interactingObject)
             {
+                #if DEBUG
                 Debug.LogError($"<b><color=yellow>[Interactor][PressurePlate]</color></b> {gameObject.name} has been stepped off by {other.gameObject.name}");
+                #endif
+
                 _interactingObject =  null;
                 OnEndInteraction?.Invoke();
                 _isInteracting = false;

@@ -1495,7 +1495,7 @@
     "m_ObjectId": "4753e75ecbb54061a12e93f5769c9ffa",
     "m_Title": "CUtout section",
     "m_Position": {
-        "x": 570.2858276367188,
+        "x": 570.2855834960938,
         "y": 1172.0
     }
 }
@@ -3153,7 +3153,7 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_Value": 0.20000000298023225,
+    "m_Value": 0.10000000149011612,
     "m_FloatType": 0,
     "m_RangeValues": {
         "x": 0.0,
@@ -3732,7 +3732,7 @@
     "m_ObjectId": "efd649f06c294e10a32fcca4a648874a",
     "m_Title": "Base Color",
     "m_Position": {
-        "x": -159.99996948242188,
+        "x": -160.0,
         "y": 598.28564453125
     }
 }

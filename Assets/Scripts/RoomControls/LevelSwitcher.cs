@@ -9,6 +9,7 @@ namespace RoomControls
     {
         [Scene][SerializeField] private int level;
         [Tag][SerializeField] private string allowedTag;
+        public bool IsInterLevelTransition;
 
         private void OnTriggerEnter(Collider other)
         {

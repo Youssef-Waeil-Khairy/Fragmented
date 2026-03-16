@@ -8,7 +8,7 @@
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Ground, Water, UI, Interactible, EchoMina, Walls
 - Active game object:
-  - Name: EchoMina(Original)
-  - Tag: EchoMina
-  - Layer: EchoMina
+  - Name: CTRL_Hole.005
+  - Tag: Untagged
+  - Layer: Walls
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

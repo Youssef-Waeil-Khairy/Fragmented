@@ -166,7 +166,7 @@ namespace EchoMina.Original
                     rb.AddForce(move, ForceMode.Force);
                     rb.AddTorque(transform.up * (_turnDirection * _turnSpeed * Time.fixedDeltaTime));
 
-                    Debug.Log($"{rb.linearVelocity.magnitude} | {rb.angularVelocity.magnitude}");
+                    //Debug.Log($"{rb.linearVelocity.magnitude} | {rb.angularVelocity.magnitude}");
 
                     break;
 
