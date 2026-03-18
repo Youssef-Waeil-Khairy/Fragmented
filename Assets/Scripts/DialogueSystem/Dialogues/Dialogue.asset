@@ -15,13 +15,43 @@ MonoBehaviour:
   DialogueSnippets:
   - SpeakerName: Mina
     HasSpeakerSprite: 0
-    SpeakerSprite: {fileID: 0}
+    SpeakerSprite: {fileID: 21300000, guid: fd007fc9ebfec074ca2c3266a2e2a15d, type: 3}
     HasBackgroundSprite: 0
-    BackgroundSprite: {fileID: 0}
-    Text: Hi, I am mina
+    BackgroundSprite: {fileID: 21300000, guid: cae5d5c948e37614dba255241696dfc7, type: 3}
+    Text: 
   - SpeakerName: Mina
-    HasSpeakerSprite: 0
-    SpeakerSprite: {fileID: 0}
-    HasBackgroundSprite: 0
-    BackgroundSprite: {fileID: 0}
-    Text: Bye, enjoy the tutorial!
+    HasSpeakerSprite: 1
+    SpeakerSprite: {fileID: 21300000, guid: fd007fc9ebfec074ca2c3266a2e2a15d, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 5aba950b40859a6468cb1923d8436c2d, type: 3}
+    Text: '(internal): Same routine. Same coffee. Same clothes. Same everything.'
+  - SpeakerName: Co-Worker
+    HasSpeakerSprite: 1
+    SpeakerSprite: {fileID: 21300000, guid: 005888ede18a58e4db8d069cfa3007cb, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 8c6831239a9189a478a98bee6bbb4b7d, type: 3}
+    Text: '"You coming to the team lunch?"'
+  - SpeakerName: Mina
+    HasSpeakerSprite: 1
+    SpeakerSprite: {fileID: 21300000, guid: fd007fc9ebfec074ca2c3266a2e2a15d, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 8c6831239a9189a478a98bee6bbb4b7d, type: 3}
+    Text: '"I have work."'
+  - SpeakerName: Co-Worker
+    HasSpeakerSprite: 1
+    SpeakerSprite: {fileID: 21300000, guid: 005888ede18a58e4db8d069cfa3007cb, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 8c6831239a9189a478a98bee6bbb4b7d, type: 3}
+    Text: '"It''s a team lunch. For the team. That you''re on."'
+  - SpeakerName: Mina
+    HasSpeakerSprite: 1
+    SpeakerSprite: {fileID: 21300000, guid: fd007fc9ebfec074ca2c3266a2e2a15d, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 8c6831239a9189a478a98bee6bbb4b7d, type: 3}
+    Text: '"SIgh....I wil pass"'
+  - SpeakerName: Mina
+    HasSpeakerSprite: 1
+    SpeakerSprite: {fileID: 21300000, guid: fd007fc9ebfec074ca2c3266a2e2a15d, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: c19f444d09c93594f900e578a4881a70, type: 3}
+    Text: '(looking at phone, distracted): Meeting at 2... or was it 3?'

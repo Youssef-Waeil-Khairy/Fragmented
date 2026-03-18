@@ -409,6 +409,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 0
   allowedTag: 
+  IsInterLevelTransition: 0
 --- !u!1 &119667298
 GameObject:
   m_ObjectHideFlags: 0
@@ -3229,7 +3230,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 90.74695, w: 29.275269}
+  m_margin: {x: 0, y: 0, z: 88.006226, w: 29.275269}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -5062,7 +5063,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 1.0092773, z: 45.41992, w: 25.569824}
+  m_margin: {x: 0, y: 1.0092773, z: 39.078125, w: 25.569824}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -5198,7 +5199,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 165.06857, w: 31.26947}
+  m_margin: {x: 0, y: 0, z: 157.19965, w: 31.26947}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -5360,6 +5361,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 0
   allowedTag: 
+  IsInterLevelTransition: 0
 --- !u!1 &1923670061
 GameObject:
   m_ObjectHideFlags: 0
