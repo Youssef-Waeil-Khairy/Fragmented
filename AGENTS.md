@@ -6,9 +6,9 @@
   - Tags:
     - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Command, EchoMina, Interactable
   - Layers:
-    - Default, TransparentFX, Ignore Raycast, Ground, Water, UI, Interactible, EchoMina, Walls
+    - Default, TransparentFX, Ignore Raycast, Water, UI
 - Active game object:
-  - Name: CTRL_Hole.005
+  - Name: DialogueCanvas
   - Tag: Untagged
-  - Layer: Walls
+  - Layer: UI
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
