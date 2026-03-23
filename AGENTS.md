@@ -4,11 +4,11 @@
 - Active scene:
   - Name: Tutorial_Home
   - Tags:
-    - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Command, EchoMina, Interactable
+    - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Command, EchoMina, Interactable, Stair
   - Layers:
-    - Default, TransparentFX, Ignore Raycast, Water, UI
+    - Default, TransparentFX, Ignore Raycast, Ground, Water, UI, Interactible, EchoMina, Walls, Player, Stairs
 - Active game object:
-  - Name: DialogueCanvas
+  - Name: Text (TMP)
   - Tag: Untagged
   - Layer: UI
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

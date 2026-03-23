@@ -5,6 +5,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using NaughtyAttributes;
+using PlayerControls;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 // ReSharper disable InconsistentNaming
@@ -13,6 +14,7 @@ namespace DialogueSystem
 {
     public class DialogueManager : MonoBehaviour
     {
+        [SerializeField] private bool showOnLevelStart = false;
         [SerializeField] private GameObject DialoguePanel;
         // Speaker name
         [SerializeField] private TMP_Text SpeakerName;
@@ -38,6 +40,20 @@ namespace DialogueSystem
         {
             nextAction = InputSystem.actions.FindAction("NextSnippet");
             nextAction.performed += NextSnippet;
+
+            //GetCurrentSnippet();
+
+            if (!showOnLevelStart)
+            {
+                HideDialogue();
+                PlayerController.Instance.UnlockCursor();
+            }
+            else
+            {
+                ShowDialogue();
+                PlayerController.Instance.LockCursor();
+
+            }
         }
 
         private void OnDisable()

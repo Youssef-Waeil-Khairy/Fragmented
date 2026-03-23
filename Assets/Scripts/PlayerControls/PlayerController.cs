@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics.CodeAnalysis;
 using EchoMina.Original;
 using Interactables;
@@ -62,7 +63,6 @@ namespace PlayerControls
             Vector3 move = transform.forward * (moveDirection * moveSpeed);
             rb.AddForce(move, ForceMode.Force);
             rb.AddTorque(transform.up * (turnDirection * turnSpeed * Time.fixedDeltaTime));
-
         }
 
         void ToggleCursorFree()
@@ -79,14 +79,14 @@ namespace PlayerControls
             }
         }
 
-        void LockCursor()
+        public void LockCursor()
         {
             cursorFree = false;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             cinemachineInputAxisController.enabled = true;
         }
-        void UnlockCursor()
+        public void UnlockCursor()
         {
             cursorFree = true;
             Cursor.lockState = CursorLockMode.Confined;
@@ -196,5 +196,7 @@ namespace PlayerControls
             rb.maxLinearVelocity = maxSpeed;
             rb.maxAngularVelocity = maxTurnSpeed;
         }
+
+
     }
 }

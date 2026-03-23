@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36722238b0204cf0aa52ed6f487fcf02, type: 3}
+  m_Name: Tutorial
+  m_EditorClassIdentifier: 
+  DialogueSnippets:
+  - SpeakerName: Instructor
+    HasSpeakerSprite: 0
+    SpeakerSprite: {fileID: 0}
+    HasBackgroundSprite: 0
+    BackgroundSprite: {fileID: 0}
+    Text: Press TAB to toggle looking around and using your cursor
+  - SpeakerName: Instructor
+    HasSpeakerSprite: 0
+    SpeakerSprite: {fileID: 0}
+    HasBackgroundSprite: 0
+    BackgroundSprite: {fileID: 0}
+    Text: 'Press WS to move forward and backward
+
+      Press AD to turn left and
+      right
+
+      Press E to interact when you see the pop up'
+  - SpeakerName: Instructor
+    HasSpeakerSprite: 0
+    SpeakerSprite: {fileID: 0}
+    HasBackgroundSprite: 0
+    BackgroundSprite: {fileID: 0}
+    Text: 'Press R to begin recording for Echo Mina
+
+      Press R again to finish
+      the recording
+
+      Press P to begin playing back Echo Mina''s recording
+
+      Press
+      P again the stop'
+  - SpeakerName: Instructor
+    HasSpeakerSprite: 0
+    SpeakerSprite: {fileID: 0}
+    HasBackgroundSprite: 0
+    BackgroundSprite: {fileID: 0}
+    Text: 'Hold C to make a quick save. This saves your current position and state
+      of the level
+
+      Hold V to load the last quick save made'

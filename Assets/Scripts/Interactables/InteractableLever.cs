@@ -11,12 +11,13 @@ namespace Interactables
     public class InteractableLever : MonoBehaviour, IInteractable, IBindable
     {
 
+        [SerializeField] private bool isInteracted;
+        [SerializeField] private GameObject previewPanel;
         [SerializeField] private UnityEvent onInteract;
         [SerializeField] private UnityEvent onUnInteract;
         [SerializeField] private UnityEvent onStartPreview;
         [SerializeField] private UnityEvent onStopPreview;
-        [SerializeField] private bool isInteracted;
-        
+
 
     #region IInteractable Methods
 
@@ -50,10 +51,12 @@ namespace Interactables
 
         public void StartPreview()
         {
+            previewPanel.SetActive(true);
             onStartPreview?.Invoke();
         }
         public void StopPreview()
         {
+            previewPanel.SetActive(false);
             onStopPreview?.Invoke();
         }
         public bool IsLockable()

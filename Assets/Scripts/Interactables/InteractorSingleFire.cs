@@ -8,6 +8,7 @@ namespace Interactables
     {
         public UnityEvent OnInteract;
         public Outline PreventOutline;
+        public GameObject PreviewPanel;
 
         private void OnEnable()
         {
@@ -26,10 +27,13 @@ namespace Interactables
         public void StartPreview()
         {
             PreventOutline.enabled = true;
+            PreviewPanel.SetActive(true);
+
         }
         public void StopPreview()
         {
             PreventOutline.enabled = false;
+            PreviewPanel.SetActive(false);
         }
         public bool IsLockable()
         {

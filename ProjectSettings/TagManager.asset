@@ -7,6 +7,7 @@ TagManager:
   - Command
   - EchoMina
   - Interactable
+  - Stair
   layers:
   - Default
   - TransparentFX
@@ -17,8 +18,8 @@ TagManager:
   - Interactible
   - EchoMina
   - Walls
-  - 
-  - 
+  - Player
+  - Stairs
   - 
   - 
   - 

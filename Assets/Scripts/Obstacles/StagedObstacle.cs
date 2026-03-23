@@ -14,14 +14,19 @@ public class StagedObstacle : MonoBehaviour, IRecordable
     private Rigidbody rb;
     public int currentStage = 0;
     private Vector3 targetPosition;
+    private Vector3 moveDirection;
     [SerializeField] private LineRenderer lineRenderer;
-    [SerializeField] private float moveSpeed = 2f;
+    [SerializeField] private float duration;
+    [SerializeField] private float maxSpeed = 2f;
+    [SerializeField] private AnimationCurve speedCurve;
+    private float timer;
     [SerializeField] private bool movingForward = true;
     [SerializeField] private float errorMargin = 0.1f;
-    private bool isMoving = false;
+    [SerializeField][ReadOnly] private bool isMoving = false;
+    [SerializeField][ReadOnly] private bool isMovingToTarget = false;
     [SerializeField] private bool canMoveWhileMoving = true;
-    [SerializeField] private List<UnityEvent> preMoveEvents;
-    [SerializeField] private List<UnityEvent> events;
+    [Foldout("Events")][SerializeField] private List<UnityEvent> preMoveEvents;
+    [Foldout("Events")][SerializeField] private List<UnityEvent> events;
     [SerializeField] private bool drawGizmos = true;
 
     [Foldout("Snapshot")][SerializeField] private int snapshotStage = 0;
@@ -69,17 +74,30 @@ public class StagedObstacle : MonoBehaviour, IRecordable
             events.Add(null);
             goto EventsSizeCheck;
         }
+
+        timer = 0f;
     }
 
     public virtual void FixedUpdate()
     {
         isMoving = rb.linearVelocity.magnitude > 0;
 
+        if (!isMovingToTarget) return;
+
         if (Vector3.Distance(transform.position, targetPosition) <= errorMargin)
         {
-            rb.linearVelocity = Vector3.zero;
-            transform.position = targetPosition; // Snap to target position
+            isMovingToTarget = false;
+            rb.MovePosition(targetPosition);
             events[currentStage]?.Invoke();
+            Debug.Log($"{gameObject.name} at target stage");
+        }
+        else
+        {
+            timer += Time.fixedDeltaTime;
+            float time = timer / duration;
+            float curveValue = speedCurve.Evaluate(time);
+            float speed = math.lerp(0f, maxSpeed, curveValue);
+            rb.MovePosition(transform.position + moveDirection * (speed * Time.fixedDeltaTime));
         }
     }
 
@@ -137,8 +155,10 @@ public class StagedObstacle : MonoBehaviour, IRecordable
     private void GoToTarget()
     {
         targetPosition = lineRenderer.GetPosition(currentStage);
-        rb.linearVelocity = Vector3.zero;
-        rb.AddForce((targetPosition - transform.position).normalized * moveSpeed, ForceMode.VelocityChange);
+        timer = 0f;
+        isMovingToTarget = true;
+
+        moveDirection = (targetPosition - transform.position).normalized;
 
         preMoveEvents[currentStage]?.Invoke();
     }

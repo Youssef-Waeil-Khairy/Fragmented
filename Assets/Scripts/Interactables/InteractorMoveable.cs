@@ -16,6 +16,7 @@ namespace Interactables
         [SerializeField] private Quaternion startingRotation;
         [SerializeField] private bool isPickedUp = false;
         [SerializeField] private Outline outline;
+        [SerializeField] private GameObject previewPanel;
         private Interactor _interactor;
         [SerializeField] private bool isLocked = false;
 
@@ -48,6 +49,7 @@ namespace Interactables
             transform.SetParent(interactor.AttachingTransform);
 
             isPickedUp = true;
+            StopPreview();
         }
 
         private void DropObject(Interactor interactor)
@@ -62,6 +64,7 @@ namespace Interactables
             transform.SetParent(startingTransform);
 
             Unlock(interactor);
+            StartPreview();
         }
 
         [Button][UsedImplicitly]
@@ -87,13 +90,13 @@ namespace Interactables
             {
                 return true;
             }
-            
+
             // if we are picked up the interactor needs to be the same as our current one
             if (isPickedUp && interactor == _interactor)
             {
                 return true;
             }
-            
+
             Debug.Log($"{gameObject.name} is already picked up by {_interactor.gameObject.name}");
             return false;
         }
@@ -114,11 +117,13 @@ namespace Interactables
         {
             Debug.Log($"<b><color=green>[Interactions][Moveable Objects][Preview]</color></b> Preview started for {gameObject.name}");
             outline.enabled = true;
+            previewPanel.SetActive(true);
         }
         public void StopPreview()
         {
             Debug.Log($"<b><color=red>[Interactions][Moveable Objects][Preview]</color></b> Preview ended for {gameObject.name}");
             if (outline) outline.enabled = false;
+            previewPanel.SetActive(false);
         }
         public bool IsLockable()
         {
@@ -145,7 +150,7 @@ namespace Interactables
         }
 
   #endregion
-        
+
         #region IRecordable
 
         public void TakeSnapshot()
@@ -153,7 +158,7 @@ namespace Interactables
             print($"[Echo Mina][Recording] Taking snapshot of {gameObject.name}");
             snapshotParentTransform = transform.parent;
             snapshotTransform = transform;
-            
+
             startingPosition = transform.position;
             startingRotation = transform.rotation;
         }
