@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36722238b0204cf0aa52ed6f487fcf02, type: 3}
+  m_Name: Preasure Plate Tutorial
+  m_EditorClassIdentifier: 
+  DialogueSnippets:
+  - SpeakerName: Mina
+    HasSpeakerSprite: 0
+    SpeakerSprite: {fileID: 0}
+    HasBackgroundSprite: 0
+    BackgroundSprite: {fileID: 0}
+    Text: Press R to summon echo mina
+  - SpeakerName: Mina
+    HasSpeakerSprite: 0
+    SpeakerSprite: {fileID: 0}
+    HasBackgroundSprite: 0
+    BackgroundSprite: {fileID: 0}
+    Text: While in Echo state, stand on the pressure plate
+  - SpeakerName: Mina
+    HasSpeakerSprite: 0
+    SpeakerSprite: {fileID: 0}
+    HasBackgroundSprite: 0
+    BackgroundSprite: {fileID: 0}
+    Text: Press R to exit the echo state
+  - SpeakerName: Mina
+    HasSpeakerSprite: 0
+    SpeakerSprite: {fileID: 0}
+    HasBackgroundSprite: 0
+    BackgroundSprite: {fileID: 0}
+    Text: Press P to call back echo mina
+  - SpeakerName: Mina
+    HasSpeakerSprite: 0
+    SpeakerSprite: {fileID: 0}
+    HasBackgroundSprite: 0
+    BackgroundSprite: {fileID: 0}
+    Text: While Echo mina stadns on preusre plate, Exit her room
