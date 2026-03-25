@@ -1,5 +1,6 @@
 using System;
 using EchoMina.Original;
+using QuickLoad;
 using Unity.VisualScripting.FullSerializer;
 
 namespace Interactables
@@ -13,6 +14,8 @@ namespace Interactables
         {
             OriginalEchoMina.Instance.StartRecording += TakeSnapshot;
             OriginalEchoMina.Instance.StopRecording += LoadSnapshot;
+            QuickLoader.Instance.CheckpointSave += TakeCheckpointSnapshot;
+            QuickLoader.Instance.CheckpointLoad += LoadCheckpointSnapshot;
         }
 
         /// <summary>
@@ -22,6 +25,8 @@ namespace Interactables
         {
             OriginalEchoMina.Instance.StartRecording -= TakeSnapshot;
             OriginalEchoMina.Instance.StopRecording -= LoadSnapshot;
+            QuickLoader.Instance.CheckpointSave -= TakeCheckpointSnapshot;
+            QuickLoader.Instance.CheckpointLoad -= LoadCheckpointSnapshot;
         }
 
         /// <summary>
@@ -30,8 +35,18 @@ namespace Interactables
         public void TakeSnapshot();
 
         /// <summary>
+        /// Takes a snapshot of the object's state for the checkpoint/quick save
+        /// </summary>
+        public void TakeCheckpointSnapshot();
+
+        /// <summary>
         /// Resets all the information when the recording stops so that it returns o how it was when we started recording
         /// </summary>
         public void LoadSnapshot();
+
+        /// <summary>
+        /// Loads the snapshot for the checkpoint or quick save/load
+        /// </summary>
+        public void LoadCheckpointSnapshot();
     }
 }

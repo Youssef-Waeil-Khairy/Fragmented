@@ -34,6 +34,8 @@ namespace PlayerControls
 
         [Foldout("Snapshot")][SerializeField] private Vector3 snapshotPosition;
         [Foldout("Snapshot")][SerializeField] private Quaternion snapshotRotation;
+        [Foldout("Snapshot")][SerializeField] private Vector3 checkpointSnapshotPosition;
+        [Foldout("Snapshot")][SerializeField] private Quaternion checkpointSnapshotRotation;
 
         public void Start()
         {
@@ -55,7 +57,7 @@ namespace PlayerControls
 
         private void FixedUpdate()
         {
-            if (OriginalEchoMina.Instance.State is OriginalEchoMina.EchoState.Recording)
+            if (OriginalEchoMina.Instance.State is OriginalEchoMina.EchoState.Recording || cursorFree)
             {
                 return;
             }
@@ -67,6 +69,8 @@ namespace PlayerControls
 
         void ToggleCursorFree()
         {
+            if (OriginalEchoMina.Instance.State is OriginalEchoMina.EchoState.Recording) return;
+
             cursorFree = !cursorFree;
 
             if (cursorFree)
@@ -106,6 +110,8 @@ namespace PlayerControls
         [UsedImplicitly]
         void OnMove(InputValue value)
         {
+            if (cursorFree) return;
+
             Vector2 inputDirection = value.Get<Vector2>();
 
             // Block move inputs to main Mina if we are recording
@@ -143,6 +149,8 @@ namespace PlayerControls
         [UsedImplicitly]
         void OnMinaPlayback(InputValue value)
         {
+            if (cursorFree) return;
+
             OriginalEchoMina.Instance.TogglePlaying();
             if (OriginalEchoMina.Instance.State is OriginalEchoMina.EchoState.Playing)
             {
@@ -154,6 +162,8 @@ namespace PlayerControls
         [UsedImplicitly]
         void OnLoadCheckpoint(InputValue value)
         {
+            if (cursorFree) return;
+
             if (value.isPressed)
             {
                 QuickLoader.Instance.LoadCheckpoint();
@@ -163,6 +173,8 @@ namespace PlayerControls
         [UsedImplicitly]
         void OnQuickLoad(InputValue value)
         {
+            if (cursorFree) return;
+
             if (value.isPressed)
             {
                 Debug.Log("Quick Load");
@@ -173,6 +185,8 @@ namespace PlayerControls
         [UsedImplicitly]
         void OnQuickSave(InputValue value)
         {
+            if (cursorFree) return;
+
             if (value.isPressed)
             {
                 Debug.Log("Quick Save");
@@ -184,10 +198,20 @@ namespace PlayerControls
             snapshotPosition = transform.position;
             snapshotRotation = transform.rotation;
         }
+        public void TakeCheckpointSnapshot()
+        {
+            checkpointSnapshotPosition = transform.position;
+            checkpointSnapshotRotation = transform.rotation;
+        }
         public void LoadSnapshot()
         {
             transform.position = snapshotPosition;
             transform.rotation = snapshotRotation;
+        }
+        public void LoadCheckpointSnapshot()
+        {
+            transform.position = checkpointSnapshotPosition;
+            transform.rotation = checkpointSnapshotRotation;
         }
 
         [Button]

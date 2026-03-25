@@ -20,11 +20,10 @@ namespace Interactables
         private Interactor _interactor;
         [SerializeField] private bool isLocked = false;
 
-        [BoxGroup("Snapshot")] [SerializeField]
-        private Transform snapshotParentTransform;
-
-        [BoxGroup("Snapshot")] [SerializeField]
-        private Transform snapshotTransform;
+        [BoxGroup("Snapshot")] [SerializeField] private Transform snapshotParentTransform;
+        [BoxGroup("Snapshot")] [SerializeField] private Transform snapshotTransform;
+        [BoxGroup("Snapshot")] [SerializeField] private Transform checkpointSnapshotParentTransform;
+        [BoxGroup("Snapshot")] [SerializeField] private Transform checkpointSnapshotTransform;
 
         void OnEnable()
         {
@@ -155,21 +154,30 @@ namespace Interactables
 
         public void TakeSnapshot()
         {
-            print($"[Echo Mina][Recording] Taking snapshot of {gameObject.name}");
             snapshotParentTransform = transform.parent;
             snapshotTransform = transform;
 
             startingPosition = transform.position;
             startingRotation = transform.rotation;
         }
+        public void TakeCheckpointSnapshot()
+        {
+            checkpointSnapshotParentTransform = transform.parent;
+            checkpointSnapshotTransform = transform;
+        }
         public void LoadSnapshot()
         {
-            print($"[Echo Mina][Recording] Loading snapshot for {gameObject.name}");
             transform.SetParent(snapshotParentTransform);
             transform.position = startingPosition;
             transform.rotation = startingRotation;
         }
+        public void LoadCheckpointSnapshot()
+        {
+            transform.SetParent(checkpointSnapshotParentTransform);
+            transform.position = checkpointSnapshotTransform.position;
+            transform.rotation = checkpointSnapshotTransform.rotation;
+        }
 
-  #endregion
+        #endregion
     }
 }

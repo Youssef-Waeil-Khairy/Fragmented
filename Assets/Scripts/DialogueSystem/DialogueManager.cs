@@ -15,6 +15,7 @@ namespace DialogueSystem
     public class DialogueManager : MonoBehaviour
     {
         [SerializeField] private bool showOnLevelStart = false;
+        [SerializeField] private bool lockCursorInDialogue = true;
         [SerializeField] private GameObject DialoguePanel;
         // Speaker name
         [SerializeField] private TMP_Text SpeakerName;
@@ -40,19 +41,17 @@ namespace DialogueSystem
         {
             nextAction = InputSystem.actions.FindAction("NextSnippet");
             nextAction.performed += NextSnippet;
+        }
 
-            //GetCurrentSnippet();
-
+        private void Start()
+        {
             if (!showOnLevelStart)
             {
                 HideDialogue();
-                PlayerController.Instance.UnlockCursor();
             }
             else
             {
                 ShowDialogue();
-                PlayerController.Instance.LockCursor();
-
             }
         }
 
@@ -85,6 +84,8 @@ namespace DialogueSystem
         [Button]
         public void ShowDialogue()
         {
+            if (lockCursorInDialogue) PlayerController.Instance.UnlockCursor();
+
             DialoguePanel.SetActive(true);
             CurrentSnippet = Dialogue.DialogueSnippets[DialogueIndex];
             UpdateUI();
@@ -94,6 +95,8 @@ namespace DialogueSystem
         [Button]
         public void HideDialogue()
         {
+            if (lockCursorInDialogue) PlayerController.Instance.LockCursor();
+
             DialoguePanel.SetActive(false);
         }
 

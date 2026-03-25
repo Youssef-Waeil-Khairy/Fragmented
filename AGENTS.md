@@ -8,7 +8,7 @@
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Ground, Water, UI, Interactible, EchoMina, Walls, Player, Stairs
 - Active game object:
-  - Name: Plane.008
+  - Name: Upper Floor Floor
   - Tag: Untagged
-  - Layer: Walls
+  - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

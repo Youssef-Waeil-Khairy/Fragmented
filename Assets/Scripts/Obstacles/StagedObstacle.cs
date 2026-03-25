@@ -30,6 +30,7 @@ public class StagedObstacle : MonoBehaviour, IRecordable
     [SerializeField] private bool drawGizmos = true;
 
     [Foldout("Snapshot")][SerializeField] private int snapshotStage = 0;
+    [Foldout("Snapshot")][SerializeField] private int checkpointSnapshotStage = 0;
 
     public bool IsMoving
     {
@@ -218,10 +219,20 @@ public class StagedObstacle : MonoBehaviour, IRecordable
     {
         snapshotStage = currentStage;
     }
+    public void TakeCheckpointSnapshot()
+    {
+        checkpointSnapshotStage = currentStage;
+    }
     public void LoadSnapshot()
     {
         targetPosition = lineRenderer.GetPosition(snapshotStage);
         transform.position = targetPosition;
         currentStage = snapshotStage;
+    }
+    public void LoadCheckpointSnapshot()
+    {
+        targetPosition = lineRenderer.GetPosition(checkpointSnapshotStage);
+        transform.position = targetPosition;
+        currentStage = checkpointSnapshotStage;
     }
 }

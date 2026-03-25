@@ -40,15 +40,16 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3527509656408764565}
+  - component: {fileID: 5705918881453248200}
   - component: {fileID: 883346794724088767}
   - component: {fileID: 4693985011188660579}
   - component: {fileID: 7122641883725677383}
-  - component: {fileID: 5705918881453248200}
   - component: {fileID: 3300511215796750327}
   - component: {fileID: 7202005059351573423}
   - component: {fileID: 6791672363379826751}
   - component: {fileID: 6888464894120266942}
   - component: {fileID: 8553967550618334529}
+  - component: {fileID: 2122927724188418564}
   m_Layer: 9
   m_Name: Mina
   m_TagString: Player
@@ -75,6 +76,19 @@ Transform:
   - {fileID: 8867864332500461574}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5705918881453248200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4583377852656252385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 229a2e5a0073a4117afc017c66e213cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GUID: 831c6d28-c969-4095-9483-624bd2bbb322
 --- !u!114 &883346794724088767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,6 +112,8 @@ MonoBehaviour:
   cursorFree: 0
   snapshotPosition: {x: 0, y: 0, z: 0}
   snapshotRotation: {x: 0, y: 0, z: 0, w: 0}
+  checkpointSnapshotPosition: {x: 0, y: 0, z: 0}
+  checkpointSnapshotRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &4693985011188660579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,19 +145,6 @@ MonoBehaviour:
   Whitelist:
   - Respawn
   IsOnMina: 1
---- !u!114 &5705918881453248200
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4583377852656252385}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 229a2e5a0073a4117afc017c66e213cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GUID: 831c6d28-c969-4095-9483-624bd2bbb322
 --- !u!114 &3300511215796750327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,7 +226,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
@@ -258,6 +261,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &2122927724188418564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4583377852656252385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 4
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &7304531934226083275
 GameObject:
   m_ObjectHideFlags: 0

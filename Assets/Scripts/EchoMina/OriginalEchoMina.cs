@@ -46,8 +46,11 @@ namespace EchoMina.Original
         [Header("Interactions")] [SerializeField]
         private Interactor _interactor;
 
-        [Header("Recordings")] [SerializeField] [Range(float.MinValue, float.MaxValue)]
-        private float _recordFrequency = 0.1f;
+        [Foldout("Recordings")][SerializeField][Range(float.MinValue, float.MaxValue)] private float _recordFrequency = 0.1f;
+        [Foldout("Recordings")][SerializeField][Range(float.MinValue, 30f)] private float _recordingTimeout = 10f;
+        [Foldout("Recordings")][SerializeField][Range(float.MinValue, 30f)] private float _recordingTimeoutWarning = 8f;
+        [Foldout("Recordings")][SerializeField] private GameObject _RecordingWarning;
+        [Foldout("Recordings")][SerializeField][ProgressBar(10f, EColor.Red)][ReadOnly] private float _recordingTimer;
 
         [SerializeField] [ReadOnly] private int _recordIndex;
         [SerializeField] [ReadOnly] private int _interactIndex;
@@ -162,6 +165,18 @@ namespace EchoMina.Original
                     return;
 
                 case EchoState.Recording:
+                    _recordingTimer += Time.fixedDeltaTime;
+                    if (_recordingTimer >= _recordingTimeoutWarning)
+                    {
+                        _RecordingWarning.SetActive(true);
+
+                        if (_recordingTimer >= _recordingTimeout)
+                        {
+                            ToggleRecording(transform.position, transform.rotation);
+                        }
+
+                    }
+
                     Vector3 move = transform.forward * (_moveDirection * _speed);
                     rb.AddForce(move, ForceMode.Force);
                     rb.AddTorque(transform.up * (_turnDirection * _turnSpeed * Time.fixedDeltaTime));
@@ -228,10 +243,13 @@ namespace EchoMina.Original
                 state = EchoState.Recording;
 
                 Spawn(position, rotation);
+
+                _recordingTimer = 0f;
                 _positions.Clear();
                 _rotations.Clear();
                 _interactions.Clear();
                 InvokeRepeating(nameof(RecordSnapshot), _recordFrequency, _recordFrequency);
+
                 if (StartRecording != null) StartRecording();
             }
             else if (state is EchoState.Recording)
@@ -255,6 +273,7 @@ namespace EchoMina.Original
 
             echoCamera.enabled = false;
             echoInputAxisController.enabled = false;
+            _RecordingWarning.SetActive(false);
             gameObject.SetActive(false);
         }
 
