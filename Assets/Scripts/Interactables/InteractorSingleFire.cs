@@ -6,7 +6,7 @@ namespace Interactables
 {
     public class InteractorSingleFire : MonoBehaviour,  IInteractable
     {
-        public UnityEvent OnInteract;
+        public UnityEvent OnInteract, OnPreviewStart,  OnPreviewEnd;
         public Outline PreventOutline;
         public GameObject PreviewPanel;
 
@@ -28,12 +28,14 @@ namespace Interactables
         {
             PreventOutline.enabled = true;
             PreviewPanel.SetActive(true);
+            OnPreviewStart?.Invoke();
 
         }
         public void StopPreview()
         {
             PreventOutline.enabled = false;
             PreviewPanel.SetActive(false);
+            OnPreviewEnd?.Invoke();
         }
         public bool IsLockable()
         {

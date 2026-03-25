@@ -8,7 +8,7 @@
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Ground, Water, UI, Interactible, EchoMina, Walls, Player, Stairs
 - Active game object:
-  - Name: Text (TMP)
+  - Name: Plane.008
   - Tag: Untagged
-  - Layer: UI
+  - Layer: Walls
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
