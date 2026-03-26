@@ -4,6 +4,7 @@ using System.Linq;
 using Interactables;
 using JetBrains.Annotations;
 using NaughtyAttributes;
+using PlayerControls;
 using Unity.Cinemachine;
 using UnityEngine;
 using Utility;
@@ -172,7 +173,8 @@ namespace EchoMina.Original
 
                         if (_recordingTimer >= _recordingTimeout)
                         {
-                            ToggleRecording(transform.position, transform.rotation);
+                            //ToggleRecording(transform.position, transform.rotation);
+                            PlayerController.Instance.ToggleRecording();
                         }
 
                     }

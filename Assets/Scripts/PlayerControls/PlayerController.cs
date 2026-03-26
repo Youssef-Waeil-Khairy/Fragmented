@@ -129,6 +129,11 @@ namespace PlayerControls
         [UsedImplicitly]
         void OnMinaRecord(InputValue value)
         {
+            ToggleRecording();
+        }
+
+        public void ToggleRecording()
+        {
             if (cursorFree) return;
 
             //characterController.enabled = !characterController.enabled;
