@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 36722238b0204cf0aa52ed6f487fcf02, type: 3}
-  m_Name: Preasure Plate Tutorial
+  m_Name: PreasurePlate_Tutorial
   m_EditorClassIdentifier: 
   DialogueSnippets:
   - SpeakerName: Mina
@@ -18,28 +18,44 @@ MonoBehaviour:
     SpeakerSprite: {fileID: 0}
     HasBackgroundSprite: 0
     BackgroundSprite: {fileID: 0}
-    Text: Press R to summon echo mina
+    Text: Any colored plate placed on the ground is usally a presure plate
   - SpeakerName: Mina
     HasSpeakerSprite: 0
     SpeakerSprite: {fileID: 0}
     HasBackgroundSprite: 0
     BackgroundSprite: {fileID: 0}
-    Text: While in Echo state, stand on the pressure plate
+    Text: Pressure plates trigger objects as long as pressure is applied. This includes
+      Mina, echo mina and moavble objects
   - SpeakerName: Mina
     HasSpeakerSprite: 0
     SpeakerSprite: {fileID: 0}
     HasBackgroundSprite: 0
     BackgroundSprite: {fileID: 0}
-    Text: Press R to exit the echo state
+    Text: Press R to summon Echo mina
   - SpeakerName: Mina
     HasSpeakerSprite: 0
     SpeakerSprite: {fileID: 0}
     HasBackgroundSprite: 0
     BackgroundSprite: {fileID: 0}
-    Text: Press P to call back echo mina
+    Text: Stand on the presure plate while in Echo mina form. Wait fro the obstacle
+      to be lifted
   - SpeakerName: Mina
     HasSpeakerSprite: 0
     SpeakerSprite: {fileID: 0}
     HasBackgroundSprite: 0
     BackgroundSprite: {fileID: 0}
-    Text: While Echo mina stands on preusre plate, Exit her room as Mina
+    Text: Stand on the presure plate while in Echo mina form. Wait for the obstacle
+      to be lifted
+  - SpeakerName: Mina
+    HasSpeakerSprite: 0
+    SpeakerSprite: {fileID: 0}
+    HasBackgroundSprite: 0
+    BackgroundSprite: {fileID: 0}
+    Text: Exist echo mina state by pressing R again
+  - SpeakerName: Mina
+    HasSpeakerSprite: 0
+    SpeakerSprite: {fileID: 0}
+    HasBackgroundSprite: 0
+    BackgroundSprite: {fileID: 0}
+    Text: 'As mina go to the blue wall and press P to summon Echo Mina Again. To
+      continue '

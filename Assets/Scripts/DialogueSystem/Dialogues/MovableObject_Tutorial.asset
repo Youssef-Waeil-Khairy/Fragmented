@@ -10,55 +10,36 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 36722238b0204cf0aa52ed6f487fcf02, type: 3}
-  m_Name: Tutorial
+  m_Name: MovableObject_Tutorial
   m_EditorClassIdentifier: 
   DialogueSnippets:
-  - SpeakerName: Instructor
+  - SpeakerName: Mina
     HasSpeakerSprite: 0
     SpeakerSprite: {fileID: 0}
     HasBackgroundSprite: 0
     BackgroundSprite: {fileID: 0}
-    Text: Press TAB to toggle looking around and using your cursor
-  - SpeakerName: Instructor
+    Text: Mina can lift objects
+  - SpeakerName: Mina
     HasSpeakerSprite: 0
     SpeakerSprite: {fileID: 0}
     HasBackgroundSprite: 0
     BackgroundSprite: {fileID: 0}
-    Text: 'Press WS to move forward and backward
-
-      Press AD to turn left and
-      right
-
-      Press E to interact when you see the pop up'
-  - SpeakerName: Instructor
+    Text: Press E to interact with the orange box.
+  - SpeakerName: Mina
     HasSpeakerSprite: 0
     SpeakerSprite: {fileID: 0}
     HasBackgroundSprite: 0
     BackgroundSprite: {fileID: 0}
-    Text: 'Press R to begin recording for Echo Mina
-
-      Press R again to finish
-      the recording
-
-      Press P to begin playing back Echo Mina''s recording
-
-      Press
-      P again the stop'
-  - SpeakerName: Instructor
+    Text: Lift the orange box to the orange presure plate.
+  - SpeakerName: Mina
     HasSpeakerSprite: 0
     SpeakerSprite: {fileID: 0}
     HasBackgroundSprite: 0
     BackgroundSprite: {fileID: 0}
-    Text: 'ECHO MINA CAN ONLY EXIST FOR A COUPLE FO SECONDS
-
-      A PURPLE CIRCLE
-      WILL APPEAR WHEN YOUR TIME IS ALMOST UP'
-  - SpeakerName: Instructor
+    Text: This opens the gate
+  - SpeakerName: Mina
     HasSpeakerSprite: 0
     SpeakerSprite: {fileID: 0}
     HasBackgroundSprite: 0
     BackgroundSprite: {fileID: 0}
-    Text: 'Hold C to make a quick save. This saves your current position and state
-      of the level
-
-      Hold V to load the last quick save made'
+    Text: Now head inside the home, and go to the basement
