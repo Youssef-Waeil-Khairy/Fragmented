@@ -41,7 +41,7 @@ namespace QuickLoad
 
             if (OriginalEchoMina.Instance.State is OriginalEchoMina.EchoState.Recording)
             {
-                OriginalEchoMina.Instance.ToggleRecording(PlayerController.Instance.transform.position, PlayerController.Instance.transform.rotation);
+                OriginalEchoMina.Instance.ToggleRecording();
             }
             else if (OriginalEchoMina.Instance.State is OriginalEchoMina.EchoState.Playing)
             {
@@ -58,7 +58,7 @@ namespace QuickLoad
 
             if (OriginalEchoMina.Instance.State is OriginalEchoMina.EchoState.Recording)
             {
-                OriginalEchoMina.Instance.ToggleRecording(PlayerController.Instance.transform.position, PlayerController.Instance.transform.rotation);
+                OriginalEchoMina.Instance.ToggleRecording();
             }
             else if (OriginalEchoMina.Instance.State is OriginalEchoMina.EchoState.Playing)
             {

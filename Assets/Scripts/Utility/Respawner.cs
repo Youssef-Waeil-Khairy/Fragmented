@@ -24,7 +24,7 @@ namespace Utility
                 {
                     if (OriginalEchoMina.Instance.State is OriginalEchoMina.EchoState.Recording)
                     {
-                        OriginalEchoMina.Instance.ToggleRecording(transform.position, transform.rotation);
+                        OriginalEchoMina.Instance.Despawn();
                     }
                     else if (OriginalEchoMina.Instance.State is OriginalEchoMina.EchoState.Playing)
                     {

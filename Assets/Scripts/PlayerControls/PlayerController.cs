@@ -137,8 +137,13 @@ namespace PlayerControls
             if (cursorFree) return;
 
             //characterController.enabled = !characterController.enabled;
-            Debug.Log($"position: {transform.position}, rotation: {transform.rotation}");
-            OriginalEchoMina.Instance.ToggleRecording(transform.position, transform.rotation);
+            //Debug.Log($"position: {transform.position}, rotation: {transform.rotation}");
+
+            OriginalEchoMina.Instance.transform.position = transform.position;
+            OriginalEchoMina.Instance.transform.rotation = transform.rotation;
+
+            OriginalEchoMina.Instance.ToggleRecording();
+            
             if (OriginalEchoMina.Instance.State is not OriginalEchoMina.EchoState.Recording)
             {
                 playerCamera.enabled = true;

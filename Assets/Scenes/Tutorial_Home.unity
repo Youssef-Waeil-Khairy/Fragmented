@@ -503,7 +503,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3527509656408764565, guid: 1db0bcc4edb713c46be7f54718df9be6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.37
+      value: -1.89
       objectReference: {fileID: 0}
     - target: {fileID: 3527509656408764565, guid: 1db0bcc4edb713c46be7f54718df9be6, type: 3}
       propertyPath: m_LocalRotation.w
@@ -667,7 +667,7 @@ Transform:
   m_GameObject: {fileID: 687187133}
   serializedVersion: 2
   m_LocalRotation: {x: 0.106264055, y: 0, z: 0, w: 0.994338}
-  m_LocalPosition: {x: 0, y: 1.9056131, z: -9.241234}
+  m_LocalPosition: {x: 0, y: 1.9056131, z: -8.761234}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12304,7 +12304,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3165675276197059476, guid: 0bd7b9a101f8cd846a52b3b29287fc51, type: 3}
       propertyPath: SnippetEvents.Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5794322275354725111, guid: 0bd7b9a101f8cd846a52b3b29287fc51, type: 3}
       propertyPath: m_Pivot.x

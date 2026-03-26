@@ -31,8 +31,7 @@ namespace EchoMina.Original
         [UsedImplicitly] public event OnStartPlayback StartPlayback;
         public event OnStopPlayback StopPlayback;
 
-        [Header("States")] [SerializeField] [ReadOnly]
-        private EchoState state;
+        [Header("States")] [SerializeField] private EchoState state;
 
         public static OriginalEchoMina Instance;
 
@@ -55,8 +54,6 @@ namespace EchoMina.Original
 
         [SerializeField] [ReadOnly] private int _recordIndex;
         [SerializeField] [ReadOnly] private int _interactIndex;
-        [SerializeField] [ReadOnly] private Vector3 _startPosition;
-        [SerializeField] [ReadOnly] private Quaternion _startRotation;
         [SerializeField] [ReadOnly] private List<Vector3> _positions;
         [SerializeField] [ReadOnly] private List<Quaternion> _rotations;
         [SerializeField] [ReadOnly] private float _interactionTime;
@@ -106,7 +103,7 @@ namespace EchoMina.Original
 
         #region Unity Functions
 
-        private void Awake()
+        private void Start()
         {
             if (Instance == null)
             {
@@ -116,6 +113,8 @@ namespace EchoMina.Original
             {
                 Destroy(gameObject);
             }
+
+            state = EchoState.Inactive;
 
             rb = GetComponent<Rigidbody>();
             SetMaxSpeed();
@@ -133,12 +132,20 @@ namespace EchoMina.Original
                 bindable.BindObject();
             }
 
-            Despawn();
+            transform.position = PlayerController.Instance.transform.position;
+
+            //ToggleRecording();
+            //ToggleRecording();
+
+            //Despawn();
         }
 
         private void OnEnable()
         {
-            SetMaxSpeed();
+            if (PlayerController.Instance != null)
+            {
+                transform.position = PlayerController.Instance.transform.position;
+            }
         }
 
         private void OnDestroy()
@@ -237,14 +244,14 @@ namespace EchoMina.Original
             }
         }
 
-        public void ToggleRecording(Vector3 position, Quaternion rotation)
+        public void ToggleRecording()
         {
             if (state is EchoState.Inactive or EchoState.Playing)
             {
                 Debug.Log("[Echo Mina][Recording] Echo Mina is recording...");
-                state = EchoState.Recording;
+                Spawn();
 
-                Spawn(position, rotation);
+                state = EchoState.Recording;
 
                 _recordingTimer = 0f;
                 _positions.Clear();
@@ -257,19 +264,27 @@ namespace EchoMina.Original
             else if (state is EchoState.Recording)
             {
                 Debug.Log("[Echo Mina][Recording] Echo Mina is no longer recording...");
-                CancelInvoke(nameof(RecordSnapshot));
-                CancelInvoke(nameof(LoadSnapshot));
-                CancelInvoke(nameof(LoadInteraction));
-                if (StopRecording != null) StopRecording();
+
                 Despawn();
             }
         }
 
-        private void Despawn()
+        public void Despawn()
         {
             Debug.Log("<b><color=red>[ECHOMINA]</color></b> Despawning Echo Mina");
 
+            if (state is EchoState.Recording)
+            {
+                CancelInvoke(nameof(RecordSnapshot));
+                CancelInvoke(nameof(LoadSnapshot));
+                CancelInvoke(nameof(LoadInteraction));
+                if (StopRecording != null) StopRecording();
+            }
+
             state = EchoState.Inactive;
+
+            transform.position = PlayerController.Instance.transform.position;
+            transform.rotation = PlayerController.Instance.transform.rotation;
 
             CancelInvoke();
 
@@ -279,16 +294,15 @@ namespace EchoMina.Original
             gameObject.SetActive(false);
         }
 
-        private void Spawn(Vector3 position, Quaternion rotation)
+        [Button]
+        public void Spawn()
         {
-            Debug.Log("<b><color=green>[ECHOMINA]</color></b> Spawning Echo Mina");
+            Debug.Log($"<b><color=green>[ECHOMINA]</color></b> Spawning Echo Mina");
             gameObject.SetActive(true);
             echoCamera.enabled = true;
             echoInputAxisController.enabled = true;
-            transform.position = position;
-            transform.rotation = rotation;
-            _startPosition = transform.position;
-            _startRotation = transform.rotation;
+            transform.position = PlayerController.Instance.transform.position;
+            transform.rotation = PlayerController.Instance.transform.rotation;
             _recordIndex = 0;
             _interactor.StartRecording();
         }
@@ -331,8 +345,8 @@ namespace EchoMina.Original
 
                 if (StopRecording != null) StopRecording();
 
-                transform.position = _startPosition;
-                transform.rotation = _startRotation;
+                transform.position = _positions[0];
+                transform.rotation = _rotations[0];
 
                 if (_interactions.Count > 0)
                 {
@@ -359,8 +373,8 @@ namespace EchoMina.Original
                 echoCamera.enabled = false;
                 state = EchoState.Playing;
 
-                transform.position = _startPosition;
-                transform.rotation = _startRotation;
+                transform.position = _positions[0];
+                transform.rotation = _rotations[0];
 
                 _recordIndex = 0;
                 _interactIndex = 0;
