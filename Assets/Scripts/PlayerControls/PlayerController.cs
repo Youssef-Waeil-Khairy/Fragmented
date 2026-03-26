@@ -143,7 +143,7 @@ namespace PlayerControls
             OriginalEchoMina.Instance.transform.rotation = transform.rotation;
 
             OriginalEchoMina.Instance.ToggleRecording();
-            
+
             if (OriginalEchoMina.Instance.State is not OriginalEchoMina.EchoState.Recording)
             {
                 playerCamera.enabled = true;

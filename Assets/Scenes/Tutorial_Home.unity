@@ -1504,6 +1504,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6869389280814274392, guid: dd2e3ea5078d9fb4f96e1d1f5d95f628, type: 3}
+      propertyPath: _recordFrequency
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 6869389280814274392, guid: dd2e3ea5078d9fb4f96e1d1f5d95f628, type: 3}
       propertyPath: _recordingTimeout
       value: 15
       objectReference: {fileID: 0}
