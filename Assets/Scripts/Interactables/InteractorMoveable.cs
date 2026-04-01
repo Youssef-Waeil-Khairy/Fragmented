@@ -147,8 +147,16 @@ namespace Interactables
             _interactor = null;
             isLocked = false;
         }
+        public void ShowInteraction()
+        {
+            Debug.Log("Should be unreachable");
+        }
+        public void HideInteraction()
+        {
+            Debug.Log("Should be unreachable");
+        }
 
-  #endregion
+        #endregion
 
         #region IRecordable
 

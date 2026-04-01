@@ -10,6 +10,8 @@ namespace MainMenu
         {
             FadeIn,
             FadeOut,
+            DelayIn,
+            DelayOut,
             None
         }
 
@@ -19,6 +21,8 @@ namespace MainMenu
         public float FadeInTime, FadeOutTime;
         public float FadeTime;
         public TransitionType Transition = TransitionType.FadeOut;
+        public float FadeDelayIn, FadeDelayOut;
+
 
         private void Update()
         {

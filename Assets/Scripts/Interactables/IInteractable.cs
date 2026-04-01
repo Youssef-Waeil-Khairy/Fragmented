@@ -32,4 +32,7 @@ public interface IInteractable
     /// </summary>
     /// <param name="interactor">The Interactor to lock to</param>
     public void Unlock(Interactor interactor);
+
+    public void ShowInteraction();
+    public void HideInteraction();
 }

@@ -1,8 +1,12 @@
+using System;
 using System.Collections.Generic;
 using EchoMina.Original;
 using NaughtyAttributes;
+using PlayerControls;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using Utility;
 // ReSharper disable InconsistentNaming
 
@@ -14,6 +18,12 @@ namespace Interactables
         [Tag][SerializeField] private List<string> _whitelistTags = new List<string>() {"Player"};
         [SerializeField] private GameObject _interactingObject;
         public UnityEvent OnBeginInteraction, OnEndInteraction;
+
+        [Foldout("Camera")] [SerializeField] private bool _hasIntectionCaamera = false;
+        [Foldout("Camera")] [SerializeField] private CinemachineCamera _camera;
+        [Foldout("Camera")] [SerializeField] private float _cameraDuration;
+        [Foldout("Camera")] [SerializeField] private float _cameraTime;
+        [Foldout("Camera")] [SerializeField] private bool _hasBeenInteracted = false;
 
         private void OnTriggerEnter(Collider other)
         {
@@ -27,6 +37,21 @@ namespace Interactables
 
                 OnBeginInteraction?.Invoke();
                 _isInteracting = true;
+
+                if (!_hasBeenInteracted)
+                {
+                    if (OriginalEchoMina.Instance.State is OriginalEchoMina.EchoState.Recording)
+                    {
+                        OriginalEchoMina.Instance.EchoCamera.enabled = false;
+                    }
+                    else
+                    {
+                        PlayerController.Instance.PlayerCamera.enabled = false;
+                    }
+
+                    PlayerController.Instance.PlayerInput.enabled = false;
+                    _camera.enabled = true;
+                }
             }
         }
 
@@ -41,6 +66,33 @@ namespace Interactables
                 _interactingObject =  null;
                 OnEndInteraction?.Invoke();
                 _isInteracting = false;
+            }
+        }
+
+        private void Update()
+        {
+            if (!_hasIntectionCaamera) return;
+
+            if (_camera.enabled)
+            {
+                _cameraTime += Time.deltaTime;
+
+                if (_cameraTime >= _cameraDuration)
+                {
+                    _camera.enabled = false;
+
+                    if (OriginalEchoMina.Instance.State is OriginalEchoMina.EchoState.Recording)
+                    {
+                        OriginalEchoMina.Instance.EchoCamera.enabled = true;
+                    }
+                    else
+                    {
+                        PlayerController.Instance.PlayerCamera.enabled = true;
+                    }
+
+                    PlayerController.Instance.PlayerInput.enabled = true;
+                    _camera.enabled = false;
+                }
             }
         }
 

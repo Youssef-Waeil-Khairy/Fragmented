@@ -2,6 +2,7 @@ using System;
 using EchoMina.Original;
 using NaughtyAttributes;
 using PlayerControls;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Events;
 using Utility;
@@ -13,13 +14,34 @@ namespace Interactables
 
         [SerializeField] private bool isInteracted;
         [SerializeField] private GameObject previewPanel;
-        [SerializeField] private UnityEvent onInteract;
-        [SerializeField] private UnityEvent onUnInteract;
-        [SerializeField] private UnityEvent onStartPreview;
-        [SerializeField] private UnityEvent onStopPreview;
+        [SerializeField] private bool hasBeenInteracted = false;
 
+        [Foldout("Events")][SerializeField] private UnityEvent onInteract;
+        [Foldout("Events")][SerializeField] private UnityEvent onUnInteract;
+        [Foldout("Events")][SerializeField] private UnityEvent onStartPreview;
+        [Foldout("Events")][SerializeField] private UnityEvent onStopPreview;
 
-    #region IInteractable Methods
+        [Foldout("Camera")][SerializeField] private bool hasInteractionCamera = false;
+        [Foldout("Camera")][SerializeField] private CinemachineCamera interactionCamera;
+        [Foldout("Camera")][SerializeField] private float cameraDuration;
+        [Foldout("Camera")][SerializeField] private float cameraTime;
+
+        private void Update()
+        {
+            if (!hasInteractionCamera) return;
+
+            if (interactionCamera.enabled)
+            {
+                cameraTime += Time.deltaTime;
+
+                if (cameraTime >= cameraDuration)
+                {
+                    HideInteraction();
+                }
+            }
+        }
+
+        #region IInteractable Methods
 
         private void StopRecording() {isInteracted = false;}
         public void BindObject()
@@ -37,6 +59,12 @@ namespace Interactables
         }
         public void Interact(Interactor interactor)
         {
+            if (hasBeenInteracted == false)
+            {
+                ShowInteraction();
+                hasBeenInteracted = true;
+            }
+
             if (isInteracted)
             {
                 onUnInteract.Invoke();
@@ -75,8 +103,42 @@ namespace Interactables
         {
             return;
         }
+        public bool ShouldShowInteraction()
+        {
+            return hasBeenInteracted == false;
+        }
+        public void ShowInteraction()
+        {
+            if (OriginalEchoMina.Instance.State is OriginalEchoMina.EchoState.Recording)
+            {
+                // Disable Echo  Mina's camera
+                OriginalEchoMina.Instance.EchoCamera.enabled = false;
+            }
+            else
+            {
+                // Disable the player's camera and input
+                PlayerController.Instance.PlayerCamera.enabled = false;
+            }
 
-    #endregion
+            PlayerController.Instance.PlayerInput.enabled = false;
+            interactionCamera.enabled = true;
+        }
+        public void HideInteraction()
+        {
+            if (OriginalEchoMina.Instance.State is OriginalEchoMina.EchoState.Recording)
+            {
+                OriginalEchoMina.Instance.EchoCamera.enabled = true;
+            }
+            else
+            {
+                PlayerController.Instance.PlayerCamera.enabled = true;
+            }
+
+            PlayerController.Instance.PlayerInput.enabled = true;
+            interactionCamera.enabled = false;
+        }
+
+        #endregion
 
         [Button]
         public void DebugInteract()

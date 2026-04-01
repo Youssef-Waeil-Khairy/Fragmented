@@ -31,35 +31,34 @@ namespace EchoMina.Original
         [UsedImplicitly] public event OnStartPlayback StartPlayback;
         public event OnStopPlayback StopPlayback;
 
-        [Header("States")] [SerializeField] private EchoState state;
-
         public static OriginalEchoMina Instance;
 
-        [Header("Movement")] Rigidbody rb;
-        [SerializeField] private float _speed = 1f;
-        [SerializeField] private float _turnSpeed = 1f;
-        [SerializeField, ReadOnly] private float _moveDirection;
-        [SerializeField, ReadOnly] private float _turnDirection;
-        [SerializeField] private float maxSpeed = 5f;
-        [SerializeField] private float maxTurnSpeed = 5f;
+        [Foldout("States")][SerializeField] private EchoState state;
 
-        [Header("Interactions")] [SerializeField]
-        private Interactor _interactor;
+        [Foldout("Movement")] Rigidbody rb;
+        [Foldout("Movement")][SerializeField] private float _speed = 1f;
+        [Foldout("Movement")][SerializeField] private float _turnSpeed = 1f;
+        [Foldout("Movement")][SerializeField, ReadOnly] private float _moveDirection;
+        [Foldout("Movement")][SerializeField, ReadOnly] private float _turnDirection;
+        [Foldout("Movement")][SerializeField] private float maxSpeed = 5f;
+        [Foldout("Movement")][SerializeField] private float maxTurnSpeed = 5f;
+
+        [Foldout("Interactions")] [SerializeField] private Interactor _interactor;
 
         [Foldout("Recordings")][SerializeField][Range(float.MinValue, float.MaxValue)] private float _recordFrequency = 0.1f;
         [Foldout("Recordings")][SerializeField][Range(float.MinValue, 30f)] private float _recordingTimeout = 10f;
         [Foldout("Recordings")][SerializeField][Range(float.MinValue, 30f)] private float _recordingTimeoutWarning = 8f;
         [Foldout("Recordings")][SerializeField] private GameObject _RecordingWarning;
         [Foldout("Recordings")][SerializeField][ProgressBar(10f, EColor.Red)][ReadOnly] private float _recordingTimer;
+        [Foldout("Recordings")][SerializeField][ReadOnly] private int _recordIndex;
+        [Foldout("Recordings")][SerializeField][ReadOnly] private int _interactIndex;
+        [Foldout("Recordings")][SerializeField][ReadOnly] private List<Vector3> _positions;
+        [Foldout("Recordings")][SerializeField][ReadOnly] private List<Quaternion> _rotations;
+        [Foldout("Recordings")][SerializeField][ReadOnly] private float _interactionTime;
+        [Foldout("Recordings")][SerializeField][ReadOnly] private List<float> _interactions;
 
-        [SerializeField] [ReadOnly] private int _recordIndex;
-        [SerializeField] [ReadOnly] private int _interactIndex;
-        [SerializeField] [ReadOnly] private List<Vector3> _positions;
-        [SerializeField] [ReadOnly] private List<Quaternion> _rotations;
-        [SerializeField] [ReadOnly] private float _interactionTime;
-        [SerializeField] [ReadOnly] private List<float> _interactions;
-        [SerializeField] private CinemachineCamera echoCamera;
-        [SerializeField] private CinemachineInputAxisController echoInputAxisController;
+        [Foldout("Camera")][SerializeField] private CinemachineCamera echoCamera;
+        [Foldout("Camera")][SerializeField] private CinemachineInputAxisController echoInputAxisController;
         private IRecordable[] recordables;
         private IBindable[] bindables;
 
@@ -89,6 +88,7 @@ namespace EchoMina.Original
             }
         }
 
+        public CinemachineCamera EchoCamera  => echoCamera;
         #endregion
 
         #region InputMessages
@@ -133,11 +133,6 @@ namespace EchoMina.Original
             }
 
             transform.position = PlayerController.Instance.transform.position;
-
-            //ToggleRecording();
-            //ToggleRecording();
-
-            //Despawn();
         }
 
         private void OnEnable()

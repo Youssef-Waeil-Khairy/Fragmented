@@ -17,7 +17,7 @@ namespace PlayerControls
     {
         public static PlayerController Instance;
 
-        //PlayerInput playerInput;
+        PlayerInput playerInput;
         //CharacterController characterController;
         private Rigidbody rb;
 
@@ -37,6 +37,10 @@ namespace PlayerControls
         [Foldout("Snapshot")][SerializeField] private Vector3 checkpointSnapshotPosition;
         [Foldout("Snapshot")][SerializeField] private Quaternion checkpointSnapshotRotation;
 
+        // Getters
+        public CinemachineCamera PlayerCamera => playerCamera;
+        public PlayerInput PlayerInput => playerInput;
+
         public void Start()
         {
             if (Instance == null)
@@ -48,7 +52,7 @@ namespace PlayerControls
                 Destroy(gameObject);
             }
 
-            //playerInput = GetComponent<PlayerInput>();
+            playerInput = GetComponent<PlayerInput>();
             rb  = GetComponent<Rigidbody>();
             rb.maxLinearVelocity = maxSpeed;
             rb.maxAngularVelocity = maxTurnSpeed;
