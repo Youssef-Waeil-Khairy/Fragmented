@@ -59,13 +59,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ce7607d8a101b61498d82fbde7ad7119, type: 3}
+  m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -190,6 +190,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 843e872f10994ddfa2355420a90c9029, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTransitioning: 0
+  FadeTime: 0
+  delayTime: 0
+  FadeInTime: 3
+  FadeOutTime: 3
+  FadeDelayIn: 3
+  FadeDelayOut: 3
   TransitionImage: {fileID: 8954826464331768930}
   TransitionCurveIn:
     serializedVersion: 2
@@ -248,7 +255,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  FadeInTime: 3
-  FadeOutTime: 3
-  FadeTime: 0
-  Transition: 1
+  Transition: 4
+  debugTime: 3
+  debugBool: 0

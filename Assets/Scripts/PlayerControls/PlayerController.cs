@@ -8,6 +8,7 @@ using QuickLoad;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Utility;
 
 namespace PlayerControls
 {
@@ -15,6 +16,8 @@ namespace PlayerControls
     [SuppressMessage("ReSharper", "RedundantDefaultMemberInitializer")]
     public class PlayerController : MonoBehaviour, IRecordable
     {
+        public static bool PLAYERCONTROLLERSTARTED = false;
+        
         public static PlayerController Instance;
 
         PlayerInput playerInput;
@@ -43,12 +46,16 @@ namespace PlayerControls
 
         public void Start()
         {
+            StartupLogger.LogStart("Setting up PlayerController Singleton", name);
             if (Instance == null)
             {
+                StartupLogger.LogStart($"PlayerController Singleton instance was null, setting it to {gameObject.name}'s PlayerController", name);
                 Instance = this;
             }
             else if (Instance != this)
             {
+                StartupLogger.LogStart($"PlayerController Singleton instance already exists and is not us. Destroying {gameObject.name}", name);
+
                 Destroy(gameObject);
             }
 
@@ -57,12 +64,19 @@ namespace PlayerControls
             rb.maxLinearVelocity = maxSpeed;
             rb.maxAngularVelocity = maxTurnSpeed;
             LockCursor();
+            
+            PLAYERCONTROLLERSTARTED = true;
+            StartupLogger.LogStart("Finished start up successfully", name);
         }
 
         private void FixedUpdate()
         {
             if (OriginalEchoMina.Instance.State is OriginalEchoMina.EchoState.Recording || cursorFree)
             {
+                if (cursorFree)
+                {
+                    cinemachineInputAxisController.enabled = false;
+                }
                 return;
             }
 
@@ -93,6 +107,7 @@ namespace PlayerControls
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             cinemachineInputAxisController.enabled = true;
+            Debug.Log("Locking cursor.");
         }
         public void UnlockCursor()
         {
@@ -100,6 +115,7 @@ namespace PlayerControls
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
             cinemachineInputAxisController.enabled = false;
+            Debug.Log("Unlocking cursor.");
         }
 
         [UsedImplicitly]
@@ -235,6 +251,12 @@ namespace PlayerControls
             rb.maxAngularVelocity = maxTurnSpeed;
         }
 
-
+        public void ToggleInputEnabled(bool isEnabled)
+        {
+            if (playerInput != null)
+            {
+                playerInput.enabled = isEnabled;
+            }
+        }
     }
 }
