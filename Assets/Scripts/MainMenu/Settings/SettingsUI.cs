@@ -4,12 +4,11 @@ using UnityEngine.UI;
 public class SettingsUI : MonoBehaviour
 {
     [Header("Dispaly")]
-    public Toggle fullscreenToggle;
-    public Toggle windowedToggle;
+    public Button fullscreenButton;
+    public Button windowedBUtton;
 
     [Header("Mouse Sensitivity")]
-    public Toggle mediumToggle;
-    public Toggle largeToggle;
+    public Slider mouseSensitivtySlider;
 
     [Header("Sound Sliders")]
     public Slider musicSlider;
@@ -19,18 +18,11 @@ public class SettingsUI : MonoBehaviour
 
     void Start()
     {
+
+
         var s = GameSettingsManager.Instance;
 
-        //display
-
-        fullscreenToggle.isOn = s.IsFullscreen;
-        windowedToggle.isOn = !s.IsFullscreen;
-
-        // Mouse
-
-        mediumToggle.isOn = s.MouseSensitivity <= MouseSensitivitySettings.Medium;
-        largeToggle.isOn = s.MouseSensitivity > MouseSensitivitySettings.Medium;
-
+       
         // Sound
 
         musicSlider.value = s.MusicVolume;
@@ -38,13 +30,20 @@ public class SettingsUI : MonoBehaviour
         voiceSlider.value = s.VoiceVolume;
         notifSlider.value = s.NotificationVolume;
 
-        // listners
+        //display
+        fullscreenButton.onClick.AddListener(() =>
+        {
+            if (s.IsFullscreen) return;
+            s.SetFullscreen(true);
+        });
 
-        fullscreenToggle.onValueChanged.AddListener(v => { if (v) s.SetFullscreen(true); });
-        windowedToggle.onValueChanged.AddListener(v => { if (v) s.SetFullscreen(false); });
+        windowedBUtton.onClick.AddListener(() =>
+        {
+            if (s.IsFullscreen) return;
+            s.SetFullscreen(false);
+        });
 
-        mediumToggle.onValueChanged.AddListener(v => { if (v) s.SetMouseSensitivity(MouseSensitivitySettings.Medium); });
-        largeToggle.onValueChanged.AddListener(v => { if (v) s.SetMouseSensitivity(MouseSensitivitySettings.Large); });
+        mouseSensitivtySlider.onValueChanged.AddListener(s.SetMouseSensitivity);
 
         musicSlider.onValueChanged.AddListener(s.SetMusicVolume);
         sfxSlider.onValueChanged.AddListener(s.SetSFXVolume);
