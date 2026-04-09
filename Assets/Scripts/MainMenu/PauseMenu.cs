@@ -2,10 +2,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using UnityEngine.InputSystem;
 
 public class PauseMenu : MonoBehaviour
 {
-    public static PauseMenu instance;
+    public static PauseMenu Instance;
 
     [Header("Panel")]
     public RectTransform pausePanel;
@@ -15,12 +16,12 @@ public class PauseMenu : MonoBehaviour
     public Button settingsButton;
     public Button quitButton;
 
-    [Header("Settings Panel")]
-    public GameObject seetingsPanel;
+    [Header("Scene Names")]
+    public string mainMenuSceneName = "MainMenu";
+    public string settingsSceneName = "Settings";
 
     [Header("Animation")]
     public float slideSpeed = 0.5f;
-    public string mainMenuSceneName = "MainMenu";
 
     private Vector2 hiddenPosition;
     private Vector2 shownPosition;
@@ -29,127 +30,98 @@ public class PauseMenu : MonoBehaviour
 
     void Awake()
     {
-      if (instance != null && instance != this)
-      {
-            Destroy(gameObject);
-            return;
-      }
-
-      instance = this;
+        if (Instance != null && Instance != this) { Destroy(gameObject); return; }
+        Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        if (pausePanel != null)
+        {
+            Canvas parentCanvas = pausePanel.GetComponentInParent<Canvas>();
+            if (parentCanvas != null) DontDestroyOnLoad(parentCanvas.gameObject);
+
+            hiddenPosition = new Vector2(-pausePanel.rect.width - 100, 0);
+            shownPosition = new Vector2(0, 0);
+            pausePanel.anchoredPosition = hiddenPosition;
+            pausePanel.gameObject.SetActive(false);
+        }
     }
-
-
-
 
     void Start()
     {
-        hiddenPosition = new Vector2(-pausePanel.rect.width - 100, 0);
-        shownPosition = new Vector2(0, 0);
-
-        pausePanel.anchoredPosition = hiddenPosition;
-        pausePanel.gameObject.SetActive(false);
-
         resumeButton.onClick.AddListener(Resume);
         settingsButton.onClick.AddListener(OpenSettings);
         quitButton.onClick.AddListener(Quit);
-
     }
 
     void Update()
     {
-        if (SceneManager.GetActiveScene().name == mainMenuSceneName) 
-        {
-            return;
-        }
+        if (SceneManager.GetActiveScene().name == mainMenuSceneName) return;
 
-        if (Input.GetKeyDown(KeyCode.Escape) && !isAnimating) 
+        if (Keyboard.current.escapeKey.wasPressedThisFrame && !isAnimating)
         {
-            if (seetingsPanel != null && seetingsPanel.activeSelf) 
-            {
-                seetingsPanel.SetActive(false);
-                return;
-            }
-
-            if (isPaused) 
-            {
-                Resume();
-            }
-            else
-            {
-                Pause();
-            }
+            if (isPaused) Resume();
+            else Pause();
         }
     }
 
     void Pause()
     {
+        if (pausePanel == null)
+        {
+            Debug.LogError("PausePanel is null! Canvas was destroyed on scene change.");
+            return;
+        }
+
         isPaused = true;
         Time.timeScale = 0f;
         pausePanel.gameObject.SetActive(true);
-
         StartCoroutine(SlidePanel(hiddenPosition, shownPosition));
-
-        Debug.Log("game paused");
-        
+        Debug.Log("Game Paused");
     }
 
-    void Resume()
+    public void Resume()
     {
         if (isAnimating) return;
-
-        StartCoroutine(SlideOutandResume());
-
-        Debug.Log("game resumed");
+        StartCoroutine(SlideOutAndResume());
+        Debug.Log("Game Resumed");
     }
 
     void OpenSettings()
     {
-        if (seetingsPanel == null)
-        {
-            Debug.LogError("seetings pannel not assigned in inspector");
-            return;
-        }
-
-        seetingsPanel.SetActive(true);
-        Debug.Log("settings opend");
+        Time.timeScale = 1f;
+        isPaused = false;
+        SceneManager.LoadScene(settingsSceneName);
+        Debug.Log("Opening Settings");
     }
 
     void Quit()
     {
-        Debug.Log("quiting");
-
         Time.timeScale = 1f;
-
         isPaused = false;
-
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene(mainMenuSceneName);
+        Debug.Log("Quitting to Main Menu");
     }
 
     IEnumerator SlidePanel(Vector2 from, Vector2 to)
     {
         isAnimating = true;
         float elapsed = 0f;
-
-        while (elapsed < slideSpeed) 
+        while (elapsed < slideSpeed)
         {
             elapsed += Time.unscaledDeltaTime;
-                float t = Mathf.SmoothStep(0f, 1f, elapsed / slideSpeed);
+            float t = Mathf.SmoothStep(0f, 1f, elapsed / slideSpeed);
             pausePanel.anchoredPosition = Vector2.Lerp(from, to, t);
             yield return null;
         }
-
         pausePanel.anchoredPosition = to;
         isAnimating = false;
     }
 
-    IEnumerator SlideOutandResume() 
+    IEnumerator SlideOutAndResume()
     {
         yield return StartCoroutine(SlidePanel(shownPosition, hiddenPosition));
         pausePanel.gameObject.SetActive(false);
         isPaused = false;
         Time.timeScale = 1f;
     }
-
-
 }

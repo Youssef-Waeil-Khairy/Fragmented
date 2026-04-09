@@ -569,6 +569,7 @@ GameObject:
   - component: {fileID: 958211074}
   - component: {fileID: 958211079}
   - component: {fileID: 958211080}
+  - component: {fileID: 958211081}
   m_Layer: 5
   m_Name: MainMenu
   m_TagString: Untagged
@@ -675,8 +676,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cd4b808397c4d319cd314ed02f13a7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 2
+  level: 3
   allowedTag: 
+  IsInterLevelTransition: 0
 --- !u!114 &958211080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -691,6 +693,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clickEffectPrefab: {fileID: 7677935224966929425, guid: c842fa19bc51258469907115e82843cd, type: 3}
   canvas: {fileID: 958211076}
+--- !u!114 &958211081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 958211073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e79864bcc626d244a5147b7ed71e1e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1031683959
 GameObject:
   m_ObjectHideFlags: 0
@@ -702,13 +716,14 @@ GameObject:
   - component: {fileID: 1031683962}
   - component: {fileID: 1031683961}
   - component: {fileID: 1031683960}
+  - component: {fileID: 1031683963}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1031683960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -770,6 +785,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 958211077}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1031683963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1031683959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e79864bcc626d244a5147b7ed71e1e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1511022733
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1465,8 +1492,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cd4b808397c4d319cd314ed02f13a7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 1
+  level: 2
   allowedTag: 
+  IsInterLevelTransition: 0
 --- !u!1 &1906691539
 GameObject:
   m_ObjectHideFlags: 0
