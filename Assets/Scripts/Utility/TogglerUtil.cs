@@ -22,5 +22,21 @@ namespace Utility
                 item.SetActive(!item.activeSelf);
             }
         }
+
+        public void ToggleOn()
+        {
+            foreach (GameObject item in toToggle)
+            {
+                item.SetActive(true);
+            }
+        }
+
+        public void ToggleOff()
+        {
+            foreach (GameObject item in toToggle)
+            {
+                item.SetActive(false);
+            }
+        }
     }
 }

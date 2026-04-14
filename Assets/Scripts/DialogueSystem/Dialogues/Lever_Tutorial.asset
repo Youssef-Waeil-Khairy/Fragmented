@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 36722238b0204cf0aa52ed6f487fcf02, type: 3}
-  m_Name: Dialogue
+  m_Name: Lever_Tutorial
   m_EditorClassIdentifier: 
   DialogueSnippets:
   - SpeakerName: Mina
@@ -18,10 +18,22 @@ MonoBehaviour:
     SpeakerSprite: {fileID: 0}
     HasBackgroundSprite: 0
     BackgroundSprite: {fileID: 0}
-    Text: Hi, I am mina
+    Text: The lever toggles obstacles, like a switch
   - SpeakerName: Mina
     HasSpeakerSprite: 0
     SpeakerSprite: {fileID: 0}
     HasBackgroundSprite: 0
     BackgroundSprite: {fileID: 0}
-    Text: Bye, enjoy the tutorial!
+    Text: Press E to interact with the lever
+  - SpeakerName: Mina
+    HasSpeakerSprite: 0
+    SpeakerSprite: {fileID: 0}
+    HasBackgroundSprite: 0
+    BackgroundSprite: {fileID: 0}
+    Text: Toggling the lever actiavtes the stairs
+  - SpeakerName: Mina
+    HasSpeakerSprite: 0
+    SpeakerSprite: {fileID: 0}
+    HasBackgroundSprite: 0
+    BackgroundSprite: {fileID: 0}
+    Text: Go up the stairs

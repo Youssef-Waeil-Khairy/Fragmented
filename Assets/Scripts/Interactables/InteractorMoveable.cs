@@ -16,14 +16,14 @@ namespace Interactables
         [SerializeField] private Quaternion startingRotation;
         [SerializeField] private bool isPickedUp = false;
         [SerializeField] private Outline outline;
+        [SerializeField] private GameObject previewPanel;
         private Interactor _interactor;
         [SerializeField] private bool isLocked = false;
 
-        [BoxGroup("Snapshot")] [SerializeField]
-        private Transform snapshotParentTransform;
-
-        [BoxGroup("Snapshot")] [SerializeField]
-        private Transform snapshotTransform;
+        [BoxGroup("Snapshot")] [SerializeField] private Transform snapshotParentTransform;
+        [BoxGroup("Snapshot")] [SerializeField] private Transform snapshotTransform;
+        [BoxGroup("Snapshot")] [SerializeField] private Transform checkpointSnapshotParentTransform;
+        [BoxGroup("Snapshot")] [SerializeField] private Transform checkpointSnapshotTransform;
 
         void OnEnable()
         {
@@ -48,6 +48,7 @@ namespace Interactables
             transform.SetParent(interactor.AttachingTransform);
 
             isPickedUp = true;
+            StopPreview();
         }
 
         private void DropObject(Interactor interactor)
@@ -62,6 +63,7 @@ namespace Interactables
             transform.SetParent(startingTransform);
 
             Unlock(interactor);
+            StartPreview();
         }
 
         [Button][UsedImplicitly]
@@ -87,13 +89,13 @@ namespace Interactables
             {
                 return true;
             }
-            
+
             // if we are picked up the interactor needs to be the same as our current one
             if (isPickedUp && interactor == _interactor)
             {
                 return true;
             }
-            
+
             Debug.Log($"{gameObject.name} is already picked up by {_interactor.gameObject.name}");
             return false;
         }
@@ -114,11 +116,13 @@ namespace Interactables
         {
             Debug.Log($"<b><color=green>[Interactions][Moveable Objects][Preview]</color></b> Preview started for {gameObject.name}");
             outline.enabled = true;
+            previewPanel.SetActive(true);
         }
         public void StopPreview()
         {
             Debug.Log($"<b><color=red>[Interactions][Moveable Objects][Preview]</color></b> Preview ended for {gameObject.name}");
             if (outline) outline.enabled = false;
+            previewPanel.SetActive(false);
         }
         public bool IsLockable()
         {
@@ -143,28 +147,45 @@ namespace Interactables
             _interactor = null;
             isLocked = false;
         }
+        public void ShowInteraction()
+        {
+            Debug.Log("Should be unreachable");
+        }
+        public void HideInteraction()
+        {
+            Debug.Log("Should be unreachable");
+        }
 
-  #endregion
-        
+        #endregion
+
         #region IRecordable
 
         public void TakeSnapshot()
         {
-            print($"[Echo Mina][Recording] Taking snapshot of {gameObject.name}");
             snapshotParentTransform = transform.parent;
             snapshotTransform = transform;
-            
+
             startingPosition = transform.position;
             startingRotation = transform.rotation;
         }
+        public void TakeCheckpointSnapshot()
+        {
+            checkpointSnapshotParentTransform = transform.parent;
+            checkpointSnapshotTransform = transform;
+        }
         public void LoadSnapshot()
         {
-            print($"[Echo Mina][Recording] Loading snapshot for {gameObject.name}");
             transform.SetParent(snapshotParentTransform);
             transform.position = startingPosition;
             transform.rotation = startingRotation;
         }
+        public void LoadCheckpointSnapshot()
+        {
+            transform.SetParent(checkpointSnapshotParentTransform);
+            transform.position = checkpointSnapshotTransform.position;
+            transform.rotation = checkpointSnapshotTransform.rotation;
+        }
 
-  #endregion
+        #endregion
     }
 }

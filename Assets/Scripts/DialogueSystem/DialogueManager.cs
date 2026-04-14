@@ -5,14 +5,18 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using NaughtyAttributes;
+using PlayerControls;
+using Unity.Cinemachine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using Utility;
 // ReSharper disable InconsistentNaming
 
 namespace DialogueSystem
 {
     public class DialogueManager : MonoBehaviour
     {
+        [SerializeField] private bool showOnLevelStart = false;
         [SerializeField] private GameObject DialoguePanel;
         // Speaker name
         [SerializeField] private TMP_Text SpeakerName;
@@ -26,23 +30,51 @@ namespace DialogueSystem
         [SerializeField][Expandable] private ScriptableDialogue Dialogue;
         [SerializeField] private ScriptableDialogue.DialogueSnippet CurrentSnippet;
         [SerializeField] private int DialogueIndex;
-        [SerializeField] private List<UnityEvent> SnippetEvents;
         [InfoBox("These events will be called when their corresponding index snippet is shown. Please ensure the number of events exactly match the number of snippets in your dialogue.", EInfoBoxType.Warning)]
-
-        public UnityEvent OnDialogueStart;
-        public UnityEvent OnDialogueEnd;
+        [ValidateInput("ValidateDialogue", "You must have the same number of Snippet Events as Dialogue snippets. You currently do not")]
+        [Foldout("Events")][SerializeField] private List<UnityEvent> SnippetEvents;
+        [Foldout("Events")] public UnityEvent OnDialogueStart;
+        [Foldout("Events")] public UnityEvent OnDialogueEnd;
 
         InputAction nextAction;
 
         private void OnEnable()
         {
+            StartupLogger.LogEnable("Binding dialogue advance input", name);
             nextAction = InputSystem.actions.FindAction("NextSnippet");
             nextAction.performed += NextSnippet;
+            StartupLogger.LogEnable("Finished enabling successfully", name);
+        }
+
+        private void Start()
+        {
+            if (!showOnLevelStart)
+            {
+                StartupLogger.LogStart("Hiding dialogue on start up", name);
+                
+                HideDialogue();
+            }
+            else
+            {
+                StartupLogger.LogStart("Showing dialogue on start up", name);
+                while (PlayerController.PLAYERCONTROLLERSTARTED == false)
+                {
+                    StartupLogger.LogStart($"Waiting for Player Controller to start. currently: {PlayerController.PLAYERCONTROLLERSTARTED}", name);
+                }
+                
+                ShowDialogue();
+            }
         }
 
         private void OnDisable()
         {
+            StartupLogger.LogDisable("Unbinding dialogue advance input", name);
             nextAction.performed -= NextSnippet;
+        }
+
+        private bool ValidateDialogue()
+        {
+            return Dialogue.DialogueSnippets.Count == SnippetEvents.Count;
         }
 
         private void NextSnippet(InputAction.CallbackContext callbackContext)
@@ -69,6 +101,8 @@ namespace DialogueSystem
         [Button]
         public void ShowDialogue()
         {
+            Debug.Log("Showing dialogue");
+
             DialoguePanel.SetActive(true);
             CurrentSnippet = Dialogue.DialogueSnippets[DialogueIndex];
             UpdateUI();
@@ -78,10 +112,12 @@ namespace DialogueSystem
         [Button]
         public void HideDialogue()
         {
+            Debug.Log("Hiding dialogue");
+
             DialoguePanel.SetActive(false);
         }
 
-        [Button][UsedImplicitly]
+        [Button]
         public void AdvanceDialogue()
         {
             if (!DialoguePanel.activeSelf) return;

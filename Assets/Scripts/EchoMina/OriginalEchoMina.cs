@@ -4,6 +4,7 @@ using System.Linq;
 using Interactables;
 using JetBrains.Annotations;
 using NaughtyAttributes;
+using PlayerControls;
 using Unity.Cinemachine;
 using UnityEngine;
 using Utility;
@@ -30,35 +31,34 @@ namespace EchoMina.Original
         [UsedImplicitly] public event OnStartPlayback StartPlayback;
         public event OnStopPlayback StopPlayback;
 
-        [Header("States")] [SerializeField] [ReadOnly]
-        private EchoState state;
-
         public static OriginalEchoMina Instance;
 
-        [Header("Movement")] Rigidbody rb;
-        [SerializeField] private float _speed = 1f;
-        [SerializeField] private float _turnSpeed = 1f;
-        [SerializeField, ReadOnly] private float _moveDirection;
-        [SerializeField, ReadOnly] private float _turnDirection;
-        [SerializeField] private float maxSpeed = 5f;
-        [SerializeField] private float maxTurnSpeed = 5f;
+        [Foldout("States")][SerializeField] private EchoState state;
 
-        [Header("Interactions")] [SerializeField]
-        private Interactor _interactor;
+        [Foldout("Movement")] Rigidbody rb;
+        [Foldout("Movement")][SerializeField] private float _speed = 1f;
+        [Foldout("Movement")][SerializeField] private float _turnSpeed = 1f;
+        [Foldout("Movement")][SerializeField, ReadOnly] private float _moveDirection;
+        [Foldout("Movement")][SerializeField, ReadOnly] private float _turnDirection;
+        [Foldout("Movement")][SerializeField] private float maxSpeed = 5f;
+        [Foldout("Movement")][SerializeField] private float maxTurnSpeed = 5f;
 
-        [Header("Recordings")] [SerializeField] [Range(float.MinValue, float.MaxValue)]
-        private float _recordFrequency = 0.1f;
+        [Foldout("Interactions")] [SerializeField] private Interactor _interactor;
 
-        [SerializeField] [ReadOnly] private int _recordIndex;
-        [SerializeField] [ReadOnly] private int _interactIndex;
-        [SerializeField] [ReadOnly] private Vector3 _startPosition;
-        [SerializeField] [ReadOnly] private Quaternion _startRotation;
-        [SerializeField] [ReadOnly] private List<Vector3> _positions;
-        [SerializeField] [ReadOnly] private List<Quaternion> _rotations;
-        [SerializeField] [ReadOnly] private float _interactionTime;
-        [SerializeField] [ReadOnly] private List<float> _interactions;
-        [SerializeField] private CinemachineCamera echoCamera;
-        [SerializeField] private CinemachineInputAxisController echoInputAxisController;
+        [Foldout("Recordings")][SerializeField][Range(float.MinValue, float.MaxValue)] private float _recordFrequency = 0.1f;
+        [Foldout("Recordings")][SerializeField][Range(float.MinValue, 30f)] private float _recordingTimeout = 10f;
+        [Foldout("Recordings")][SerializeField][Range(float.MinValue, 30f)] private float _recordingTimeoutWarning = 8f;
+        [Foldout("Recordings")][SerializeField] private GameObject _RecordingWarning;
+        [Foldout("Recordings")][SerializeField][ProgressBar(10f, EColor.Red)][ReadOnly] private float _recordingTimer;
+        [Foldout("Recordings")][SerializeField][ReadOnly] private int _recordIndex;
+        [Foldout("Recordings")][SerializeField][ReadOnly] private int _interactIndex;
+        [Foldout("Recordings")][SerializeField][ReadOnly] private List<Vector3> _positions;
+        [Foldout("Recordings")][SerializeField][ReadOnly] private List<Quaternion> _rotations;
+        [Foldout("Recordings")][SerializeField][ReadOnly] private float _interactionTime;
+        [Foldout("Recordings")][SerializeField][ReadOnly] private List<float> _interactions;
+
+        [Foldout("Camera")][SerializeField] private CinemachineCamera echoCamera;
+        [Foldout("Camera")][SerializeField] private CinemachineInputAxisController echoInputAxisController;
         private IRecordable[] recordables;
         private IBindable[] bindables;
 
@@ -88,6 +88,7 @@ namespace EchoMina.Original
             }
         }
 
+        public CinemachineCamera EchoCamera  => echoCamera;
         #endregion
 
         #region InputMessages
@@ -102,7 +103,7 @@ namespace EchoMina.Original
 
         #region Unity Functions
 
-        private void Awake()
+        private void Start()
         {
             if (Instance == null)
             {
@@ -112,6 +113,8 @@ namespace EchoMina.Original
             {
                 Destroy(gameObject);
             }
+
+            state = EchoState.Inactive;
 
             rb = GetComponent<Rigidbody>();
             SetMaxSpeed();
@@ -129,12 +132,15 @@ namespace EchoMina.Original
                 bindable.BindObject();
             }
 
-            Despawn();
+            transform.position = PlayerController.Instance.transform.position;
         }
 
         private void OnEnable()
         {
-            SetMaxSpeed();
+            if (PlayerController.Instance != null)
+            {
+                transform.position = PlayerController.Instance.transform.position;
+            }
         }
 
         private void OnDestroy()
@@ -162,6 +168,19 @@ namespace EchoMina.Original
                     return;
 
                 case EchoState.Recording:
+                    _recordingTimer += Time.fixedDeltaTime;
+                    if (_recordingTimer >= _recordingTimeoutWarning)
+                    {
+                        _RecordingWarning.SetActive(true);
+
+                        if (_recordingTimer >= _recordingTimeout)
+                        {
+                            //ToggleRecording(transform.position, transform.rotation);
+                            PlayerController.Instance.ToggleRecording();
+                        }
+
+                    }
+
                     Vector3 move = transform.forward * (_moveDirection * _speed);
                     rb.AddForce(move, ForceMode.Force);
                     rb.AddTorque(transform.up * (_turnDirection * _turnSpeed * Time.fixedDeltaTime));
@@ -220,54 +239,65 @@ namespace EchoMina.Original
             }
         }
 
-        public void ToggleRecording(Vector3 position, Quaternion rotation)
+        public void ToggleRecording()
         {
             if (state is EchoState.Inactive or EchoState.Playing)
             {
                 Debug.Log("[Echo Mina][Recording] Echo Mina is recording...");
+                Spawn();
+
                 state = EchoState.Recording;
 
-                Spawn(position, rotation);
+                _recordingTimer = 0f;
                 _positions.Clear();
                 _rotations.Clear();
                 _interactions.Clear();
                 InvokeRepeating(nameof(RecordSnapshot), _recordFrequency, _recordFrequency);
+
                 if (StartRecording != null) StartRecording();
             }
             else if (state is EchoState.Recording)
             {
                 Debug.Log("[Echo Mina][Recording] Echo Mina is no longer recording...");
-                CancelInvoke(nameof(RecordSnapshot));
-                CancelInvoke(nameof(LoadSnapshot));
-                CancelInvoke(nameof(LoadInteraction));
-                if (StopRecording != null) StopRecording();
+
                 Despawn();
             }
         }
 
-        private void Despawn()
+        public void Despawn()
         {
             Debug.Log("<b><color=red>[ECHOMINA]</color></b> Despawning Echo Mina");
 
+            if (state is EchoState.Recording)
+            {
+                CancelInvoke(nameof(RecordSnapshot));
+                CancelInvoke(nameof(LoadSnapshot));
+                CancelInvoke(nameof(LoadInteraction));
+                if (StopRecording != null) StopRecording();
+            }
+
             state = EchoState.Inactive;
+
+            transform.position = PlayerController.Instance.transform.position;
+            transform.rotation = PlayerController.Instance.transform.rotation;
 
             CancelInvoke();
 
             echoCamera.enabled = false;
             echoInputAxisController.enabled = false;
+            _RecordingWarning.SetActive(false);
             gameObject.SetActive(false);
         }
 
-        private void Spawn(Vector3 position, Quaternion rotation)
+        [Button]
+        public void Spawn()
         {
-            Debug.Log("<b><color=green>[ECHOMINA]</color></b> Spawning Echo Mina");
+            Debug.Log($"<b><color=green>[ECHOMINA]</color></b> Spawning Echo Mina");
             gameObject.SetActive(true);
             echoCamera.enabled = true;
             echoInputAxisController.enabled = true;
-            transform.position = position;
-            transform.rotation = rotation;
-            _startPosition = transform.position;
-            _startRotation = transform.rotation;
+            transform.position = PlayerController.Instance.transform.position;
+            transform.rotation = PlayerController.Instance.transform.rotation;
             _recordIndex = 0;
             _interactor.StartRecording();
         }
@@ -310,8 +340,8 @@ namespace EchoMina.Original
 
                 if (StopRecording != null) StopRecording();
 
-                transform.position = _startPosition;
-                transform.rotation = _startRotation;
+                transform.position = _positions[0];
+                transform.rotation = _rotations[0];
 
                 if (_interactions.Count > 0)
                 {
@@ -338,8 +368,8 @@ namespace EchoMina.Original
                 echoCamera.enabled = false;
                 state = EchoState.Playing;
 
-                transform.position = _startPosition;
-                transform.rotation = _startRotation;
+                transform.position = _positions[0];
+                transform.rotation = _rotations[0];
 
                 _recordIndex = 0;
                 _interactIndex = 0;

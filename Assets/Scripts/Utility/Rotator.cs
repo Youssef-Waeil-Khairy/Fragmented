@@ -7,7 +7,6 @@ namespace Utility
 {
     public class Rotator : MonoBehaviour, IRecordable
     {
-        [SerializeField][ReadOnly] private Quaternion snapshotRotation;
         public Vector3 targetRotation;
         public Vector3 startingRotation;
         public Quaternion goalRotation;
@@ -15,6 +14,8 @@ namespace Utility
         public float speed = 0.1f;
         public float timeCount = 0f;
         public bool isRotating = false;
+        [SerializeField][ReadOnly] private Quaternion snapshotRotation;
+        [SerializeField][ReadOnly] private Quaternion checkpointSnapshotRotation;
 
         private void Start()
         {
@@ -58,9 +59,19 @@ namespace Utility
         {
             snapshotRotation = transform.rotation;
         }
+        public void TakeCheckpointSnapshot()
+        {
+            checkpointSnapshotRotation = transform.rotation;
+        }
         public void LoadSnapshot()
         {
             transform.rotation = snapshotRotation;
+            isRotating = false;
+            timeCount = 0f;
+        }
+        public void LoadCheckpointSnapshot()
+        {
+            transform.rotation = checkpointSnapshotRotation;
             isRotating = false;
             timeCount = 0f;
         }

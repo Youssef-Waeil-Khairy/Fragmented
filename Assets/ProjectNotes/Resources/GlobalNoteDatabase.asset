@@ -167,14 +167,26 @@ MonoBehaviour:
     instanceID: 0
     GUID: 3eeb93f9-ef88-4277-b6d9-d2dda3067c03
   - note:
-      noteTitle: Quick Load
-      content: Add checkpoint world snapshot and loading
-      style: 0
+      noteTitle: Override Reminder
+      content: Do NOT override the Quickloader component as this will cause all instances
+        of Mina to have the same checkpoint references to this scene which they can't
+        access. If you get null reference exceptions, this is the likely cause!
+      style: 3
       isOpen: 1
       folderIndex: 0
     isGlobal: 0
     instanceID: 0
     GUID: 831c6d28-c969-4095-9483-624bd2bbb322
+  - note:
+      noteTitle: Override Reminder
+      content: Do NOT override the Dialogue Manager component as this will make all
+        instructor prefabs switch to the same dialogue
+      style: 3
+      isOpen: 1
+      folderIndex: 0
+    isGlobal: 0
+    instanceID: 0
+    GUID: 427bedc2-0d6a-4acd-8931-e1755bd94c2c
   noteFolders:
   - Current Tasks
   - Archived
