@@ -5,6 +5,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using NaughtyAttributes;
+using PlayerControls;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using Utility;
@@ -23,7 +24,7 @@ namespace DialogueSystem
         [SerializeField] private Image BackgroundSprite;
         // Text
         [SerializeField] private TMP_Text Text;
-
+        [SerializeField] private bool showOnLevelStart = false;
         [SerializeField][Expandable] private ScriptableDialogue Dialogue;
         [SerializeField] private ScriptableDialogue.DialogueSnippet CurrentSnippet;
         [SerializeField] private int DialogueIndex;
@@ -48,7 +49,7 @@ namespace DialogueSystem
             if (!showOnLevelStart)
             {
                 StartupLogger.LogStart("Hiding dialogue on start up", name);
-                
+
                 HideDialogue();
             }
             else
@@ -58,22 +59,22 @@ namespace DialogueSystem
                 {
                     StartupLogger.LogStart($"Waiting for Player Controller to start. currently: {PlayerController.PLAYERCONTROLLERSTARTED}", name);
                 }
-                
+
                 ShowDialogue();
             }
         }
 
-        private void Start()
-        {
-            if (!showOnLevelStart)
-            {
-                HideDialogue();
-            }
-            else
-            {
-                ShowDialogue();
-            }
-        }
+        // private void Start()
+        // {
+        //     if (!showOnLevelStart)
+        //     {
+        //         HideDialogue();
+        //     }
+        //     else
+        //     {
+        //         ShowDialogue();
+        //     }
+        // }
 
         private void OnDisable()
         {

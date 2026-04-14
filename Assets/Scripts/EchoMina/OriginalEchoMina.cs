@@ -37,8 +37,6 @@ namespace EchoMina.Original
 
         public static OriginalEchoMina Instance;
 
-        [Foldout("States")][SerializeField] private EchoState state;
-
         [Foldout("Movement")] Rigidbody rb;
         [Foldout("Movement")][SerializeField] private float _speed = 1f;
         [Foldout("Movement")][SerializeField] private float _turnSpeed = 1f;
@@ -54,6 +52,10 @@ namespace EchoMina.Original
 
         [SerializeField] [ReadOnly] private int _recordIndex;
         [SerializeField] [ReadOnly] private int _interactIndex;
+        [SerializeField] private float _recordingTimer = 0;
+        [SerializeField] private float _recordingTimeoutWarning = 15f;
+        [SerializeField] private float _recordingTimeout = 18f;
+        [SerializeField] private GameObject _RecordingWarning;
         [SerializeField] [ReadOnly] private Vector3 _startPosition;
         [SerializeField] [ReadOnly] private Quaternion _startRotation;
         [SerializeField] [ReadOnly] private List<Vector3> _positions;

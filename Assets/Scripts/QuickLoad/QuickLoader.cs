@@ -105,7 +105,7 @@ namespace QuickLoad
             {
                 if (i == loadIndex) continue;
 
-                Gizmos.DrawSphere(checkpoints[i].position, 0.2f);
+                if (checkpoints[i] != null) Gizmos.DrawSphere(checkpoints[i].position, 0.2f);
             }
 
             Gizmos.color = prevColor;
