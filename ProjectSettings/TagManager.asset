@@ -8,6 +8,7 @@ TagManager:
   - EchoMina
   - Interactable
   - Stair
+  - TheHouse
   layers:
   - Default
   - TransparentFX

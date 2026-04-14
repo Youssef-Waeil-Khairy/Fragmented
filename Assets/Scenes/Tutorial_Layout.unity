@@ -1175,6 +1175,75 @@ Transform:
   - {fileID: 1511445891}
   m_Father: {fileID: 543450652045535129}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &247795691
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 247795692}
+  - component: {fileID: 247795694}
+  - component: {fileID: 247795693}
+  m_Layer: 0
+  m_Name: Respawning
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &247795692
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 247795691}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -11.17997, y: -3.57, z: -12.79173}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &247795693
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 247795691}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 50.770348, y: 1, z: 25.29479}
+  m_Center: {x: 24.46138, y: 0, z: 6.002528}
+--- !u!114 &247795694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 247795691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5416fe839034079847accc795559b4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Whitelist:
+  - Player
+  IsOnMina: 0
 --- !u!1 &258200483
 GameObject:
   m_ObjectHideFlags: 0
@@ -2590,6 +2659,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skyboxOnEnter: {fileID: 2100000, guid: 1cf6f4c6e6e0518419839d3f5448dd99, type: 2}
   skyboxOnExit: {fileID: 2100000, guid: 8426cf3d3939a7d419671f3d5c269c0b, type: 2}
+  objectsToToggle:
+  - {fileID: 919132147587005731}
+  - {fileID: 360834029}
+  useTagInstead: 0
+  tagToToggle: TheHouse
 --- !u!1001 &663647946
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3639,6 +3713,7 @@ Transform:
   - {fileID: 3225041371295397952}
   - {fileID: 5128607424093651298}
   - {fileID: 1736376842}
+  - {fileID: 1547353645}
   m_Father: {fileID: 543450652045535129}
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
 --- !u!4 &844381151 stripped
@@ -4168,112 +4243,6 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
---- !u!1 &1021865528
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1021865530}
-  - component: {fileID: 1021865529}
-  m_Layer: 0
-  m_Name: SkyboxTrigger_House (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!65 &1021865529
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1021865528}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 16.001831, y: 3.3493447, z: 11.837402}
-  m_Center: {x: 6.979191, y: 1.6207745, z: 4.5764923}
---- !u!4 &1021865530
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1021865528}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 36, y: -2.80048, z: -6.31843}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1064879970
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1064879972}
-  - component: {fileID: 1064879971}
-  m_Layer: 0
-  m_Name: SkyboxTrigger_House (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!65 &1064879971
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1064879970}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 9.253677, y: 3.4004085, z: 19.070818}
-  m_Center: {x: 9.040274, y: 1.2002043, z: -0.22700405}
---- !u!4 &1064879972
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1064879970}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.8, y: -2.80048, z: -27.3}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1128450165
 GameObject:
   m_ObjectHideFlags: 0
@@ -15271,13 +15240,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1547353644}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.7526628, z: -0, w: 0.6584062}
-  m_LocalPosition: {x: 12.187, y: -5.063, z: -0.626}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: 0.65840673, z: -0, w: -0.7526624}
+  m_LocalPosition: {x: 7.892556, y: -3.823568, z: 5.783908}
+  m_LocalScale: {x: 0.8474576, y: 0.84745765, z: 0.8474576}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2045210398}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 838441055}
   m_LocalEulerAnglesHint: {x: 0, y: 97.643, z: 0}
 --- !u!1 &1589620650
 GameObject:
@@ -15347,59 +15316,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skyboxOnEnter: {fileID: 2100000, guid: 1cf6f4c6e6e0518419839d3f5448dd99, type: 2}
   skyboxOnExit: {fileID: 2100000, guid: 8426cf3d3939a7d419671f3d5c269c0b, type: 2}
---- !u!1 &1593763266
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1593763267}
-  - component: {fileID: 1593763268}
-  m_Layer: 0
-  m_Name: SkyboxTrigger_House
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1593763267
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1593763266}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.7825, y: -2.80048, z: -6.31843}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1593763268
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1593763266}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 20.083923, y: 6.4163055, z: 20.424892}
-  m_Center: {x: 9.223738, y: 2.7081528, z: 0.4500332}
+  objectsToToggle:
+  - {fileID: 919132147587005731}
+  - {fileID: 206339332}
+  - {fileID: 582549242}
+  useTagInstead: 0
+  tagToToggle: TheHouse
 --- !u!1001 &1604413435
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -66158,35 +66080,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3384165181960216068, guid: 69fe55091baa7bc40b3acee110ebc662, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.523629
+      value: 8.826309
       objectReference: {fileID: 0}
     - target: {fileID: 3384165181960216068, guid: 69fe55091baa7bc40b3acee110ebc662, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.9115168
+      value: -1.8491925
       objectReference: {fileID: 0}
     - target: {fileID: 3384165181960216068, guid: 69fe55091baa7bc40b3acee110ebc662, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.0277611
+      value: -2.1949632
       objectReference: {fileID: 0}
     - target: {fileID: 3384165181960216068, guid: 69fe55091baa7bc40b3acee110ebc662, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071067
+      value: 0.45627987
       objectReference: {fileID: 0}
     - target: {fileID: 3384165181960216068, guid: 69fe55091baa7bc40b3acee110ebc662, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.7071068
+      value: -0.45628002
       objectReference: {fileID: 0}
     - target: {fileID: 3384165181960216068, guid: 69fe55091baa7bc40b3acee110ebc662, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0.54019314
       objectReference: {fileID: 0}
     - target: {fileID: 3384165181960216068, guid: 69fe55091baa7bc40b3acee110ebc662, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0.54019314
       objectReference: {fileID: 0}
     - target: {fileID: 3384165181960216068, guid: 69fe55091baa7bc40b3acee110ebc662, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 3384165181960216068, guid: 69fe55091baa7bc40b3acee110ebc662, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -66194,7 +66116,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3384165181960216068, guid: 69fe55091baa7bc40b3acee110ebc662, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: 99.627
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -66669,7 +66591,6 @@ SceneRoots:
   - {fileID: 1129588561}
   - {fileID: 1350532011}
   - {fileID: 1172360700}
-  - {fileID: 1547353645}
   - {fileID: 145814414}
   - {fileID: 446507474}
   - {fileID: 206339336}
@@ -66677,6 +66598,4 @@ SceneRoots:
   - {fileID: 360834030}
   - {fileID: 1589620651}
   - {fileID: 627532317}
-  - {fileID: 1593763267}
-  - {fileID: 1021865530}
-  - {fileID: 1064879972}
+  - {fileID: 247795692}
