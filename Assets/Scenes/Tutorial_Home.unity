@@ -1864,6 +1864,10 @@ PrefabInstance:
       value: GroundToBasement
       objectReference: {fileID: 0}
     - target: {fileID: 1871153385237235056, guid: b87b57b3b2d65d342ae03b706499f47c, type: 3}
+      propertyPath: Transitioner
+      value: 
+      objectReference: {fileID: 1042718844}
+    - target: {fileID: 1871153385237235056, guid: b87b57b3b2d65d342ae03b706499f47c, type: 3}
       propertyPath: OnTeleport.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -1935,6 +1939,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8851492593459575555, guid: b87b57b3b2d65d342ae03b706499f47c, type: 3}
+      propertyPath: Transitioner
+      value: 
+      objectReference: {fileID: 1042718844}
     - target: {fileID: 8851492593459575555, guid: b87b57b3b2d65d342ae03b706499f47c, type: 3}
       propertyPath: OnTeleport.m_PersistentCalls.m_Calls.Array.size
       value: 1
