@@ -5,8 +5,6 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using NaughtyAttributes;
-using PlayerControls;
-using Unity.Cinemachine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using Utility;
@@ -16,7 +14,6 @@ namespace DialogueSystem
 {
     public class DialogueManager : MonoBehaviour
     {
-        [SerializeField] private bool showOnLevelStart = false;
         [SerializeField] private GameObject DialoguePanel;
         // Speaker name
         [SerializeField] private TMP_Text SpeakerName;
@@ -66,6 +63,18 @@ namespace DialogueSystem
             }
         }
 
+        private void Start()
+        {
+            if (!showOnLevelStart)
+            {
+                HideDialogue();
+            }
+            else
+            {
+                ShowDialogue();
+            }
+        }
+
         private void OnDisable()
         {
             StartupLogger.LogDisable("Unbinding dialogue advance input", name);
@@ -101,8 +110,6 @@ namespace DialogueSystem
         [Button]
         public void ShowDialogue()
         {
-            Debug.Log("Showing dialogue");
-
             DialoguePanel.SetActive(true);
             CurrentSnippet = Dialogue.DialogueSnippets[DialogueIndex];
             UpdateUI();
@@ -112,8 +119,6 @@ namespace DialogueSystem
         [Button]
         public void HideDialogue()
         {
-            Debug.Log("Hiding dialogue");
-
             DialoguePanel.SetActive(false);
         }
 

@@ -5,6 +5,7 @@ using Interactables;
 using JetBrains.Annotations;
 using NaughtyAttributes;
 using PlayerControls;
+using PlayerControls;
 using Unity.Cinemachine;
 using UnityEngine;
 using Utility;
@@ -31,6 +32,9 @@ namespace EchoMina.Original
         [UsedImplicitly] public event OnStartPlayback StartPlayback;
         public event OnStopPlayback StopPlayback;
 
+        [Header("States")] [SerializeField] [ReadOnly]
+        private EchoState state;
+
         public static OriginalEchoMina Instance;
 
         [Foldout("States")][SerializeField] private EchoState state;
@@ -45,20 +49,19 @@ namespace EchoMina.Original
 
         [Foldout("Interactions")] [SerializeField] private Interactor _interactor;
 
-        [Foldout("Recordings")][SerializeField][Range(float.MinValue, float.MaxValue)] private float _recordFrequency = 0.1f;
-        [Foldout("Recordings")][SerializeField][Range(float.MinValue, 30f)] private float _recordingTimeout = 10f;
-        [Foldout("Recordings")][SerializeField][Range(float.MinValue, 30f)] private float _recordingTimeoutWarning = 8f;
-        [Foldout("Recordings")][SerializeField] private GameObject _RecordingWarning;
-        [Foldout("Recordings")][SerializeField][ProgressBar(10f, EColor.Red)][ReadOnly] private float _recordingTimer;
-        [Foldout("Recordings")][SerializeField][ReadOnly] private int _recordIndex;
-        [Foldout("Recordings")][SerializeField][ReadOnly] private int _interactIndex;
-        [Foldout("Recordings")][SerializeField][ReadOnly] private List<Vector3> _positions;
-        [Foldout("Recordings")][SerializeField][ReadOnly] private List<Quaternion> _rotations;
-        [Foldout("Recordings")][SerializeField][ReadOnly] private float _interactionTime;
-        [Foldout("Recordings")][SerializeField][ReadOnly] private List<float> _interactions;
+        [Header("Recordings")] [SerializeField] [Range(float.MinValue, float.MaxValue)]
+        private float _recordFrequency = 0.1f;
 
-        [Foldout("Camera")][SerializeField] private CinemachineCamera echoCamera;
-        [Foldout("Camera")][SerializeField] private CinemachineInputAxisController echoInputAxisController;
+        [SerializeField] [ReadOnly] private int _recordIndex;
+        [SerializeField] [ReadOnly] private int _interactIndex;
+        [SerializeField] [ReadOnly] private Vector3 _startPosition;
+        [SerializeField] [ReadOnly] private Quaternion _startRotation;
+        [SerializeField] [ReadOnly] private List<Vector3> _positions;
+        [SerializeField] [ReadOnly] private List<Quaternion> _rotations;
+        [SerializeField] [ReadOnly] private float _interactionTime;
+        [SerializeField] [ReadOnly] private List<float> _interactions;
+        [SerializeField] private CinemachineCamera echoCamera;
+        [SerializeField] private CinemachineInputAxisController echoInputAxisController;
         private IRecordable[] recordables;
         private IBindable[] bindables;
 
@@ -132,7 +135,7 @@ namespace EchoMina.Original
                 bindable.BindObject();
             }
 
-            transform.position = PlayerController.Instance.transform.position;
+            Despawn();
         }
 
         private void OnEnable()
