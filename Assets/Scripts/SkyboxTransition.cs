@@ -6,72 +6,60 @@ public class SkyboxAndObjectToggle : MonoBehaviour
     public Material skyboxOnEnter;
     public Material skyboxOnExit;
 
-    [Header("Objects To Toggle (Drag manually)")]
-    public GameObject[] objectsToToggle;
+    [Header("On Trigger ENTER")]
+    [Tooltip("These objects will be turned ON when you enter, and OFF when you leave.")]
+    public GameObject[] enableOnEnter;
 
-    [Header("OR Use Tag Instead")]
-    public bool useTagInstead = false;
-    public string tagToToggle = "DisableGroup";
+    [Tooltip("These objects will be turned OFF when you enter, and ON when you leave.")]
+    public GameObject[] disableOnEnter;
 
     private void OnTriggerEnter(Collider other)
     {
+        // Only trigger for the Player
         if (!other.CompareTag("Player")) return;
 
-        // Skybox change
+        // 1. Change Skybox
         if (skyboxOnEnter != null)
         {
             RenderSettings.skybox = skyboxOnEnter;
             DynamicGI.UpdateEnvironment();
         }
 
-        // Disable objects
-        if (useTagInstead)
+        // 2. Enable the 'Enable' group
+        foreach (GameObject obj in enableOnEnter)
         {
-            GameObject[] objs = GameObject.FindGameObjectsWithTag(tagToToggle);
-            foreach (GameObject obj in objs)
-            {
-                if (obj != null)
-                    obj.SetActive(false);
-            }
+            if (obj != null) obj.SetActive(true);
         }
-        else
+
+        // 3. Disable the 'Disable' group
+        foreach (GameObject obj in disableOnEnter)
         {
-            foreach (GameObject obj in objectsToToggle)
-            {
-                if (obj != null)
-                    obj.SetActive(false);
-            }
+            if (obj != null) obj.SetActive(false);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
+        // Only trigger for the Player
         if (!other.CompareTag("Player")) return;
 
-        // Skybox revert
+        // 1. Revert Skybox
         if (skyboxOnExit != null)
         {
             RenderSettings.skybox = skyboxOnExit;
             DynamicGI.UpdateEnvironment();
         }
 
-        // Re-enable objects
-        if (useTagInstead)
+        // 2. Reverse: Turn OFF the 'Enable' group
+        foreach (GameObject obj in enableOnEnter)
         {
-            GameObject[] objs = GameObject.FindGameObjectsWithTag(tagToToggle);
-            foreach (GameObject obj in objs)
-            {
-                if (obj != null)
-                    obj.SetActive(true);
-            }
+            if (obj != null) obj.SetActive(false);
         }
-        else
+
+        // 3. Reverse: Turn ON the 'Disable' group
+        foreach (GameObject obj in disableOnEnter)
         {
-            foreach (GameObject obj in objectsToToggle)
-            {
-                if (obj != null)
-                    obj.SetActive(true);
-            }
+            if (obj != null) obj.SetActive(true);
         }
     }
 }
