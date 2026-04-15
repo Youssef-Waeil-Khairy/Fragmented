@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class GhostTrail : MonoBehaviour
 {
     [Header("Trail Settings")]
     public float meshRefreshRate = 0.05f;   // How often a ghost spawns
     public float meshDestroyDelay = 0.5f;    // How long each ghost stays visible
+    public float movementThreshold = 0.01f; // Minimum distance moved to spawn a ghost
 
     [Header("Visuals")]
     public Material ghostMaterial;         // Assign your GhostMaterial here
@@ -17,6 +19,7 @@ public class GhostTrail : MonoBehaviour
 
     private MeshRenderer[] meshRenderers;
     private MeshFilter[] meshFilters;
+    private Vector3 lastPosition;
 
     private class GhostData
     {
@@ -30,6 +33,7 @@ public class GhostTrail : MonoBehaviour
 
     void Start()
     {
+        lastPosition = transform.position;
         StartCoroutine(SpawnGhosts());
     }
 
@@ -50,22 +54,31 @@ public class GhostTrail : MonoBehaviour
 
         while (true)
         {
-            for (int i = 0; i < meshRenderers.Length; i++)
+            // Check if the character has moved significantly since the last frame
+            float distanceMoved = Vector3.Distance(transform.position, lastPosition);
+
+            if (distanceMoved > movementThreshold)
             {
-                if (meshRenderers[i] == null || !meshRenderers[i].enabled || meshFilters[i] == null || meshFilters[i].sharedMesh == null) continue;
+                for (int i = 0; i < meshRenderers.Length; i++)
+                {
+                    if (meshRenderers[i] == null || !meshRenderers[i].enabled || meshFilters[i] == null || meshFilters[i].sharedMesh == null) continue;
 
-                GhostData newGhost = new GhostData();
-                newGhost.mesh = meshFilters[i].sharedMesh;
-                newGhost.matrix = meshRenderers[i].transform.localToWorldMatrix;
-                newGhost.material = new Material(ghostMaterial);
+                    GhostData newGhost = new GhostData();
+                    newGhost.mesh = meshFilters[i].sharedMesh;
+                    newGhost.matrix = meshRenderers[i].transform.localToWorldMatrix;
+                    newGhost.material = new Material(ghostMaterial);
 
-                // Set render queue to draw behind transparent objects but after opaque ones
-                newGhost.material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent - 1; // Draw just before transparent objects
+                    // Force settings to prevent artifacts
+                    newGhost.material.renderQueue = (int)RenderQueue.Transparent + 100;
+                    newGhost.material.SetInt("_ZWrite", 0);
 
-                newGhost.startTime = Time.time;
-
-                activeGhosts.Add(newGhost);
+                    newGhost.startTime = Time.time;
+                    activeGhosts.Add(newGhost);
+                }
+                // Update lastPosition only when we actually spawn a ghost
+                lastPosition = transform.position;
             }
+
             yield return new WaitForSeconds(meshRefreshRate);
         }
     }
@@ -79,17 +92,31 @@ public class GhostTrail : MonoBehaviour
 
             if (t >= 1.0f)
             {
-                Destroy(activeGhosts[i].material);
+                if (activeGhosts[i].material != null) Destroy(activeGhosts[i].material);
                 activeGhosts.RemoveAt(i);
                 continue;
             }
 
-            // Update Alpha
             float currentAlpha = Mathf.Lerp(1f, 0f, t);
-            activeGhosts[i].material.SetFloat(alphaPropertyName, currentAlpha);
+            if (activeGhosts[i].material != null)
+            {
+                activeGhosts[i].material.SetFloat(alphaPropertyName, currentAlpha);
 
-            // Draw the mesh directly in the world, explicitly disabling shadows
-            Graphics.DrawMesh(activeGhosts[i].mesh, activeGhosts[i].matrix, activeGhosts[i].material, 0, null, 0, null, UnityEngine.Rendering.ShadowCastingMode.Off, false);
+                Graphics.DrawMesh(
+                    activeGhosts[i].mesh,
+                    activeGhosts[i].matrix,
+                    activeGhosts[i].material,
+                    0,
+                    null,
+                    0,
+                    null,
+                    ShadowCastingMode.Off,
+                    false,
+                    null,
+                    LightProbeUsage.Off,
+                    null
+                );
+            }
         }
     }
 }

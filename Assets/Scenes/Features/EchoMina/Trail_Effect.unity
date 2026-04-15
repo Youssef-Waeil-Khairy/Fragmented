@@ -932,6 +932,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meshRefreshRate: 0.05
   meshDestroyDelay: 0.5
+  movementThreshold: 0.01
   ghostMaterial: {fileID: 2100000, guid: 1bfac5ce67e142b498a96f68c61b0401, type: 2}
   alphaPropertyName: _Alpha
   targetModelParent: {fileID: 180486401}
@@ -2773,7 +2774,8 @@ PrefabInstance:
       propertyPath: m_Interpolate
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5133057803280067583, guid: 1db0bcc4edb713c46be7f54718df9be6, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
