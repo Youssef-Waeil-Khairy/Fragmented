@@ -167,5 +167,30 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3aa1d8ec02d10554380ab6cf56e3d55c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3235901421456194807}
   m_SourcePrefab: {fileID: 100100000, guid: 3aa1d8ec02d10554380ab6cf56e3d55c, type: 3}
+--- !u!1 &1985903672401749428 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 3aa1d8ec02d10554380ab6cf56e3d55c, type: 3}
+  m_PrefabInstance: {fileID: 1679333654295959781}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3235901421456194807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1985903672401749428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 320d1358a3e98ea4480b741a62a41f54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshRefreshRate: 0.05
+  meshDestroyDelay: 0.00001
+  ghostMaterial: {fileID: 2100000, guid: 1bfac5ce67e142b498a96f68c61b0401, type: 2}
+  alphaPropertyName: _Alpha
+  targetModelParent: {fileID: 1985903672401749428}

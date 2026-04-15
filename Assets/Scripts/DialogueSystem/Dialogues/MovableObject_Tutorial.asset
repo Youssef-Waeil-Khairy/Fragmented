@@ -18,28 +18,28 @@ MonoBehaviour:
     SpeakerSprite: {fileID: 0}
     HasBackgroundSprite: 0
     BackgroundSprite: {fileID: 0}
-    Text: Mina can lift objects
+    Text: Mina can toggle levers
   - SpeakerName: Mina
     HasSpeakerSprite: 0
     SpeakerSprite: {fileID: 0}
     HasBackgroundSprite: 0
     BackgroundSprite: {fileID: 0}
-    Text: Press E to interact with the orange box.
+    Text: Toggleing levers, makes obtsacles move permantley
   - SpeakerName: Mina
     HasSpeakerSprite: 0
     SpeakerSprite: {fileID: 0}
     HasBackgroundSprite: 0
     BackgroundSprite: {fileID: 0}
-    Text: Lift the orange box to the orange presure plate.
+    Text: Press E to interact with the lever at the end of the room
   - SpeakerName: Mina
     HasSpeakerSprite: 0
     SpeakerSprite: {fileID: 0}
     HasBackgroundSprite: 0
     BackgroundSprite: {fileID: 0}
-    Text: This opens the gate
+    Text: This toggles the door form right to left
   - SpeakerName: Mina
     HasSpeakerSprite: 0
     SpeakerSprite: {fileID: 0}
     HasBackgroundSprite: 0
     BackgroundSprite: {fileID: 0}
-    Text: Now head inside the home, and go to the basement
+    Text: Now go back to the yard through the new opening
