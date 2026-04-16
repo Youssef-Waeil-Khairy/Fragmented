@@ -1,3 +1,4 @@
+using System;
 using NaughtyAttributes;
 using PlayerControls;
 using UnityEngine;
@@ -61,6 +62,11 @@ namespace MainMenu
         private void DebugFadeOut()
         {
             DoFadeOut(debugBool, debugTime);
+        }
+
+        private void Start()
+        {
+            if (Transition is not TransitionType.None) isTransitioning = true;
         }
 
         private void Update()

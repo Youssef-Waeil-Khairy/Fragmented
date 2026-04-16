@@ -2,13 +2,13 @@
 - Project name: Fragmented
 - Unity version: Unity 6000.1.14f1
 - Active scene:
-  - Name: Tutorial_Home
+  - Name: Tutorial_Layout
   - Tags:
-    - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Command, EchoMina, Interactable, Stair
+    - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Command, EchoMina, Interactable, Stair, TheHouse
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Ground, Water, UI, Interactible, EchoMina, Walls, Player, Stairs
 - Active game object:
-  - Name: Player
-  - Tag: Player
-  - Layer: Player
+  - Name: 0 Set GameStart
+  - Tag: Untagged
+  - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

@@ -1365,7 +1365,7 @@ MonoBehaviour:
         m_CallState: 2
   _hasIntectionCaamera: 0
   _camera: {fileID: 0}
-  _cameraDuration: 0
+  _cameraDuration: 0.1
   _cameraTime: 0
   _hasBeenInteracted: 0
 --- !u!65 &1230290286
@@ -1969,7 +1969,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3527509656408764565, guid: 1db0bcc4edb713c46be7f54718df9be6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.96
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 3527509656408764565, guid: 1db0bcc4edb713c46be7f54718df9be6, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2010,6 +2010,10 @@ PrefabInstance:
     - target: {fileID: 4583377852656252385, guid: 1db0bcc4edb713c46be7f54718df9be6, type: 3}
       propertyPath: m_Name
       value: Mina
+      objectReference: {fileID: 0}
+    - target: {fileID: 5133057803280067583, guid: 1db0bcc4edb713c46be7f54718df9be6, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2229,8 +2233,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1670553570}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0, z: 0.7071068, w: -0.7071068}
-  m_LocalPosition: {x: 18.026026, y: -5.812689, z: -12.200001}
+  m_LocalRotation: {x: 0.10626403, y: 0, z: 0, w: 0.994338}
+  m_LocalPosition: {x: 0.15, y: 4.995613, z: -9.031234}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2642,7 +2646,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4928453060125610321, guid: 9f9391dafc7a8234882125e06cde6b8b, type: 3}
       propertyPath: Transition
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

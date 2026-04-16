@@ -88,6 +88,8 @@ namespace Interactables
         }
         public void ShowInteraction()
         {
+            if (!hasInteractionCamera) return;
+            
             if (OriginalEchoMina.Instance.State is OriginalEchoMina.EchoState.Recording)
             {
                 // Disable Echo  Mina's camera

@@ -37,8 +37,8 @@ namespace Interactables
 
                 OnBeginInteraction?.Invoke();
                 _isInteracting = true;
-
-                if (!_hasBeenInteracted)
+                
+                if (!_hasBeenInteracted && _hasIntectionCaamera)
                 {
                     if (OriginalEchoMina.Instance.State is OriginalEchoMina.EchoState.Recording)
                     {
@@ -50,7 +50,7 @@ namespace Interactables
                     }
 
                     PlayerController.Instance.PlayerInput.enabled = false;
-                    _camera.enabled = true;
+                    if (_camera != null) _camera.enabled = true;
                 }
             }
         }

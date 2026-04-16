@@ -3,6 +3,7 @@ using Interactables;
 using JetBrains.Annotations;
 using NaughtyAttributes;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -25,6 +26,7 @@ public class StagedObstacle : MonoBehaviour, IRecordable
     [SerializeField][ReadOnly] private bool isMoving = false;
     [SerializeField][ReadOnly] private bool isMovingToTarget = false;
     [SerializeField] private bool canMoveWhileMoving = true;
+    [SerializeField] private List<float> distancesToTarget = new List<float>();
     [Foldout("Events")][SerializeField] private List<UnityEvent> preMoveEvents;
     [Foldout("Events")][SerializeField] private List<UnityEvent> events;
     [SerializeField] private bool drawGizmos = true;
@@ -85,8 +87,9 @@ public class StagedObstacle : MonoBehaviour, IRecordable
 
         if (!isMovingToTarget) return;
 
-        if (Vector3.Distance(transform.position, targetPosition) <= errorMargin)
+        if (Vector3.Distance(transform.position, targetPosition) <= errorMargin || HasMovedAwayFromTarget())
         {
+            DestinationReached:
             isMovingToTarget = false;
             rb.MovePosition(targetPosition);
             events[currentStage]?.Invoke();
@@ -99,6 +102,27 @@ public class StagedObstacle : MonoBehaviour, IRecordable
             float curveValue = speedCurve.Evaluate(time);
             float speed = math.lerp(0f, maxSpeed, curveValue);
             rb.MovePosition(transform.position + moveDirection * (speed * Time.fixedDeltaTime));
+        }
+        
+        
+    }
+
+    private bool HasMovedAwayFromTarget()
+    {
+        if (distancesToTarget.Count > 1)
+        {
+            if (distancesToTarget[distancesToTarget.Count - 1] > distancesToTarget[distancesToTarget.Count - 2])
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            return false;
         }
     }
 
