@@ -44,6 +44,10 @@ namespace PlayerControls
         public CinemachineCamera PlayerCamera => playerCamera;
         public PlayerInput PlayerInput => playerInput;
 
+        //getters for animtion
+        public float MoveDirection => moveDirection;
+
+
         public void Start()
         {
             StartupLogger.LogStart("Setting up PlayerController Singleton", name);
