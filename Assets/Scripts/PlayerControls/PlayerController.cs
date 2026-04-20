@@ -46,6 +46,7 @@ namespace PlayerControls
 
         //getters for animtion
         public float MoveDirection => moveDirection;
+        public float TurnDirection => turnDirection;
 
 
         public void Start()
