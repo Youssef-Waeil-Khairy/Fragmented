@@ -1,9 +1,9 @@
-
-using EchoMina.Original;
+﻿using EchoMina.Original;
 using JetBrains.Annotations;
 using NaughtyAttributes;
 using PlayerControls;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Interactables
 {
@@ -20,10 +20,33 @@ namespace Interactables
         private Interactor _interactor;
         [SerializeField] private bool isLocked = false;
 
-        [BoxGroup("Snapshot")] [SerializeField] private Transform snapshotParentTransform;
-        [BoxGroup("Snapshot")] [SerializeField] private Transform snapshotTransform;
-        [BoxGroup("Snapshot")] [SerializeField] private Transform checkpointSnapshotParentTransform;
-        [BoxGroup("Snapshot")] [SerializeField] private Transform checkpointSnapshotTransform;
+        [BoxGroup("Snapshot")][SerializeField] private Transform snapshotParentTransform;
+        [BoxGroup("Snapshot")][SerializeField] private Transform snapshotTransform;
+        [BoxGroup("Snapshot")][SerializeField] private Transform checkpointSnapshotParentTransform;
+        [BoxGroup("Snapshot")][SerializeField] private Transform checkpointSnapshotTransform;
+
+        // ✅ Events — subscribe to these from other scripts or wire up in Inspector
+        [Foldout("Events")][SerializeField] private UnityEvent onPickedUp;
+        [Foldout("Events")][SerializeField] private UnityEvent onDropped;
+        [Foldout("Events")][SerializeField] private UnityEvent onPreviewStarted;
+        [Foldout("Events")][SerializeField] private UnityEvent onPreviewStopped;
+        [Foldout("Events")][SerializeField] private UnityEvent onLocked;
+        [Foldout("Events")][SerializeField] private UnityEvent onUnlocked;
+
+        // ✅ C# delegates — subscribe to these from code
+        public delegate void OnPickedUpDelegate(Interactor interactor);
+        public delegate void OnDroppedDelegate(Interactor interactor);
+        public delegate void OnPreviewStartedDelegate();
+        public delegate void OnPreviewStoppedDelegate();
+        public delegate void OnLockedDelegate(Interactor interactor);
+        public delegate void OnUnlockedDelegate(Interactor interactor);
+
+        public event OnPickedUpDelegate PickedUp;
+        public event OnDroppedDelegate Dropped;
+        public event OnPreviewStartedDelegate PreviewStarted;
+        public event OnPreviewStoppedDelegate PreviewStopped;
+        public event OnLockedDelegate Locked;
+        public event OnUnlockedDelegate Unlocked;
 
         void OnEnable()
         {
@@ -49,6 +72,10 @@ namespace Interactables
 
             isPickedUp = true;
             StopPreview();
+
+            // ✅ Fire pick up events
+            onPickedUp?.Invoke();
+            PickedUp?.Invoke(interactor);
         }
 
         private void DropObject(Interactor interactor)
@@ -64,15 +91,21 @@ namespace Interactables
 
             Unlock(interactor);
             StartPreview();
+
+            // ✅ Fire drop events
+            onDropped?.Invoke();
+            Dropped?.Invoke(interactor);
         }
 
-        [Button][UsedImplicitly]
+        [Button]
+        [UsedImplicitly]
         private void EchoDrop()
         {
             DropObject(OriginalEchoMina.Instance.EchoInteractor);
         }
 
-        [Button][UsedImplicitly]
+        [Button]
+        [UsedImplicitly]
         private void MinaDrop()
         {
             DropObject(PlayerController.Instance.gameObject.GetComponent<Interactor>());
@@ -84,21 +117,14 @@ namespace Interactables
 
         public bool CanInteract(Interactor interactor)
         {
-            // if we are not picked up, we can be picked up
-            if (!isPickedUp)
-            {
-                return true;
-            }
+            if (!isPickedUp) return true;
 
-            // if we are picked up the interactor needs to be the same as our current one
-            if (isPickedUp && interactor == _interactor)
-            {
-                return true;
-            }
+            if (isPickedUp && interactor == _interactor) return true;
 
             Debug.Log($"{gameObject.name} is already picked up by {_interactor.gameObject.name}");
             return false;
         }
+
         public void Interact(Interactor interactor)
         {
             if (isPickedUp)
@@ -112,32 +138,41 @@ namespace Interactables
                 Debug.Log($"{gameObject.name} is picked up by {interactor.gameObject.name}");
             }
         }
+
         public void StartPreview()
         {
             Debug.Log($"<b><color=green>[Interactions][Moveable Objects][Preview]</color></b> Preview started for {gameObject.name}");
             outline.enabled = true;
             previewPanel.SetActive(true);
+
+            // ✅ Fire preview started events
+            onPreviewStarted?.Invoke();
+            PreviewStarted?.Invoke();
         }
+
         public void StopPreview()
         {
             Debug.Log($"<b><color=red>[Interactions][Moveable Objects][Preview]</color></b> Preview ended for {gameObject.name}");
             if (outline) outline.enabled = false;
             previewPanel.SetActive(false);
+
+            // ✅ Fire preview stopped events
+            onPreviewStopped?.Invoke();
+            PreviewStopped?.Invoke();
         }
-        public bool IsLockable()
-        {
-            return true;
-        }
-        public bool IsLocked()
-        {
-            return isLocked;
-        }
+
+        public bool IsLockable() => true;
+        public bool IsLocked() => isLocked;
+
         public void Lock(Interactor interactor)
         {
             _interactor = interactor;
             isLocked = true;
-
             Debug.Log($"<b><color=green>[Interactions][Lock]</color></b> {gameObject.name} is locked to {interactor.name}");
+
+            // ✅ Fire lock events
+            onLocked?.Invoke();
+            Locked?.Invoke(interactor);
         }
 
         public void Unlock(Interactor interactor)
@@ -146,15 +181,14 @@ namespace Interactables
             interactor.UnlockObject();
             _interactor = null;
             isLocked = false;
+
+            // ✅ Fire unlock events
+            onUnlocked?.Invoke();
+            Unlocked?.Invoke(interactor);
         }
-        public void ShowInteraction()
-        {
-            Debug.Log("Should be unreachable");
-        }
-        public void HideInteraction()
-        {
-            Debug.Log("Should be unreachable");
-        }
+
+        public void ShowInteraction() => Debug.Log("Should be unreachable");
+        public void HideInteraction() => Debug.Log("Should be unreachable");
 
         #endregion
 
@@ -164,7 +198,6 @@ namespace Interactables
         {
             snapshotParentTransform = transform.parent;
             snapshotTransform = transform;
-
             startingPosition = transform.position;
             startingRotation = transform.rotation;
         }
