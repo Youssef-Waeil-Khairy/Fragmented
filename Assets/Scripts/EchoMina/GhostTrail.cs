@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -6,20 +6,21 @@ using UnityEngine.Rendering;
 public class GhostTrail : MonoBehaviour
 {
     [Header("Trail Settings")]
-    public float meshRefreshRate = 0.05f;   // How often a ghost spawns
-    public float meshDestroyDelay = 0.5f;    // How long each ghost stays visible
-    public float movementThreshold = 0.01f; // Minimum distance moved to spawn a ghost
+    public float meshRefreshRate = 0.05f;
+    public float meshDestroyDelay = 0.5f;
+    public float movementThreshold = 0.01f;
 
     [Header("Visuals")]
-    public Material ghostMaterial;         // Assign your GhostMaterial here
-    public string alphaPropertyName = "_Alpha"; // Must match shader reference
+    public Material ghostMaterial;
+    public string alphaPropertyName = "_Alpha";
 
     [Header("Target Model")]
-    [SerializeField] private GameObject targetModelParent; // Drag the parent GameObject of your Mina Model here
+    [SerializeField] private GameObject targetModelParent;
 
     private MeshRenderer[] meshRenderers;
     private MeshFilter[] meshFilters;
     private Vector3 lastPosition;
+    private Coroutine spawnCoroutine;
 
     private class GhostData
     {
@@ -33,8 +34,31 @@ public class GhostTrail : MonoBehaviour
 
     void Start()
     {
+        if (targetModelParent == null) targetModelParent = this.gameObject;
+
+        meshRenderers = targetModelParent.GetComponentsInChildren<MeshRenderer>(true);
+        meshFilters = targetModelParent.GetComponentsInChildren<MeshFilter>(true);
+    }
+
+    // ✅ Runs every time the GameObject is enabled (including after SetActive(true))
+    void OnEnable()
+    {
         lastPosition = transform.position;
-        StartCoroutine(SpawnGhosts());
+        activeGhosts.Clear();
+
+        if (spawnCoroutine != null) StopCoroutine(spawnCoroutine);
+        spawnCoroutine = StartCoroutine(SpawnGhosts());
+    }
+
+    // ✅ Runs every time the GameObject is disabled
+    void OnDisable()
+    {
+        if (spawnCoroutine != null)
+        {
+            StopCoroutine(spawnCoroutine);
+            spawnCoroutine = null;
+        }
+        activeGhosts.Clear();
     }
 
     IEnumerator SpawnGhosts()
@@ -54,7 +78,6 @@ public class GhostTrail : MonoBehaviour
 
         while (true)
         {
-            // Check if the character has moved significantly since the last frame
             float distanceMoved = Vector3.Distance(transform.position, lastPosition);
 
             if (distanceMoved > movementThreshold)
@@ -67,15 +90,11 @@ public class GhostTrail : MonoBehaviour
                     newGhost.mesh = meshFilters[i].sharedMesh;
                     newGhost.matrix = meshRenderers[i].transform.localToWorldMatrix;
                     newGhost.material = new Material(ghostMaterial);
-
-                    // Force settings to prevent artifacts
                     newGhost.material.renderQueue = (int)RenderQueue.Transparent + 100;
                     newGhost.material.SetInt("_ZWrite", 0);
-
                     newGhost.startTime = Time.time;
                     activeGhosts.Add(newGhost);
                 }
-                // Update lastPosition only when we actually spawn a ghost
                 lastPosition = transform.position;
             }
 
@@ -101,20 +120,14 @@ public class GhostTrail : MonoBehaviour
             if (activeGhosts[i].material != null)
             {
                 activeGhosts[i].material.SetFloat(alphaPropertyName, currentAlpha);
-
                 Graphics.DrawMesh(
                     activeGhosts[i].mesh,
                     activeGhosts[i].matrix,
                     activeGhosts[i].material,
-                    0,
-                    null,
-                    0,
-                    null,
+                    0, null, 0, null,
                     ShadowCastingMode.Off,
-                    false,
-                    null,
-                    LightProbeUsage.Off,
-                    null
+                    false, null,
+                    LightProbeUsage.Off, null
                 );
             }
         }
