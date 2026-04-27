@@ -8085,10 +8085,6 @@ PrefabInstance:
       propertyPath: 'checkpoints.Array.data[2]'
       value: 
       objectReference: {fileID: 1977796692}
-    - target: {fileID: 3408073673203408446, guid: 1db0bcc4edb713c46be7f54718df9be6, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.72
-      objectReference: {fileID: 0}
     - target: {fileID: 3527509656408764565, guid: 1db0bcc4edb713c46be7f54718df9be6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 44.4
@@ -8133,14 +8129,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 6373630317462492808, guid: 1db0bcc4edb713c46be7f54718df9be6, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.7656131
-      objectReference: {fileID: 0}
-    - target: {fileID: 8767316769088701508, guid: 1db0bcc4edb713c46be7f54718df9be6, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 29e852e1833306942954894c23a959ac, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8267,7 +8255,7 @@ Transform:
   m_GameObject: {fileID: 687187133}
   serializedVersion: 2
   m_LocalRotation: {x: 0.106264055, y: 0, z: 0, w: 0.994338}
-  m_LocalPosition: {x: 44.406002, y: -0.5143869, z: -11.745234}
+  m_LocalPosition: {x: 44.406002, y: -0.7323868, z: -11.779234}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
