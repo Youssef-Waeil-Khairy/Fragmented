@@ -9,21 +9,33 @@ EditorBuildSettings:
     path: Assets/Scenes/Develop.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Scenes/PauseMenu.unity
-    guid: 7f7c8264b9a947f41917c44129827f0c
-  - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: b3f11a1e2c034d748a6dd86ee85664ec
   - enabled: 1
+    path: Assets/Scenes/PauseMenu.unity
+    guid: 7f7c8264b9a947f41917c44129827f0c
+  - enabled: 1
     path: Assets/Scenes/Settings.unity
     guid: 2ec3f857bb552ea4d8cd5dee65063312
+  - enabled: 1
+    path: Assets/Scenes/Tutorial_Layout.unity
+    guid: ad2ca052f6cf9c7489af52d6718f5333
+  - enabled: 1
+    path: Assets/Scenes/Level_One_Pool.unity
+    guid: 21fd2320e26c42b4ab2e357f5de8e9cf
+  - enabled: 1
+    path: Assets/Scenes/Level_Two_Library.unity
+    guid: 581620b54a06acc4f87fb22cb36d574b
+  - enabled: 1
+    path: Assets/Scenes/Level_Three_Mall.unity
+    guid: 753f09b3099a99a4db1fbec87b94de70
   - enabled: 0
     path: Assets/Scenes/GreyBoxing/0_Tutorial_GreyBoxing.unity
     guid: 419aa68a2502a0646b27ed6426b0010a
   - enabled: 0
     path: Assets/Scenes/GreyBoxing/library test.unity
     guid: 525f9a454a562ed4994f3cec67d96577
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Tutorial_Home_.unity
     guid: b5ed89ada5eea504fa4ca10b27b60344
   - enabled: 0

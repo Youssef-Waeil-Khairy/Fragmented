@@ -5,7 +5,6 @@ using Interactables;
 using JetBrains.Annotations;
 using NaughtyAttributes;
 using PlayerControls;
-using PlayerControls;
 using Unity.Cinemachine;
 using UnityEngine;
 using Utility;
@@ -109,8 +108,10 @@ namespace EchoMina.Original
                 if (_moveDirection != 0)
                 {
                     IsWalking = true;
-                    if (_moveDirection != animator.GetFloat("WalkingSpeed"))
-                    animator.SetFloat("WalkingSpeed", _moveDirection);
+                    if (!Mathf.Approximately(_moveDirection, animator.GetFloat(parameterNameWalkingSpeed)))
+                    {
+                        animator.SetFloat(parameterNameWalkingSpeed, _moveDirection);
+                    }
                 }
                 else
                 {

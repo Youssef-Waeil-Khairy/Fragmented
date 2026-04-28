@@ -6562,7 +6562,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1924080998}
         m_TargetAssemblyTypeName: DialogueSystem.DialogueManager, Assembly-CSharp
-        m_MethodName: AdvanceDialogue
+        m_MethodName: Activate
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6574,34 +6574,10 @@ MonoBehaviour:
         m_CallState: 2
   OnPreviewStart:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1924080998}
-        m_TargetAssemblyTypeName: DialogueSystem.DialogueManager, Assembly-CSharp
-        m_MethodName: ShowDialogue
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   OnPreviewEnd:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1924080998}
-        m_TargetAssemblyTypeName: DialogueSystem.DialogueManager, Assembly-CSharp
-        m_MethodName: HideDialogue
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   PreventOutline: {fileID: 6885937178916628784}
   PreviewPanel: {fileID: 1831019308}
   interactionCamera: {fileID: 0}
@@ -8539,6 +8515,18 @@ PrefabInstance:
     - target: {fileID: 6181083584301792470, guid: 1c8edcaf2a2788944b8530049fe6a546, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 277.986
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702084702840114592, guid: 1c8edcaf2a2788944b8530049fe6a546, type: 3}
+      propertyPath: OnPreviewEnd.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702084702840114592, guid: 1c8edcaf2a2788944b8530049fe6a546, type: 3}
+      propertyPath: OnPreviewStart.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702084702840114592, guid: 1c8edcaf2a2788944b8530049fe6a546, type: 3}
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Activate
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -15662,6 +15650,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: DialogueCanvas_PreasurePlate
       objectReference: {fileID: 0}
+    - target: {fileID: 7702084702840114592, guid: 1c8edcaf2a2788944b8530049fe6a546, type: 3}
+      propertyPath: OnPreviewEnd.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702084702840114592, guid: 1c8edcaf2a2788944b8530049fe6a546, type: 3}
+      propertyPath: OnPreviewStart.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702084702840114592, guid: 1c8edcaf2a2788944b8530049fe6a546, type: 3}
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Activate
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -21313,7 +21313,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 910499289}
         m_TargetAssemblyTypeName: DialogueSystem.DialogueManager, Assembly-CSharp
-        m_MethodName: AdvanceDialogue
+        m_MethodName: Activate
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -21325,34 +21325,10 @@ MonoBehaviour:
         m_CallState: 2
   OnPreviewStart:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 910499289}
-        m_TargetAssemblyTypeName: DialogueSystem.DialogueManager, Assembly-CSharp
-        m_MethodName: ShowDialogue
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   OnPreviewEnd:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 910499289}
-        m_TargetAssemblyTypeName: DialogueSystem.DialogueManager, Assembly-CSharp
-        m_MethodName: HideDialogue
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   PreventOutline: {fileID: 6885937178916628784}
   PreviewPanel: {fileID: 118669040}
   interactionCamera: {fileID: 0}
@@ -22333,6 +22309,18 @@ PrefabInstance:
     - target: {fileID: 6181083584301792470, guid: 1c8edcaf2a2788944b8530049fe6a546, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 277.986
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702084702840114592, guid: 1c8edcaf2a2788944b8530049fe6a546, type: 3}
+      propertyPath: OnPreviewEnd.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702084702840114592, guid: 1c8edcaf2a2788944b8530049fe6a546, type: 3}
+      propertyPath: OnPreviewStart.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702084702840114592, guid: 1c8edcaf2a2788944b8530049fe6a546, type: 3}
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Activate
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -34718,12 +34706,28 @@ PrefabInstance:
       value: DialogueCanvas_Instruction
       objectReference: {fileID: 0}
     - target: {fileID: 7702084702840114592, guid: 1c8edcaf2a2788944b8530049fe6a546, type: 3}
+      propertyPath: OnPreviewEnd.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702084702840114592, guid: 1c8edcaf2a2788944b8530049fe6a546, type: 3}
+      propertyPath: OnPreviewStart.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702084702840114592, guid: 1c8edcaf2a2788944b8530049fe6a546, type: 3}
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702084702840114592, guid: 1c8edcaf2a2788944b8530049fe6a546, type: 3}
       propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1969505313926868471}
     - target: {fileID: 7702084702840114592, guid: 1c8edcaf2a2788944b8530049fe6a546, type: 3}
       propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: AdvanceDialogue
+      value: Activate
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702084702840114592, guid: 1c8edcaf2a2788944b8530049fe6a546, type: 3}
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DialogueSystem.DialogueManager, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 750790358631497639, guid: 1c8edcaf2a2788944b8530049fe6a546, type: 3}
