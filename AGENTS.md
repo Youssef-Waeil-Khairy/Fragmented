@@ -8,7 +8,7 @@
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Ground, Water, UI, Interactible, EchoMina, Walls, Player, Stairs
 - Active game object:
-  - Name: 0 Set GameStart
-  - Tag: Untagged
-  - Layer: Default
+  - Name: EchoMina(Original)
+  - Tag: EchoMina
+  - Layer: EchoMina
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

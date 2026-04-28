@@ -140,6 +140,18 @@ namespace DialogueSystem
             UpdateUI();
         }
 
+        public void Activate()
+        {
+            if (DialoguePanel.activeSelf)
+            {
+                AdvanceDialogue();
+            }
+            else
+            {
+                ShowDialogue();
+            }
+        }
+
         [Button][UsedImplicitly]
         public void GetCurrentSnippet()
         {
