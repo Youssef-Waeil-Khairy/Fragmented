@@ -16,5 +16,6 @@ public class AnimationController : MonoBehaviour
 
         bool isWalking = PlayerController.Instance.MoveDirection != 0f;
         animator.SetBool("isWalking", isWalking);
+        animator.SetFloat("WalkingSpeed", PlayerController.Instance.MoveDirection);
     }
 }

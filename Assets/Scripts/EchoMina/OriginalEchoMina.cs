@@ -50,22 +50,28 @@ namespace EchoMina.Original
         [Header("Recordings")] [SerializeField] [Range(float.MinValue, float.MaxValue)]
         private float _recordFrequency = 0.1f;
 
-        [SerializeField] [ReadOnly] private int _recordIndex;
-        [SerializeField] [ReadOnly] private int _interactIndex;
-        [SerializeField] private float _recordingTimer = 0;
-        [SerializeField] private float _recordingTimeoutWarning = 15f;
-        [SerializeField] private float _recordingTimeout = 18f;
-        [SerializeField] private GameObject _RecordingWarning;
-        [SerializeField] [ReadOnly] private Vector3 _startPosition;
-        [SerializeField] [ReadOnly] private Quaternion _startRotation;
-        [SerializeField] [ReadOnly] private List<Vector3> _positions;
-        [SerializeField] [ReadOnly] private List<Quaternion> _rotations;
-        [SerializeField] [ReadOnly] private float _interactionTime;
-        [SerializeField] [ReadOnly] private List<float> _interactions;
-        [SerializeField] private CinemachineCamera echoCamera;
-        [SerializeField] private CinemachineInputAxisController echoInputAxisController;
-        private IRecordable[] recordables;
-        private IBindable[] bindables;
+        [Foldout("Recording")][SerializeField] [ReadOnly] private int _recordIndex;
+        [Foldout("Recording")][SerializeField] [ReadOnly] private int _interactIndex;
+        [Foldout("Recording")][SerializeField] private float _recordingTimer = 0;
+        [Foldout("Recording")][SerializeField] private float _recordingTimeoutWarning = 15f;
+        [Foldout("Recording")][SerializeField] private float _recordingTimeout = 18f;
+        [Foldout("Recording")][SerializeField] private GameObject _RecordingWarning;
+        [Foldout("Recording")][SerializeField] [ReadOnly] private Vector3 _startPosition;
+        [Foldout("Recording")][SerializeField] [ReadOnly] private Quaternion _startRotation;
+        [Foldout("Recording")][SerializeField] [ReadOnly] private List<Vector3> _positions;
+        [Foldout("Recording")][SerializeField] [ReadOnly] private List<Quaternion> _rotations;
+        [Foldout("Recording")][SerializeField] [ReadOnly] private float _interactionTime;
+        [Foldout("Recording")][SerializeField] [ReadOnly] private List<float> _interactions;
+        [Foldout("Recording")][SerializeField] private CinemachineCamera echoCamera;
+        [Foldout("Recording")][SerializeField] private CinemachineInputAxisController echoInputAxisController;
+        [Foldout("Recording")]private IRecordable[] recordables;
+        [Foldout("Recording")]private IBindable[] bindables;
+        
+        [Foldout("Animation")][SerializeField] private Animator animator;
+        [Foldout("Animation")][SerializeField] private AnimationController animationController;
+        [Foldout("Animation")][SerializeField] private string parameterNameWalking = "IsWalking";
+        [Foldout("Animation")][SerializeField] private string parameterNameWalkingSpeed = "WalkingSpeed";
+        [Foldout("Animation")][SerializeField] private bool isWalking = false;
 
         // Getters and setters
 
@@ -94,13 +100,43 @@ namespace EchoMina.Original
         }
 
         public CinemachineCamera EchoCamera  => echoCamera;
+        public float MoveDirection
+        {
+            get { return _moveDirection; }
+            set
+            {
+                _moveDirection = value;
+                if (_moveDirection != 0)
+                {
+                    IsWalking = true;
+                    if (_moveDirection != animator.GetFloat("WalkingSpeed"))
+                    animator.SetFloat("WalkingSpeed", _moveDirection);
+                }
+                else
+                {
+                    IsWalking = false;
+                }
+            }
+        }
+        public bool IsWalking
+        {
+            get {return isWalking;}
+            set
+            {
+                isWalking = value;
+                if (isWalking != animator.GetBool(parameterNameWalking))
+                {
+                    animator.SetBool(parameterNameWalking, isWalking);
+                }
+            }
+        }
         #endregion
 
         #region InputMessages
 
         public void OnMove(Vector3 move)
         {
-            _moveDirection = move.x;
+            MoveDirection = move.x;
             _turnDirection = move.y;
         }
 
@@ -124,6 +160,8 @@ namespace EchoMina.Original
             rb = GetComponent<Rigidbody>();
             SetMaxSpeed();
             _interactor = GetComponent<Interactor>();
+            animator = GetComponentInChildren<Animator>();
+            animator.SetBool(parameterNameWalking, false);
 
             recordables = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<IRecordable>().ToArray();
             foreach (var recordable in recordables)
