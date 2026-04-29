@@ -1,15 +1,16 @@
+using System;
 using System.Collections.Generic;
 using Interactables;
 using JetBrains.Annotations;
 using NaughtyAttributes;
 using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(LineRenderer))]
 [RequireComponent(typeof(BoxCollider))]
+// ReSharper disable once CheckNamespace
 public class StagedObstacle : MonoBehaviour, IRecordable
 {
     private Rigidbody rb;
@@ -33,6 +34,8 @@ public class StagedObstacle : MonoBehaviour, IRecordable
 
     [Foldout("Snapshot")][SerializeField] private int snapshotStage = 0;
     [Foldout("Snapshot")][SerializeField] private int checkpointSnapshotStage = 0;
+    
+    [SerializeField][ReadOnly] private bool hasBeenInitialized = false;
 
     public bool IsMoving
     {
@@ -47,6 +50,12 @@ public class StagedObstacle : MonoBehaviour, IRecordable
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
+    {
+        StartUp();
+    }
+    
+    [Button]
+    private void StartUp()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
@@ -202,6 +211,21 @@ public class StagedObstacle : MonoBehaviour, IRecordable
         lineRenderer.SetPosition(1, transform.position);
     }
 
+    [Button]
+    private void UpdateLineRenderer()
+    {
+        if (lineRenderer == null)
+        {
+            Debug.LogError($"<b><color=orange>[StagedObstacle]</color></b> {gameObject.name} tried to update a line renderer, but no line renderer set up yet\nPlease run 'Set Up LineRenderer' first");
+        }
+        float dif = lineRenderer.GetPosition(1).y - transform.position.y;
+        Debug.Log(dif);
+        
+        lineRenderer.SetPosition(0, transform.position);
+        
+        lineRenderer.SetPosition(1, new Vector3(transform.position.x, transform.position.y + dif, transform.position.z));
+    }
+
     private void OnDrawGizmos()
     {
         if (!drawGizmos)
@@ -216,15 +240,27 @@ public class StagedObstacle : MonoBehaviour, IRecordable
 
         if (lineRenderer != null)
         {
+            // Draw path
             for (int i = 0; i < lineRenderer.positionCount - 1; i++)
             {
                 Gizmos.color = Color.rebeccaPurple;
                 Gizmos.DrawLine(lineRenderer.GetPosition(i), lineRenderer.GetPosition(i + 1));
             }
+
             if (lineRenderer.loop)
             {
-                Gizmos.DrawLine(lineRenderer.GetPosition(lineRenderer.positionCount - 1), lineRenderer.GetPosition(0));
+                Gizmos.DrawLine(
+                    lineRenderer.GetPosition(lineRenderer.positionCount - 1),
+                    lineRenderer.GetPosition(0));
             }
+
+            // ChatGPT fix start
+            // this fix from ChatGPT is to correctly preview the obstacle's positions along the line renderer
+            // Save original matrix
+            Matrix4x4 oldMatrix = Gizmos.matrix;
+
+            // Apply full transform (position, rotation, scale)
+            Gizmos.matrix = transform.localToWorldMatrix;
 
             for (int i = 0; i < lineRenderer.positionCount; i++)
             {
@@ -232,11 +268,25 @@ public class StagedObstacle : MonoBehaviour, IRecordable
                 {
                     Gizmos.color = Color.cyan;
                 }
+                else
+                {
+                    Gizmos.color = Color.rebeccaPurple;
+                }
+
+                // Convert lineRenderer position into local space of this object
+                Vector3 localPos = transform.InverseTransformPoint(lineRenderer.GetPosition(i));
+
+                // Draw collider preview
                 Gizmos.DrawWireCube(
-                    lineRenderer.GetPosition(i) + boxCollider.center,
-                    new Vector3(boxCollider.size.x, boxCollider.size.y, boxCollider.size.z));
-                Gizmos.color = Color.rebeccaPurple;
+                    localPos + boxCollider.center,
+                    boxCollider.size
+                    );
             }
+
+            // Restore matrix
+            Gizmos.matrix = oldMatrix;
+            
+            // ChatGPT fix end
         }
     }
     public void TakeSnapshot()
