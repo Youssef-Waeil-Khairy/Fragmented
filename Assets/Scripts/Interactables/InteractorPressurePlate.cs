@@ -7,6 +7,7 @@ using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 using Utility;
 // ReSharper disable InconsistentNaming
 
@@ -18,12 +19,17 @@ namespace Interactables
         [Tag][SerializeField] private List<string> _whitelistTags = new List<string>() {"Player"};
         [SerializeField] private GameObject _interactingObject;
         public UnityEvent OnBeginInteraction, OnEndInteraction;
-
-        [Foldout("Camera")] [SerializeField] private bool _hasIntectionCaamera = false;
+        
+        [Foldout("Camera")] [SerializeField] private bool _hasInteractionCamera = false;
         [Foldout("Camera")] [SerializeField] private CinemachineCamera _camera;
         [Foldout("Camera")] [SerializeField] private float _cameraDuration;
         [Foldout("Camera")] [SerializeField] private float _cameraTime;
         [Foldout("Camera")] [SerializeField] private bool _hasBeenInteracted = false;
+
+        private void Awake()
+        {
+            _hasInteractionCamera = _camera != null;
+        }
 
         private void OnTriggerEnter(Collider other)
         {
@@ -38,7 +44,7 @@ namespace Interactables
                 OnBeginInteraction?.Invoke();
                 _isInteracting = true;
                 
-                if (!_hasBeenInteracted && _hasIntectionCaamera)
+                if (!_hasBeenInteracted && _hasInteractionCamera)
                 {
                     if (OriginalEchoMina.Instance.State is OriginalEchoMina.EchoState.Recording)
                     {
@@ -71,7 +77,7 @@ namespace Interactables
 
         private void Update()
         {
-            if (!_hasIntectionCaamera) return;
+            if (!_hasInteractionCamera) return;
 
             if (_camera.enabled)
             {
