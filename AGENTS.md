@@ -8,7 +8,7 @@
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Ground, Water, UI, Interactible, EchoMina, Walls, Player, Stairs
 - Active game object:
-  - Name: Cube (1)
+  - Name: Instructor_PreaurPlate
   - Tag: Untagged
-  - Layer: Default
+  - Layer: Walls
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
