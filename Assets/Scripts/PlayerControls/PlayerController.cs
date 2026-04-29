@@ -29,7 +29,10 @@ namespace PlayerControls
         [Foldout("Movement")][SerializeField] float moveDirection = 0f;
         [Foldout("Movement")][SerializeField] float turnDirection = 0f;
         [Foldout("Movement")][SerializeField] private float maxSpeed;
-        [Foldout("Movement")] [SerializeField] private float maxTurnSpeed;
+        [Foldout("Movement")][SerializeField] private float maxTurnSpeed;
+        [Foldout("Movement")][SerializeField] private bool isGivingInput = false;
+        [Foldout("Movement")][SerializeField] private PhysicsMaterial controlablesMaterial;
+        [Foldout("Movement")][SerializeField] private float moveInput;
 
         [Foldout("Camera")][SerializeField] private CinemachineInputAxisController cinemachineInputAxisController;
         [Foldout("Camera")][SerializeField] private CinemachineCamera playerCamera;
@@ -75,6 +78,15 @@ namespace PlayerControls
 
         private void FixedUpdate()
         {
+            if (moveInput != 0)
+            {
+                controlablesMaterial.frictionCombine = PhysicsMaterialCombine.Minimum;
+            }
+            else
+            {
+                controlablesMaterial.frictionCombine = PhysicsMaterialCombine.Average;
+            }
+            
             if (OriginalEchoMina.Instance.State is OriginalEchoMina.EchoState.Recording || cursorFree)
             {
                 if (cursorFree)
@@ -83,7 +95,7 @@ namespace PlayerControls
                 }
                 return;
             }
-
+            
             Vector3 move = transform.forward * (moveDirection * moveSpeed);
             rb.AddForce(move, ForceMode.Force);
             rb.AddTorque(transform.up * (turnDirection * turnSpeed * Time.fixedDeltaTime));
@@ -135,9 +147,10 @@ namespace PlayerControls
         void OnMove(InputValue value)
         {
             if (cursorFree) return;
+            isGivingInput = true;
 
             Vector2 inputDirection = value.Get<Vector2>();
-
+            moveInput = inputDirection.y;
             // Block move inputs to main Mina if we are recording
             if (OriginalEchoMina.Instance.State is OriginalEchoMina.EchoState.Recording)
             {

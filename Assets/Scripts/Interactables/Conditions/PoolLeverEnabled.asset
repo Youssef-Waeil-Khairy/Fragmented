@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9f1c660c85e04f928a97b0c93c356eb7, type: 3}
-  m_Name: Condition
+  m_Name: PoolLeverEnabled
   m_EditorClassIdentifier: 
-  conditionType: 4
+  conditionType: 0
   IsMet: 0
-  BooleanCondition: 0
+  BooleanCondition: 1
   booleanValue: 0
   IntegerCondition: 0
   integerValue: 0
@@ -22,7 +22,7 @@ MonoBehaviour:
   floatValue: 0
   ConditionSequenceBoolean: 
   valueSequenceBoolean: 
-  ConditionSequenceInteger: 000000000000000000000000
-  valueSequenceInteger: 000000000000000000000000
+  ConditionSequenceInteger: 
+  valueSequenceInteger: 
   ConditionSequenceFloat: []
   valueSequenceFloat: []

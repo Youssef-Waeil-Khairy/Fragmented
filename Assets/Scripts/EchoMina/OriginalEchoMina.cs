@@ -184,6 +184,12 @@ namespace EchoMina.Original
             {
                 transform.position = PlayerController.Instance.transform.position;
             }
+
+            if (rb == null)
+            {
+                rb = GetComponent<Rigidbody>();
+            }
+            SetMaxSpeed();
         }
 
         private void OnDestroy()
