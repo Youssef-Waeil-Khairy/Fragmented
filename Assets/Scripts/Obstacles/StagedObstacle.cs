@@ -98,11 +98,14 @@ public class StagedObstacle : MonoBehaviour, IRecordable
         isMoving = rb.linearVelocity.magnitude > 0;
 
         if (!isMovingToTarget) return;
+        
+        //distancesToTarget.Add(Vector3.Distance(rb.position, targetPosition));
 
         if (Vector3.Distance(transform.position, targetPosition) <= errorMargin || HasMovedAwayFromTarget())
         {
             isMovingToTarget = false;
             rb.MovePosition(targetPosition);
+            //transform.position = targetPosition;
             events[currentStage]?.Invoke();
             Debug.Log($"{gameObject.name} at target stage");
         }
@@ -192,6 +195,7 @@ public class StagedObstacle : MonoBehaviour, IRecordable
     {
         targetPosition = lineRenderer.GetPosition(currentStage);
         timer = 0f;
+        distancesToTarget.Clear();
         isMovingToTarget = true;
 
         moveDirection = (targetPosition - transform.position).normalized;

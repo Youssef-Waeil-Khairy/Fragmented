@@ -36,7 +36,7 @@ namespace Interactables
             if (_whitelistTags.Contains(other.tag) && !_isInteracting)
             {
                 #if DEBUG
-                Debug.LogError($"<b><color=yellow>[Interactor][PressurePlate]</color></b> {gameObject.name} has been stepped on by {other.gameObject.name}");
+                Debug.Log($"<b><color=yellow>[Interactor][PressurePlate]</color></b> {gameObject.name} has been stepped on by {other.gameObject.name}");
                 #endif
 
                 _interactingObject = other.gameObject;

@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f1c660c85e04f928a97b0c93c356eb7, type: 3}
+  m_Name: Condition
+  m_EditorClassIdentifier: 
+  conditionType: 4
+  IsMet: 0
+  BooleanCondition: 0
+  booleanValue: 0
+  IntegerCondition: 0
+  integerValue: 0
+  FloatCondition: 0
+  floatValue: 0
+  ConditionSequenceBoolean: 
+  valueSequenceBoolean: 
+  ConditionSequenceInteger: 000000000000000000000000
+  valueSequenceInteger: 000000000000000000000000
+  ConditionSequenceFloat: []
+  valueSequenceFloat: []

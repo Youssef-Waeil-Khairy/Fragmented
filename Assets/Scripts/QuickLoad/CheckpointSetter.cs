@@ -24,8 +24,15 @@ namespace QuickLoad
         {
             if (other.CompareTag(allowedTag))
             {
-                QuickLoader.Instance.SetCheckpoint(loadIndex);
+                SetCheckpoint();
             }
+        }
+
+        [Button]
+        // ReSharper disable once MemberCanBePrivate.Global
+        public void SetCheckpoint()
+        {
+            QuickLoader.Instance.SetCheckpoint(loadIndex);
         }
     }
 }

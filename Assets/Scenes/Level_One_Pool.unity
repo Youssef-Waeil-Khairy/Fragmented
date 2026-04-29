@@ -10145,7 +10145,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _hasIntectionCaamera: 0
+  _hasInteractionCamera: 0
   _camera: {fileID: 0}
   _cameraDuration: 0
   _cameraTime: 0
@@ -14464,6 +14464,22 @@ PrefabInstance:
       propertyPath: _originalEchoMina
       value: 
       objectReference: {fileID: 141054132}
+    - target: {fileID: 6791672363379826751, guid: 1db0bcc4edb713c46be7f54718df9be6, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6888464894120266942, guid: 1db0bcc4edb713c46be7f54718df9be6, type: 3}
+      propertyPath: m_Size.y
+      value: 0.68375015
+      objectReference: {fileID: 0}
+    - target: {fileID: 6888464894120266942, guid: 1db0bcc4edb713c46be7f54718df9be6, type: 3}
+      propertyPath: m_Size.z
+      value: 0.79999995
+      objectReference: {fileID: 0}
+    - target: {fileID: 6888464894120266942, guid: 1db0bcc4edb713c46be7f54718df9be6, type: 3}
+      propertyPath: m_Center.y
+      value: -0.15812492
+      objectReference: {fileID: 0}
     - target: {fileID: 7122641883725677383, guid: 1db0bcc4edb713c46be7f54718df9be6, type: 3}
       propertyPath: RespawnPoint
       value: 
@@ -14474,6 +14490,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8553967550618334529, guid: 1db0bcc4edb713c46be7f54718df9be6, type: 3}
       propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8767316769088701508, guid: 1db0bcc4edb713c46be7f54718df9be6, type: 3}
+      propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -16002,7 +16022,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -5795684495818377019, guid: 416aa681090ccfc4ea1b039522a3870a, type: 3}
 --- !u!1 &1381039400
@@ -25028,7 +25048,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _hasIntectionCaamera: 0
+  _hasInteractionCamera: 0
   _camera: {fileID: 0}
   _cameraDuration: 0
   _cameraTime: 0
@@ -25612,7 +25632,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _hasIntectionCaamera: 0
+  _hasInteractionCamera: 0
   _camera: {fileID: 0}
   _cameraDuration: 0
   _cameraTime: 0
