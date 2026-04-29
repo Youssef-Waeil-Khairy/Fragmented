@@ -252,7 +252,9 @@ namespace PlayerControls
         }
         public void LoadSnapshot()
         {
+            Debug.Log("Load Snapshot for Player");
             transform.position = snapshotPosition;
+            snapshotPosition.y += 1f;
             transform.rotation = snapshotRotation;
         }
         public void LoadCheckpointSnapshot()
