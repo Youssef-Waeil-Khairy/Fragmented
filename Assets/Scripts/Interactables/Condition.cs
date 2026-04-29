@@ -41,6 +41,10 @@ namespace Interactables
                     IsMet = true;
                     OnConditionIsMet?.Invoke();
                 }
+                else
+                {
+                    IsMet = false;
+                }
                 ValueUpdated?.Invoke();
             }
         }
