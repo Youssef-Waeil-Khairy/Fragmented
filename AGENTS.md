@@ -8,7 +8,7 @@
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Ground, Water, UI, Interactible, EchoMina, Walls, Player, Stairs
 - Active game object:
-  - Name: Plate_A
+  - Name: QuadBFloorDrop
   - Tag: Untagged
   - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

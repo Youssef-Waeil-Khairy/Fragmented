@@ -25,6 +25,8 @@ namespace Interactables
         {
             PreventOutline = GetComponent<Outline>();
             PreventOutline.enabled = false;
+            
+            hasInteractionCamera = interactionCamera != null;
         }
 
         private void Update()

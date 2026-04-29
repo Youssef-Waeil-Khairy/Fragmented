@@ -65,6 +65,11 @@ public class StagedObstacle : MonoBehaviour, IRecordable
         {
             lineRenderer.SetPosition(0, transform.position);
         }
+        else
+        {
+            lineRenderer = GetComponent<LineRenderer>();
+            lineRenderer.SetPosition(0, transform.position);
+        }
 
         if (preMoveEvents.Count > lineRenderer.positionCount)
         {
