@@ -67,7 +67,6 @@ namespace EchoMina.Original
         [Foldout("Recording")]private IBindable[] bindables;
         
         [Foldout("Animation")][SerializeField] private Animator animator;
-        [Foldout("Animation")][SerializeField] private AnimationController animationController;
         [Foldout("Animation")][SerializeField] private string parameterNameWalking = "IsWalking";
         [Foldout("Animation")][SerializeField] private string parameterNameWalkingSpeed = "WalkingSpeed";
         [Foldout("Animation")][SerializeField] private bool isWalking = false;

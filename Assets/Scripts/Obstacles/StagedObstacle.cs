@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Interactables;
 using JetBrains.Annotations;
@@ -6,6 +5,7 @@ using NaughtyAttributes;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
+// ReSharper disable RedundantDefaultMemberInitializer
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(LineRenderer))]
@@ -34,8 +34,6 @@ public class StagedObstacle : MonoBehaviour, IRecordable
 
     [Foldout("Snapshot")][SerializeField] private int snapshotStage = 0;
     [Foldout("Snapshot")][SerializeField] private int checkpointSnapshotStage = 0;
-    
-    [SerializeField][ReadOnly] private bool hasBeenInitialized = false;
 
     public bool IsMoving
     {
@@ -103,7 +101,6 @@ public class StagedObstacle : MonoBehaviour, IRecordable
 
         if (Vector3.Distance(transform.position, targetPosition) <= errorMargin || HasMovedAwayFromTarget())
         {
-            DestinationReached:
             isMovingToTarget = false;
             rb.MovePosition(targetPosition);
             events[currentStage]?.Invoke();
@@ -125,7 +122,7 @@ public class StagedObstacle : MonoBehaviour, IRecordable
     {
         if (distancesToTarget.Count > 1)
         {
-            if (distancesToTarget[distancesToTarget.Count - 1] > distancesToTarget[distancesToTarget.Count - 2])
+            if (distancesToTarget[^1] > distancesToTarget[^2])
             {
                 return true;
             }
@@ -217,6 +214,7 @@ public class StagedObstacle : MonoBehaviour, IRecordable
     }
 
     [Button]
+    [UsedImplicitly]
     private void UpdateLineRenderer()
     {
         if (lineRenderer == null)
@@ -245,7 +243,7 @@ public class StagedObstacle : MonoBehaviour, IRecordable
 
         if (lineRenderer != null)
         {
-            // Draw path
+            // Draw the path of the line renderer
             for (int i = 0; i < lineRenderer.positionCount - 1; i++)
             {
                 Gizmos.color = Color.rebeccaPurple;
@@ -269,14 +267,7 @@ public class StagedObstacle : MonoBehaviour, IRecordable
 
             for (int i = 0; i < lineRenderer.positionCount; i++)
             {
-                if (i == currentStage)
-                {
-                    Gizmos.color = Color.cyan;
-                }
-                else
-                {
-                    Gizmos.color = Color.rebeccaPurple;
-                }
+                Gizmos.color = i == currentStage ? Color.cyan : Color.rebeccaPurple;
 
                 // Convert lineRenderer position into local space of this object
                 Vector3 localPos = transform.InverseTransformPoint(lineRenderer.GetPosition(i));
