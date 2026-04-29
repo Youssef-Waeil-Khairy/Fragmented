@@ -36,6 +36,10 @@ namespace EchoMina.Original
 
         public static OriginalEchoMina Instance;
 
+        //trail
+        public static event Action OnInstanceReady;
+        //trail
+
         [Foldout("Movement")] Rigidbody rb;
         [Foldout("Movement")][SerializeField] private float _speed = 1f;
         [Foldout("Movement")][SerializeField] private float _turnSpeed = 1f;
@@ -149,6 +153,10 @@ namespace EchoMina.Original
             if (Instance == null)
             {
                 Instance = this;
+
+                //trail
+                OnInstanceReady?.Invoke();
+                //trail
             }
             else if (Instance != this)
             {
