@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -13,20 +12,23 @@ using Utility;
 
 namespace DialogueSystem
 {
+    /// <summary>
+    /// Author: Jan Willem Goedvolk
+    /// The component attached to a canvas for displaying dialogue
+    /// </summary>
     public class DialogueManager : MonoBehaviour
     {
-        [SerializeField] private GameObject DialoguePanel;
-        // Speaker name
-        [SerializeField] private TMP_Text SpeakerName;
-        // Speaker Sprite
-        [SerializeField] private Image SpeakerSprite;
-        // Background Sprite
-        [SerializeField] private Image BackgroundSprite;
-        // Text
-        [SerializeField] private TMP_Text Text;
-        [SerializeField] private bool showOnLevelStart = false;
+        #region Variables
         [SerializeField][Expandable] private ScriptableDialogue Dialogue;
         [SerializeField] private ScriptableDialogue.DialogueSnippet CurrentSnippet;
+        
+        [SerializeField] private GameObject DialoguePanel;
+        [SerializeField] private TMP_Text SpeakerName;
+        [SerializeField] private Image SpeakerSprite;
+        [SerializeField] private Image BackgroundSprite;
+        [SerializeField] private TMP_Text Text;
+        
+        [SerializeField] private bool showOnLevelStart = false;
         [SerializeField] private int DialogueIndex;
         [InfoBox("These events will be called when their corresponding index snippet is shown. Please ensure the number of events exactly match the number of snippets in your dialogue.", EInfoBoxType.Warning)]
         [ValidateInput("ValidateDialogue", "You must have the same number of Snippet Events as Dialogue snippets. You currently do not")]
@@ -35,7 +37,9 @@ namespace DialogueSystem
         [Foldout("Events")] public UnityEvent OnDialogueEnd;
 
         InputAction nextAction;
-
+        #endregion
+        
+        #region Unity Functions
         private void OnEnable()
         {
             StartupLogger.LogEnable("Binding dialogue advance input", name);
@@ -64,34 +68,35 @@ namespace DialogueSystem
             }
         }
 
-        // private void Start()
-        // {
-        //     if (!showOnLevelStart)
-        //     {
-        //         HideDialogue();
-        //     }
-        //     else
-        //     {
-        //         ShowDialogue();
-        //     }
-        // }
-
         private void OnDisable()
         {
             StartupLogger.LogDisable("Unbinding dialogue advance input", name);
             nextAction.performed -= NextSnippet;
         }
+        #endregion
 
+        #region Functions
+        /// <summary>
+        /// Ensures the dialogue events are the same as the number of dialogue snippets
+        /// </summary>
+        /// <returns></returns>
         private bool ValidateDialogue()
         {
             return Dialogue.DialogueSnippets.Count == SnippetEvents.Count;
         }
 
+        /// <summary>
+        /// New input system function wrapper for advancing dialogue
+        /// </summary>
+        /// <param name="callbackContext">Input system action to perform this</param>
         private void NextSnippet(InputAction.CallbackContext callbackContext)
         {
-            AdvanceDialogue();
+            AdvanceDialogue(); // This actually goes to the next snippet
         }
 
+        /// <summary>
+        /// Updates the dialogue UI with the current snippet's data
+        /// </summary>
         private void UpdateUI()
         {
             SpeakerName.text = CurrentSnippet.SpeakerName;
@@ -108,6 +113,9 @@ namespace DialogueSystem
             SnippetEvents[DialogueIndex]?.Invoke();
         }
 
+        /// <summary>
+        /// Shows the dialogue UI
+        /// </summary>
         [Button]
         public void ShowDialogue()
         {
@@ -117,29 +125,39 @@ namespace DialogueSystem
             OnDialogueStart?.Invoke();
         }
 
+        /// <summary>
+        /// Hides the dialogue UI
+        /// </summary>
         [Button]
         public void HideDialogue()
         {
             DialoguePanel.SetActive(false);
         }
 
+        /// <summary>
+        /// Goes to the next snippet and updates the UI as needed
+        /// </summary>
         [Button]
         public void AdvanceDialogue()
         {
-            if (!DialoguePanel.activeSelf) return;
+            if (!DialoguePanel.activeSelf) return; // Only advance if dialogue is active
 
-            DialogueIndex++;
-            if (DialogueIndex > Dialogue.DialogueSnippets.Count - 1)
+            DialogueIndex++; 
+            if (DialogueIndex > Dialogue.DialogueSnippets.Count - 1) // check if we are at the end
             {
                 DialogueIndex = 0;
                 OnDialogueEnd?.Invoke();
                 HideDialogue();
                 return;
             }
+            
             CurrentSnippet = Dialogue.DialogueSnippets[DialogueIndex];
             UpdateUI();
         }
 
+        /// <summary>
+        /// Another way to make the dialogue move alond, will show the UI if it isn't already
+        /// </summary>
         public void Activate()
         {
             if (DialoguePanel.activeSelf)
@@ -152,6 +170,9 @@ namespace DialogueSystem
             }
         }
 
+        /// <summary>
+        /// Button functions for updating snippet data in the inspector
+        /// </summary>
         [Button][UsedImplicitly]
         public void GetCurrentSnippet()
         {
@@ -163,5 +184,6 @@ namespace DialogueSystem
             CurrentSnippet = Dialogue.DialogueSnippets[DialogueIndex];
             UpdateUI();
         }
+        #endregion
     }
 }

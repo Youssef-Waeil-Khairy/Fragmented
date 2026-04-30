@@ -5,26 +5,37 @@ using PlayerControls;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
+// ReSharper disable InconsistentNaming
 
 namespace Interactables
 {
+    /// <summary>
+    /// Author: Jan Willem Goedvolk
+    /// A button like interactable
+    /// </summary>
     public class InteractorSingleFire : MonoBehaviour,  IInteractable
     {
-        public UnityEvent OnInteract, OnPreviewStart,  OnPreviewEnd;
-        public Outline PreventOutline;
-        public GameObject PreviewPanel;
+        #region Variables
+        [Foldout("Events" )] public UnityEvent OnInteract, OnPreviewStart,  OnPreviewEnd;
+        
+        [Foldout("Preview")] public Outline PreviewOutline;
+        [Foldout("Preview")] public GameObject PreviewPanel;
 
         [Foldout("Camera")][SerializeField] private CinemachineCamera interactionCamera;
         [Foldout("Camera")][SerializeField] private float cameraDuration;
         [Foldout("Camera")][SerializeField] private float cameraTime;
         [Foldout("Camera")][SerializeField] private bool hasBeenInteracted = false;
         [Foldout("Camera")][SerializeField] private bool hasInteractionCamera = false;
-
-
+        #endregion
+        
+        #region Unity Functions
         private void OnEnable()
         {
-            PreventOutline = GetComponent<Outline>();
-            PreventOutline.enabled = false;
+            PreviewOutline = GetComponent<Outline>();
+            if (PreviewOutline != null) PreviewOutline.enabled = false;
+            
+            if (PreviewPanel != null) PreviewPanel.SetActive(false);
             
             hasInteractionCamera = interactionCamera != null;
         }
@@ -43,7 +54,9 @@ namespace Interactables
                 }
             }
         }
+        #endregion
 
+        #region IInteractable Functions
         public bool CanInteract(Interactor interactor)
         {
             return true;
@@ -61,15 +74,15 @@ namespace Interactables
         }
         public void StartPreview()
         {
-            PreventOutline.enabled = true;
-            PreviewPanel.SetActive(true);
+            if (PreviewOutline != null) PreviewOutline.enabled = true;
+            if (PreviewPanel   != null) PreviewPanel.SetActive(true);
             OnPreviewStart?.Invoke();
 
         }
         public void StopPreview()
         {
-            PreventOutline.enabled = false;
-            PreviewPanel.SetActive(false);
+            if (PreviewOutline != null) PreviewOutline.enabled = false;
+            if (PreviewPanel   != null) PreviewPanel.SetActive(false);
             OnPreviewEnd?.Invoke();
         }
         public bool IsLockable()
@@ -120,5 +133,6 @@ namespace Interactables
             PlayerController.Instance.PlayerInput.enabled = true;
             interactionCamera.enabled = false;
         }
+        #endregion
     }
 }

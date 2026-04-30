@@ -1,11 +1,18 @@
 using System;
 using System.Collections;
 using Interactables;
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.AI;
+// ReSharper disable InconsistentNaming
 
 namespace EchoMina
 {
+    /// <summary>
+    /// THIS HAS BEEN DEPRECIATED! USE "OriginalEchoMina"!
+    /// Author: Jan Willem Goedvolk
+    /// A command that can be given to Echo Mina to perform
+    /// </summary>
     [Serializable]
     public class Command : MonoBehaviour
     {
@@ -27,21 +34,21 @@ namespace EchoMina
         [SerializeField] private float _timeoutTimer;
 
         // Move command type
-        [SerializeField] private LineRenderer _path;
-        [SerializeField] private float _errorMargin;
-        private Transform _currentTransform;
-        [SerializeField] private int _pathIndex;
-        [SerializeField] private float _speed;
-        public bool IsGrounded;
+        [Foldout("Move")][SerializeField] private LineRenderer _path;
+        [Foldout("Move")][SerializeField] private float _errorMargin;
+        [Foldout("Move")]private Transform _currentTransform;
+        [Foldout("Move")][SerializeField] private int _pathIndex;
+        [Foldout("Move")][SerializeField] private float _speed;
+        [Foldout("Move")]public bool IsGrounded;
 
         // Rotate command type
-        private Quaternion _startRotation;
-        [SerializeField] private Quaternion _endRotation;
-        [SerializeField] private float _rotateSpeed;
+        [Foldout("Rotate")] private Quaternion _startRotation;
+        [Foldout("Rotate")][SerializeField] private Quaternion _endRotation;
+        [Foldout("Rotate")][SerializeField] private float _rotateSpeed;
 
         // Wait command type
-        private float _currentTime;
-        [SerializeField] private float _duration;
+        [Foldout("Wait")] private float _currentTime;
+        [Foldout("Wait")][SerializeField] private float _duration;
 
         // Interact command type
         private Interactor _interactor;

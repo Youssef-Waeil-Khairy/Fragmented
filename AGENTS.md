@@ -6,9 +6,9 @@
   - Tags:
     - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Command, EchoMina, Interactable, Stair, TheHouse
   - Layers:
-    - Default, TransparentFX, Ignore Raycast, Ground, Water, UI, Interactible, EchoMina, Walls, Player, Stairs
+    - Default, TransparentFX, Ignore Raycast, Water, UI
 - Active game object:
-  - Name: Lever_C
+  - Name: QuadDLift
   - Tag: Untagged
   - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
