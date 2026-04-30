@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using EchoMina.Original;
 using NaughtyAttributes;
@@ -19,7 +20,7 @@ namespace Interactables
         [Tag][SerializeField] private List<string> _whitelistTags = new List<string>() {"Player"};
         [SerializeField] private GameObject _interactingObject;
         public UnityEvent OnBeginInteraction, OnEndInteraction;
-        
+
         [Foldout("Camera")] [SerializeField] private bool _hasInteractionCamera = false;
         [Foldout("Camera")] [SerializeField] private CinemachineCamera _camera;
         [Foldout("Camera")] [SerializeField] private float _cameraDuration;
@@ -41,23 +42,19 @@ namespace Interactables
 
                 _interactingObject = other.gameObject;
 
-                OnBeginInteraction?.Invoke();
-                _isInteracting = true;
-                
-                if (!_hasBeenInteracted && _hasInteractionCamera)
-                {
-                    if (OriginalEchoMina.Instance.State is OriginalEchoMina.EchoState.Recording)
-                    {
-                        OriginalEchoMina.Instance.EchoCamera.enabled = false;
-                    }
-                    else
-                    {
-                        PlayerController.Instance.PlayerCamera.enabled = false;
-                    }
+                Interact();
+            }
+        }
 
-                    PlayerController.Instance.PlayerInput.enabled = false;
-                    if (_camera != null) _camera.enabled = true;
-                }
+        [Button("Interact")]
+        public void Interact()
+        {
+            OnBeginInteraction?.Invoke();
+            _isInteracting = true;
+
+            if (!_hasBeenInteracted && _hasInteractionCamera)
+            {
+                StartCoroutine(ShowInteractionRoutine());
             }
         }
 
@@ -75,31 +72,49 @@ namespace Interactables
             }
         }
 
-        private void Update()
+        [Button]
+        public void StartShowInteraction()
         {
-            if (!_hasInteractionCamera) return;
+            Debug.Log($"Showing Interaction camera for {gameObject.name}");
+            StartCoroutine(ShowInteractionRoutine());
+        }
 
-            if (_camera.enabled)
+        private IEnumerator ShowInteractionRoutine()
+        {
+            if (_camera == null)
             {
-                _cameraTime += Time.deltaTime;
-
-                if (_cameraTime >= _cameraDuration)
-                {
-                    _camera.enabled = false;
-
-                    if (OriginalEchoMina.Instance.State is OriginalEchoMina.EchoState.Recording)
-                    {
-                        OriginalEchoMina.Instance.EchoCamera.enabled = true;
-                    }
-                    else
-                    {
-                        PlayerController.Instance.PlayerCamera.enabled = true;
-                    }
-
-                    PlayerController.Instance.PlayerInput.enabled = true;
-                    _camera.enabled = false;
-                }
+                Debug.Log("No Camera to show");
+                yield break;
             }
+
+            if (OriginalEchoMina.Instance.State is OriginalEchoMina.EchoState.Recording)
+            {
+                OriginalEchoMina.Instance.EchoCamera.enabled = false;
+            }
+            else
+            {
+                PlayerController.Instance.PlayerCamera.enabled = false;
+            }
+
+            PlayerController.Instance.PlayerInput.enabled = false;
+
+            _camera.enabled = true;
+
+            yield return new WaitForSeconds(_cameraDuration);
+
+            _camera.enabled = false;
+
+            if (OriginalEchoMina.Instance.State is OriginalEchoMina.EchoState.Recording)
+            {
+                OriginalEchoMina.Instance.EchoCamera.enabled = true;
+            }
+            else
+            {
+                PlayerController.Instance.PlayerCamera.enabled = true;
+            }
+
+            PlayerController.Instance.PlayerInput.enabled = true;
+            yield break;
         }
 
         private void RecordingStopped()

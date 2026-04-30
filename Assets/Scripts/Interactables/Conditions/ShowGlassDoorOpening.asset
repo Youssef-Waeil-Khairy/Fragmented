@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9f1c660c85e04f928a97b0c93c356eb7, type: 3}
-  m_Name: PoolExitPlatform
+  m_Name: ShowGlassDoorOpening
   m_EditorClassIdentifier: 
-  conditionType: 3
+  conditionType: 0
   IsMet: 0
-  BooleanCondition: 0
+  BooleanCondition: 1
   booleanValue: 0
   booleanValueDefault: 0
   IntegerCondition: 0
@@ -23,11 +23,11 @@ MonoBehaviour:
   FloatCondition: 0
   floatValue: 0
   floatValueDefault: 0
-  ConditionSequenceBoolean: 0101
-  valueSequenceBoolean: 0000
-  valueSequenceBooleanDefault: 0000
-  ConditionSequenceInteger: 000000000000000000000000
-  valueSequenceInteger: 000000000000000000000000
+  ConditionSequenceBoolean: 
+  valueSequenceBoolean: 
+  valueSequenceBooleanDefault: 
+  ConditionSequenceInteger: 
+  valueSequenceInteger: 
   valueSequenceIntegerDefault: 
   ConditionSequenceFloat: []
   valueSequenceFloat: []

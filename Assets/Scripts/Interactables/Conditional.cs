@@ -21,7 +21,7 @@ namespace Interactables
                 OnConditionNotMet?.Invoke();
             }
         }
-        
+
         private void OnEnable()
         {
             if (condition != null)
@@ -34,7 +34,9 @@ namespace Interactables
         {
             if (condition != null)
             {
-                condition.ValueUpdated += ConditionValueChanged;
+                condition.ValueUpdated -= ConditionValueChanged;
+
+                condition.ResetToDefault();
             }
         }
     }
