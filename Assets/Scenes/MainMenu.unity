@@ -679,6 +679,8 @@ MonoBehaviour:
   level: 3
   allowedTag: 
   IsInterLevelTransition: 0
+  IsLeavingSettingsScene: 0
+  IsGoingToSettingsScene: 0
 --- !u!114 &958211080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1214,7 +1216,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1325656215188091037, guid: 152180182c0ae7648a77017c90d71928, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: GoToScene
+      value: GoToSettingsScene
       objectReference: {fileID: 0}
     - target: {fileID: 1325656215188091037, guid: 152180182c0ae7648a77017c90d71928, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -1495,6 +1497,8 @@ MonoBehaviour:
   level: 2
   allowedTag: 
   IsInterLevelTransition: 0
+  IsLeavingSettingsScene: 0
+  IsGoingToSettingsScene: 0
 --- !u!1 &1906691539
 GameObject:
   m_ObjectHideFlags: 0

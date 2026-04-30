@@ -2,31 +2,38 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using NaughtyAttributes;
+using PlayerControls;
+using RoomControls;
 using UnityEngine.InputSystem;
 
 public class PauseMenu : MonoBehaviour
 {
     public static PauseMenu Instance;
 
-    [Header("Panel")]
-    public RectTransform pausePanel;
+    [Foldout("Panel")] public RectTransform pausePanel;
 
-    [Header("Buttons")]
-    public Button resumeButton;
-    public Button settingsButton;
-    public Button quitButton;
+    [Foldout("Buttons")] public Button resumeButton;
+    [Foldout("Buttons")] public Button settingsButton;
+    [Foldout("Buttons")] public Button quitButton;
 
-    [Header("Scene Names")]
-    public string mainMenuSceneName = "MainMenu";
-    public string settingsSceneName = "Settings";
+    public LevelSwitcher SettingsSwitcher;
+    [Foldout("Scene Names")] public string mainMenuSceneName = "MainMenu";
+    [Foldout("Scene Names")] public string settingsSceneName = "Settings";
 
-    [Header("Animation")]
+    [Foldout("Animation")]
     public float slideSpeed = 0.5f;
 
     private Vector2 hiddenPosition;
     private Vector2 shownPosition;
     private bool isPaused = false;
     private bool isAnimating = false;
+
+    [Foldout("Snapshots")] public bool ShouldSnapshot;
+    [Foldout("Snapshots")] public bool ShouldLoadSnapShot;
+    [Foldout("Snapshots")][Scene] public int CurrentScene;
+    [Foldout("Snapshots")] public Vector3 CurrentPosition;
+    [Foldout("Snapshots")] public Quaternion CurrentRotation;
 
     void Awake()
     {
@@ -90,8 +97,40 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1f;
         isPaused = false;
-        SceneManager.LoadScene(settingsSceneName);
+        SettingsSwitcher.GoToSettingsScene();
+
         Debug.Log("Opening Settings");
+    }
+
+    public bool IsMainMenu()
+    {
+        return SceneManager.GetActiveScene().name == mainMenuSceneName;
+    }
+    public bool IsSettingsScene()
+    {
+        return SceneManager.GetActiveScene().name == settingsSceneName;
+    }
+
+    public void TakeSnapshot()
+    {
+        if (IsMainMenu())
+        {
+            return;
+        }
+
+        CurrentPosition = PlayerController.Instance.transform.position;
+        CurrentRotation = PlayerController.Instance.transform.rotation;
+    }
+
+    public void LoadSnapshot()
+    {
+        if (PlayerController.Instance == null)
+        {
+            return;
+        }
+
+        PlayerController.Instance.transform.position = CurrentPosition;
+        PlayerController.Instance.transform.rotation = CurrentRotation;
     }
 
     void Quit()

@@ -908,6 +908,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2061620281}
   - component: {fileID: 2061620282}
+  - component: {fileID: 2061620283}
   m_Layer: 0
   m_Name: PauseMenu
   m_TagString: Untagged
@@ -946,9 +947,33 @@ MonoBehaviour:
   resumeButton: {fileID: 574788859}
   settingsButton: {fileID: 1384726532}
   quitButton: {fileID: 246634840}
+  SettingsSwitcher: {fileID: 2061620283}
   mainMenuSceneName: MainMenu
   settingsSceneName: Settings
   slideSpeed: 0.5
+  ShouldSnapshot: 0
+  ShouldLoadSnapShot: 0
+  CurrentScene:
+    m_Handle: 0
+  CurrentPosition: {x: 0, y: 0, z: 0}
+  CurrentRotation: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2061620283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2061620280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cd4b808397c4d319cd314ed02f13a7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: 2
+  allowedTag: 
+  IsInterLevelTransition: 0
+  IsLeavingSettingsScene: 0
+  IsGoingToSettingsScene: 1
 --- !u!1 &2065775339
 GameObject:
   m_ObjectHideFlags: 0

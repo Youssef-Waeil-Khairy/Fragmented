@@ -63413,6 +63413,8 @@ MonoBehaviour:
   level: 4
   allowedTag: Player
   IsInterLevelTransition: 0
+  IsLeavingSettingsScene: 0
+  IsGoingToSettingsScene: 0
 --- !u!33 &7398712692081530616
 MeshFilter:
   m_ObjectHideFlags: 0

@@ -23,13 +23,14 @@ namespace Interactables
 
         public delegate void OnValueUpdated();
         public event OnValueUpdated ValueUpdated;
-        
+
         public ConditionType conditionType;
         public bool IsMet = false;
 
         #region Values
         [ShowIf("ShowBool")] public bool BooleanCondition;
         [ShowIf("ShowBool")][SerializeField] private bool booleanValue;
+        [ShowIf("ShowBool")][SerializeField] private bool booleanValueDefault;
         public bool BooleanValue
         {
             get {return booleanValue;}
@@ -48,9 +49,10 @@ namespace Interactables
                 ValueUpdated?.Invoke();
             }
         }
-        
+
         [ShowIf("ShowInteger")] public int IntegerCondition;
         [ShowIf("ShowInteger")][SerializeField] private int integerValue;
+        [ShowIf("ShowInteger")][SerializeField] private int integerValueDefault;
         public int IntegerValue
         {
             get {return integerValue;}
@@ -65,9 +67,10 @@ namespace Interactables
                 ValueUpdated?.Invoke();
             }
         }
-        
+
         [ShowIf("ShowFloat")] public float FloatCondition;
         [ShowIf("ShowFloat")][SerializeField] private float floatValue;
+        [ShowIf("ShowFloat")][SerializeField] private float floatValueDefault;
         public float FloatValue
         {
             get {return floatValue;}
@@ -82,15 +85,40 @@ namespace Interactables
                 ValueUpdated?.Invoke();
             }
         }
-        
+
         [ShowIf("ShowSequenceBoolean")] public List<bool> ConditionSequenceBoolean;
         [ShowIf("ShowSequenceBoolean")][SerializeField] private List<bool> valueSequenceBoolean;
-        
+        [ShowIf("ShowSequenceBoolean")][SerializeField] private List<bool> valueSequenceBooleanDefault;
+
         [ShowIf("ShowSequenceInteger")] public List<int> ConditionSequenceInteger;
         [ShowIf("ShowSequenceInteger")][SerializeField] private List<int> valueSequenceInteger;
-        
+        [ShowIf("ShowSequenceInteger")][SerializeField] private List<int> valueSequenceIntegerDefault;
+
         [ShowIf("ShowSequenceFloat")] public List<float> ConditionSequenceFloat;
         [ShowIf("ShowSequenceFloat")][SerializeField] private List<float> valueSequenceFloat;
+        [ShowIf("ShowSequenceFloat")][SerializeField] private List<float> valueSequenceFloatDefault;
+
+        public void ResetToDefault()
+        {
+            IsMet = false;
+
+            booleanValue = booleanValueDefault;
+            integerValue = integerValueDefault;
+            floatValue = floatValueDefault;
+
+            for (int bi = 0; bi < valueSequenceBoolean.Count; bi++)
+            {
+                valueSequenceBoolean[bi] = valueSequenceBooleanDefault[bi];
+            }
+            for (int ii = 0; ii < valueSequenceInteger.Count; ii++)
+            {
+                valueSequenceInteger[ii] = valueSequenceIntegerDefault[ii];
+            }
+            for (int fi = 0; fi < valueSequenceFloat.Count; fi++)
+            {
+                valueSequenceFloat[fi] = valueSequenceFloatDefault[fi];
+            }
+        }
 
         private bool ShowBool()
         {
@@ -157,7 +185,7 @@ namespace Interactables
                 Debug.LogError("Tried set a condition sequence value outside the sequence range");
             }
         }
-        
+
         public void SetValue(int index, int value)
         {
             if (index < ConditionSequenceInteger.Count)
@@ -180,7 +208,7 @@ namespace Interactables
                 Debug.LogError("Tried set a condition sequence value outside the sequence range");
             }
         }
-        
+
         public void SetValue(int index, float value)
         {
             if (index < ConditionSequenceFloat.Count)
@@ -217,7 +245,7 @@ namespace Interactables
             }
             return result;
         }
-        
+
         private bool SequencesAreCorrect(List<int> currentSequence)
         {
             bool result = true;
@@ -231,7 +259,7 @@ namespace Interactables
             }
             return result;
         }
-        
+
         private bool SequencesAreCorrect(List<float> currentSequence)
         {
             bool result = true;
