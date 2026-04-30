@@ -16,7 +16,8 @@ public class MeshTrail : MonoBehaviour
     public float sahderVarRefreshRate = 0.05f;
 
     private bool isTrailActive;
-    private SkinnedMeshRenderer[] skinnedMeshRenderers;
+    public SkinnedMeshRenderer[] skinnedMeshRenderers;
+
     private Coroutine trailCoroutine;
 
     // Tracks every spawned frame so we can nuke them instantly on stop
@@ -81,8 +82,7 @@ public class MeshTrail : MonoBehaviour
     {
         while (isTrailActive && gameObject.activeInHierarchy)
         {
-            if (skinnedMeshRenderers == null || skinnedMeshRenderers.Length == 0)
-                skinnedMeshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
+            
 
             for (int i = 0; i < skinnedMeshRenderers.Length; i++)
             {
