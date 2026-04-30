@@ -6602,7 +6602,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  PreventOutline: {fileID: 6885937178916628784}
+  PreviewOutline: {fileID: 0}
   PreviewPanel: {fileID: 1831019308}
   interactionCamera: {fileID: 0}
   cameraDuration: 0
@@ -8069,6 +8069,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 883346794724088767, guid: 1db0bcc4edb713c46be7f54718df9be6, type: 3}
+      propertyPath: controlablesMaterial
+      value: 
+      objectReference: {fileID: 13400000, guid: 711365663230c5e4596132cf4a9466e1, type: 2}
     - target: {fileID: 3300511215796750327, guid: 1db0bcc4edb713c46be7f54718df9be6, type: 3}
       propertyPath: quickSavePoint
       value: 
@@ -21274,7 +21278,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  PreventOutline: {fileID: 6885937178916628784}
+  PreviewOutline: {fileID: 0}
   PreviewPanel: {fileID: 118669040}
   interactionCamera: {fileID: 0}
   cameraDuration: 0
@@ -22008,7 +22012,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  PreventOutline: {fileID: 6885937178916628784}
+  PreviewOutline: {fileID: 0}
   PreviewPanel: {fileID: 896484837}
   interactionCamera: {fileID: 0}
   cameraDuration: 0
@@ -23730,7 +23734,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  PreventOutline: {fileID: 6885937178916628784}
+  PreviewOutline: {fileID: 0}
   PreviewPanel: {fileID: 779806546}
   interactionCamera: {fileID: 0}
   cameraDuration: 0
@@ -60729,17 +60733,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6181083584301792470, guid: 1c8edcaf2a2788944b8530049fe6a546, type: 3}
   m_PrefabInstance: {fileID: 1969505313926868470}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6885937178916628784 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1086080115016239055, guid: 1c8edcaf2a2788944b8530049fe6a546, type: 3}
-  m_PrefabInstance: {fileID: 1969505313926868470}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!23 &6889570814764586581
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -63468,6 +63461,8 @@ MonoBehaviour:
   level: 4
   allowedTag: Player
   IsInterLevelTransition: 0
+  IsLeavingSettingsScene: 0
+  IsGoingToSettingsScene: 0
 --- !u!33 &7398712692081530616
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -68277,7 +68272,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _hasIntectionCaamera: 0
+  _hasInteractionCamera: 0
   _camera: {fileID: 0}
   _cameraDuration: 0
   _cameraTime: 0
@@ -69767,7 +69762,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _hasIntectionCaamera: 0
+  _hasInteractionCamera: 0
   _camera: {fileID: 0}
   _cameraDuration: 0
   _cameraTime: 0
