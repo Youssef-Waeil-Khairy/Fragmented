@@ -18,28 +18,28 @@ MonoBehaviour:
     SpeakerSprite: {fileID: 0}
     HasBackgroundSprite: 0
     BackgroundSprite: {fileID: 0}
-    Text: Mina can toggle levers
+    Text: Mina and Echo Mina can lift highlighted objects
   - SpeakerName: Mina
     HasSpeakerSprite: 0
     SpeakerSprite: {fileID: 0}
     HasBackgroundSprite: 0
     BackgroundSprite: {fileID: 0}
-    Text: Toggleing levers, makes obtsacles move permantley
+    Text: They can pick and drop these objects on preasure plates
   - SpeakerName: Mina
     HasSpeakerSprite: 0
     SpeakerSprite: {fileID: 0}
     HasBackgroundSprite: 0
     BackgroundSprite: {fileID: 0}
-    Text: Press E to interact with the lever at the end of the room
+    Text: Press E to interact with the Orange box
   - SpeakerName: Mina
     HasSpeakerSprite: 0
     SpeakerSprite: {fileID: 0}
     HasBackgroundSprite: 0
     BackgroundSprite: {fileID: 0}
-    Text: This toggles the door form right to left
+    Text: Move it and drop it on the Orange preasure plate
   - SpeakerName: Mina
     HasSpeakerSprite: 0
     SpeakerSprite: {fileID: 0}
     HasBackgroundSprite: 0
     BackgroundSprite: {fileID: 0}
-    Text: Now go back to the yard through the new opening
+    Text: This lowers the gate that is blocking MIna fromt he door

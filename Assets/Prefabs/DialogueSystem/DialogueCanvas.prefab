@@ -115,14 +115,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e25bd7500a3e45168d05b21c3b52090e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Dialogue: {fileID: 11400000, guid: 0057a9bee18e05347a800337a983bdc7, type: 2}
+  Dialogue: {fileID: 11400000, guid: d071f0ea5a78bb246ac0c3eca70badbd, type: 2}
   CurrentSnippet:
-    SpeakerName: Mina
+    SpeakerName: Instructor
     HasSpeakerSprite: 0
     SpeakerSprite: {fileID: 0}
     HasBackgroundSprite: 0
     BackgroundSprite: {fileID: 0}
-    Text: Press R to summon echo mina
+    Text: Press TAB to toggle looking around and using your cursor
   DialoguePanel: {fileID: 6536128143774187598}
   SpeakerName: {fileID: 1209708201343579853}
   SpeakerSprite: {fileID: 9079948934565805555}
@@ -131,8 +131,6 @@ MonoBehaviour:
   showOnLevelStart: 0
   DialogueIndex: 0
   SnippetEvents:
-  - m_PersistentCalls:
-      m_Calls: []
   - m_PersistentCalls:
       m_Calls: []
   - m_PersistentCalls:
@@ -393,8 +391,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -577,7 +575,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press SPACE or LEFT CLICK to continue
+  m_text: LEFT CLICK to continue
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -663,7 +661,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7408283080276860803
 RectTransform:
   m_ObjectHideFlags: 0

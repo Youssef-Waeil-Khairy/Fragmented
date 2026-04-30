@@ -186,8 +186,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  PreventOutline: {fileID: 1086080115016239055}
+  PreviewOutline: {fileID: 0}
   PreviewPanel: {fileID: 3897732220502739693}
+  interactionCamera: {fileID: 0}
+  cameraDuration: 0
+  cameraTime: 0
+  hasBeenInteracted: 0
+  hasInteractionCamera: 0
 --- !u!114 &1086080115016239055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -273,6 +278,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _hasInteractionCamera: 0
+  _camera: {fileID: 0}
+  _cameraDuration: 0
+  _cameraTime: 0
+  _hasBeenInteracted: 0
 --- !u!1001 &3376572353396962627
 PrefabInstance:
   m_ObjectHideFlags: 0
