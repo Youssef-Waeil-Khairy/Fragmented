@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36722238b0204cf0aa52ed6f487fcf02, type: 3}
+  m_Name: Tutorial_EasterEgg
+  m_EditorClassIdentifier: 
+  DialogueSnippets:
+  - SpeakerName: Mina
+    HasSpeakerSprite: 1
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 0
+    BackgroundSprite: {fileID: 0}
+    Text: I remember that story, wasn't this about the girl who can fly, but she
+      keeps forgetting where her home is?
+  - SpeakerName: Young Mina
+    HasSpeakerSprite: 1
+    SpeakerSprite: {fileID: 21300000, guid: 19cb878ae217df648ba82e0116391c43, type: 3}
+    HasBackgroundSprite: 0
+    BackgroundSprite: {fileID: 0}
+    Text: Yeah, how does it end tho? I was thinking of adding bunnies to her home
+      and adding a twist like she was a bunny monster the whole time.
+  - SpeakerName: Mina
+    HasSpeakerSprite: 1
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 0
+    BackgroundSprite: {fileID: 0}
+    Text: I didn't finish it, I haven't bothered.
+  - SpeakerName: Young Mina
+    HasSpeakerSprite: 1
+    SpeakerSprite: {fileID: 21300000, guid: 19cb878ae217df648ba82e0116391c43, type: 3}
+    HasBackgroundSprite: 0
+    BackgroundSprite: {fileID: 0}
+    Text: Why didn't you finish it tho? I am hooked on the story. I hope the poor
+      girl finds her way.
+  - SpeakerName: Mina
+    HasSpeakerSprite: 1
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 0
+    BackgroundSprite: {fileID: 0}
+    Text: I dont rember why.
