@@ -187,6 +187,101 @@ MonoBehaviour:
     isGlobal: 0
     instanceID: 0
     GUID: 427bedc2-0d6a-4acd-8931-e1755bd94c2c
+  - note:
+      noteTitle: Note Title (Edit Me!)
+      content: Activates = RED and BLUE lights
+      style: 0
+      isOpen: 1
+      folderIndex: 0
+    isGlobal: 0
+    instanceID: 0
+    GUID: c7c57d10-8876-467d-94e5-2c04c7b131f7
+  - note:
+      noteTitle: Note Title (Edit Me!)
+      content: Activates = BLUE and YELLOW lights
+      style: 0
+      isOpen: 1
+      folderIndex: 0
+    isGlobal: 0
+    instanceID: 0
+    GUID: f825e04d-e67c-429f-9236-29697fcce5d3
+  - note:
+      noteTitle: Note Title (Edit Me!)
+      content: Activates = YELLOW and GREEN lights
+      style: 0
+      isOpen: 1
+      folderIndex: 0
+    isGlobal: 0
+    instanceID: 0
+    GUID: 11c13946-00fb-42e7-a62b-6fbef6c1c15a
+  - note:
+      noteTitle: Note Title (Edit Me!)
+      content: Activates = GREEN and RED lights
+      style: 0
+      isOpen: 1
+      folderIndex: 0
+    isGlobal: 0
+    instanceID: 0
+    GUID: ec8d6454-1545-4fc2-937f-0cebb9ff77d0
+  - note:
+      noteTitle: Note Title (Edit Me!)
+      content: Deactivates ONE of any TWO (RED lights)
+      style: 0
+      isOpen: 1
+      folderIndex: 0
+    isGlobal: 0
+    instanceID: 0
+    GUID: 8f531eac-3368-4ab9-b0fa-f16905cb20ba
+  - note:
+      noteTitle: Note Title (Edit Me!)
+      content: Deactivates ONE of any TWO (GREEN lights)
+      style: 0
+      isOpen: 1
+      folderIndex: 0
+    isGlobal: 0
+    instanceID: 0
+    GUID: 77dd9829-9819-4fc5-9f5c-65c70f2e8a2e
+  - note:
+      noteTitle: Note Title (Edit Me!)
+      content: Deactivates ONE of any TWO (BLUE lights)
+      style: 0
+      isOpen: 1
+      folderIndex: 0
+    isGlobal: 0
+    instanceID: 0
+    GUID: d16085dd-85bf-4a3e-ad34-cadf89b3d1f3
+  - note:
+      noteTitle: Note Title (Edit Me!)
+      content: '1) Toggle lever 1 to deactivate the light
+
+        2) Mina stands
+        on the pressure plate A
+
+        3) Shadow stands on pressure plate D'
+      style: 0
+      isOpen: 1
+      folderIndex: 0
+    isGlobal: 0
+    instanceID: 0
+    GUID: 52d40cfa-2b34-44db-aee7-d77409663bba
+  - note:
+      noteTitle: Note Title (Edit Me!)
+      content: The player needs only 3 lights active
+      style: 0
+      isOpen: 1
+      folderIndex: 0
+    isGlobal: 0
+    instanceID: 0
+    GUID: 9c89a132-27f0-42a8-a735-05ed167fd9d4
+  - note:
+      noteTitle: Note Title (Edit Me!)
+      content: Activates = RED and BLUE lights
+      style: 0
+      isOpen: 1
+      folderIndex: 0
+    isGlobal: 0
+    instanceID: 0
+    GUID: 65e7d1d0-786f-45e5-8cdc-38c50d540da3
   noteFolders:
   - Current Tasks
   - Archived

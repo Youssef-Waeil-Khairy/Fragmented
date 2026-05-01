@@ -9,6 +9,10 @@ TagManager:
   - Interactable
   - Stair
   - TheHouse
+  - Red
+  - Blue
+  - Yellow
+  - Green
   layers:
   - Default
   - TransparentFX

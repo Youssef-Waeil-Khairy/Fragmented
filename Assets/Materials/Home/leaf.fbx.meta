@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: 47fa6d6139564a044a19418e0e5dfcf6
+guid: 3576b610644341b408f7ccff3edfa19a
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Beech Leaves
+    second: {fileID: 2100000, guid: 1608a48419d7a1d479b78a5de7659f2b, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -33,7 +38,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 100
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
