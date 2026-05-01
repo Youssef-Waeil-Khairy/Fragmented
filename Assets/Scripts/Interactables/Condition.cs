@@ -26,6 +26,8 @@ namespace Interactables
 
         public ConditionType conditionType;
         public bool IsMet = false;
+        public bool IsLocked = false;
+        public bool IsLockedDefault = false;
 
         #region Values
         [ShowIf("ShowBool")] public bool BooleanCondition;
@@ -36,6 +38,8 @@ namespace Interactables
             get {return booleanValue;}
             set
             {
+                if (IsLocked) return;
+
                 booleanValue = value;
                 if (BooleanCondition == booleanValue)
                 {
@@ -58,6 +62,8 @@ namespace Interactables
             get {return integerValue;}
             set
             {
+                if (IsLocked) return;
+
                 integerValue = value;
                 if (IntegerCondition == integerValue)
                 {
@@ -76,6 +82,8 @@ namespace Interactables
             get {return floatValue;}
             set
             {
+                if (IsLocked) return;
+
                 floatValue = value;
                 if (Mathf.Approximately(FloatCondition, floatValue))
                 {
@@ -101,6 +109,7 @@ namespace Interactables
         public void ResetToDefault()
         {
             IsMet = false;
+            IsLocked = IsLockedDefault;
 
             switch (conditionType)
             {
@@ -162,6 +171,19 @@ namespace Interactables
 
         #region Value Setting
 
+        public void LockCondition()
+        {
+            IsLocked = true;
+        }
+        public void UnlockCondition()
+        {
+            IsLocked = false;
+        }
+        public void ToggleBool()
+        {
+            BooleanValue = !BooleanValue;
+            Debug.Log($"{name} is now {BooleanValue}");
+        }
         public void SetValue(bool value)
         {
             BooleanValue = value;
@@ -179,6 +201,8 @@ namespace Interactables
 
         public void SetValue(int index, bool value)
         {
+            if (IsLocked) return;
+
             if (index < ConditionSequenceBoolean.Count)
             {
                 valueSequenceBoolean[index] = value;
@@ -202,6 +226,8 @@ namespace Interactables
 
         public void SetValue(int index, int value)
         {
+            if (IsLocked) return;
+
             if (index < ConditionSequenceInteger.Count)
             {
                 valueSequenceInteger[index] = value;
@@ -225,6 +251,8 @@ namespace Interactables
 
         public void SetValue(int index, float value)
         {
+            if (IsLocked) return;
+
             if (index < ConditionSequenceFloat.Count)
             {
                 valueSequenceFloat[index] = value;

@@ -1,7 +1,11 @@
+using System.Collections;
 using System.Collections.Generic;
+using EchoMina.Original;
 using Interactables;
 using JetBrains.Annotations;
 using NaughtyAttributes;
+using PlayerControls;
+using Unity.Cinemachine;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
@@ -35,6 +39,9 @@ public class StagedObstacle : MonoBehaviour, IRecordable
     [Foldout("Snapshot")][SerializeField] private int snapshotStage = 0;
     [Foldout("Snapshot")][SerializeField] private int checkpointSnapshotStage = 0;
 
+    [Foldout("Camera")][SerializeField] private CinemachineCamera _camera;
+    [Foldout("Camera")] [SerializeField] private float cameraDuration = 2f;
+
     public bool IsMoving
     {
         get
@@ -50,6 +57,44 @@ public class StagedObstacle : MonoBehaviour, IRecordable
     void Start()
     {
         StartUp();
+    }
+
+    public void ShowCameraStart()
+    {
+        StartCoroutine(ShowCamera());
+    }
+
+    private IEnumerator ShowCamera()
+    {
+        if (_camera == null) yield return null;
+
+        _camera.enabled = true;
+
+        if (OriginalEchoMina.Instance.State is OriginalEchoMina.EchoState.Recording)
+        {
+            OriginalEchoMina.Instance.EchoCamera.enabled = false;
+        }
+        else
+        {
+            PlayerController.Instance.PlayerCamera.enabled = false;
+        }
+        PlayerController.Instance.PlayerInput.enabled = false;
+
+        yield return new WaitForSeconds(cameraDuration);
+
+        _camera.enabled = false;
+
+        if (OriginalEchoMina.Instance.State is OriginalEchoMina.EchoState.Recording)
+        {
+            OriginalEchoMina.Instance.EchoCamera.enabled = true;
+        }
+        else
+        {
+            PlayerController.Instance.PlayerCamera.enabled = true;
+        }
+        PlayerController.Instance.PlayerInput.enabled = true;
+
+        yield break;
     }
 
     [Button]

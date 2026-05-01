@@ -2,13 +2,13 @@
 - Project name: Fragmented
 - Unity version: Unity 6000.1.14f1
 - Active scene:
-  - Name: Level_One_Pool
+  - Name: Level_Three_Mall
   - Tags:
-    - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Command, EchoMina, Interactable, Stair, TheHouse
+    - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Command, EchoMina, Interactable, Stair, TheHouse, Red, Blue, Yellow, Green
   - Layers:
-    - Default, TransparentFX, Ignore Raycast, Ground, Water, UI, Interactible, EchoMina, Walls, Player, Stairs
+    - Default, TransparentFX, Ignore Raycast, Ground, Water, UI, Interactible, EchoMina, Walls, Player, Stairs, Chairs
 - Active game object:
-  - Name: Mansion Door.005
+  - Name: Plate_D_Green
   - Tag: Untagged
   - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
