@@ -57,20 +57,28 @@ namespace Utility
 
         public void TakeSnapshot()
         {
+            Debug.Log($"<b><color=brown>[Snapshot][Take]</color></b> Snapshot: {gameObject.name}]");
+
             snapshotRotation = transform.rotation;
         }
         public void TakeCheckpointSnapshot()
         {
+            Debug.Log($"<b><color=brown>[Snapshot][Take][Checkpoint]</color></b> Snapshot: {gameObject.name}]");
+
             checkpointSnapshotRotation = transform.rotation;
         }
         public void LoadSnapshot()
         {
+            Debug.Log($"<b><color=brown>[Snapshot][Load]</color></b> Snapshot: {gameObject.name}]");
+
             transform.rotation = snapshotRotation;
             isRotating = false;
             timeCount = 0f;
         }
         public void LoadCheckpointSnapshot()
         {
+            Debug.Log($"<b><color=brown>[Snapshot][Load][Checkpoint]</color></b> Snapshot: {gameObject.name}]");
+
             transform.rotation = checkpointSnapshotRotation;
             isRotating = false;
             timeCount = 0f;

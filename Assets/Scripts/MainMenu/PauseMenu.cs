@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -41,6 +42,8 @@ public class PauseMenu : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
+        SceneManager.sceneLoaded += SceneManagerOnsceneLoaded;
+
         if (pausePanel != null)
         {
             Canvas parentCanvas = pausePanel.GetComponentInParent<Canvas>();
@@ -50,6 +53,13 @@ public class PauseMenu : MonoBehaviour
             shownPosition = new Vector2(0, 0);
             pausePanel.anchoredPosition = hiddenPosition;
             pausePanel.gameObject.SetActive(false);
+        }
+    }
+    private void SceneManagerOnsceneLoaded(Scene arg0, LoadSceneMode arg1)
+    {
+        if (ShouldLoadSnapShot)
+        {
+            LoadSnapshot();
         }
     }
 

@@ -2,6 +2,7 @@ using System;
 using NaughtyAttributes;
 using PlayerControls;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 // ReSharper disable InconsistentNaming
 
@@ -64,6 +65,20 @@ namespace MainMenu
             DoFadeOut(debugBool, debugTime);
         }
 
+        private void OnEnable()
+        {
+            Transition = TransitionType.None;
+            SceneManager.sceneLoaded += SceneManagerOnsceneLoaded;
+        }
+        private void SceneManagerOnsceneLoaded(Scene arg0, LoadSceneMode arg1)
+        {
+            DoFadeOut();
+        }
+        private void OnDisable()
+        {
+            SceneManager.sceneLoaded -= SceneManagerOnsceneLoaded;
+        }
+
         private void Start()
         {
             if (Transition is not TransitionType.None) isTransitioning = true;
@@ -72,7 +87,7 @@ namespace MainMenu
         private void Update()
         {
             if (!isTransitioning) return;
-            
+
             switch (Transition)
             {
                 case TransitionType.FadeIn:
@@ -83,7 +98,7 @@ namespace MainMenu
                     break;
                 case TransitionType.DelayIn:
                     delayTime += Time.deltaTime;
-                    
+
                     if (delayTime >= FadeDelayIn)
                     {
                         EndDelayIn?.Invoke();
@@ -112,14 +127,14 @@ namespace MainMenu
         {
             Transition = TransitionType.FadeIn;
             FadeTime = 0f;
-            
+
             isTransitioning = true;
-            
+
             if (PlayerController.Instance != null)
             {
                 PlayerController.Instance.ToggleInputEnabled(false);
             }
-            
+
             BeginFadeIn?.Invoke();
         }
         /// <summary>
@@ -133,9 +148,9 @@ namespace MainMenu
             FadeTime = 0f;
             delayTime = 0f;
             if (!defaultDelay) FadeDelayIn = delay;
-            
+
             isTransitioning = true;
-            
+
             BeginDelayIn?.Invoke();
         }
 
@@ -147,17 +162,17 @@ namespace MainMenu
         {
             Transition = TransitionType.FadeOut;
             FadeTime = 0f;
-            
+
             isTransitioning = true;
-            
+
             if (PlayerController.Instance != null)
             {
                 PlayerController.Instance.ToggleInputEnabled(false);
             }
-            
+
             BeginFadeOut?.Invoke();
         }
-        
+
         /// <summary>
         /// Begins fading out the transition screen to full transparency after a delay
         /// </summary>
@@ -169,9 +184,9 @@ namespace MainMenu
             FadeTime = 0f;
             delayTime = 0f;
             if (!defaultDelay) FadeDelayOut = delay;
-            
+
             isTransitioning = true;
-            
+
             BeginDelayOut?.Invoke();
         }
 
@@ -190,12 +205,12 @@ namespace MainMenu
                 Transition = TransitionType.None;
                 FadeTime = 0f;
                 isTransitioning = false;
-                
+
                 if (PlayerController.Instance != null)
                 {
                     PlayerController.Instance.ToggleInputEnabled(true);
                 }
-                
+
                 EndFadeIn?.Invoke();
             }
         }
@@ -213,16 +228,16 @@ namespace MainMenu
             if (FadeTime >= FadeOutTime)
             {
                 Transition = TransitionType.None;
-                
+
                 FadeTime = 0f;
-                
+
                 isTransitioning = false;
-                
+
                 if (PlayerController.Instance != null)
                 {
                     PlayerController.Instance.ToggleInputEnabled(true);
                 }
-                
+
                 EndFadeOut?.Invoke();
             }
         }

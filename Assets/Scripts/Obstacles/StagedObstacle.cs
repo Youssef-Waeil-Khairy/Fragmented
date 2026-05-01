@@ -51,7 +51,7 @@ public class StagedObstacle : MonoBehaviour, IRecordable
     {
         StartUp();
     }
-    
+
     [Button]
     private void StartUp()
     {
@@ -98,7 +98,7 @@ public class StagedObstacle : MonoBehaviour, IRecordable
         isMoving = rb.linearVelocity.magnitude > 0;
 
         if (!isMovingToTarget) return;
-        
+
         //distancesToTarget.Add(Vector3.Distance(rb.position, targetPosition));
 
         if (Vector3.Distance(transform.position, targetPosition) <= errorMargin || HasMovedAwayFromTarget())
@@ -117,8 +117,8 @@ public class StagedObstacle : MonoBehaviour, IRecordable
             float speed = math.lerp(0f, maxSpeed, curveValue);
             rb.MovePosition(transform.position + moveDirection * (speed * Time.fixedDeltaTime));
         }
-        
-        
+
+
     }
 
     private bool HasMovedAwayFromTarget()
@@ -227,9 +227,9 @@ public class StagedObstacle : MonoBehaviour, IRecordable
         }
         float dif = lineRenderer.GetPosition(1).y - transform.position.y;
         Debug.Log(dif);
-        
+
         lineRenderer.SetPosition(0, transform.position);
-        
+
         lineRenderer.SetPosition(1, new Vector3(transform.position.x, transform.position.y + dif, transform.position.z));
     }
 
@@ -285,26 +285,30 @@ public class StagedObstacle : MonoBehaviour, IRecordable
 
             // Restore matrix
             Gizmos.matrix = oldMatrix;
-            
+
             // ChatGPT fix end
         }
     }
     public void TakeSnapshot()
     {
+        Debug.Log($"<b><color=brown>[Snapshot][Take]</color></b> Snapshot: {gameObject.name}]");
         snapshotStage = currentStage;
     }
     public void TakeCheckpointSnapshot()
     {
+        Debug.Log($"<b><color=brown>[Snapshot][Take][Checkpoint]</color></b> Snapshot: {gameObject.name}]");
         checkpointSnapshotStage = currentStage;
     }
     public void LoadSnapshot()
     {
+        Debug.Log($"<b><color=brown>[Snapshot][Load]</color></b> Snapshot: {gameObject.name}]");
         targetPosition = lineRenderer.GetPosition(snapshotStage);
         transform.position = targetPosition;
         currentStage = snapshotStage;
     }
     public void LoadCheckpointSnapshot()
     {
+        Debug.Log($"<b><color=brown>[Snapshot][Load][Checkpoint]</color></b> Snapshot: {gameObject.name}]");
         targetPosition = lineRenderer.GetPosition(checkpointSnapshotStage);
         transform.position = targetPosition;
         currentStage = checkpointSnapshotStage;

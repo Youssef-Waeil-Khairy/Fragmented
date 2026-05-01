@@ -187,6 +187,15 @@ MonoBehaviour:
     isGlobal: 0
     instanceID: 0
     GUID: 427bedc2-0d6a-4acd-8931-e1755bd94c2c
+  - note:
+      noteTitle: Note Title (Edit Me!)
+      content: Put Your Note Here
+      style: 0
+      isOpen: 1
+      folderIndex: 0
+    isGlobal: 0
+    instanceID: 0
+    GUID: 776fb2f2-d45c-4ee4-a5cd-e6273a83af1f
   noteFolders:
   - Current Tasks
   - Archived

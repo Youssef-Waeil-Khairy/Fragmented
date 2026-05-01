@@ -196,6 +196,8 @@ namespace Interactables
 
         public void TakeSnapshot()
         {
+            Debug.Log($"<b><color=brown>[Snapshot][Take]</color></b> Snapshot: {gameObject.name}]");
+
             snapshotParentTransform = transform.parent;
             snapshotTransform = transform;
             startingPosition = transform.position;
@@ -203,17 +205,23 @@ namespace Interactables
         }
         public void TakeCheckpointSnapshot()
         {
+            Debug.Log($"<b><color=brown>[Snapshot][Take][Checkpoint]</color></b> Snapshot: {gameObject.name}]");
+
             checkpointSnapshotParentTransform = transform.parent;
             checkpointSnapshotTransform = transform;
         }
         public void LoadSnapshot()
         {
+            Debug.Log($"<b><color=brown>[Snapshot][Load]</color></b> Snapshot: {gameObject.name}]");
+
             transform.SetParent(snapshotParentTransform);
             transform.position = startingPosition;
             transform.rotation = startingRotation;
         }
         public void LoadCheckpointSnapshot()
         {
+            Debug.Log($"<b><color=brown>[Snapshot][Load][Checkpoint]</color></b> Snapshot: {gameObject.name}]");
+
             transform.SetParent(checkpointSnapshotParentTransform);
             transform.position = checkpointSnapshotTransform.position;
             transform.rotation = checkpointSnapshotTransform.rotation;

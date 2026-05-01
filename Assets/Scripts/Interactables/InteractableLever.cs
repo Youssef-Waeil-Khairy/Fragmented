@@ -42,7 +42,6 @@ namespace Interactables
         }
 
         #region IInteractable Methods
-
         private void StopRecording() {isInteracted = false;}
         public void BindObject()
         {
@@ -79,12 +78,18 @@ namespace Interactables
 
         public void StartPreview()
         {
-            previewPanel.SetActive(true);
+            if (previewPanel != null)
+            {
+                previewPanel.SetActive(true);
+            }
             onStartPreview?.Invoke();
         }
         public void StopPreview()
         {
-            previewPanel.SetActive(false);
+            if (previewPanel != null)
+            {
+                previewPanel.SetActive(false);
+            }
             onStopPreview?.Invoke();
         }
         public bool IsLockable()
@@ -110,7 +115,7 @@ namespace Interactables
         public void ShowInteraction()
         {
             if (!hasInteractionCamera) return;
-            
+
             if (OriginalEchoMina.Instance.State is OriginalEchoMina.EchoState.Recording)
             {
                 // Disable Echo  Mina's camera

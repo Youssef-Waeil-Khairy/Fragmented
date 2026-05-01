@@ -17,7 +17,7 @@ namespace PlayerControls
     public class PlayerController : MonoBehaviour, IRecordable
     {
         public static bool PLAYERCONTROLLERSTARTED = false;
-        
+
         public static PlayerController Instance;
 
         PlayerInput playerInput;
@@ -71,7 +71,7 @@ namespace PlayerControls
             rb.maxLinearVelocity = maxSpeed;
             rb.maxAngularVelocity = maxTurnSpeed;
             LockCursor();
-            
+
             PLAYERCONTROLLERSTARTED = true;
             StartupLogger.LogStart("Finished start up successfully", name);
         }
@@ -86,7 +86,7 @@ namespace PlayerControls
             {
                 controlablesMaterial.frictionCombine = PhysicsMaterialCombine.Average;
             }
-            
+
             if (OriginalEchoMina.Instance.State is OriginalEchoMina.EchoState.Recording || cursorFree)
             {
                 if (cursorFree)
@@ -95,7 +95,7 @@ namespace PlayerControls
                 }
                 return;
             }
-            
+
             Vector3 move = transform.forward * (moveDirection * moveSpeed);
             rb.AddForce(move, ForceMode.Force);
             rb.AddTorque(transform.up * (turnDirection * turnSpeed * Time.fixedDeltaTime));
@@ -242,23 +242,30 @@ namespace PlayerControls
         }
         public void TakeSnapshot()
         {
+            Debug.Log($"<b><color=brown>[Snapshot][Take]</color></b> Snapshot: {gameObject.name}]");
+
             snapshotPosition = transform.position;
             snapshotRotation = transform.rotation;
         }
         public void TakeCheckpointSnapshot()
         {
+            Debug.Log($"<b><color=brown>[Snapshot][Take][Checkpoint]</color></b> Snapshot: {gameObject.name}]");
+
             checkpointSnapshotPosition = transform.position;
             checkpointSnapshotRotation = transform.rotation;
         }
         public void LoadSnapshot()
         {
-            Debug.Log("Load Snapshot for Player");
+            Debug.Log($"<b><color=brown>[Snapshot][Load]</color></b> Snapshot: {gameObject.name}]");
+
             transform.position = snapshotPosition;
             snapshotPosition.y += 1f;
             transform.rotation = snapshotRotation;
         }
         public void LoadCheckpointSnapshot()
         {
+            Debug.Log($"<b><color=brown>[Snapshot][Load][Checkpoint]</color></b> Snapshot: {gameObject.name}]");
+
             transform.position = checkpointSnapshotPosition;
             transform.rotation = checkpointSnapshotRotation;
         }

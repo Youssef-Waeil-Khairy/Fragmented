@@ -102,21 +102,35 @@ namespace Interactables
         {
             IsMet = false;
 
-            booleanValue = booleanValueDefault;
-            integerValue = integerValueDefault;
-            floatValue = floatValueDefault;
-
-            for (int bi = 0; bi < valueSequenceBoolean.Count; bi++)
+            switch (conditionType)
             {
-                valueSequenceBoolean[bi] = valueSequenceBooleanDefault[bi];
-            }
-            for (int ii = 0; ii < valueSequenceInteger.Count; ii++)
-            {
-                valueSequenceInteger[ii] = valueSequenceIntegerDefault[ii];
-            }
-            for (int fi = 0; fi < valueSequenceFloat.Count; fi++)
-            {
-                valueSequenceFloat[fi] = valueSequenceFloatDefault[fi];
+                case ConditionType.Boolean:
+                    booleanValue = booleanValueDefault;
+                    break;
+                case ConditionType.Integer:
+                    integerValue = integerValueDefault;
+                    break;
+                case ConditionType.Float:
+                    floatValue = floatValueDefault;
+                    break;
+                case ConditionType.SequenceBoolean:
+                    for (int bi = 0; bi < valueSequenceBoolean.Count; bi++)
+                    {
+                        valueSequenceBoolean[bi] = valueSequenceBooleanDefault[bi];
+                    }
+                    break;
+                case ConditionType.SequenceInteger:
+                    for (int ii = 0; ii < valueSequenceInteger.Count; ii++)
+                    {
+                        valueSequenceInteger[ii] = valueSequenceIntegerDefault[ii];
+                    }
+                    break;
+                case ConditionType.SequenceFloat:
+                    for (int fi = 0; fi < valueSequenceFloat.Count; fi++)
+                    {
+                        valueSequenceFloat[fi] = valueSequenceFloatDefault[fi];
+                    }
+                    break;
             }
         }
 

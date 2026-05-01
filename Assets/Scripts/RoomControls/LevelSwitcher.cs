@@ -1,4 +1,6 @@
+using System;
 using JetBrains.Annotations;
+using MainMenu;
 using UnityEngine;
 using NaughtyAttributes;
 using PlayerControls;
@@ -10,10 +12,26 @@ namespace RoomControls
     {
         [Scene][SerializeField] private int level;
         [Tag][SerializeField] private string allowedTag;
+        public ScreenTransitioner Transitioner;
         public bool IsInterLevelTransition;
 
         public bool IsLeavingSettingsScene = false;
         public bool IsGoingToSettingsScene = false;
+
+        private void OnEnable()
+        {
+            if (Transitioner != null)
+            {
+                Transitioner.EndFadeIn += DoGoToScene;
+            }
+        }
+        private void OnDisable()
+        {
+            if (Transitioner != null)
+            {
+                Transitioner.EndFadeIn -= DoGoToScene;
+            }
+        }
 
         private void OnTriggerEnter(Collider other)
         {
@@ -23,13 +41,28 @@ namespace RoomControls
             }
         }
 
+        private void DoGoToScene()
+        {
+            if (IsLeavingSettingsScene)
+            {
+                SceneManager.LoadScene(PauseMenu.Instance.CurrentScene);
+            }
+            else
+            {
+                SceneManager.LoadScene(level);
+            }
+        }
+
         [Button][UsedImplicitly]
         public void GoToScene()
         {
             Debug.Log($"Loading scene: {level} from {SceneManager.GetActiveScene().buildIndex}");
-
-            SceneManager.LoadScene(level);
             PauseMenu.Instance.CurrentScene = level;
+
+            if (Transitioner != null)
+            {
+                Transitioner.DoFadeIn();
+            }
         }
 
         public void GoToSettingsScene()
@@ -44,13 +77,12 @@ namespace RoomControls
         public void LeaveSettingsScene()
         {
             Debug.Log($"Loading scene: {PauseMenu.Instance.CurrentScene} from {SceneManager.GetActiveScene().buildIndex}");
-            SceneManager.LoadScene(PauseMenu.Instance.CurrentScene);
 
-            while (!SceneManager.GetActiveScene().isLoaded)
+            if (Transitioner != null)
             {
-                Debug.Log("Waiting for scene to load");
+                Transitioner.DoFadeIn();
+                PauseMenu.Instance.ShouldLoadSnapShot = true;
             }
-            PauseMenu.Instance.LoadSnapshot();
         }
 
         public void CloseGame()
