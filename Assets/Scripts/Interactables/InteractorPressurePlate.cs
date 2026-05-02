@@ -7,8 +7,6 @@ using PlayerControls;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 using Utility;
 // ReSharper disable InconsistentNaming
 
@@ -57,6 +55,11 @@ namespace Interactables
                 StartCoroutine(ShowInteractionRoutine());
             }
         }
+        [Button]
+        public void ResetInteractions()
+        {
+            _hasBeenInteracted = false;
+        }
 
         private void OnTriggerExit(Collider other)
         {
@@ -65,13 +68,15 @@ namespace Interactables
                 EndInteraction();
             }
         }
+
+        [Button]
         private void EndInteraction()
         {
             #if DEBUG
-            Debug.Log($"<b><color=yellow>[Interactor][PressurePlate]</color></b> {gameObject.name} has been stepped off by {_interactingObject.name}");
+            if (_interactingObject) Debug.Log($"<b><color=yellow>[Interactor][PressurePlate]</color></b> {gameObject.name} has been stepped off by {_interactingObject.name}");
             #endif
 
-            _interactingObject =  null;
+            if (_interactingObject) _interactingObject =  null;
             OnEndInteraction?.Invoke();
             _isInteracting = false;
         }

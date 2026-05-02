@@ -55,6 +55,16 @@ namespace Interactables
             {
                 Debug.LogError($"<b><color=red>[Start Up][Moveable Object]</color.</b> {gameObject.name} does not have a RigidBody component.");
             }
+
+            if (outline != null)
+            {
+                outline.enabled = false;
+            }
+
+            if (previewPanel != null)
+            {
+                previewPanel.SetActive(false);
+            }
         }
 
         #region Private Functions

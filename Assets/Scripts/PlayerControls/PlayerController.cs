@@ -30,7 +30,6 @@ namespace PlayerControls
         [Foldout("Movement")][SerializeField] float turnDirection = 0f;
         [Foldout("Movement")][SerializeField] private float maxSpeed;
         [Foldout("Movement")][SerializeField] private float maxTurnSpeed;
-        [Foldout("Movement")][SerializeField] private bool isGivingInput = false;
         [Foldout("Movement")][SerializeField] private PhysicsMaterial controlablesMaterial;
         [Foldout("Movement")][SerializeField] private float moveInput;
 
@@ -147,7 +146,6 @@ namespace PlayerControls
         void OnMove(InputValue value)
         {
             if (cursorFree) return;
-            isGivingInput = true;
 
             Vector2 inputDirection = value.Get<Vector2>();
             moveInput = inputDirection.y;

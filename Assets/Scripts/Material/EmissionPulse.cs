@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class EmissionPulse : MonoBehaviour
 {
+    private static readonly int Emissionccolor = Shader.PropertyToID("_Emissionccolor");
     public Color emissionColor = Color.red;
     public float minIntensity = 0.5f;
     public float maxIntensity = 3f;
@@ -18,6 +19,6 @@ public class EmissionPulse : MonoBehaviour
     {
         float intensity = Mathf.Lerp(minIntensity, maxIntensity,(Mathf.Sin(Time.time * pulseSpeed) + 1f) / 2f);
 
-        mat.SetColor("_Emissionccolor", emissionColor * intensity);
+        mat.SetColor(Emissionccolor, emissionColor * intensity);
     }
 }
