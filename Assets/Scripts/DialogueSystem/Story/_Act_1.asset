@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36722238b0204cf0aa52ed6f487fcf02, type: 3}
+  m_Name: _Act_1
+  m_EditorClassIdentifier: 
+  DialogueSnippets:
+  - SpeakerName: Mina(Internal)
+    HasSpeakerSprite: 1
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 29b1fbdcde6c9a64c9b2e22c510cb431, type: 3}
+    Text: Same routine. Same coffee. Same clothes. Same everything.
+  - SpeakerName: Co-Worker
+    HasSpeakerSprite: 0
+    SpeakerSprite: {fileID: 21300000, guid: 005888ede18a58e4db8d069cfa3007cb, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 29b1fbdcde6c9a64c9b2e22c510cb431, type: 3}
+    Text: You Coming to the team lunch
+  - SpeakerName: Mina
+    HasSpeakerSprite: 1
+    SpeakerSprite: {fileID: 21300000, guid: 005888ede18a58e4db8d069cfa3007cb, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 29b1fbdcde6c9a64c9b2e22c510cb431, type: 3}
+    Text: I have a meeting ,right now on my phone , maybe next time
+  - SpeakerName: Co worker
+    HasSpeakerSprite: 1
+    SpeakerSprite: {fileID: 21300000, guid: 005888ede18a58e4db8d069cfa3007cb, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 29b1fbdcde6c9a64c9b2e22c510cb431, type: 3}
+    Text: Its team lunch ... For the team.... that you are on
+  - SpeakerName: Mina
+    HasSpeakerSprite: 1
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 29b1fbdcde6c9a64c9b2e22c510cb431, type: 3}
+    Text: I will pass
+  - SpeakerName: Mina
+    HasSpeakerSprite: 1
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 29b1fbdcde6c9a64c9b2e22c510cb431, type: 3}
+    Text: (MIna is walking down a hallway with a wet floor visibile, but no warning
+      sign and she is distracted on her phone)
+  - SpeakerName: Narrator
+    HasSpeakerSprite: 0
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 29b1fbdcde6c9a64c9b2e22c510cb431, type: 3}
+    Text: (MIna is walking down a hallway with a wet floor visibile, but no warning
+      sign and she is distracted on her phone)
+  - SpeakerName: Mina
+    HasSpeakerSprite: 0
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 1b01530ace5f6c14dae900d589d62916, type: 3}
+    Text: '"Whoooosh"'
+  - SpeakerName: Doctor
+    HasSpeakerSprite: 0
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 1b01530ace5f6c14dae900d589d62916, type: 3}
+    Text: Ahh, you are finally awkae. Well, you hit your head pretty hard and you
+      passed out with a bit of concussion
+  - SpeakerName: Mina
+    HasSpeakerSprite: 1
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 1b01530ace5f6c14dae900d589d62916, type: 3}
+    Text: '"Huhh.. Whaaa"'
+  - SpeakerName: Doctor
+    HasSpeakerSprite: 0
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 1b01530ace5f6c14dae900d589d62916, type: 3}
+    Text: No, no. Dont try to speak. Yous hould take 2 days off, no technolgy, no
+      work , just rest for 2 days
+  - SpeakerName: Mina
+    HasSpeakerSprite: 1
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 1b01530ace5f6c14dae900d589d62916, type: 3}
+    Text: 2 days off from work ? Doesnt sound bad.

@@ -13222,11 +13222,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3527509656408764565, guid: 1db0bcc4edb713c46be7f54718df9be6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.28
+      value: -1.652
       objectReference: {fileID: 0}
     - target: {fileID: 3527509656408764565, guid: 1db0bcc4edb713c46be7f54718df9be6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -27
+      value: -24.09
       objectReference: {fileID: 0}
     - target: {fileID: 3527509656408764565, guid: 1db0bcc4edb713c46be7f54718df9be6, type: 3}
       propertyPath: m_LocalRotation.w
@@ -13409,7 +13409,7 @@ Transform:
   m_GameObject: {fileID: 687187133}
   serializedVersion: 2
   m_LocalRotation: {x: 0.106264055, y: 0, z: 0, w: 0.994338}
-  m_LocalPosition: {x: -7.894, y: -0.7323868, z: -33.891235}
+  m_LocalPosition: {x: -7.894, y: -1.1043868, z: -30.981236}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -28526,6 +28526,8 @@ MonoBehaviour:
   drawGizmos: 1
   snapshotStage: 0
   checkpointSnapshotStage: 0
+  _camera: {fileID: 0}
+  cameraDuration: 2
 --- !u!1 &1976051991
 GameObject:
   m_ObjectHideFlags: 0
@@ -33136,7 +33138,7 @@ Transform:
   m_GameObject: {fileID: 2962397015081171703}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7062073, y: -0.035654187, z: -0.035654202, w: -0.7062074}
-  m_LocalPosition: {x: 2.7419698, y: -1.4593117, z: 3.2298536}
+  m_LocalPosition: {x: 1.524, y: -1.4593117, z: 3.353}
   m_LocalScale: {x: 100, y: 100, z: 99.999985}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -44996,7 +44998,7 @@ Transform:
   m_GameObject: {fileID: 3802221451235586110}
   serializedVersion: 2
   m_LocalRotation: {x: -0.70620745, y: -0.035654213, z: 0.035654187, w: -0.7062072}
-  m_LocalPosition: {x: 2.7395525, y: -1.4593117, z: 3.2059755}
+  m_LocalPosition: {x: 1.5215827, y: -1.4593117, z: 3.3291216}
   m_LocalScale: {x: 100, y: 100, z: 99.999985}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -46229,13 +46231,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 550209317351513992}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7062073, y: -0.035654187, z: -0.035654202, w: -0.7062074}
+  m_LocalRotation: {x: 0.48882398, y: 0.5109316, z: 0.5109317, w: -0.48882407}
   m_LocalPosition: {x: 1.9525108, y: -1.4593115, z: 3.3147974}
   m_LocalScale: {x: 100, y: 100, z: 99.999985}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 875961038}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 95.78}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: -92.534}
 --- !u!33 &3240376942102015824
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -48996,7 +48998,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: f3fc32df3773ace47aed3809e0554c4c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -77584,6 +77586,8 @@ MonoBehaviour:
   drawGizmos: 1
   snapshotStage: 0
   checkpointSnapshotStage: 0
+  _camera: {fileID: 0}
+  cameraDuration: 2
 --- !u!65 &8978887088961476117
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -78788,6 +78792,8 @@ MonoBehaviour:
   drawGizmos: 1
   snapshotStage: 0
   checkpointSnapshotStage: 0
+  _camera: {fileID: 0}
+  cameraDuration: 2
 --- !u!65 &9170846854351370350
 BoxCollider:
   m_ObjectHideFlags: 0
