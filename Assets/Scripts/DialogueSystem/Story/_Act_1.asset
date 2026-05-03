@@ -89,3 +89,184 @@ MonoBehaviour:
     HasBackgroundSprite: 1
     BackgroundSprite: {fileID: 21300000, guid: b0ccd58ee8fd7aa4b8ca38f16c03a9f6, type: 3}
     Text: 2 days off from work ? Doesnt sound bad.
+  - SpeakerName: Mina (Internal)
+    HasSpeakerSprite: 1
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 0855448029ecefd4db4fd30ffd58b6c0, type: 3}
+    Text: (Its been a while sicne  I have seen my parents)
+  - SpeakerName: 'Mina '
+    HasSpeakerSprite: 1
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: dac666ccb125a2840ab9437ab406a5e1, type: 3}
+    Text: Hey Ma
+  - SpeakerName: Mom
+    HasSpeakerSprite: 0
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: dac666ccb125a2840ab9437ab406a5e1, type: 3}
+    Text: MINAAAAAA, OH MY GOD, DAVID , DAVID , ITS YOUR DAUGHTER
+  - SpeakerName: Dad
+    HasSpeakerSprite: 0
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: dac666ccb125a2840ab9437ab406a5e1, type: 3}
+    Text: How are you mina? what forgot your old folks, Hahahahaha
+  - SpeakerName: Mina
+    HasSpeakerSprite: 1
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: dac666ccb125a2840ab9437ab406a5e1, type: 3}
+    Text: How can I ever forget you guys? I am coming home to rest for a while, just
+      wanted to give you a heads up.
+  - SpeakerName: Dad
+    HasSpeakerSprite: 0
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: dac666ccb125a2840ab9437ab406a5e1, type: 3}
+    Text: Oh, hey cmon now its your home. Cmon we will be waiting for you.
+  - SpeakerName: 'Mina '
+    HasSpeakerSprite: 1
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 24a68abe93d3078449d186a666175fde, type: 3}
+    Text: Wow, it's like I am stuck in the past while being present.
+  - SpeakerName: Dad
+    HasSpeakerSprite: 0
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 24a68abe93d3078449d186a666175fde, type: 3}
+    Text: I mean, we had no reason to change your room, so your mom decided to keep
+      it the same.
+  - SpeakerName: Mom
+    HasSpeakerSprite: 0
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 24a68abe93d3078449d186a666175fde, type: 3}
+    Text: Hey, your father and I are bout to finish supper, settle in, and  you will
+      have something to eat in an hour.
+  - SpeakerName: MIna
+    HasSpeakerSprite: 1
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 24a68abe93d3078449d186a666175fde, type: 3}
+    Text: Yeah, Ma for sure.
+  - SpeakerName: MIna (Internal)
+    HasSpeakerSprite: 1
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 24a68abe93d3078449d186a666175fde, type: 3}
+    Text: '(I just wish I could live in that state forever)
+
+'
+  - SpeakerName: Dad
+    HasSpeakerSprite: 0
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 24a68abe93d3078449d186a666175fde, type: 3}
+    Text: MINAAAA! supper is ready. Come downstairs
+  - SpeakerName: Mina
+    HasSpeakerSprite: 1
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 24a68abe93d3078449d186a666175fde, type: 3}
+    Text: Alright, I am coming  right now
+  - SpeakerName: Mom
+    HasSpeakerSprite: 0
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 2e3ca632d7abcdf40b154d04a7c20d22, type: 3}
+    Text: So, 2 days of work, historic!
+  - SpeakerName: Mina
+    HasSpeakerSprite: 1
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 2e3ca632d7abcdf40b154d04a7c20d22, type: 3}
+    Text: 'Tell me about it, it''s my life, like I don''t know what to do right now,
+      I have no where ot be or go. '
+  - SpeakerName: Dad
+    HasSpeakerSprite: 0
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 2e3ca632d7abcdf40b154d04a7c20d22, type: 3}
+    Text: 'Yeah, Mina, but that''s life. You know I worked for 50 years to give you
+      the life that you deserve. '
+  - SpeakerName: Mina
+    HasSpeakerSprite: 1
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 2e3ca632d7abcdf40b154d04a7c20d22, type: 3}
+    Text: 'I get it, Dad, but it feels like my life is going in a constant line,
+      it''s not declining nor inclining, it''s a parallel line that reaches nowhere
+
+'
+  - SpeakerName: Dad
+    HasSpeakerSprite: 0
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 2e3ca632d7abcdf40b154d04a7c20d22, type: 3}
+    Text: Yeah, that's adulthood for ya, but look at your old man all jolly and happy,
+      all thanks to my passion for fishing. You should try it sometimes; it teaches
+      you patience.
+  - SpeakerName: Mom
+    HasSpeakerSprite: 0
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 2e3ca632d7abcdf40b154d04a7c20d22, type: 3}
+    Text: Oooo, you might try sewing, it makes your mind go in a flow state that
+      feels like you are one with the thread
+  - SpeakerName: Dad
+    HasSpeakerSprite: 0
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 2e3ca632d7abcdf40b154d04a7c20d22, type: 3}
+    Text: 'Maybe try a hobby of yours, like drawing, yeah, you used to sketch a lot
+
+'
+  - SpeakerName: Mina
+    HasSpeakerSprite: 1
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 2e3ca632d7abcdf40b154d04a7c20d22, type: 3}
+    Text: ' I mean, it wasn''t like a hidden talent, I just copied other pieces and
+      the proportions were all out of place'
+  - SpeakerName: Mom
+    HasSpeakerSprite: 0
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 2e3ca632d7abcdf40b154d04a7c20d22, type: 3}
+    Text: "No, no, your dad is right, you used to draw a lot.\r"
+  - SpeakerName: Mina
+    HasSpeakerSprite: 1
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 2e3ca632d7abcdf40b154d04a7c20d22, type: 3}
+    Text: Alright, ma and pa, I am gonna freshen up so I can see what my work wants,
+      goodnight
+  - SpeakerName: Mom and Dad
+    HasSpeakerSprite: 0
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 2e3ca632d7abcdf40b154d04a7c20d22, type: 3}
+    Text: Alright sweatie , take care
+  - SpeakerName: Mina
+    HasSpeakerSprite: 1
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 28f22a79850a8504ab8902abb19386a4, type: 3}
+    Text: Huhhhhhhh, I hate it when my parents give me false reinforcments, sometimes
+      i just wish to stay on my room and not leave. Quilt sulking Mina and just rest.
+  - SpeakerName: Mina (Internal)
+    HasSpeakerSprite: 0
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 28f22a79850a8504ab8902abb19386a4, type: 3}
+    Text: Let me just grab that towel to dry up the wet floor. Ha it would be funny
+      if i slipped agai......................
+  - SpeakerName: Mina (Internal)
+    HasSpeakerSprite: 0
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 1b01530ace5f6c14dae900d589d62916, type: 3}
+    Text: SHIT
