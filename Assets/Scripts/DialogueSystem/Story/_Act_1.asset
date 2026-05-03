@@ -67,25 +67,25 @@ MonoBehaviour:
     HasSpeakerSprite: 0
     SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
     HasBackgroundSprite: 1
-    BackgroundSprite: {fileID: 21300000, guid: 1b01530ace5f6c14dae900d589d62916, type: 3}
+    BackgroundSprite: {fileID: 21300000, guid: b0ccd58ee8fd7aa4b8ca38f16c03a9f6, type: 3}
     Text: Ahh, you are finally awkae. Well, you hit your head pretty hard and you
       passed out with a bit of concussion
   - SpeakerName: Mina
     HasSpeakerSprite: 1
     SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
     HasBackgroundSprite: 1
-    BackgroundSprite: {fileID: 21300000, guid: 1b01530ace5f6c14dae900d589d62916, type: 3}
+    BackgroundSprite: {fileID: 21300000, guid: b0ccd58ee8fd7aa4b8ca38f16c03a9f6, type: 3}
     Text: '"Huhh.. Whaaa"'
   - SpeakerName: Doctor
     HasSpeakerSprite: 0
     SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
     HasBackgroundSprite: 1
-    BackgroundSprite: {fileID: 21300000, guid: 1b01530ace5f6c14dae900d589d62916, type: 3}
+    BackgroundSprite: {fileID: 21300000, guid: b0ccd58ee8fd7aa4b8ca38f16c03a9f6, type: 3}
     Text: No, no. Dont try to speak. Yous hould take 2 days off, no technolgy, no
       work , just rest for 2 days
   - SpeakerName: Mina
     HasSpeakerSprite: 1
     SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
     HasBackgroundSprite: 1
-    BackgroundSprite: {fileID: 21300000, guid: 1b01530ace5f6c14dae900d589d62916, type: 3}
+    BackgroundSprite: {fileID: 21300000, guid: b0ccd58ee8fd7aa4b8ca38f16c03a9f6, type: 3}
     Text: 2 days off from work ? Doesnt sound bad.
