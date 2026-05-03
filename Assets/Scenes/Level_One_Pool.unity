@@ -22719,6 +22719,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ScreenTransition
       objectReference: {fileID: 0}
+    - target: {fileID: 2251009283472521733, guid: 9f9391dafc7a8234882125e06cde6b8b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4928453060125610321, guid: 9f9391dafc7a8234882125e06cde6b8b, type: 3}
       propertyPath: Transition
       value: 1
@@ -22728,17 +22732,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f9391dafc7a8234882125e06cde6b8b, type: 3}
---- !u!114 &1476415161 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4928453060125610321, guid: 9f9391dafc7a8234882125e06cde6b8b, type: 3}
-  m_PrefabInstance: {fileID: 1476415160}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 843e872f10994ddfa2355420a90c9029, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1483291809
 GameObject:
   m_ObjectHideFlags: 0
@@ -24968,6 +24961,8 @@ MonoBehaviour:
   drawGizmos: 1
   snapshotStage: 0
   checkpointSnapshotStage: 0
+  _camera: {fileID: 0}
+  cameraDuration: 2
 --- !u!120 &1661024137
 LineRenderer:
   serializedVersion: 2
@@ -26070,6 +26065,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DialogueCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 923519535873372274, guid: 0bd7b9a101f8cd846a52b3b29287fc51, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3165675276197059476, guid: 0bd7b9a101f8cd846a52b3b29287fc51, type: 3}
       propertyPath: Dialogue
       value: 
@@ -26775,6 +26774,8 @@ MonoBehaviour:
   drawGizmos: 1
   snapshotStage: 0
   checkpointSnapshotStage: 0
+  _camera: {fileID: 0}
+  cameraDuration: 2
 --- !u!120 &1834117240
 LineRenderer:
   serializedVersion: 2
@@ -27341,6 +27342,8 @@ MonoBehaviour:
   drawGizmos: 1
   snapshotStage: 0
   checkpointSnapshotStage: 0
+  _camera: {fileID: 0}
+  cameraDuration: 2
 --- !u!120 &1885501207
 LineRenderer:
   serializedVersion: 2
@@ -27782,6 +27785,8 @@ MonoBehaviour:
   drawGizmos: 1
   snapshotStage: 0
   checkpointSnapshotStage: 0
+  _camera: {fileID: 0}
+  cameraDuration: 2
 --- !u!120 &1918915004
 LineRenderer:
   serializedVersion: 2
@@ -32183,9 +32188,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 5
   allowedTag: Player
-  Transitioner: {fileID: 1476415161}
-  IsInterLevelTransition: 0
-  IsLeavingSettingsScene: 0
+  isGoingToScene: 0
   IsGoingToSettingsScene: 0
 --- !u!65 &6995579705891555204
 BoxCollider:
