@@ -85,7 +85,7 @@ namespace MainMenu
         }
         private void SceneManagerOnsceneLoaded(Scene arg0, LoadSceneMode arg1)
         {
-            DoFadeOut();
+            DoFadeOut(false, 1f);
         }
         private void OnDisable()
         {

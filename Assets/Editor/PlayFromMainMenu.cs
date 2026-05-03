@@ -32,8 +32,8 @@ public static class PlayFromMainMenu
     {
         if (state == PlayModeStateChange.ExitingEditMode)
         {
-            if (!IsShiftHeld())
-                return;
+            /*if (!IsShiftHeld())
+                return;*/
 
             StartPlayFromMainMenu();
         }

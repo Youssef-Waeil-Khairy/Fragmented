@@ -19,11 +19,13 @@ namespace Interactables
         [SerializeField] private GameObject _interactingObject;
         public UnityEvent OnBeginInteraction, OnEndInteraction;
 
-        [Foldout("Camera")] [SerializeField] private bool _hasInteractionCamera = false;
+        [Foldout("Camera")]
+        [InfoBox("Make sure the interaction camera has a higher priority than the player and Echo Mina")]
+        /*still in the foldout  */[SerializeField] private bool _hasInteractionCamera = false;
         [Foldout("Camera")] [SerializeField] private CinemachineCamera _camera;
         [Foldout("Camera")] [SerializeField] private float _cameraDuration;
         [Foldout("Camera")] [SerializeField] private float _cameraTime;
-        [Foldout("Camera")] [SerializeField] private bool _hasBeenInteracted = false;
+        [Foldout("Camera")] [SerializeField] private bool  _hasBeenInteracted = false;
 
         private void Awake()
         {
@@ -94,16 +96,7 @@ namespace Interactables
             if (_camera == null)
             {
                 Debug.Log("No Camera to show");
-                yield break;
-            }
-
-            if (OriginalEchoMina.Instance.State is OriginalEchoMina.EchoState.Recording)
-            {
-                OriginalEchoMina.Instance.EchoCamera.enabled = false;
-            }
-            else
-            {
-                PlayerController.Instance.PlayerCamera.enabled = false;
+                yield return null;
             }
 
             PlayerController.Instance.PlayerInput.enabled = false;
@@ -114,16 +107,8 @@ namespace Interactables
 
             _camera.enabled = false;
 
-            if (OriginalEchoMina.Instance.State is OriginalEchoMina.EchoState.Recording)
-            {
-                OriginalEchoMina.Instance.EchoCamera.enabled = true;
-            }
-            else
-            {
-                PlayerController.Instance.PlayerCamera.enabled = true;
-            }
-
             PlayerController.Instance.PlayerInput.enabled = true;
+            _hasBeenInteracted = true;
             yield break;
         }
 

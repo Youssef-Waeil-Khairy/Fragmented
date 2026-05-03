@@ -1,8 +1,10 @@
 using System;
+using System.Collections;
 using System.Diagnostics.CodeAnalysis;
 using EchoMina.Original;
 using Interactables;
 using JetBrains.Annotations;
+using MainMenu;
 using NaughtyAttributes;
 using QuickLoad;
 using Unity.Cinemachine;
@@ -24,6 +26,9 @@ namespace PlayerControls
         PlayerInput playerInput;
         //CharacterController characterController;
         private Rigidbody rb;
+
+        public bool EchoMinaCooldownActive = false;
+        public float EchoMinaCooldown = 3f;
 
         [Foldout("Movement")][SerializeField] float moveSpeed = 5f;
         [Foldout("Movement")][SerializeField] float turnSpeed = 5f;
@@ -72,31 +77,65 @@ namespace PlayerControls
             rb.maxAngularVelocity = maxTurnSpeed;
             LockCursor();
 
-            SceneManager.sceneLoaded += SceneManagerOnsceneLoaded;
+            OriginalEchoMina.Instance.StopRecording -= OnEchoMinaRecordingStopped;
+            OriginalEchoMina.Instance.StopRecording += OnEchoMinaRecordingStopped;
+            StartupLogger.LogEnable("Player Echo Mina recording stopped event subscribed", "Player Controller");
 
             PLAYERCONTROLLERSTARTED = true;
             StartupLogger.LogStart("Finished start up successfully", name);
         }
 
-        void OnDestroy()
+        private void OnEnable()
         {
-            SceneManager.sceneLoaded -= SceneManagerOnsceneLoaded;
+            EchoMinaCooldownActive = false;
+
+            ScreenTransitioner.Instance.EndFadeOut -= RestoreSnapshotAfterReturn; // Trust no one to remove themself (make sure we aren't already subscribed somehow to avoid double firing it)
+            ScreenTransitioner.Instance.EndFadeOut += RestoreSnapshotAfterReturn;
+            StartupLogger.LogEnable("Player position restoring subscribed", "Player Controller");
         }
 
-        private void SceneManagerOnsceneLoaded(Scene arg0, LoadSceneMode arg1)
+        void OnDisable()
+        {
+            ScreenTransitioner.Instance.EndDelayOut -= RestoreSnapshotAfterReturn;
+            OriginalEchoMina.Instance.StopRecording -= OnEchoMinaRecordingStopped;
+        }
+
+        private void OnEchoMinaRecordingStopped()
+        {
+            StartCoroutine(StartEchoMinaCooldown());
+        }
+
+        private void RestoreSnapshotAfterReturn()
         {
             if (PauseMenu.Instance == null)
             {
-                Debug.LogWarning("PauseMenu instance not found");
+                Debug.LogWarning("Position restoring of the player expects pause menu but none found");
+                return;
+            }
+            if (!PauseMenu.Instance.ShouldLoadSnapShot)
+            {
+                return;
+            }
+            if (this == null)
+            {
+                Debug.LogWarning("this is null");
                 return;
             }
 
-            if (PauseMenu.Instance.ShouldLoadSnapShot)
-            {
-                Debug.LogWarning("ShouldLoadSnapShot is true");
-                PauseMenu.Instance.LoadSnapshot();
-            }
+            Debug.LogWarning($"Before restoring: Snapshot position: {PauseMenu.Instance.CurrentPosition} | Current position: {transform.position}");
+
+            Debug.LogWarning("Player loading pause menu snapshot");
+            transform.SetPositionAndRotation(
+                PauseMenu.Instance.CurrentPosition,
+                PauseMenu.Instance.CurrentRotation
+                );
+
+            Debug.LogWarning($"After restoring: Snapshot position: {PauseMenu.Instance.CurrentPosition} | Current position: {transform.position}");
+
+            PauseMenu.Instance.ShouldLoadSnapShot = false;
         }
+
+
 
         private void FixedUpdate()
         {
@@ -121,6 +160,14 @@ namespace PlayerControls
             Vector3 move = transform.forward * (moveDirection * moveSpeed);
             rb.AddForce(move, ForceMode.Force);
             rb.AddTorque(transform.up * (turnDirection * turnSpeed * Time.fixedDeltaTime));
+        }
+
+        private IEnumerator StartEchoMinaCooldown()
+        {
+            EchoMinaCooldownActive = true;
+            yield return new WaitForSeconds(EchoMinaCooldown);
+            EchoMinaCooldownActive = false;
+            yield break;
         }
 
         void ToggleCursorFree()
@@ -194,6 +241,12 @@ namespace PlayerControls
         [UsedImplicitly]
         void OnMinaRecord(InputValue value)
         {
+            if (EchoMinaCooldownActive)
+            {
+                Debug.LogWarning("Echo Mina cooldown is still active");
+                return;
+            }
+
             ToggleRecording();
         }
 
