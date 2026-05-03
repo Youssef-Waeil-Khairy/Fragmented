@@ -18,7 +18,7 @@ namespace Interactables
     {
         #region Variables
         [Foldout("Events" )] public UnityEvent OnInteract, OnPreviewStart,  OnPreviewEnd;
-        
+
         [Foldout("Preview")] public Outline PreviewOutline;
         [Foldout("Preview")] public GameObject PreviewPanel;
 
@@ -28,16 +28,17 @@ namespace Interactables
         [Foldout("Camera")][SerializeField] private bool hasBeenInteracted = false;
         [Foldout("Camera")][SerializeField] private bool hasInteractionCamera = false;
         #endregion
-        
+
         #region Unity Functions
         private void OnEnable()
         {
             PreviewOutline = GetComponent<Outline>();
             if (PreviewOutline != null) PreviewOutline.enabled = false;
-            
+
             if (PreviewPanel != null) PreviewPanel.SetActive(false);
-            
+
             hasInteractionCamera = interactionCamera != null;
+            if (hasInteractionCamera) interactionCamera.enabled = false;
         }
 
         private void Update()
@@ -104,7 +105,7 @@ namespace Interactables
         public void ShowInteraction()
         {
             if (!hasInteractionCamera) return;
-            
+
             if (OriginalEchoMina.Instance.State is OriginalEchoMina.EchoState.Recording)
             {
                 // Disable Echo  Mina's camera

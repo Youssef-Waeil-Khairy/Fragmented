@@ -26,6 +26,17 @@ namespace Interactables
         [Foldout("Camera")][SerializeField] private float cameraDuration;
         [Foldout("Camera")][SerializeField] private float cameraTime;
 
+        private void Awake()
+        {
+            if (interactionCamera == null)
+            {
+                return;
+            }
+
+            hasInteractionCamera = interactionCamera != null;
+            if (hasInteractionCamera) interactionCamera.enabled = false;
+        }
+
         private void Update()
         {
             if (!hasInteractionCamera) return;

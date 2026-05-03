@@ -19,6 +19,7 @@ public class PauseMenu : MonoBehaviour
     [Foldout("Buttons")] public Button quitButton;
 
     public LevelSwitcher SettingsSwitcher;
+    public LevelSwitcher QuitSwitcher;
     [Foldout("Scene Names")] public string mainMenuSceneName = "MainMenu";
     [Foldout("Scene Names")] public string settingsSceneName = "Settings";
 
@@ -30,7 +31,6 @@ public class PauseMenu : MonoBehaviour
     private bool isPaused = false;
     private bool isAnimating = false;
 
-    [Foldout("Snapshots")] public bool ShouldSnapshot;
     [Foldout("Snapshots")] public bool ShouldLoadSnapShot;
     [Foldout("Snapshots")][Scene] public int CurrentScene;
     [Foldout("Snapshots")] public Vector3 CurrentPosition;
@@ -57,10 +57,7 @@ public class PauseMenu : MonoBehaviour
     }
     private void SceneManagerOnsceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
-        if (ShouldLoadSnapShot)
-        {
-            LoadSnapshot();
-        }
+        Resume();
     }
 
     void Start()
@@ -112,19 +109,11 @@ public class PauseMenu : MonoBehaviour
         Debug.Log("Opening Settings");
     }
 
-    public bool IsMainMenu()
-    {
-        return SceneManager.GetActiveScene().name == mainMenuSceneName;
-    }
-    public bool IsSettingsScene()
-    {
-        return SceneManager.GetActiveScene().name == settingsSceneName;
-    }
-
     public void TakeSnapshot()
     {
-        if (IsMainMenu())
+        if (PlayerController.Instance == null)
         {
+            Debug.LogError("Player controller is null! Can't take snapshot.");
             return;
         }
 
@@ -139,15 +128,19 @@ public class PauseMenu : MonoBehaviour
             return;
         }
 
+        Debug.Log("Loading Snapshot");
+
         PlayerController.Instance.transform.position = CurrentPosition;
         PlayerController.Instance.transform.rotation = CurrentRotation;
+
+        ShouldLoadSnapShot = false;
     }
 
     void Quit()
     {
         Time.timeScale = 1f;
         isPaused = false;
-        SceneManager.LoadScene(mainMenuSceneName);
+        QuitSwitcher.GoToScene();
         Debug.Log("Quitting to Main Menu");
     }
 
@@ -164,6 +157,10 @@ public class PauseMenu : MonoBehaviour
         }
         pausePanel.anchoredPosition = to;
         isAnimating = false;
+        if (PlayerController.Instance != null)
+        {
+            PlayerController.Instance.UnlockCursor();
+        }
     }
 
     IEnumerator SlideOutAndResume()
@@ -172,5 +169,10 @@ public class PauseMenu : MonoBehaviour
         pausePanel.gameObject.SetActive(false);
         isPaused = false;
         Time.timeScale = 1f;
+
+        if (PlayerController.Instance != null)
+        {
+            PlayerController.Instance.LockCursor();
+        }
     }
 }

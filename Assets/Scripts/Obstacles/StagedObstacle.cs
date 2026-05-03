@@ -70,28 +70,12 @@ public class StagedObstacle : MonoBehaviour, IRecordable
 
         _camera.enabled = true;
 
-        if (OriginalEchoMina.Instance.State is OriginalEchoMina.EchoState.Recording)
-        {
-            OriginalEchoMina.Instance.EchoCamera.enabled = false;
-        }
-        else
-        {
-            PlayerController.Instance.PlayerCamera.enabled = false;
-        }
         PlayerController.Instance.PlayerInput.enabled = false;
 
         yield return new WaitForSeconds(cameraDuration);
 
         _camera.enabled = false;
 
-        if (OriginalEchoMina.Instance.State is OriginalEchoMina.EchoState.Recording)
-        {
-            OriginalEchoMina.Instance.EchoCamera.enabled = true;
-        }
-        else
-        {
-            PlayerController.Instance.PlayerCamera.enabled = true;
-        }
         PlayerController.Instance.PlayerInput.enabled = true;
 
         yield break;
@@ -103,6 +87,7 @@ public class StagedObstacle : MonoBehaviour, IRecordable
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         rb.useGravity = false;
+        rb.isKinematic = true;
 
         if (lineRenderer)
         {

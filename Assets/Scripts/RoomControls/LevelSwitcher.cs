@@ -5,6 +5,7 @@ using UnityEngine;
 using NaughtyAttributes;
 using PlayerControls;
 using UnityEngine.SceneManagement;
+using Utility;
 
 namespace RoomControls
 {
@@ -12,24 +13,25 @@ namespace RoomControls
     {
         [Scene][SerializeField] private int level;
         [Tag][SerializeField] private string allowedTag;
-        public ScreenTransitioner Transitioner;
-        public bool IsInterLevelTransition;
 
-        public bool IsLeavingSettingsScene = false;
+        [SerializeField] private bool isGoingToScene = false;
         public bool IsGoingToSettingsScene = false;
 
         private void OnEnable()
         {
-            if (Transitioner != null)
+            if (ScreenTransitioner.Instance != null)
             {
-                Transitioner.EndFadeIn += DoGoToScene;
+                StartupLogger.LogEnable($"{name} Subscribing level transition events", "LevelSwitcher");
+                ScreenTransitioner.Instance.EndFadeIn += DoGoToScene;
             }
         }
         private void OnDisable()
         {
-            if (Transitioner != null)
+            if (ScreenTransitioner.Instance != null)
             {
-                Transitioner.EndFadeIn -= DoGoToScene;
+                StartupLogger.LogDisable($"{name} Unsubscribing level transition events", "LevelSwitcher");
+
+                ScreenTransitioner.Instance.EndFadeIn -= DoGoToScene;
             }
         }
 
@@ -43,46 +45,48 @@ namespace RoomControls
 
         private void DoGoToScene()
         {
-            if (IsLeavingSettingsScene)
+            if (!isGoingToScene)
             {
-                SceneManager.LoadScene(PauseMenu.Instance.CurrentScene);
+                return;
             }
-            else
+
+            isGoingToScene = false; // Reset this to false so that if we are reused (mostly for persistent switchers) we don't continue thinking we are being used
+
+            if (IsGoingToSettingsScene)
             {
-                SceneManager.LoadScene(level);
+                PauseMenu.Instance.TakeSnapshot();
             }
+
+            SceneManager.LoadScene(level);
         }
 
         [Button][UsedImplicitly]
         public void GoToScene()
         {
-            Debug.Log($"Loading scene: {level} from {SceneManager.GetActiveScene().buildIndex}");
-            PauseMenu.Instance.CurrentScene = level;
-
-            if (Transitioner != null)
-            {
-                Transitioner.DoFadeIn();
-            }
+            Debug.Log($"Go to scene: {level} from {SceneManager.GetActiveScene().buildIndex}");
+            //PauseMenu.Instance.CurrentScene = level;
+            isGoingToScene = true;
+            ScreenTransitioner.Instance.DoFadeIn();
         }
 
         public void GoToSettingsScene()
         {
             Debug.Log("level switcher going to settings scene");
+            isGoingToScene = true;
             PauseMenu.Instance.CurrentScene = SceneManager.GetActiveScene().buildIndex;
             PauseMenu.Instance.TakeSnapshot();
-            Debug.Log($"Loading scene: {level} from {SceneManager.GetActiveScene().buildIndex}");
-            SceneManager.LoadScene(level);
+
+            GoToScene();
         }
 
         public void LeaveSettingsScene()
         {
-            Debug.Log($"Loading scene: {PauseMenu.Instance.CurrentScene} from {SceneManager.GetActiveScene().buildIndex}");
+            Debug.Log($"Leave settings scene");
+            isGoingToScene = true;
+            PauseMenu.Instance.ShouldLoadSnapShot = true;
+            level = PauseMenu.Instance.CurrentScene;
 
-            if (Transitioner != null)
-            {
-                Transitioner.DoFadeIn();
-                PauseMenu.Instance.ShouldLoadSnapShot = true;
-            }
+            GoToScene();
         }
 
         public void CloseGame()

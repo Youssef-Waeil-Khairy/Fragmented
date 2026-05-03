@@ -28,6 +28,7 @@ namespace Interactables
         private void Awake()
         {
             _hasInteractionCamera = _camera != null;
+            if (_hasInteractionCamera) _camera.enabled = false;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -130,12 +131,7 @@ namespace Interactables
         {
             if (_isInteracting)
             {
-                if (_interactingObject.CompareTag("Player"))
-                {
-                    Debug.LogWarning("Pressure plate is being interacted with by the player when recording stopped");
-                    return;
-                }
-                else
+                if (_interactingObject.CompareTag("EchoMina"))
                 {
                     Debug.LogWarning("Pressure plate is being interacted with by the Echo Mina when recording stopped");
                     EndInteraction();

@@ -10,5 +10,8 @@ public class PauseMenuLoader : MonoBehaviour
         {
             SceneManager.LoadScene("PauseMenu", LoadSceneMode.Additive);
         }
+
+        Debug.Log($"Active scene: {SceneManager.GetActiveScene().name}");
+        //SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(0));
     }
 }

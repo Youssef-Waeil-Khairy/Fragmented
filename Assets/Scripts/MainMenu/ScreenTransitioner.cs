@@ -43,6 +43,8 @@ namespace MainMenu
 
   #endregion
 
+        public static ScreenTransitioner Instance { get; private set; }
+
         [SerializeField][ReadOnly] private bool isTransitioning = false;
         public float FadeTime;
         [SerializeField][ReadOnly] private float delayTime = 0f;
@@ -67,6 +69,17 @@ namespace MainMenu
 
         private void OnEnable()
         {
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else if (Instance != this)
+            {
+                Destroy(gameObject);
+            }
+
+            DontDestroyOnLoad(this);
+
             Transition = TransitionType.None;
             SceneManager.sceneLoaded += SceneManagerOnsceneLoaded;
         }
@@ -125,6 +138,9 @@ namespace MainMenu
         [Button]
         public void DoFadeIn()
         {
+#if DEBUG
+            Debug.Log("Begin Fade In");
+#endif
             Transition = TransitionType.FadeIn;
             FadeTime = 0f;
 
@@ -144,6 +160,9 @@ namespace MainMenu
         /// <param name="delay">The time to wait before fading in</param>
         public void DoFadeIn(bool defaultDelay, float delay)
         {
+#if DEBUG
+            Debug.Log("Begin Fade In Delayed");
+#endif
             Transition = TransitionType.DelayIn;
             FadeTime = 0f;
             delayTime = 0f;
@@ -160,6 +179,9 @@ namespace MainMenu
         [Button]
         public void DoFadeOut()
         {
+#if DEBUG
+            Debug.Log("Begin Fade Out");
+#endif
             Transition = TransitionType.FadeOut;
             FadeTime = 0f;
 
@@ -180,6 +202,9 @@ namespace MainMenu
         /// <param name="delay">How long to wait before starting the fade out process</param>
         public void DoFadeOut(bool defaultDelay, float delay)
         {
+#if DEBUG
+            Debug.Log("Begin Fade Out Delayed");
+#endif
             Transition = TransitionType.DelayOut;
             FadeTime = 0f;
             delayTime = 0f;
@@ -210,7 +235,7 @@ namespace MainMenu
                 {
                     PlayerController.Instance.ToggleInputEnabled(true);
                 }
-
+                Debug.Log("Fade In Finished");
                 EndFadeIn?.Invoke();
             }
         }
@@ -237,7 +262,7 @@ namespace MainMenu
                 {
                     PlayerController.Instance.ToggleInputEnabled(true);
                 }
-
+                Debug.Log("Fade Out Finished");
                 EndFadeOut?.Invoke();
             }
         }

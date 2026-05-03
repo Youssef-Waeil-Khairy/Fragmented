@@ -8,6 +8,7 @@ using QuickLoad;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using Utility;
 
 namespace PlayerControls
@@ -71,8 +72,30 @@ namespace PlayerControls
             rb.maxAngularVelocity = maxTurnSpeed;
             LockCursor();
 
+            SceneManager.sceneLoaded += SceneManagerOnsceneLoaded;
+
             PLAYERCONTROLLERSTARTED = true;
             StartupLogger.LogStart("Finished start up successfully", name);
+        }
+
+        void OnDestroy()
+        {
+            SceneManager.sceneLoaded -= SceneManagerOnsceneLoaded;
+        }
+
+        private void SceneManagerOnsceneLoaded(Scene arg0, LoadSceneMode arg1)
+        {
+            if (PauseMenu.Instance == null)
+            {
+                Debug.LogWarning("PauseMenu instance not found");
+                return;
+            }
+
+            if (PauseMenu.Instance.ShouldLoadSnapShot)
+            {
+                Debug.LogWarning("ShouldLoadSnapShot is true");
+                PauseMenu.Instance.LoadSnapshot();
+            }
         }
 
         private void FixedUpdate()
@@ -116,6 +139,9 @@ namespace PlayerControls
             }
         }
 
+        /// <summary>
+        /// Resume camera movement and hides and locks the cursor
+        /// </summary>
         public void LockCursor()
         {
             cursorFree = false;
@@ -124,6 +150,10 @@ namespace PlayerControls
             cinemachineInputAxisController.enabled = true;
             Debug.Log("Locking cursor.");
         }
+
+        /// <summary>
+        /// Stops camera movement and shows and confines the cursor
+        /// </summary>
         public void UnlockCursor()
         {
             cursorFree = true;
