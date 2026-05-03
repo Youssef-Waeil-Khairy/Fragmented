@@ -24,9 +24,33 @@ namespace Interactables
         public delegate void OnValueUpdated();
         public event OnValueUpdated ValueUpdated;
 
+        public delegate void OnCondditionLocked();
+        public event OnCondditionLocked ConditionLocked;
+        public delegate void OnConditionUnlocked();
+        public event OnConditionUnlocked ConditionUnlocked;
+
         public ConditionType conditionType;
         public bool IsMet = false;
-        public bool IsLocked = false;
+        public bool IsLocked
+        {
+            get
+            {
+                return isLocked;
+            }
+            set
+            {
+                isLocked = value;
+                if (isLocked)
+                {
+                    ConditionLocked?.Invoke();
+                }
+                else
+                {
+                    ConditionUnlocked?.Invoke();
+                }
+            }
+        }
+        [SerializeField] private bool isLocked = false;
         public bool IsLockedDefault = false;
 
         #region Values
