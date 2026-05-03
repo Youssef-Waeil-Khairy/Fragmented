@@ -7,6 +7,7 @@ using NaughtyAttributes;
 using PlayerControls;
 using RoomControls;
 using UnityEngine.InputSystem;
+using Utility;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -42,8 +43,6 @@ public class PauseMenu : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        SceneManager.sceneLoaded += SceneManagerOnsceneLoaded;
-
         if (pausePanel != null)
         {
             Canvas parentCanvas = pausePanel.GetComponentInParent<Canvas>();
@@ -55,6 +54,18 @@ public class PauseMenu : MonoBehaviour
             pausePanel.gameObject.SetActive(false);
         }
     }
+
+    private void OnEnable()
+    {
+        StartupLogger.LogEnable("Pause menu subscribing to scene change event", "Pause Menu");
+        SceneManager.sceneLoaded += SceneManagerOnsceneLoaded;
+    }
+    private void OnDisable()
+    {
+        StartupLogger.LogDisable("Pause menu unsubscribing to scene change event", "Pause Menu");
+        SceneManager.sceneLoaded -= SceneManagerOnsceneLoaded;
+    }
+
     private void SceneManagerOnsceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
         Resume();
@@ -104,6 +115,7 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1f;
         isPaused = false;
+        TakeSnapshot();
         SettingsSwitcher.GoToSettingsScene();
 
         Debug.Log("Opening Settings");
@@ -125,6 +137,7 @@ public class PauseMenu : MonoBehaviour
     {
         if (PlayerController.Instance == null)
         {
+            Debug.LogWarning("Tried to load snapshot when player is null! Can't load snapshot.");
             return;
         }
 

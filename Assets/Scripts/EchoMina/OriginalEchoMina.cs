@@ -69,7 +69,7 @@ namespace EchoMina.Original
         [Foldout("Recording")][SerializeField] private CinemachineInputAxisController echoInputAxisController;
         [Foldout("Recording")]private IRecordable[] recordables;
         [Foldout("Recording")]private IBindable[] bindables;
-        
+
         [Foldout("Animation")][SerializeField] private Animator animator;
         [Foldout("Animation")][SerializeField] private string parameterNameWalking = "IsWalking";
         [Foldout("Animation")][SerializeField] private string parameterNameWalkingSpeed = "WalkingSpeed";
@@ -147,8 +147,7 @@ namespace EchoMina.Original
         #endregion
 
         #region Unity Functions
-
-        private void Start()
+        private void OnEnable()
         {
             if (Instance == null)
             {
@@ -163,8 +162,6 @@ namespace EchoMina.Original
                 Destroy(gameObject);
             }
 
-            state = EchoState.Inactive;
-
             rb = GetComponent<Rigidbody>();
             SetMaxSpeed();
             _interactor = GetComponent<Interactor>();
@@ -172,45 +169,44 @@ namespace EchoMina.Original
             animator.SetBool(parameterNameWalking, false);
 
             recordables = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<IRecordable>().ToArray();
-            foreach (var recordable in recordables)
+            foreach (IRecordable recordable in recordables)
             {
                 recordable.BindRecordable();
             }
+            StartupLogger.LogEnable("Recordables bound to Echo Mina", "Echo Mina");
 
             bindables = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<IBindable>().ToArray();
             foreach (var bindable in bindables)
             {
                 bindable.BindObject();
             }
-
-            Despawn();
+            StartupLogger.LogEnable("Bindables bound to Echo Mina", "Echo Mina");
         }
 
-        private void OnEnable()
+        private void OnDisable()
         {
-            if (PlayerController.Instance != null)
+            if (recordables != null)
             {
-                transform.position = PlayerController.Instance.transform.position;
+                foreach (IRecordable recordable in recordables)
+                {
+                    recordable.UnbindRecordable();
+                }
+                StartupLogger.LogDisable("Recordables unbound from Echo Mina", "Echo Mina");
             }
 
-            if (rb == null)
+            if (bindables != null)
             {
-                rb = GetComponent<Rigidbody>();
+                foreach (var bindable in bindables)
+                {
+                    bindable.UnBindObject();
+                }
             }
-            SetMaxSpeed();
+            StartupLogger.LogDisable("Bindables unbound from Echo Mina", "Echo Mina");
         }
 
-        private void OnDestroy()
+        private void Start()
         {
-            foreach (IRecordable recordable in recordables)
-            {
-                recordable.UnbindRecordable();
-            }
-
-            foreach (var bindable in bindables)
-            {
-                bindable.UnBindObject();
-            }
+            state = EchoState.Inactive;
         }
 
         private void FixedUpdate()
@@ -335,8 +331,8 @@ namespace EchoMina.Original
 
             state = EchoState.Inactive;
 
-            transform.position = PlayerController.Instance.transform.position;
-            transform.rotation = PlayerController.Instance.transform.rotation;
+            if (PlayerController.Instance != null) transform.position = PlayerController.Instance.transform.position;
+            if (PlayerController.Instance != null) transform.rotation = PlayerController.Instance.transform.rotation;
 
             CancelInvoke();
 
@@ -353,8 +349,9 @@ namespace EchoMina.Original
             gameObject.SetActive(true);
             echoCamera.enabled = true;
             echoInputAxisController.enabled = true;
-            transform.position = PlayerController.Instance.transform.position;
-            transform.rotation = PlayerController.Instance.transform.rotation;
+            Debug.LogWarning($"Before: {transform.position}");
+            transform.SetPositionAndRotation(PlayerController.Instance.transform.position, PlayerController.Instance.transform.rotation);
+            Debug.LogWarning($"After: {transform.position}");
             _recordIndex = 0;
             _interactor.StartRecording();
         }

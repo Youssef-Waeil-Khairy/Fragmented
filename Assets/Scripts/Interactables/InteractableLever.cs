@@ -28,13 +28,9 @@ namespace Interactables
 
         private void Awake()
         {
-            if (interactionCamera == null)
-            {
-                return;
-            }
-
             hasInteractionCamera = interactionCamera != null;
             if (hasInteractionCamera) interactionCamera.enabled = false;
+            if (previewPanel != null) previewPanel.SetActive(false);
         }
 
         private void Update()

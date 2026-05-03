@@ -97,14 +97,17 @@ namespace Interactables
         [ShowIf("ShowSequenceBoolean")] public List<bool> ConditionSequenceBoolean;
         [ShowIf("ShowSequenceBoolean")][SerializeField] private List<bool> valueSequenceBoolean;
         [ShowIf("ShowSequenceBoolean")][SerializeField] private List<bool> valueSequenceBooleanDefault;
+        public List<bool> ValueSequenceBoolean {get {return valueSequenceBoolean;}}
 
         [ShowIf("ShowSequenceInteger")] public List<int> ConditionSequenceInteger;
         [ShowIf("ShowSequenceInteger")][SerializeField] private List<int> valueSequenceInteger;
         [ShowIf("ShowSequenceInteger")][SerializeField] private List<int> valueSequenceIntegerDefault;
+        public List<int> ValueSequenceInteger {get {return valueSequenceInteger;}}
 
         [ShowIf("ShowSequenceFloat")] public List<float> ConditionSequenceFloat;
         [ShowIf("ShowSequenceFloat")][SerializeField] private List<float> valueSequenceFloat;
         [ShowIf("ShowSequenceFloat")][SerializeField] private List<float> valueSequenceFloatDefault;
+        public List<float> ValueSequenceFloat {get {return valueSequenceFloat;}}
 
         public void ResetToDefault()
         {

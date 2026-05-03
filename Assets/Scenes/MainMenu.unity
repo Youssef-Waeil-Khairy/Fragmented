@@ -429,7 +429,7 @@ GameObject:
   - component: {fileID: 480856710}
   - component: {fileID: 480856711}
   m_Layer: 0
-  m_Name: Tutorial
+  m_Name: GameStart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -462,8 +462,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cd4b808397c4d319cd314ed02f13a7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 3
-  allowedTag: Player
+  level: 8
+  allowedTag: 
   isGoingToScene: 0
   IsGoingToSettingsScene: 0
 --- !u!1 &573874665

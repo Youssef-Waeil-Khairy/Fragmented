@@ -21,13 +21,13 @@ namespace DialogueSystem
         #region Variables
         [SerializeField][Expandable] private ScriptableDialogue Dialogue;
         [SerializeField] private ScriptableDialogue.DialogueSnippet CurrentSnippet;
-        
+
         [SerializeField] private GameObject DialoguePanel;
         [SerializeField] private TMP_Text SpeakerName;
         [SerializeField] private Image SpeakerSprite;
         [SerializeField] private Image BackgroundSprite;
         [SerializeField] private TMP_Text Text;
-        
+
         [SerializeField] private bool showOnLevelStart = false;
         [SerializeField] private int DialogueIndex;
         [InfoBox("These events will be called when their corresponding index snippet is shown. Please ensure the number of events exactly match the number of snippets in your dialogue.", EInfoBoxType.Warning)]
@@ -38,13 +38,16 @@ namespace DialogueSystem
 
         InputAction nextAction;
         #endregion
-        
+
         #region Unity Functions
         private void OnEnable()
         {
             StartupLogger.LogEnable("Binding dialogue advance input", name);
             nextAction = InputSystem.actions.FindAction("NextSnippet");
             nextAction.performed += NextSnippet;
+
+            DialogueIndex = 0;
+
             StartupLogger.LogEnable("Finished enabling successfully", name);
         }
 
@@ -59,10 +62,6 @@ namespace DialogueSystem
             else
             {
                 StartupLogger.LogStart("Showing dialogue on start up", name);
-                while (PlayerController.PLAYERCONTROLLERSTARTED == false)
-                {
-                    StartupLogger.LogStart($"Waiting for Player Controller to start. currently: {PlayerController.PLAYERCONTROLLERSTARTED}", name);
-                }
 
                 ShowDialogue();
             }
@@ -142,7 +141,7 @@ namespace DialogueSystem
         {
             if (!DialoguePanel.activeSelf) return; // Only advance if dialogue is active
 
-            DialogueIndex++; 
+            DialogueIndex++;
             if (DialogueIndex > Dialogue.DialogueSnippets.Count - 1) // check if we are at the end
             {
                 DialogueIndex = 0;
@@ -150,7 +149,7 @@ namespace DialogueSystem
                 HideDialogue();
                 return;
             }
-            
+
             CurrentSnippet = Dialogue.DialogueSnippets[DialogueIndex];
             UpdateUI();
         }
