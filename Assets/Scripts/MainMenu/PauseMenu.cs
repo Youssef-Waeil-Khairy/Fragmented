@@ -68,6 +68,16 @@ public class PauseMenu : MonoBehaviour
 
     private void SceneManagerOnsceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
+        if (SceneManager.GetActiveScene().name == mainMenuSceneName || SceneManager.GetActiveScene().name == settingsSceneName)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Confined;
+        }
+        else
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
         Resume();
     }
 

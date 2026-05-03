@@ -9,8 +9,11 @@ namespace Interactables
     {
         public UnityEvent OnConditionMet;
         public UnityEvent OnConditionNotMet;
+        public UnityEvent OnConditionLocked;
+        public UnityEvent OnConditionUnlocked;
         [Expandable] public Condition condition;
 
+        [Foldout("Snapshot")][SerializeField] private bool snapshotIsLocked;
         [Foldout("Snapshot")][SerializeField] private bool snapshotBool;
         [Foldout("Snapshot")][SerializeField] private int snapshotInt;
         [Foldout("Snapshot")][SerializeField] private float snapshotFloat;
@@ -30,11 +33,22 @@ namespace Interactables
             }
         }
 
+        void OnLocked()
+        {
+            OnConditionLocked?.Invoke();
+        }
+        void OnUnlocked()
+        {
+            OnConditionUnlocked?.Invoke();
+        }
+
         private void OnEnable()
         {
             if (condition != null)
             {
                 condition.ValueUpdated += ConditionValueChanged;
+                condition.ConditionLocked += OnLocked;
+                condition.ConditionUnlocked += OnUnlocked;
             }
         }
 
@@ -42,14 +56,18 @@ namespace Interactables
         {
             if (condition != null)
             {
-                condition.ValueUpdated -= ConditionValueChanged;
-
                 condition.ResetToDefault();
+
+                condition.ValueUpdated -= ConditionValueChanged;
+                condition.ConditionLocked -= OnLocked;
+                condition.ConditionUnlocked -= OnUnlocked;
             }
         }
         public void TakeSnapshot()
         {
             if (condition == null) return;
+
+            snapshotIsLocked = condition.IsLocked;
 
             switch (condition.conditionType)
             {
@@ -79,6 +97,10 @@ namespace Interactables
         }
         public void LoadSnapshot()
         {
+            if (condition == null) return;
+
+            condition.IsLocked = snapshotIsLocked;
+
             switch (condition.conditionType)
             {
                 case Condition.ConditionType.Boolean:
