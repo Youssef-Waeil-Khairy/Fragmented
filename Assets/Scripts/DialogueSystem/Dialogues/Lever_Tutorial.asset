@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36722238b0204cf0aa52ed6f487fcf02, type: 3}
+  m_Name: Lever_Tutorial
+  m_EditorClassIdentifier: 
+  DialogueSnippets:
+  - SpeakerName: Mina
+    HasSpeakerSprite: 0
+    SpeakerSprite: {fileID: 0}
+    HasBackgroundSprite: 0
+    BackgroundSprite: {fileID: 0}
+    Text: The lever toggles obstacles, like a switch
+  - SpeakerName: Mina
+    HasSpeakerSprite: 0
+    SpeakerSprite: {fileID: 0}
+    HasBackgroundSprite: 0
+    BackgroundSprite: {fileID: 0}
+    Text: Press E to interact with the lever
+  - SpeakerName: Mina
+    HasSpeakerSprite: 0
+    SpeakerSprite: {fileID: 0}
+    HasBackgroundSprite: 0
+    BackgroundSprite: {fileID: 0}
+    Text: 'Toggling the lever moves the obstacle '
+  - SpeakerName: Mina
+    HasSpeakerSprite: 0
+    SpeakerSprite: {fileID: 0}
+    HasBackgroundSprite: 0
+    BackgroundSprite: {fileID: 0}
+    Text: Follow the leafs

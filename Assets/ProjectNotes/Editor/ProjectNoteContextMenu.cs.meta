@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: 078703930decb4cb9bdcecc2fda889b6
+timeCreated: 1530048270
+licenseType: Store
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 100395
+  packageName: Project Notes
+  packageVersion: 1.25
+  assetPath: Assets/ProjectNotes/Editor/ProjectNoteContextMenu.cs
+  uploadId: 448900

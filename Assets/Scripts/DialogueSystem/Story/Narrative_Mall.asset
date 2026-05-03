@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36722238b0204cf0aa52ed6f487fcf02, type: 3}
+  m_Name: Narrative_Mall
+  m_EditorClassIdentifier: 
+  DialogueSnippets:
+  - SpeakerName: Narrator
+    HasSpeakerSprite: 0
+    SpeakerSprite: {fileID: 0}
+    HasBackgroundSprite: 0
+    BackgroundSprite: {fileID: 0}
+    Text: '"Young Mina and her friend are eating while talking"'
+  - SpeakerName: Mina's Friend
+    HasSpeakerSprite: 0
+    SpeakerSprite: {fileID: 0}
+    HasBackgroundSprite: 0
+    BackgroundSprite: {fileID: 0}
+    Text: HAHAHAH. Ok, ok - Then what about if we both enter the art club
+  - SpeakerName: Mina
+    HasSpeakerSprite: 1
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 0
+    BackgroundSprite: {fileID: 0}
+    Text: ' Art club?  And then what we end up selling art while sitting at the side
+      road of a random European country '
+  - SpeakerName: Narrator
+    HasSpeakerSprite: 1
+    SpeakerSprite: {fileID: 0}
+    HasBackgroundSprite: 0
+    BackgroundSprite: {fileID: 0}
+    Text: '"Young mina has a smirk, looking down at her food while her friend''s
+      face shifts to stoic and poker face "'
+  - SpeakerName: Mina
+    HasSpeakerSprite: 1
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 0
+    BackgroundSprite: {fileID: 0}
+    Text: 'I dont rember it that way at all. I thought she was joking '
+  - SpeakerName: Young Mna
+    HasSpeakerSprite: 1
+    SpeakerSprite: {fileID: 21300000, guid: 19cb878ae217df648ba82e0116391c43, type: 3}
+    HasBackgroundSprite: 0
+    BackgroundSprite: {fileID: 0}
+    Text: 'Why would a kid joke about having big dreams '
+  - SpeakerName: Mina
+    HasSpeakerSprite: 1
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 0
+    BackgroundSprite: {fileID: 0}
+    Text: 'She didnt realize what was lying ahead of her. '
+  - SpeakerName: Young Mna
+    HasSpeakerSprite: 1
+    SpeakerSprite: {fileID: 21300000, guid: 19cb878ae217df648ba82e0116391c43, type: 3}
+    HasBackgroundSprite: 0
+    BackgroundSprite: {fileID: 0}
+    Text: 'Wrong, she was a kid, her job was to have fun, not think about the political
+      and economic state of the world '

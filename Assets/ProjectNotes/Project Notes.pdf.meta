@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: ee3ec7c2257294492994e9eb9df7aa49
+timeCreated: 1530219513
+licenseType: Store
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 100395
+  packageName: Project Notes
+  packageVersion: 1.25
+  assetPath: Assets/ProjectNotes/Project Notes.pdf
+  uploadId: 448900

@@ -1,0 +1,267 @@
+fileFormatVersion: 2
+guid: d65e35bbb3a51114d94aa00ffd8c9958
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Brown Wood_Diffuse
+    second: {fileID: 2800000, guid: 1b7cef321df5c5d4bb9444a188b071db, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Clay_soft_polished_BaseColor
+    second: {fileID: 2800000, guid: e08ceeff31d425d4bbb7637cd52f62e3, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Clay_soft_polished_Metallic
+    second: {fileID: 2800000, guid: a0946864f54e96641b1b12e9e4121e3a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Clay_soft_polished_Roughness
+    second: {fileID: 2800000, guid: 2290e5402ce168e468e54a85fe0ee20e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Info_Display
+    second: {fileID: 2800000, guid: 127f03415b6951a4d902d0c411bc50e7, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Ivory Vein Marble Tiles_BaseColor
+    second: {fileID: 2800000, guid: a80344fceafbb5741a33e3a36ea090e6, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Ivory Vein Marble Tiles_Normal
+    second: {fileID: 2800000, guid: 834d4aed0334fc34bb8dc211f25b3fdc, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Ivory Vein Marble Tiles_Roughness
+    second: {fileID: 2800000, guid: 2acfbc0664035cc47a1e21461d995787, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Main Materials_black portion_diffuse
+    second: {fileID: 2800000, guid: cae0597dba040c04e967632351bedadb, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Masonite_Rear_Side_01_Image-diffuse
+    second: {fileID: 2800000, guid: 16f6760e30773cb42953e23d015f6c3a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Masonite_Rear_Side_01_Image-normal
+    second: {fileID: 2800000, guid: 32f37f80358aa0c49a603e8d37f1a1f7, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Numbers_Texture
+    second: {fileID: 2800000, guid: ee50774f587598f43b6b3c5fbe076156, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Paper004_2K_Color
+    second: {fileID: 2800000, guid: 76600b5310fa6ed44ac308638613cd47, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Paper004_2K_Roughness
+    second: {fileID: 2800000, guid: 8d9490dc15371764d84ae1da9c3e67d3, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Polished Dark Wood_Alpha
+    second: {fileID: 2800000, guid: 191e86f606c3ddf4c85ce9cf32e80828, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Polished Dark Wood_BaseColor
+    second: {fileID: 2800000, guid: 1915526494a374940a3d7b37ea228de1, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Polished Dark Wood_Emissive
+    second: {fileID: 2800000, guid: 1787af33b56d46249b5b0a2b6528891d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Polished Dark Wood_Metallic
+    second: {fileID: 2800000, guid: d83a68b49f535124f826cd42ba84b315, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Polished Dark Wood_Normal
+    second: {fileID: 2800000, guid: e59b7f2213f6a604186289c1c3606eb2, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Polished Dark Wood_Roughness
+    second: {fileID: 2800000, guid: 449c166e54e845e49bdcc0607a3d737e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Vending machine products
+    second: {fileID: 2800000, guid: e45f8884c8ea3b542abf5a124050402f, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Wood_Normal 2
+    second: {fileID: 2800000, guid: 633417b2e70afb348a07d23643a5c643, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: bricks-38_diffuse-014
+    second: {fileID: 2800000, guid: 73dd7bedada879e4aa73f44118dca058, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: bricks-38_roughness
+    second: {fileID: 2800000, guid: 6b4cc80aa12959043b510031c6adc880, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: concrete_polish-basecolor
+    second: {fileID: 2800000, guid: 28401c589501080408133c13e7aaedea, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: concrete_polish-metallic
+    second: {fileID: 2800000, guid: 39ebc70f5399d1440863900679e73245, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: concrete_polish-normal
+    second: {fileID: 2800000, guid: 18b0029219398e340b8741cca466b755, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: concrete_polish-roughness
+    second: {fileID: 2800000, guid: 6dbe75da586adcc44885e9001c0292db, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: marble01_diffuse
+    second: {fileID: 2800000, guid: 0b86b951d49db15438c7e3b7fa7dbca5, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: marble01_normal_opengl
+    second: {fileID: 2800000, guid: dd549c8719ffbb7408436e7df021438b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: marble01_roughness
+    second: {fileID: 2800000, guid: 1c65b9178341d9540b2d578b6c7b0e82, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: marble01_specular
+    second: {fileID: 2800000, guid: 6312d3fdce87ec2499c17c062692cccd, type: 3}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

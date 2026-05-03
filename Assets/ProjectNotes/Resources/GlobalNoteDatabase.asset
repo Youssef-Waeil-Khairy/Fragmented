@@ -1,0 +1,290 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74cc2abdfba4a4c8fbb69c73fc969393, type: 3}
+  m_Name: GlobalNoteDatabase
+  m_EditorClassIdentifier: 
+  globalNoteInfoList:
+  - note:
+      noteTitle: Note Title (Edit Me!)
+      content: Put Your Note Here
+      style: 0
+      isOpen: 1
+      folderIndex: 0
+    isGlobal: 0
+    instanceID: 0
+    GUID: 5143bed9-7eae-4650-886d-e1e23330e788
+  - note:
+      noteTitle: Note Title (Edit Me!)
+      content: Put Your Note Here
+      style: 0
+      isOpen: 1
+      folderIndex: 0
+    isGlobal: 0
+    instanceID: 0
+    GUID: 18c6a304-cf38-4433-9328-3120173590bf
+  - note:
+      noteTitle: Note Title (Edit Me!)
+      content: Put Your Note Here
+      style: 0
+      isOpen: 1
+      folderIndex: 0
+    isGlobal: 0
+    instanceID: 0
+    GUID: 1461812f-ebf1-4333-b120-04cecca6c9a1
+  - note:
+      noteTitle: Note Title (Edit Me!)
+      content: Put Your Note Here
+      style: 0
+      isOpen: 1
+      folderIndex: 0
+    isGlobal: 0
+    instanceID: 0
+    GUID: eaa037f1-52ed-4cef-8a72-2d21daf28621
+  - note:
+      noteTitle: Hierarchy Restructure
+      content: 'This needs to be restructured
+
+        Have a GameObject for each
+        floor with another GameObject under it for each room. This should make it
+        much easier and cleaner to navigate through it'
+      style: 0
+      isOpen: 1
+      folderIndex: 1
+    isGlobal: 0
+    instanceID: 0
+    GUID: 132ecbdd-cba5-49fd-9fef-bc44586de550
+  - note:
+      noteTitle: Note Title (Edit Me!)
+      content: Put Your Note Here
+      style: 0
+      isOpen: 1
+      folderIndex: 0
+    isGlobal: 0
+    instanceID: 0
+    GUID: 82572f16-0ddd-4a18-aa18-6e986d639778
+  - note:
+      noteTitle: Note Title (Edit Me!)
+      content: Put Your Note Here
+      style: 0
+      isOpen: 1
+      folderIndex: 0
+    isGlobal: 1
+    instanceID: 0
+    GUID: 931a9143-dd5f-4f59-954e-b73417c6a3a5
+  - note:
+      noteTitle: Note Title (Edit Me!)
+      content: Put Your Note Here
+      style: 0
+      isOpen: 1
+      folderIndex: 0
+    isGlobal: 1
+    instanceID: 0
+    GUID: 4f0013fd-7030-4630-901b-2cf7694d31ee
+  - note:
+      noteTitle: Echo Mina Reworking
+      content: Look into get Echo Mina set up with the path she needs to take this
+        level
+      style: 1
+      isOpen: 1
+      folderIndex: 3
+    isGlobal: 0
+    instanceID: 0
+    GUID: ba7a8563-7a33-4855-a59f-516192c5972c
+  - note:
+      noteTitle: Scene Tasks
+      content: '[] Rework scene hierarchy
+
+        [] Make sure scene is accesable
+        where it needs to be
+
+        [] Player outline for when behind terrain
+
+        []
+        Room objects disabling to improve visibility
+
+        [] Fully integrate
+        Echo Mina (set up recording and test)'
+      style: 3
+      isOpen: 1
+      folderIndex: 4
+    isGlobal: 0
+    instanceID: 0
+    GUID: 5e22ec41-2f4f-448f-a25e-56a9bd9df5ca
+  - note:
+      noteTitle: Echo Mina Path Note
+      content: 'Where do we start?
+
+        Where do we have to go?
+
+        What
+        do we have to interact with and when?'
+      style: 0
+      isOpen: 1
+      folderIndex: 3
+    isGlobal: 0
+    instanceID: 0
+    GUID: 5af52f77-8590-4cc3-82ba-d0567bba824a
+  - note:
+      noteTitle: PreProgrammed Echo Mina
+      content: This is all the gameobjects needed for the preprogrammed version of
+        the echo mina mechanic
+      style: 2
+      isOpen: 1
+      folderIndex: 0
+    isGlobal: 0
+    instanceID: 0
+    GUID: fd3497ce-4a09-43bb-bec9-b905e7cb3aa9
+  - note:
+      noteTitle: Original Echo Mina Explanation
+      content: "This is the root object for the OG Echo Mina mechanic. \nThe way
+        the system works is as follows:\n1. player presses [R] to spawn in Echo Mina
+        and record a path as Echo Mina. Echo Mina can do everything normal Mina can\n2.
+        Player presses [R] again to stop the recording and save it and despawns Echo
+        Mina\n3. Player presses [P] to spawn in and run through the recording from
+        Echo Mina that was recorded, despawns after the recording finishes"
+      style: 2
+      isOpen: 1
+      folderIndex: 3
+    isGlobal: 0
+    instanceID: 0
+    GUID: 9ff38425-fc50-4a30-ba59-6b4707ff001e
+  - note:
+      noteTitle: Upper Floor Pressure Plate
+      content: Put Your Note Here
+      style: 0
+      isOpen: 1
+      folderIndex: 0
+    isGlobal: 0
+    instanceID: 0
+    GUID: 3eeb93f9-ef88-4277-b6d9-d2dda3067c03
+  - note:
+      noteTitle: Override Reminder
+      content: Do NOT override the Quickloader component as this will cause all instances
+        of Mina to have the same checkpoint references to this scene which they can't
+        access. If you get null reference exceptions, this is the likely cause!
+      style: 3
+      isOpen: 1
+      folderIndex: 0
+    isGlobal: 0
+    instanceID: 0
+    GUID: 831c6d28-c969-4095-9483-624bd2bbb322
+  - note:
+      noteTitle: Override Reminder
+      content: Do NOT override the Dialogue Manager component as this will make all
+        instructor prefabs switch to the same dialogue
+      style: 3
+      isOpen: 1
+      folderIndex: 0
+    isGlobal: 0
+    instanceID: 0
+    GUID: 427bedc2-0d6a-4acd-8931-e1755bd94c2c
+  - note:
+      noteTitle: Note Title (Edit Me!)
+      content: Activates = RED and BLUE lights
+      style: 0
+      isOpen: 1
+      folderIndex: 0
+    isGlobal: 0
+    instanceID: 0
+    GUID: c7c57d10-8876-467d-94e5-2c04c7b131f7
+  - note:
+      noteTitle: Note Title (Edit Me!)
+      content: Activates = BLUE and YELLOW lights
+      style: 0
+      isOpen: 1
+      folderIndex: 0
+    isGlobal: 0
+    instanceID: 0
+    GUID: f825e04d-e67c-429f-9236-29697fcce5d3
+  - note:
+      noteTitle: Note Title (Edit Me!)
+      content: Activates = YELLOW and GREEN lights
+      style: 0
+      isOpen: 1
+      folderIndex: 0
+    isGlobal: 0
+    instanceID: 0
+    GUID: 11c13946-00fb-42e7-a62b-6fbef6c1c15a
+  - note:
+      noteTitle: Note Title (Edit Me!)
+      content: Activates = GREEN and RED lights
+      style: 0
+      isOpen: 1
+      folderIndex: 0
+    isGlobal: 0
+    instanceID: 0
+    GUID: ec8d6454-1545-4fc2-937f-0cebb9ff77d0
+  - note:
+      noteTitle: Note Title (Edit Me!)
+      content: Deactivates ONE of any TWO (RED lights)
+      style: 0
+      isOpen: 1
+      folderIndex: 0
+    isGlobal: 0
+    instanceID: 0
+    GUID: 8f531eac-3368-4ab9-b0fa-f16905cb20ba
+  - note:
+      noteTitle: Note Title (Edit Me!)
+      content: Deactivates ONE of any TWO (GREEN lights)
+      style: 0
+      isOpen: 1
+      folderIndex: 0
+    isGlobal: 0
+    instanceID: 0
+    GUID: 77dd9829-9819-4fc5-9f5c-65c70f2e8a2e
+  - note:
+      noteTitle: Note Title (Edit Me!)
+      content: Deactivates ONE of any TWO (BLUE lights)
+      style: 0
+      isOpen: 1
+      folderIndex: 0
+    isGlobal: 0
+    instanceID: 0
+    GUID: d16085dd-85bf-4a3e-ad34-cadf89b3d1f3
+  - note:
+      noteTitle: Note Title (Edit Me!)
+      content: '1) Toggle lever 1 to deactivate the light
+
+        2) Mina stands
+        on the pressure plate A
+
+        3) Shadow stands on pressure plate D'
+      style: 0
+      isOpen: 1
+      folderIndex: 0
+    isGlobal: 0
+    instanceID: 0
+    GUID: 52d40cfa-2b34-44db-aee7-d77409663bba
+  - note:
+      noteTitle: Note Title (Edit Me!)
+      content: The player needs only 3 lights active
+      style: 0
+      isOpen: 1
+      folderIndex: 0
+    isGlobal: 0
+    instanceID: 0
+    GUID: 9c89a132-27f0-42a8-a735-05ed167fd9d4
+  - note:
+      noteTitle: Note Title (Edit Me!)
+      content: Activates = RED and BLUE lights
+      style: 0
+      isOpen: 1
+      folderIndex: 0
+    isGlobal: 0
+    instanceID: 0
+    GUID: 65e7d1d0-786f-45e5-8cdc-38c50d540da3
+  noteFolders:
+  - Current Tasks
+  - Archived
+  - Echo Mina
+  - Scene Tasks
+  - Tutorial Possible Bugs
