@@ -30,10 +30,10 @@ MonoBehaviour:
     SpeakerSprite: {fileID: 0}
     HasBackgroundSprite: 0
     BackgroundSprite: {fileID: 0}
-    Text: Toggling the lever actiavtes the stairs
+    Text: 'Toggling the lever moves the obstacle '
   - SpeakerName: Mina
     HasSpeakerSprite: 0
     SpeakerSprite: {fileID: 0}
     HasBackgroundSprite: 0
     BackgroundSprite: {fileID: 0}
-    Text: Go up the stairs
+    Text: Follow the leafs

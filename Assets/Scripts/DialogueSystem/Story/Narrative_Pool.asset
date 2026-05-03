@@ -18,8 +18,9 @@ MonoBehaviour:
     SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
     HasBackgroundSprite: 0
     BackgroundSprite: {fileID: 0}
-    Text: 'My parents didnt care that I lost, but I lost that swimming  scholarship
-      for my school. I could have saved them money. Why didn''t they care '
+    Text: 'My parents didnt care that I lost the annual swimming competetion, but
+      I lost that swimming  scholarship for my school. I could have saved them money.
+      Why didn''t they care '
   - SpeakerName: Young Mina
     HasSpeakerSprite: 1
     SpeakerSprite: {fileID: 21300000, guid: 19cb878ae217df648ba82e0116391c43, type: 3}
