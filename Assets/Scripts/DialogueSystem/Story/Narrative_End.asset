@@ -13,9 +13,92 @@ MonoBehaviour:
   m_Name: Narrative_End
   m_EditorClassIdentifier: 
   DialogueSnippets:
-  - SpeakerName: 
+  - SpeakerName: Narrator
     HasSpeakerSprite: 0
     SpeakerSprite: {fileID: 0}
-    HasBackgroundSprite: 0
-    BackgroundSprite: {fileID: 0}
-    Text: 
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 08fd31ba0784441419a0231720470c10, type: 3}
+    Text: Mina opens her eyes in the hospital room, slowly opening her eyes, 2 figures
+      are standing in front of her (Her father, Mother)
+  - SpeakerName: Mom
+    HasSpeakerSprite: 0
+    SpeakerSprite: {fileID: 0}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 08fd31ba0784441419a0231720470c10, type: 3}
+    Text: 'Oh, my darling. You are awake '
+  - SpeakerName: Dad
+    HasSpeakerSprite: 0
+    SpeakerSprite: {fileID: 0}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 08fd31ba0784441419a0231720470c10, type: 3}
+    Text: Are you ok? Do you need the nurse
+  - SpeakerName: Mina
+    HasSpeakerSprite: 1
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 08fd31ba0784441419a0231720470c10, type: 3}
+    Text: 'I understand. Seeing them all here. Together. It wasn''t a dream, it was
+      me. My consciousness '
+  - SpeakerName: Narrator
+    HasSpeakerSprite: 0
+    SpeakerSprite: {fileID: 0}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 08fd31ba0784441419a0231720470c10, type: 3}
+    Text: 1 Week Later
+  - SpeakerName: Narrator
+    HasSpeakerSprite: 0
+    SpeakerSprite: {fileID: 0}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 08fd31ba0784441419a0231720470c10, type: 3}
+    Text: Mina is at the front desk of an art class, booking a class
+  - SpeakerName: Mina (Internal)
+    HasSpeakerSprite: 1
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 08fd31ba0784441419a0231720470c10, type: 3}
+    Text: 'I started taking art classes. Just to remind myself of who I am. I didn''t
+      replace it with my full-time job; there were still adapters to sell, but spending
+      1 hr after my job wouldn''t hurt me, only my finances. But money comes and
+      goes. '
+  - SpeakerName: Mina (Internal)
+    HasSpeakerSprite: 1
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 08fd31ba0784441419a0231720470c10, type: 3}
+    Text: 'I started socializing with my peers as well. Met this guy named Adam,
+      says he hates his current job and takes all his anger out on the canvas. I
+      get you, I get you. '
+  - SpeakerName: Narrator
+    HasSpeakerSprite: 0
+    SpeakerSprite: {fileID: 0}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 08fd31ba0784441419a0231720470c10, type: 3}
+    Text: ' Mina is at her family''s house, at the porch, sitting and talking with
+      them (they are all smiling, not laughing or anything, just conversing) '
+  - SpeakerName: Mina (Internal)
+    HasSpeakerSprite: 1
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 08fd31ba0784441419a0231720470c10, type: 3}
+    Text: 'How is it that I am so blind that I thought being an adult was about throwing
+      your dreams away to focus on the future and ignoring the present, while my
+      parents were enjoying the present, and here they are still happy and content. '
+  - SpeakerName: Narrator
+    HasSpeakerSprite: 0
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 08fd31ba0784441419a0231720470c10, type: 3}
+    Text: 'Mina goes to work at her office, walking down the hallway as she sees
+      a wet floor sign: '
+  - SpeakerName: Narrator
+    HasSpeakerSprite: 0
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 08fd31ba0784441419a0231720470c10, type: 3}
+    Text: ' Mina squats downwards,  looks at it with a smile on her face: '
+  - SpeakerName: Mina
+    HasSpeakerSprite: 1
+    SpeakerSprite: {fileID: 21300000, guid: 080caa0edd7536d448df7e9c059c8f9a, type: 3}
+    HasBackgroundSprite: 1
+    BackgroundSprite: {fileID: 21300000, guid: 08fd31ba0784441419a0231720470c10, type: 3}
+    Text: Thank you

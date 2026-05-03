@@ -650,7 +650,7 @@ PrefabInstance:
     - target: {fileID: 3165675276197059476, guid: 0bd7b9a101f8cd846a52b3b29287fc51, type: 3}
       propertyPath: Dialogue
       value: 
-      objectReference: {fileID: 11400000, guid: 4d4fcbea2c69c7b4db3ec1d72b953f4d, type: 2}
+      objectReference: {fileID: 11400000, guid: 7e95d8532aa9e154288d7d2dc7d030be, type: 2}
     - target: {fileID: 3165675276197059476, guid: 0bd7b9a101f8cd846a52b3b29287fc51, type: 3}
       propertyPath: showOnLevelStart
       value: 1
